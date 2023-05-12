@@ -28,13 +28,32 @@ public class Animal extends Especie {
      *
      */
     private int edad;
+    
+    private ObjectId especieId;
 
-    public Animal(ObjectId id, String nombre, String nombreCientifico, int edad) {
+    public Animal(ObjectId id, String nombre, String nombreCientifico, int edad, ObjectId especieId) {
         this.id = id;
         this.nombre = nombre;
         this.nombreCientifico = nombreCientifico;
         this.edad = edad;
+        this.especieId = especieId;
     }
+
+    public Animal(String nombre, String nombreCientifico, int edad, ObjectId especieId) {
+        this.nombre = nombre;
+        this.nombreCientifico = nombreCientifico;
+        this.edad = edad;
+        this.especieId = especieId;
+    }
+
+    public ObjectId getEspecieId() {
+        return especieId;
+    }
+
+    public void setEspecieId(ObjectId especieId) {
+        this.especieId = especieId;
+    }
+
 
     public ObjectId getId() {
         return id;

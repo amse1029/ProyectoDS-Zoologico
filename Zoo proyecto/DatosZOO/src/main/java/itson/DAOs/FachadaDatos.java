@@ -6,6 +6,7 @@ package itson.DAOs;
 
 import Dominio.Clima;
 import Dominio.Continente;
+import Dominio.Cuidador;
 import Dominio.Habitat;
 import Dominio.Vegetacion;
 import java.util.List;
@@ -84,6 +85,13 @@ public class FachadaDatos implements IDatos {
         HabitatDAO habitatDAO = new HabitatDAO();
         List<Habitat> habitats = habitatDAO.recupera();
         return habitats;
+    }
+
+    @Override
+    public List<Cuidador> recuperarCuidadores() {
+       CuidadoresDAO cuidadoresDAO = new CuidadoresDAO();
+       List<Cuidador> cuidadores = cuidadoresDAO.recuperar();
+       return cuidadores;
     }
 
     

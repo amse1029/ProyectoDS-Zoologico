@@ -1,6 +1,7 @@
 package Dominio;
 
 import java.util.Date;
+import java.util.Objects;
 import org.bson.types.ObjectId;
 
 /**
@@ -43,6 +44,14 @@ public class Empleado {
         this.fechaIngreso = fechaIngreso;
     }
 
+    public Empleado(String nombre, String direccion, String telefono, Date fechaIngreso) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.fechaIngreso = fechaIngreso;
+    }
+    
+
     public ObjectId getId() {
         return id;
     }
@@ -83,6 +92,33 @@ public class Empleado {
 
     public void setFechaIngreso(Date fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 31 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Empleado other = (Empleado) obj;
+        return Objects.equals(this.id, other.id);
+    }
+
+    @Override
+    public String toString() {
+        return "Empleado{" + "id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", telefono=" + telefono + ", fechaIngreso=" + fechaIngreso + '}';
     }
 
     

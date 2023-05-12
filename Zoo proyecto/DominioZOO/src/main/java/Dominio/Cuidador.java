@@ -1,5 +1,6 @@
 package Dominio;
 
+import java.util.Date;
 import org.bson.types.ObjectId;
 
 /**
@@ -13,34 +14,17 @@ public class Cuidador extends Empleado {
     public Cuidador() {
     }
 
+    public Cuidador(ObjectId id, String nombre, String direccion, String telefono, Date fechaIngreso) {
+        super(id, nombre, direccion, telefono, fechaIngreso);
+    }
+
+    public Cuidador(String nombre, String direccion, String telefono, Date fechaIngreso) {
+        super(nombre, direccion, telefono, fechaIngreso);
+    }
+
     /**
      * 
      */
-    private Especie especie;
-
-    private ObjectId id;
-
-    public Cuidador(Especie especie, ObjectId id) {
-        this.especie = especie;
-        this.id = id;
-    }
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public void setId(ObjectId id) {
-        this.id = id;
-    }
-    
-    
-    public Especie getEspecie() {
-        return especie;
-    }
-
-    public void setEspecie(Especie especie) {
-        this.especie = especie;
-    }
-
+   
     
 }

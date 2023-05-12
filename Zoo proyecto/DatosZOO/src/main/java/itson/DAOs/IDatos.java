@@ -7,6 +7,7 @@ package itson.DAOs;
 
 import Dominio.Clima;
 import Dominio.Continente;
+import Dominio.Cuidador;
 import Dominio.Habitat;
 import Dominio.Vegetacion;
 import java.util.List;
@@ -27,4 +28,5 @@ public interface IDatos {
     public Habitat buscarHabitat(String nombre);
     public boolean guardarHabitat(Habitat habitat);
     public List<Habitat> recuperarHabitats();
+    public List<Cuidador> recuperarCuidadores();
 }
