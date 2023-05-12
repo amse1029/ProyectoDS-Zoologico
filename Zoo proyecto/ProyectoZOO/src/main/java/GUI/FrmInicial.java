@@ -6,7 +6,8 @@
 
 package GUI;
 
-import Dominio.Habitat;
+import javax.swing.JOptionPane;
+
 
 /**
  * Descripción de la clase: 
@@ -29,66 +30,128 @@ public class FrmInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlFondo = new javax.swing.JPanel();
+        pnlSeparador2 = new javax.swing.JPanel();
+        pnlSeparador1 = new javax.swing.JPanel();
+        pnlInicial = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        btnRegActItinerario = new javax.swing.JButton();
+        btnRegistrarHabitat1 = new javax.swing.JButton();
+        btnRegActEspecie = new javax.swing.JButton();
+        lblItinerarios = new javax.swing.JLabel();
+        lblHabitats = new javax.swing.JLabel();
+        lblEspecies = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Pantalla principal");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        pnlFondo.setBackground(new java.awt.Color(238, 189, 102));
+        pnlFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
+        pnlSeparador2.setBackground(new java.awt.Color(106, 69, 4));
+        pnlSeparador2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlFondo.add(pnlSeparador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 10, 200));
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmInicial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        pnlSeparador1.setBackground(new java.awt.Color(106, 69, 4));
+        pnlSeparador1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlFondo.add(pnlSeparador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 10, 220));
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrmInicial().setVisible(true);
+        pnlInicial.setBackground(new java.awt.Color(106, 69, 4));
+        pnlInicial.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Segoe Print", 1, 30)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Zoologico Cd. Obregón");
+        pnlInicial.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        pnlFondo.add(pnlInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 70));
+
+        btnRegActItinerario.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
+        btnRegActItinerario.setForeground(new java.awt.Color(106, 69, 4));
+        btnRegActItinerario.setText("Registrar / Actualizar");
+        pnlFondo.add(btnRegActItinerario, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, -1, -1));
+
+        btnRegistrarHabitat1.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
+        btnRegistrarHabitat1.setForeground(new java.awt.Color(106, 69, 4));
+        btnRegistrarHabitat1.setText("Registrar");
+        btnRegistrarHabitat1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarHabitat1ActionPerformed(evt);
             }
         });
-    }
+        pnlFondo.add(btnRegistrarHabitat1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+
+        btnRegActEspecie.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
+        btnRegActEspecie.setForeground(new java.awt.Color(106, 69, 4));
+        btnRegActEspecie.setText("Registrar / Actualizar");
+        btnRegActEspecie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegActEspecieActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnRegActEspecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
+
+        lblItinerarios.setFont(new java.awt.Font("Segoe Print", 1, 25)); // NOI18N
+        lblItinerarios.setForeground(new java.awt.Color(255, 255, 255));
+        lblItinerarios.setText("Itinerarios");
+        pnlFondo.add(lblItinerarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, -1, -1));
+
+        lblHabitats.setFont(new java.awt.Font("Segoe Print", 1, 25)); // NOI18N
+        lblHabitats.setForeground(new java.awt.Color(255, 255, 255));
+        lblHabitats.setText("Hábitats");
+        pnlFondo.add(lblHabitats, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        lblEspecies.setFont(new java.awt.Font("Segoe Print", 1, 25)); // NOI18N
+        lblEspecies.setForeground(new java.awt.Color(255, 255, 255));
+        lblEspecies.setText("Especies");
+        pnlFondo.add(lblEspecies, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, -1, -1));
+
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 270));
+
+        pack();
+        setLocationRelativeTo(null);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegistrarHabitat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarHabitat1ActionPerformed
+        // TODO add your handling code here:
+        this.seleccionaRegistrarHabitat();
+    }//GEN-LAST:event_btnRegistrarHabitat1ActionPerformed
+
+    private void btnRegActEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegActEspecieActionPerformed
+        // TODO add your handling code here:
+        this.seleccionaRegistActEspecie();
+    }//GEN-LAST:event_btnRegActEspecieActionPerformed
+
     
    public void seleccionaRegistrarHabitat(){
-
+       FrmRegistrarHabitat frm = new FrmRegistrarHabitat();
+       frm.setVisible(true);
+       this.dispose();
+   }
+   
+   public void seleccionaRegistActEspecie() {
+       FrmRegistrarEspecie_1 frm = new FrmRegistrarEspecie_1();
+       frm.setVisible(true);
+       this.dispose();
    }
    
    public void muestraError(){
-       
+       JOptionPane.showMessageDialog(this, "Error al recuperar los datos", "Error", JOptionPane.ERROR_MESSAGE);
    }
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegActEspecie;
+    private javax.swing.JButton btnRegActItinerario;
+    private javax.swing.JButton btnRegistrarHabitat1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblEspecies;
+    private javax.swing.JLabel lblHabitats;
+    private javax.swing.JLabel lblItinerarios;
+    private javax.swing.JPanel pnlFondo;
+    private javax.swing.JPanel pnlInicial;
+    private javax.swing.JPanel pnlSeparador1;
+    private javax.swing.JPanel pnlSeparador2;
     // End of variables declaration//GEN-END:variables
 
 }

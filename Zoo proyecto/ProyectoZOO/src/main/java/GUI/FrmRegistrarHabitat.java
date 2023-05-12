@@ -6,6 +6,8 @@
 
 package GUI;
 
+import javax.swing.JOptionPane;
+
 /**
  * Descripción de la clase: 
  * 
@@ -27,21 +29,103 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        pnlFondo = new javax.swing.JPanel();
+        pnlRegistro = new javax.swing.JPanel();
+        lblRegistro = new javax.swing.JLabel();
+        btnGuardar = new javax.swing.JButton();
+        btnVerificar = new javax.swing.JButton();
+        lblContinente = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        lblNombre1 = new javax.swing.JLabel();
+        cbxContinentes = new javax.swing.JComboBox<>();
+        lblClima = new javax.swing.JLabel();
+        cbxClimas = new javax.swing.JComboBox<>();
+        lblVegetacion = new javax.swing.JLabel();
+        cbxVegetaciones = new javax.swing.JComboBox<>();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Registrar hábitat");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlFondo.setBackground(new java.awt.Color(238, 189, 102));
+        pnlFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        pnlRegistro.setBackground(new java.awt.Color(106, 69, 4));
+        pnlRegistro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblRegistro.setFont(new java.awt.Font("Segoe Print", 1, 30)); // NOI18N
+        lblRegistro.setForeground(new java.awt.Color(255, 255, 255));
+        lblRegistro.setText("Registro hábitat");
+        pnlRegistro.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
+        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 70));
+
+        btnGuardar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(106, 69, 4));
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, -1));
+
+        btnVerificar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
+        btnVerificar.setForeground(new java.awt.Color(106, 69, 4));
+        btnVerificar.setText("Verificar");
+        btnVerificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerificarActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, -1, -1));
+
+        lblContinente.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblContinente.setForeground(new java.awt.Color(255, 255, 255));
+        lblContinente.setText("Continente:");
+        pnlFondo.add(lblContinente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
+
+        txtNombre.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 170, 40));
+
+        lblNombre1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblNombre1.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombre1.setText("Nombre hábitat:");
+        pnlFondo.add(lblNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        cbxContinentes.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        pnlFondo.add(cbxContinentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 159, 170, 40));
+
+        lblClima.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblClima.setForeground(new java.awt.Color(255, 255, 255));
+        lblClima.setText("Clima:");
+        pnlFondo.add(lblClima, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+
+        cbxClimas.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        pnlFondo.add(cbxClimas, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 170, 40));
+
+        lblVegetacion.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblVegetacion.setForeground(new java.awt.Color(255, 255, 255));
+        lblVegetacion.setText("Vegetación:");
+        pnlFondo.add(lblVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+
+        cbxVegetaciones.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        pnlFondo.add(cbxVegetaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 170, 40));
+
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        this.seleccionaGuardar();
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
+        // TODO add your handling code here:
+        this.seleccionaVerificar();
+    }//GEN-LAST:event_btnVerificarActionPerformed
 
    public void despliegaDatos(){
        
@@ -53,7 +137,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
    public void despliegaHabitatExistente(){
    }
    
-   public  void activaCamposRegistro(){
+   public void activaCamposRegistro(){
        
    }
    
@@ -73,13 +157,27 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
    }
    
    public void muestraMsjCamposVacios(){
-       
+       JOptionPane.showMessageDialog(this, "Campos vacíos", "Error", JOptionPane.WARNING_MESSAGE);
    }
    
    public void muestraMsjExito(){
-       
+       JOptionPane.showMessageDialog(this, "Hábitat registrada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
    }
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnVerificar;
+    private javax.swing.JComboBox<String> cbxClimas;
+    private javax.swing.JComboBox<String> cbxContinentes;
+    private javax.swing.JComboBox<String> cbxVegetaciones;
+    private javax.swing.JLabel lblClima;
+    private javax.swing.JLabel lblContinente;
+    private javax.swing.JLabel lblNombre1;
+    private javax.swing.JLabel lblRegistro;
+    private javax.swing.JLabel lblVegetacion;
+    private javax.swing.JPanel pnlFondo;
+    private javax.swing.JPanel pnlRegistro;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
 }
