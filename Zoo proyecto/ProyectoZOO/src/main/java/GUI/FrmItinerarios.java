@@ -37,12 +37,13 @@ public class FrmItinerarios extends javax.swing.JFrame {
         lblDescripcion = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         lblDescripcion1 = new javax.swing.JLabel();
-        cbxCuidadores = new javax.swing.JComboBox<>();
-        lblDescripcion2 = new javax.swing.JLabel();
-        cbxHabitats = new javax.swing.JComboBox<>();
+        cbxHoras = new javax.swing.JComboBox<>();
+        cbxDias = new javax.swing.JComboBox<>();
         btnGuardar = new javax.swing.JButton();
+        cbxHorarios = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Registrar itinerario");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlFondo.setBackground(new java.awt.Color(238, 189, 102));
@@ -56,7 +57,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         lblRegistro.setText("Registrar itinerario");
         pnlRegistro.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 70));
+        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 70));
 
         btnBuscar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(106, 69, 4));
@@ -66,11 +67,11 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 100, -1, -1));
+        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
 
         lblNombreCientifico.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombreCientifico.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombreCientifico.setText("Nombre científico:");
+        lblNombreCientifico.setText("Horarios:");
         pnlFondo.add(lblNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
 
         lblNombre.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
@@ -80,27 +81,23 @@ public class FrmItinerarios extends javax.swing.JFrame {
 
         lblDescripcion.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion.setForeground(new java.awt.Color(255, 255, 255));
-        lblDescripcion.setText("Descripción:");
+        lblDescripcion.setText("Día:");
         pnlFondo.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
         txtNombre.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 170, 40));
+        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 170, 40));
 
         lblDescripcion1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion1.setForeground(new java.awt.Color(255, 255, 255));
-        lblDescripcion1.setText("Cuidador:");
+        lblDescripcion1.setText("Horas:");
         pnlFondo.add(lblDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
 
-        cbxCuidadores.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(cbxCuidadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, 170, 40));
+        cbxHoras.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        pnlFondo.add(cbxHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 170, 40));
 
-        lblDescripcion2.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
-        lblDescripcion2.setForeground(new java.awt.Color(255, 255, 255));
-        lblDescripcion2.setText("Hábitat:");
-        pnlFondo.add(lblDescripcion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, -1, -1));
-
-        cbxHabitats.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(cbxHabitats, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 170, 40));
+        cbxDias.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        cbxDias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" }));
+        pnlFondo.add(cbxDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 170, 40));
 
         btnGuardar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(106, 69, 4));
@@ -110,9 +107,12 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, -1, -1));
+        pnlFondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, -1, -1));
 
-        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 510));
+        cbxHorarios.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        pnlFondo.add(cbxHorarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 170, 40));
+
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -171,11 +171,11 @@ public class FrmItinerarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JComboBox<String> cbxCuidadores;
-    private javax.swing.JComboBox<String> cbxHabitats;
+    private javax.swing.JComboBox<String> cbxDias;
+    private javax.swing.JComboBox<String> cbxHorarios;
+    private javax.swing.JComboBox<String> cbxHoras;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblDescripcion1;
-    private javax.swing.JLabel lblDescripcion2;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombreCientifico;
     private javax.swing.JLabel lblRegistro;

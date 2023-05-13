@@ -34,7 +34,7 @@ public class FrmInicial extends javax.swing.JFrame {
         pnlSeparador2 = new javax.swing.JPanel();
         pnlSeparador1 = new javax.swing.JPanel();
         pnlInicial = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        lblZoologico = new javax.swing.JLabel();
         btnRegActItinerario = new javax.swing.JButton();
         btnRegistrarHabitat1 = new javax.swing.JButton();
         btnRegActEspecie = new javax.swing.JButton();
@@ -60,10 +60,10 @@ public class FrmInicial extends javax.swing.JFrame {
         pnlInicial.setBackground(new java.awt.Color(106, 69, 4));
         pnlInicial.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe Print", 1, 30)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Zoologico Cd. Obregón");
-        pnlInicial.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+        lblZoologico.setFont(new java.awt.Font("Segoe Print", 1, 30)); // NOI18N
+        lblZoologico.setForeground(new java.awt.Color(255, 255, 255));
+        lblZoologico.setText("Zoologico Cd. Obregón");
+        pnlInicial.add(lblZoologico, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         pnlFondo.add(pnlInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 70));
 
@@ -144,10 +144,10 @@ public class FrmInicial extends javax.swing.JFrame {
     private javax.swing.JButton btnRegActEspecie;
     private javax.swing.JButton btnRegActItinerario;
     private javax.swing.JButton btnRegistrarHabitat1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblEspecies;
     private javax.swing.JLabel lblHabitats;
     private javax.swing.JLabel lblItinerarios;
+    private javax.swing.JLabel lblZoologico;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlInicial;
     private javax.swing.JPanel pnlSeparador1;
