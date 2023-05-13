@@ -7,8 +7,11 @@ package itson.DAOs;
 import Dominio.Animal;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.regex;
 import java.util.LinkedList;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -22,15 +25,31 @@ public class AnimalesDAO {
         this.BASE_DATOS = Conexion.dameInstancia();
     }
     
-    public List<Animal> recupera(){
+    public List<Animal> recupera(ObjectId idEspecie){
         MongoCollection<Animal> coleccion
                 = BASE_DATOS.getCollection( NOMBRE_COLECCION, Animal.class);
        List<Animal> animales = new LinkedList<>();
-       coleccion.find().into(animales);
+       coleccion.find(eq("especieId",idEspecie)).into(animales);
        return animales; 
     }
     
-    public Animal guardar(Animal animal){
+    public void guardar(Animal animal){
+         MongoCollection<Animal> coleccion
+                = BASE_DATOS.getCollection( NOMBRE_COLECCION, Animal.class);
+         coleccion.insertOne(animal);  
+    }
+    
+    public void eliminar(Animal animal){
+        MongoCollection<Animal> coleccion
+                = BASE_DATOS.getCollection( NOMBRE_COLECCION, Animal.class);
+        coleccion.deleteOne(eq("id",animal.getId()));
+    }
+    
+    public Animal consulta(String nombre){
+         MongoCollection<Animal> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Animal.class);
+ 
         Animal animal = new Animal();
+        animal = coleccion.find(regex("nombre", nombre)).first();
+        return animal;  
     }
 }

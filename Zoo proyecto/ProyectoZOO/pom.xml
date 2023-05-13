@@ -5,15 +5,38 @@
     <artifactId>ProyectoZOO</artifactId>
     <version>1.0-SNAPSHOT</version>
     <dependencies>
+         <!-- https://mvnrepository.com/artifact/org.mongodb/mongodb-driver -->
         <dependency>
-            <groupId>itson.logicahabitat</groupId>
-            <artifactId>LogicaZOO</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver</artifactId>
+            <version>3.10.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mongodb/bson -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>bson</artifactId>
+            <version>3.10.2</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-core -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-core</artifactId>
+            <version>3.10.2</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.external</groupId>
             <artifactId>AbsoluteLayout</artifactId>
             <version>RELEASE160</version>
+        </dependency>
+        <dependency>
+            <groupId>itson.dominiozoo</groupId>
+            <artifactId>DominioZOO</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>itson.logicahabitat</groupId>
+            <artifactId>LogicaZOO</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <properties>

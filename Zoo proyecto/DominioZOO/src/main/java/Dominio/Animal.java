@@ -6,7 +6,7 @@ import org.bson.types.ObjectId;
 /**
  *
  */
-public class Animal extends Especie {
+public class Animal{
 
     /**
      * Default constructor
@@ -45,6 +45,13 @@ public class Animal extends Especie {
         this.edad = edad;
         this.especieId = especieId;
     }
+
+    public Animal(String nombre, String nombreCientifico, int edad) {
+        this.nombre = nombre;
+        this.nombreCientifico = nombreCientifico;
+        this.edad = edad;
+    }
+   
 
     public ObjectId getEspecieId() {
         return especieId;

@@ -1,5 +1,6 @@
 package Dominio;
 
+import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
@@ -29,12 +30,43 @@ public class Especie {
      * 
      */
     private String descripcion;
+    
+    private List<Animal> animales;
+    
+    private List<Cuidador> cuiadadores;
 
-    public Especie(ObjectId id, String nombre, String nombreCientifico, String descripcion) {
+    public Especie(ObjectId id, String nombre, String nombreCientifico, String descripcion, List<Animal> animales, List<Cuidador> cuiadadores) {
         this.id = id;
         this.nombre = nombre;
         this.nombreCientifico = nombreCientifico;
         this.descripcion = descripcion;
+        this.animales = animales;
+        this.cuiadadores = cuiadadores;
+    }
+
+    public Especie(String nombre, String nombreCientifico, String descripcion, List<Animal> animales, List<Cuidador> cuiadadores) {
+        this.nombre = nombre;
+        this.nombreCientifico = nombreCientifico;
+        this.descripcion = descripcion;
+        this.animales = animales;
+        this.cuiadadores = cuiadadores;
+    }
+    
+
+    public List<Animal> getAnimales() {
+        return animales;
+    }
+
+    public void setAnimales(List<Animal> animales) {
+        this.animales = animales;
+    }
+
+    public List<Cuidador> getCuiadadores() {
+        return cuiadadores;
+    }
+
+    public void setCuiadadores(List<Cuidador> cuiadadores) {
+        this.cuiadadores = cuiadadores;
     }
 
     public ObjectId getId() {
