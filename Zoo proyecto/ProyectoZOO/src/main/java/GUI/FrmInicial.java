@@ -83,6 +83,11 @@ public class FrmInicial extends javax.swing.JFrame {
         btnRegActItinerario.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnRegActItinerario.setForeground(new java.awt.Color(106, 69, 4));
         btnRegActItinerario.setText("Registrar / Actualizar");
+        btnRegActItinerario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegActItinerarioActionPerformed(evt);
+            }
+        });
         pnlFondo.add(btnRegActItinerario, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, -1, -1));
 
         btnRegistrarHabitat1.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
@@ -136,12 +141,18 @@ public class FrmInicial extends javax.swing.JFrame {
         this.seleccionaRegistActEspecie();
     }//GEN-LAST:event_btnRegActEspecieActionPerformed
 
+    private void btnRegActItinerarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegActItinerarioActionPerformed
+        // TODO add your handling code here:
+        this.seleccionaRegActItinerario();
+    }//GEN-LAST:event_btnRegActItinerarioActionPerformed
+
     
    public void seleccionaRegistrarHabitat(){
        LinkedList<Object> arreglo = new LinkedList();
        arreglo=ctrlHabitat.recuperarDatosHabitats();
        FrmRegistrarHabitat frm = new FrmRegistrarHabitat(arreglo);
        frm.setVisible(true);
+       this.setVisible(false);
        this.dispose();
    }
 
@@ -150,6 +161,15 @@ public class FrmInicial extends javax.swing.JFrame {
        List<Cuidador> cuidadores=ctrlEspecie.recuperarCuidadores();
        FrmRegistrarEspecie_1 frm = new FrmRegistrarEspecie_1(habitats, cuidadores);
        frm.setVisible(true);
+       this.setVisible(false);
+       this.dispose();
+   }
+   
+   public void seleccionaRegActItinerario(){
+       Object[] datos=ctrlHabitat.recuperaDatosItinerario();
+       FrmItinerarios itinerario=new FrmItinerarios(datos);
+       this.setVisible(false);
+       itinerario.setVisible(true);
        this.dispose();
    }
    

@@ -4,7 +4,15 @@
  */
 package GUI;
 
+import Dominio.Dias;
+import Dominio.Horario;
+import Dominio.Itinerario;
+import Dominio.Recorrido;
+import Dominio.Zona;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,8 +23,13 @@ public class FrmItinerarios extends javax.swing.JFrame {
     /**
      * Creates new form FrmItinerarios
      */
-    public FrmItinerarios() {
+    ILogica ctrlItinerario;
+    Object[] datos;
+    public FrmItinerarios(Object[] datos) {
+        this.datos=datos;
         initComponents();
+        ctrlItinerario=FabricaLogica.crearInstancia();
+        this.despliegaDatos(datos);
     }
 
     /**
@@ -35,12 +48,19 @@ public class FrmItinerarios extends javax.swing.JFrame {
         lblNombreCientifico = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblDescripcion = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
-        lblDescripcion1 = new javax.swing.JLabel();
-        cbxHoras = new javax.swing.JComboBox<>();
-        cbxDias = new javax.swing.JComboBox<>();
+        txtDuracion = new javax.swing.JTextField();
+        Horarios = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
-        cbxHorarios = new javax.swing.JComboBox<>();
+        lblDescripcion2 = new javax.swing.JLabel();
+        Horarios1 = new javax.swing.JLabel();
+        txtLongitud = new javax.swing.JTextField();
+        txtVisitantes = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblHorarios = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblZonas = new javax.swing.JTable();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar itinerario");
@@ -67,52 +87,127 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
+        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
 
         lblNombreCientifico.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombreCientifico.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombreCientifico.setText("Horarios:");
-        pnlFondo.add(lblNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
+        lblNombreCientifico.setText("Duración:");
+        pnlFondo.add(lblNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
         lblNombre.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre.setText("Nombre:");
-        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
         lblDescripcion.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion.setForeground(new java.awt.Color(255, 255, 255));
-        lblDescripcion.setText("Día:");
-        pnlFondo.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
+        lblDescripcion.setText("Longitud:");
+        pnlFondo.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
 
-        txtNombre.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 170, 40));
+        txtDuracion.setEditable(false);
+        txtDuracion.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        pnlFondo.add(txtDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 170, 40));
 
-        lblDescripcion1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
-        lblDescripcion1.setForeground(new java.awt.Color(255, 255, 255));
-        lblDescripcion1.setText("Horas:");
-        pnlFondo.add(lblDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
-
-        cbxHoras.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(cbxHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 170, 40));
-
-        cbxDias.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        cbxDias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" }));
-        pnlFondo.add(cbxDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 170, 40));
+        Horarios.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        Horarios.setForeground(new java.awt.Color(255, 255, 255));
+        Horarios.setText("Zonas:");
+        pnlFondo.add(Horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, -1, -1));
 
         btnGuardar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(106, 69, 4));
         btnGuardar.setText("Guardar");
+        btnGuardar.setEnabled(false);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, -1, -1));
+        pnlFondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, -1, -1));
 
-        cbxHorarios.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(cbxHorarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 170, 40));
+        lblDescripcion2.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblDescripcion2.setForeground(new java.awt.Color(255, 255, 255));
+        lblDescripcion2.setText("Visitantes:");
+        pnlFondo.add(lblDescripcion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
 
-        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 450));
+        Horarios1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        Horarios1.setForeground(new java.awt.Color(255, 255, 255));
+        Horarios1.setText("Horarios:");
+        pnlFondo.add(Horarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
+
+        txtLongitud.setEditable(false);
+        txtLongitud.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        pnlFondo.add(txtLongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 170, 40));
+
+        txtVisitantes.setEditable(false);
+        txtVisitantes.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        pnlFondo.add(txtVisitantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 170, 40));
+
+        txtNombre.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 170, 40));
+
+        tblHorarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Dia", "Incluido?", "Horas de inicio:"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Boolean.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblHorarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHorariosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblHorarios);
+
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 220, 140));
+
+        tblZonas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Elegida?"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblZonas);
+
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 180, 140));
+
+        btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 500, -1, -1));
+
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -127,15 +222,99 @@ public class FrmItinerarios extends javax.swing.JFrame {
         this.seleccionaGuardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-    private void despliegaDatos() {
+    private void tblHorariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHorariosMouseClicked
+        // TODO add your handling code here:
         
+    }//GEN-LAST:event_tblHorariosMouseClicked
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+        FrmInicial principal=new FrmInicial();
+        this.setVisible(false);
+        principal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void despliegaDatos(Object[] datos) {
+        DefaultTableModel modeloTabla = (DefaultTableModel) this.tblHorarios.getModel();
+        Object[] lunes = {"Lunes", false};
+        modeloTabla.addRow(lunes);
+        Object[] martes={"Martes", false};
+        modeloTabla.addRow(martes);
+        Object[] miercoles = {"Miercoles", false};
+        modeloTabla.addRow(lunes);
+        Object[] jueves={"Jueves", false};
+        modeloTabla.addRow(martes);
+        Object[] viernes = {"Viernes", false};
+        modeloTabla.addRow(lunes);
+        Object[] sabado={"Sabado", false};
+        modeloTabla.addRow(martes);
+        Object[] domingo={"Domingo", false};
+        modeloTabla.addRow(martes);
     }
     
     private void seleccionaBuscar() {
-        
+        String nombre=this.txtNombre.getText();
+        Itinerario itinerario=ctrItinerario.buscarItinerario(nombre);
+        if(itinerario==null){
+            this.muestraMsjNoItinerario();
+            this.muestraCajasVerificacion();
+        }else{
+            this.despliegaDatosItinerario(itinerario);
+        }
     }
     
-    private void despliegaDatosItinerario() {
+    private void despliegaDatosItinerario(Itinerario itinerario) {
+        Float duracion=itinerario.getRecorrido().getDuracion();
+        Float longitud=itinerario.getRecorrido().getLongitud();
+        Integer visitantes=itinerario.getMaxVisitantes();
+        List<Horario> horarios=itinerario.getHorarios();
+        List<Zona> zonaitinerario=itinerario.getZonas();
+        List<Zona> zonas=(List<Zona>) datos[0];
+        DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblZonas.getModel();
+        for (int i = 0; i < zonas.size(); i++) {
+            if(zonaitinerario.get(i)==zonas.get(i)){
+                Object[] infor = {zonas.get(i).getNombre(), true};
+                modeloTabla2.addRow(infor);
+            }else{
+                Object[] infor = {zonas.get(i).getNombre(), false};
+                modeloTabla2.addRow(infor);
+            }
+        }
+        DefaultTableModel modeloTabla = (DefaultTableModel) this.tblHorarios.getModel();
+        for (int i = 0; i < horarios.size(); i++) {
+            if(horarios.get(i).getDia().equals(Dias.Lunes)){
+                this.tblHorarios.setValueAt(true, 0, 1);
+                this.tblHorarios.setValueAt(horarios.get(i).getHora(), 0, 2);
+            }
+            if(horarios.get(i).getDia().equals(Dias.Martes)){
+                this.tblHorarios.setValueAt(true, 1, 1);
+                this.tblHorarios.setValueAt(horarios.get(i).getHora(), 1, 2);
+            }
+            if(horarios.get(i).getDia().equals(Dias.Miercoles)){
+                this.tblHorarios.setValueAt(true, 2, 1);
+                this.tblHorarios.setValueAt(horarios.get(i).getHora(), 2, 2);
+            }
+            if(horarios.get(i).getDia().equals(Dias.Jueves)){
+                this.tblHorarios.setValueAt(true, 3, 1);
+                this.tblHorarios.setValueAt(horarios.get(i).getHora(), 3, 2);
+            }
+            if(horarios.get(i).getDia().equals(Dias.Viernes)){
+                this.tblHorarios.setValueAt(true, 4, 1);
+                this.tblHorarios.setValueAt(horarios.get(i).getHora(), 4, 2);
+            }
+            if(horarios.get(i).getDia().equals(Dias.Sabado)){
+                this.tblHorarios.setValueAt(true, 5, 1);
+                this.tblHorarios.setValueAt(horarios.get(i).getHora(), 5, 2);
+            }
+            if(horarios.get(i).getDia().equals(Dias.Domingo)){
+                this.tblHorarios.setValueAt(true, 6, 1);
+                this.tblHorarios.setValueAt(horarios.get(i).getHora(), 6, 2);
+            }
+        }
+        this.txtDuracion.setText(duracion.toString());
+        this.txtLongitud.setText(longitud.toString());
+        this.txtVisitantes.setText(visitantes.toString());
         
     }
     
@@ -144,7 +323,12 @@ public class FrmItinerarios extends javax.swing.JFrame {
     }
     
     private void muestraCajasVerificacion() {
-        
+        List<Zona> zonas=(List<Zona>) datos[0];
+        DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblZonas.getModel();
+        for (int i = 0; i < zonas.size(); i++) {
+            Object[] infor = {zonas.get(i).getNombre(), false};
+            modeloTabla2.addRow(infor);
+        }
     }
     
     private void seleccionaDia() {
@@ -156,7 +340,65 @@ public class FrmItinerarios extends javax.swing.JFrame {
     }
     
     private void seleccionaGuardar() {
-        
+        String nombre=this.txtNombre.getText();
+        float duracion=Float.parseFloat(this.txtDuracion.getText());
+        float longitud=Float.parseFloat(this.txtLongitud.getText());
+        int visitantes=Integer.parseInt(this.txtVisitantes.getText());
+        List<Horario> horarios=new ArrayList<>();
+        Horario horario=new Horario();
+        if((boolean)this.tblHorarios.getValueAt(0, 1)){
+            horario.setDia(Dias.Lunes);
+            horario.setHora(this.tblHorarios.getValueAt(0, 2).toString());
+            horarios.add(horario);
+        }
+        if((boolean)this.tblHorarios.getValueAt(1, 1)){
+            horario.setDia(Dias.Martes);
+            horario.setHora(this.tblHorarios.getValueAt(1, 2).toString());
+            horarios.add(horario);
+        }
+        if((boolean)this.tblHorarios.getValueAt(2, 1)){
+            horario.setDia(Dias.Miercoles);
+            horario.setHora(this.tblHorarios.getValueAt(2, 2).toString());
+            horarios.add(horario);
+        }
+        if((boolean)this.tblHorarios.getValueAt(3, 1)){
+            horario.setDia(Dias.Jueves);
+            horario.setHora(this.tblHorarios.getValueAt(3, 2).toString());
+            horarios.add(horario);
+        }
+        if((boolean)this.tblHorarios.getValueAt(4, 1)){
+            horario.setDia(Dias.Viernes);
+            horario.setHora(this.tblHorarios.getValueAt(4, 2).toString());
+            horarios.add(horario);
+        }
+        if((boolean)this.tblHorarios.getValueAt(5, 1)){
+            horario.setDia(Dias.Sabado);
+            horario.setHora(this.tblHorarios.getValueAt(5, 2).toString());
+            horarios.add(horario);
+        }
+        if((boolean)this.tblHorarios.getValueAt(6, 1)){
+            horario.setDia(Dias.Domingo);
+            horario.setHora(this.tblHorarios.getValueAt(6, 2).toString());
+            horarios.add(horario);
+        }
+        List<Zona> zonas=new ArrayList<>();
+        List<Zona> todas=(List<Zona>) datos[0];
+        for(int i=0;i<this.tblZonas.getRowCount();i++){
+            if((boolean)this.tblZonas.getValueAt(i, 1)){
+                zonas.add(todas.get(i));
+            }
+        }
+        Itinerario itinerario=new Itinerario();
+        Recorrido recorrido=new Recorrido();
+        recorrido.setDuracion(duracion);
+        recorrido.setLongitud(longitud);
+        boolean exito=itinerario.verificacion(nombre, visitantes, recorrido, zonas, horarios);
+        if(ctrlItinerario.buscarItinerario(nombre)==null){
+            ctrlItinerario.guardarItinerario(itinerario);
+            this.muestraMsjExito();
+        }else{
+            this.muestraMsjError();
+        }
     }
     
     private void muestraMsjError() {
@@ -169,18 +411,25 @@ public class FrmItinerarios extends javax.swing.JFrame {
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Horarios;
+    private javax.swing.JLabel Horarios1;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JComboBox<String> cbxDias;
-    private javax.swing.JComboBox<String> cbxHorarios;
-    private javax.swing.JComboBox<String> cbxHoras;
+    private javax.swing.JButton btnRegresar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblDescripcion;
-    private javax.swing.JLabel lblDescripcion1;
+    private javax.swing.JLabel lblDescripcion2;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombreCientifico;
     private javax.swing.JLabel lblRegistro;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlRegistro;
+    private javax.swing.JTable tblHorarios;
+    private javax.swing.JTable tblZonas;
+    private javax.swing.JTextField txtDuracion;
+    private javax.swing.JTextField txtLongitud;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtVisitantes;
     // End of variables declaration//GEN-END:variables
 }

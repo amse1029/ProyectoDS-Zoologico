@@ -6,6 +6,7 @@ package GUI;
 
 import Dominio.Animal;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,9 +17,10 @@ import javax.swing.table.DefaultTableModel;
 public class FrmEditarAnimales extends javax.swing.JFrame {
 
     FrmRegistrarEspecie_1 especie;
-    ArrayList<Animal> animales=new ArrayList<>();
+    List<Animal> animales=new ArrayList<>();
     /**
      * Creates new form FrmEditarAnimales
+     * @param especie
      */
     public FrmEditarAnimales(FrmRegistrarEspecie_1 especie) {
         this.especie=especie;
@@ -177,8 +179,20 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         this.seleccionaAgregar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void mostrarAnimales(){
-        
+    public void muestralos(){
+        this.animales=this.especie.getAnimales();
+        this.mostrarAnimales(animales);
+    }
+    
+    private void mostrarAnimales(List<Animal> animales){
+        DefaultTableModel model2 = (DefaultTableModel) tblAnimales.getModel();
+        model2.setRowCount(0);
+        for(int i=0;i<animales.size();i++){
+            Animal animal=animales.get(i);
+            DefaultTableModel model = (DefaultTableModel) tblAnimales.getModel();
+            Object[] row = new Object[]{animal.getNombre(), animal.getEdad(), animal.getSexo()};
+            model.addRow(row);
+        }
     }
     
     private void seleccionaAgregar() {
@@ -188,7 +202,7 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         boolean sexo=this.cbSexo.isSelected();
         boolean exito=animal.verificacion(nombre, edad, sexo);
         if(exito){
-            animales.add(animal);
+            this.animales.add(animal);
             DefaultTableModel model = (DefaultTableModel) tblAnimales.getModel();
             Object[] row = new Object[]{animal.getNombre(), animal.getEdad(), animal.getSexo()};
             model.addRow(row);
@@ -213,13 +227,13 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
                 model.removeRow(indice);
             }
             tblAnimales.revalidate();
-            tblAnimales.replace();
+            tblAnimales.repaint();
             animales.remove(indice);
         }
     }
     
     private void cierraPantalla() {
-        
+        this.setVisible(false);
     }
     
     private void muestraMsjConfirmacion() {
@@ -244,8 +258,8 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     }
     
     private void seleccionaRegresar() {
-        this.setVisible(false);
         especie.setAnimales(animales);
+        this.cierraPantalla();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -26,7 +26,7 @@ public class FrmRegistrarEspecie_1 extends javax.swing.JFrame {
      * Creates new form FrmRegistrarEspecie
      */
     FrmEditarAnimales editar;
-    ArrayList<Animal> animales;
+    List<Animal> animales;
     boolean ya = false;
     List<Cuidador> cuidadores;
     List<Habitat> habitats;
@@ -72,6 +72,7 @@ public class FrmRegistrarEspecie_1 extends javax.swing.JFrame {
         tblCuidadores = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHabitats = new javax.swing.JTable();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -97,7 +98,7 @@ public class FrmRegistrarEspecie_1 extends javax.swing.JFrame {
                 btnVerificarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 480, -1, -1));
+        pnlFondo.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, -1, -1));
 
         btnEditar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnEditar.setForeground(new java.awt.Color(106, 69, 4));
@@ -205,6 +206,16 @@ public class FrmRegistrarEspecie_1 extends javax.swing.JFrame {
 
         pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 270, 110, 110));
 
+        btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 480, -1, -1));
+
         getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 540));
 
         pack();
@@ -226,25 +237,36 @@ public class FrmRegistrarEspecie_1 extends javax.swing.JFrame {
         this.seleccionaGuardar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+        FrmInicial inicial=new FrmInicial();
+        inicial.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
     private void despliegaDatos(List<Habitat> habitats, List<Cuidador> cuidadores) {
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblCuidadores.getModel();
         for (int i = 0; i < cuidadores.size(); i++) {
-            Object[] datos = {cuidadores.get(i).getNombre(), true};
+            Object[] datos = {cuidadores.get(i).getNombre(), false};
             modeloTabla.addRow(datos);
         }
         DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblHabitats.getModel();
 
         for (int i = 0; i < habitats.size(); i++) {
-            Object[] datos = {habitats.get(i).getNombre(), true};
+            Object[] datos = {habitats.get(i).getNombre(), false};
             modeloTabla2.addRow(datos);
         }
     }
 
-    public void setAnimales(ArrayList<Animal> animales) {
+    public void setAnimales(List<Animal> animales) {
         this.animales = animales;
         ya = true;
     }
 
+    public List<Animal> getAnimales(){
+        return this.animales;
+    }
+    
     private void seleccionaVerificar() {
         String nombre = this.txtNombre1.getText();
         Especie especie = ctrlEspecie.recuperarEspecie(nombre);
@@ -258,20 +280,41 @@ public class FrmRegistrarEspecie_1 extends javax.swing.JFrame {
     }
 
     private void muestraDatos(Especie especie) {
+        DefaultTableModel model = (DefaultTableModel) tblCuidadores.getModel();
+        model.setRowCount(0);
+        DefaultTableModel model2 = (DefaultTableModel) tblHabitats.getModel();
+        model2.setRowCount(0);
         this.txtNombreCientifico.setText(especie.getNombreCientifico());
         this.txtDescripcion.setText(especie.getDescripcion());
         List<Cuidador> cuida = especie.getCuiadadores();
-        DefaultTableModel modeloTabla = (DefaultTableModel) this.tblCuidadores.getModel();
-        for (int i = 0; i < cuida.size(); i++) {
-            Object[] datos = {cuida.get(i).getNombre(), true};
-            modeloTabla.addRow(datos);
-        }
         List<Habitat> habit = especie.getHabitats();
-        DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblHabitats.getModel();
-        for (int i = 0; i < habit.size(); i++) {
-            Object[] datos = {habit.get(i).getNombre(), true};
-            modeloTabla2.addRow(datos);
+        DefaultTableModel modeloTabla = (DefaultTableModel) this.tblCuidadores.getModel();
+        for (int i = 0; i < cuidadores.size(); i++) {
+            if(cuidadores.get(i)==cuida.get(i)){
+                Object[] datos = {cuidadores.get(i).getNombre(), true};
+                modeloTabla.addRow(datos);
+            }else{
+                Object[] datos = {cuidadores.get(i).getNombre(), false};
+                modeloTabla.addRow(datos);
+            }
+            
         }
+        DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblHabitats.getModel();
+
+        for (int i = 0; i < habitats.size(); i++) {
+            if(habitats.get(i)==habit.get(i)){
+                Object[] datos = {habitats.get(i).getNombre(), true};
+                modeloTabla2.addRow(datos);
+            }else{
+                Object[] datos = {habitats.get(i).getNombre(), false};
+                modeloTabla2.addRow(datos);
+            }
+        }
+        this.animales=especie.getAnimales();
+        this.btnGuardar.setEnabled(true);
+        this.btnEditar.setEnabled(true);
+        this.txtNombre1.setEditable(false);
+        this.btnVerificar.setEnabled(false);
     }
 
     private void activaCamposRegistro() {
@@ -280,10 +323,12 @@ public class FrmRegistrarEspecie_1 extends javax.swing.JFrame {
         this.txtDescripcion.setEditable(true);
         this.btnGuardar.setEnabled(true);
         this.btnEditar.setEnabled(true);
-        this.txtNombre1.setEnabled(true);
+        this.txtNombre1.setEditable(false);
+        this.btnVerificar.setEnabled(false);
     }
 
     private void seleccionaEditar() {
+        editar.muestralos();
         editar.setVisible(true);
         while (!ya) {
 
@@ -339,6 +384,7 @@ public class FrmRegistrarEspecie_1 extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnVerificar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
