@@ -10,8 +10,11 @@ import Dominio.Clima;
 import Dominio.Continente;
 import Dominio.Cuidador;
 import Dominio.Especie;
+import Dominio.Guia;
 import Dominio.Habitat;
+import Dominio.Itinerario;
 import Dominio.Vegetacion;
+import Dominio.Zona;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -192,6 +195,27 @@ public class FachadaDatos implements IDatos {
         List<CargoEspecie> listaCargoEspecies = cargoEspecieDAO.consultaCuidador(cuidador);
         return listaCargoEspecies;
 
+    }
+
+    @Override
+    public List<Zona> recuperaZonas() {
+        ZonaDAO zonaDAO= new ZonaDAO();
+       List<Zona> listaZonas=zonaDAO.recuperar();
+       return listaZonas;
+    }
+
+    @Override
+    public List<Guia> recuperaGuias() {
+        GuiaDAO guiaDAO = new GuiaDAO();
+        List<Guia>listaGuias=guiaDAO.recuperar();
+        return listaGuias;
+    }
+
+    @Override
+    public List<Itinerario> recuperaNombreItinerario() {
+        ItinerarioDAO itinerarioDAO= new ItinerarioDAO();
+        List<Itinerario> listaItinerarios= itinerarioDAO.recupera();
+        return listaItinerarios;
     }
 
 }

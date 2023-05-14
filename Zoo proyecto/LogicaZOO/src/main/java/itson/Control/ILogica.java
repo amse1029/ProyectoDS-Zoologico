@@ -8,10 +8,10 @@ import Dominio.Animal;
 import Dominio.Cuidador;
 import Dominio.Especie;
 import Dominio.Habitat;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import org.bson.types.ObjectId;
+import Dominio.Itinerario;
 
 /**
  *
@@ -28,4 +28,7 @@ public interface ILogica {
     public Animal consultaAnimal(String nombre);
     public Especie recuperarEspecie(String nombre);
     public ObjectId guardarEspecie(Especie especie);
+    public Object[] recuperaDatosItinerario();
+    public Itinerario buscarItinerario(String nombre);
+    public Boolean guardarItinerario(Itinerario itinerario);
 }

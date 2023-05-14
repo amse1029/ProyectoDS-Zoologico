@@ -11,8 +11,11 @@ import Dominio.Clima;
 import Dominio.Continente;
 import Dominio.Cuidador;
 import Dominio.Especie;
+import Dominio.Guia;
 import Dominio.Habitat;
+import Dominio.Itinerario;
 import Dominio.Vegetacion;
+import Dominio.Zona;
 import java.util.List;
 import org.bson.types.ObjectId;
 
@@ -47,4 +50,8 @@ public interface IDatos {
      public List<CargoEspecie> consultaCuidadorCargoEspecie(Cuidador cuidador);
     public List<Cuidador> recuperarIdCuidador(ObjectId idCuidador);
     public void agregarCuiadadores();
+    public List<Zona> recuperaZonas();
+    public List<Guia> recuperaGuias();
+    public List<Itinerario> recuperaNombreItinerario();
+    
 }

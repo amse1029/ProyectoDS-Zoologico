@@ -8,9 +8,11 @@ import Dominio.Clima;
 import Dominio.Continente;
 import Dominio.Cuidador;
 import Dominio.Especie;
+import Dominio.Guia;
 import Dominio.Habitat;
+import Dominio.Itinerario;
 import Dominio.Vegetacion;
-import java.util.ArrayList;
+import Dominio.Zona;
 import java.util.LinkedList;
 
 import java.util.List;
@@ -107,4 +109,30 @@ public class FachadaLogica implements ILogica {
        return id;
     }
 
+    @Override
+    public Object[] recuperaDatosItinerario() {
+        CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
+        List<Zona> listaZonas = control.recuperarZonas();
+        List<Guia> listaGuias = control.recuperarGuias();
+        Object[] datos = new Object[2];
+        datos[0] = listaZonas;
+        datos[1] = listaGuias;
+        return datos;
+    }
+
+    @Override
+    public Itinerario buscarItinerario(String nombre) {
+        CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
+        Itinerario itinerario = new Itinerario();
+        itinerario = control.buscarItinerario(nombre);
+        return itinerario;
+    }
+
+    @Override
+    public Boolean guardarItinerario(Itinerario itinerario) {
+        CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
+        Boolean bandera;
+        bandera=control.guardarItinerario(itinerario);
+        return bandera;
+    }
 }

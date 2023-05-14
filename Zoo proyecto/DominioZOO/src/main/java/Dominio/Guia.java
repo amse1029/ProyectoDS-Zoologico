@@ -2,6 +2,7 @@ package Dominio;
 
 /**
  * 
+ * @author 
  */
 public class Guia extends Empleado {
 
