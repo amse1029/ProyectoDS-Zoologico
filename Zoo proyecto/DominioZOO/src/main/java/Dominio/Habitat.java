@@ -20,16 +20,16 @@ public class Habitat {
      */
     private ObjectId id;
     private String nombre;
-    private List<Clima> climas;
+    private Clima clima;
     private List<Continente> continentes;
-    private List<Vegetacion> vegetaciones;
+    private Vegetacion vegetacion;
 
-    public Habitat(ObjectId id, String nombre, List<Clima> climas, List<Continente> continentes, List<Vegetacion> vegetaciones) {
+    public Habitat(ObjectId id, String nombre, Clima clima, List<Continente> continentes, Vegetacion vegetacion) {
         this.id = id;
         this.nombre = nombre;
-        this.climas = climas;
+        this.clima = clima;
         this.continentes = continentes;
-        this.vegetaciones = vegetaciones;
+        this.vegetacion = vegetacion;
     }
 
     public Habitat(String nombre) {
@@ -37,19 +37,19 @@ public class Habitat {
     }
     
 
-    public Habitat(String nombre, List<Clima> climas, List<Continente> continentes, List<Vegetacion> vegetaciones) {
+    public Habitat(String nombre, Clima clima, List<Continente> continentes, Vegetacion vegetacion) {
         this.nombre = nombre;
-        this.climas = climas;
+        this.clima = clima;
         this.continentes = continentes;
-        this.vegetaciones = vegetaciones;
+        this.vegetacion = vegetacion;
     }
 
-    public List<Clima> getClimas() {
-        return climas;
+    public Clima getClima() {
+        return clima;
     }
 
-    public void setClimas(List<Clima> climas) {
-        this.climas = climas;
+    public void setClima(Clima clima) {
+        this.clima = clima;
     }
 
     public List<Continente> getContinentes() {
@@ -60,12 +60,12 @@ public class Habitat {
         this.continentes = continentes;
     }
 
-    public List<Vegetacion> getVegetaciones() {
-        return vegetaciones;
+    public Vegetacion getVegetacion() {
+        return vegetacion;
     }
 
-    public void setVegetaciones(List<Vegetacion> vegetaciones) {
-        this.vegetaciones = vegetaciones;
+    public void setVegetacion(Vegetacion vegetacion) {
+        this.vegetacion = vegetacion;
     }
     
   
@@ -87,6 +87,26 @@ public class Habitat {
         this.nombre = nombre;
     }
 
+    public boolean verificacion(String nombre, Clima clima, Vegetacion vegetacion, List<Continente> continentes){
+        if(nombre.equals("")){
+            return false;
+        }
+        if(clima==null){
+            return false;
+        }
+        if(vegetacion==null){
+            return false;
+        }
+        if(continentes.size()==0){
+            return false;
+        }
+        this.nombre=nombre;
+        this.clima=clima;
+        this.vegetacion=vegetacion;
+        this.continentes=continentes;
+        return true;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -111,7 +131,7 @@ public class Habitat {
 
     @Override
     public String toString() {
-        return "Habitat{" + "id=" + id + ", nombre=" + nombre + ", climas=" + climas + ", continentes=" + continentes + ", vegetaciones=" + vegetaciones + '}';
+        return "Habitat{" + "id=" + id + ", nombre=" + nombre + ", clima=" + clima + ", continentes=" + continentes + ", vegetacion=" + vegetacion+ '}';
     }
 
     

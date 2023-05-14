@@ -66,7 +66,7 @@ public class CtrlRegistrarEspecie {
     public Especie recuperarEspecie(String nombre) {
         Especie especie = null;
         especie = datos.recuperaEspecieNombre(nombre);
-        if (especie == null) {
+        if (especie != null) {
             //setear animales a la especie
             List<Cuidador> cuidadores = new LinkedList<>();
             List<Cuidador> cuidadoresCargo = new LinkedList<>();

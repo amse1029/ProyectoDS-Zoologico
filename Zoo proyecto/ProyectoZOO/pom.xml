@@ -29,8 +29,8 @@
             <version>RELEASE160</version>
         </dependency>
         <dependency>
-            <groupId>itson.dominiozoo</groupId>
-            <artifactId>DominioZOO</artifactId>
+            <groupId>itson.datoszoo</groupId>
+            <artifactId>DatosZOO</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

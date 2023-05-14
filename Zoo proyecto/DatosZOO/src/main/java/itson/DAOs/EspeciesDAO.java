@@ -5,11 +5,19 @@
 package itson.DAOs;
 
 
+
 import Dominio.Especie;
+import Dominio.Habitat;
+import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.gt;
 import static com.mongodb.client.model.Filters.regex;
+import org.bson.codecs.configuration.CodecProvider;
+import org.bson.codecs.configuration.CodecRegistries;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.types.ObjectId;
 
 /**
@@ -21,14 +29,21 @@ public class EspeciesDAO {
     private final String NOMBRE_COLECCION = "Especies";
     
     public EspeciesDAO() {
-        this.BASE_DATOS = Conexion.dameInstancia();
+        CodecProvider codecProvider = PojoCodecProvider.builder()
+                .register("Dominio")
+                .register(Habitat.class)
+                .build();
+        CodecRegistry codecRegistry = CodecRegistries.fromRegistries(
+                MongoClientSettings.getDefaultCodecRegistry(),
+                CodecRegistries.fromProviders(codecProvider));
+        this.BASE_DATOS = Conexion.dameInstancia().withCodecRegistry(codecRegistry);
     }
     
     public Especie recupera(String nombre){
          MongoCollection<Especie> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
  
         Especie especie = new Especie();
-        especie = coleccion.find(regex("nombre", nombre)).first();
+        especie = coleccion.find(eq("nombre", nombre)).first();
         return especie;  
     }
     
@@ -36,7 +51,7 @@ public class EspeciesDAO {
         MongoCollection<Especie> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
  
         Especie especie = new Especie();
-        especie = coleccion.find(regex("nombreCientifico", nombreCientifico)).first();
+        especie = coleccion.find(eq("nombreCientifico", nombreCientifico)).first();
         return especie; 
     }
     

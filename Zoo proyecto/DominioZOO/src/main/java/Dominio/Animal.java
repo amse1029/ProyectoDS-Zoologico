@@ -30,28 +30,33 @@ public class Animal{
     private int edad;
     
     private ObjectId especieId;
+    
+    private String sexo;
 
-    public Animal(ObjectId id, String nombre, String nombreCientifico, int edad, ObjectId especieId) {
+    public Animal(ObjectId id, String nombre, String nombreCientifico, int edad, ObjectId especieId, String sexo) {
         this.id = id;
         this.nombre = nombre;
         this.nombreCientifico = nombreCientifico;
         this.edad = edad;
         this.especieId = especieId;
+        this.sexo = sexo;
     }
 
-    public Animal(String nombre, String nombreCientifico, int edad, ObjectId especieId) {
+    public Animal(String nombre, String nombreCientifico, int edad, ObjectId especieId, String sexo) {
         this.nombre = nombre;
         this.nombreCientifico = nombreCientifico;
         this.edad = edad;
         this.especieId = especieId;
+        this.sexo = sexo;
     }
 
-    public Animal(String nombre, String nombreCientifico, int edad) {
+    public Animal(String nombre, String nombreCientifico, int edad, String sexo) {
         this.nombre = nombre;
         this.nombreCientifico = nombreCientifico;
         this.edad = edad;
+        this.sexo = sexo;
     }
-   
+
 
     public ObjectId getEspecieId() {
         return especieId;
@@ -92,6 +97,32 @@ public class Animal{
 
     public void setEdad(int edad) {
         this.edad = edad;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+    
+    
+    public boolean verificacion(String nombre, int edad, boolean sexo){
+        if(nombre.equals("")){
+            return false;
+        }
+        if(edad<0||edad>150){
+            return false;
+        }
+        this.nombre=nombre;
+        this.edad=edad;
+        if(sexo){
+            this.sexo="Macho";
+        }else{
+            this.sexo="Hembra";
+        }
+        return true;
     }
 
     @Override

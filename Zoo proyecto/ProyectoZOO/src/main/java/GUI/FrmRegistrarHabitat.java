@@ -6,7 +6,17 @@
 
 package GUI;
 
+import Dominio.Clima;
+import Dominio.Continente;
+import Dominio.Habitat;
+import Dominio.Vegetacion;
+import itson.Control.CtrlRegistrarHabitat;
+import itson.Control.FabricaLogica;
+import itson.Control.ILogica;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * Descripción de la clase: 
@@ -16,8 +26,17 @@ import javax.swing.JOptionPane;
 public class FrmRegistrarHabitat extends javax.swing.JFrame {
 
     /** Creates new form FrmRegistrarHabitat */
-    public FrmRegistrarHabitat() {
+    ArrayList<Continente> seleccionados=new ArrayList<>();
+    ArrayList<Continente> disponibles=new ArrayList<>();
+    int tamSel=0;
+    int tamDis=0;
+    ILogica ctrlHabitat= FabricaLogica.crearInstancia();
+    public FrmRegistrarHabitat(List<Object> arreglo) {
+        
+        disponibles= new ArrayList<Continente>((List<Continente>)arreglo.get(0));
+        tamDis=disponibles.size();
         initComponents();
+        this.despliegaDatos(arreglo);
     }
 
     /** This method is called from within the constructor to
@@ -37,11 +56,16 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         lblContinente = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         lblNombre1 = new javax.swing.JLabel();
-        cbxContinentes = new javax.swing.JComboBox<>();
         lblClima = new javax.swing.JLabel();
         cbxClimas = new javax.swing.JComboBox<>();
         lblVegetacion = new javax.swing.JLabel();
-        cbxVegetaciones = new javax.swing.JComboBox<>();
+        cbxVegetacion = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblSeleccionados = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblDisponibles = new javax.swing.JTable();
+        btnEliminar = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar hábitat");
@@ -58,17 +82,18 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         lblRegistro.setText("Registro hábitat");
         pnlRegistro.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 70));
+        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 70));
 
         btnGuardar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(106, 69, 4));
         btnGuardar.setText("Guardar");
+        btnGuardar.setEnabled(false);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, -1));
+        pnlFondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, -1, -1));
 
         btnVerificar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnVerificar.setForeground(new java.awt.Color(106, 69, 4));
@@ -78,7 +103,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
                 btnVerificarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 380, -1, -1));
+        pnlFondo.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, -1, -1));
 
         lblContinente.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblContinente.setForeground(new java.awt.Color(255, 255, 255));
@@ -86,35 +111,105 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         pnlFondo.add(lblContinente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
         txtNombre.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 170, 40));
+        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 170, 40));
 
         lblNombre1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombre1.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre1.setText("Nombre hábitat:");
-        pnlFondo.add(lblNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
-
-        cbxContinentes.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(cbxContinentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 159, 170, 40));
+        pnlFondo.add(lblNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         lblClima.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblClima.setForeground(new java.awt.Color(255, 255, 255));
         lblClima.setText("Clima:");
-        pnlFondo.add(lblClima, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, -1, -1));
+        pnlFondo.add(lblClima, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
 
         cbxClimas.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(cbxClimas, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 170, 40));
+        pnlFondo.add(cbxClimas, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 170, 40));
 
         lblVegetacion.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblVegetacion.setForeground(new java.awt.Color(255, 255, 255));
         lblVegetacion.setText("Vegetación:");
-        pnlFondo.add(lblVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        pnlFondo.add(lblVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
 
-        cbxVegetaciones.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(cbxVegetaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, 170, 40));
+        cbxVegetacion.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        pnlFondo.add(cbxVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 170, 40));
 
-        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 450));
+        tblSeleccionados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Continente"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblSeleccionados);
+
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 150, 110));
+
+        tblDisponibles.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Continente"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblDisponibles);
+
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 150, 110));
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setEnabled(false);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, -1, -1));
+
+        btnAgregar.setText("Agregar");
+        btnAgregar.setEnabled(false);
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 290, -1, -1));
+
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 510));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -127,29 +222,129 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         this.seleccionaVerificar();
     }//GEN-LAST:event_btnVerificarActionPerformed
 
-   public void despliegaDatos(){
-       
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+        int indice=this.tblSeleccionados.getSelectedRow();
+        if(indice!=-1&&tamSel>0){
+            disponibles.add(seleccionados.get(indice));
+            seleccionados.remove(indice);
+            DefaultTableModel model = (DefaultTableModel) tblDisponibles.getModel();
+            Object[] row = {(Object)tblSeleccionados.getValueAt(indice, 0)};
+            model.addRow(row);
+            DefaultTableModel model2 = (DefaultTableModel) tblSeleccionados.getModel();
+            if(model2.getRowCount()>1){
+                model2.removeRow(indice);
+            }
+            tamSel--;
+            tamDis++;
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+        int indice=this.tblDisponibles.getSelectedRow();
+        if(indice!=-1&&tamDis>0){
+            seleccionados.add(disponibles.get(indice));
+            disponibles.remove(indice);
+            DefaultTableModel model = (DefaultTableModel) tblSeleccionados.getModel();
+            Object[] row = {(Object)tblDisponibles.getValueAt(indice, 0)};
+            model.addRow(row);
+            DefaultTableModel model2 = (DefaultTableModel) tblDisponibles.getModel();
+            if(model2.getRowCount()>1){
+                model2.removeRow(indice);
+            }
+            tamDis--;
+            tamSel++;
+        }
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+   public void despliegaDatos(List<Object> arreglo){
+       ArrayList<Clima> climas=new ArrayList<Clima>((List<Clima>)arreglo.get(2));
+       for(int i=0;i<climas.size();i++){
+           this.cbxClimas.addItem(climas.get(i).getNombre());
+       }
+       ArrayList<Vegetacion> vegetaciones=new ArrayList<Vegetacion>((List<Vegetacion>)arreglo.get(1));;
+       for(int i=0;i<vegetaciones.size();i++){
+           this.cbxVegetacion.addItem(vegetaciones.get(i).getNombre());
+       }
+       ArrayList<Continente> continentes=new ArrayList<Continente>((List<Continente>)arreglo.get(0));
+       DefaultTableModel modeloTabla = (DefaultTableModel) this.tblDisponibles.getModel();
+       for(int i=0;i<continentes.size();i++){
+           Object[] fila = {continentes.get(i).getNombre()};
+           modeloTabla.addRow(fila);
+       }
    }
    public void seleccionaVerificar(){
-   
+       if(this.txtNombre.getText().equals("")){
+           JOptionPane.showMessageDialog(this, "No se ha ingresado ningun nombre de habitat");
+       }else{
+           Habitat habitat=ctrlHabitat.buscarHabitat(this.txtNombre.getText());
+           if(habitat==null){
+               this.activaCamposRegistro();
+           }else{
+               this.desactivarCamposRegistro();
+               this.despliegaHabitatExistente(habitat);
+           }
+       }
    }
 
-   public void despliegaHabitatExistente(){
+   public void despliegaHabitatExistente(Habitat habitat){
+       JOptionPane.showMessageDialog(this, "El habitat ya existe por lo que no se puede dar de alta");
+       this.seleccionados = new ArrayList<>(habitat.getContinentes());
+       this.cbxClimas.removeAllItems();
+       this.cbxClimas.addItem(habitat.getClima().getNombre());
+       this.cbxVegetacion.removeAllItems();
+       this.cbxVegetacion.addItem(habitat.getVegetacion().getNombre());
+       DefaultTableModel model = (DefaultTableModel) tblDisponibles.getModel();
+       model.setRowCount(0);
+       this.llenarContinenteSelect();
    }
    
    public void activaCamposRegistro(){
-       
+       this.btnEliminar.setEnabled(true);
+       this.btnAgregar.setEnabled(true);
+       this.btnGuardar.setEnabled(true);
+   }
+   
+   public void desactivarCamposRegistro(){
+       this.btnEliminar.setEnabled(false);
+       this.btnAgregar.setEnabled(false);
+       this.btnGuardar.setEnabled(false);
    }
    
    public void seleccionaAgregaContinente(){
        
    }
    
+   public void llenarContinenteSelect(){
+       DefaultTableModel modeloTabla = (DefaultTableModel) this.tblSeleccionados.getModel();
+       for(int i=0;i<seleccionados.size();i++){
+           Object[] fila = {seleccionados.get(i).getNombre()};
+           modeloTabla.addRow(fila);
+       }
+   }
+   
    public void mueveContinenteSelect(){
        
    }
    public void seleccionaGuardar(){
-       
+       Clima clima=null;
+       Vegetacion vegetacion=null;
+       if(this.cbxClimas.getSelectedIndex()!=-1){
+           clima= new Clima(cbxClimas.getSelectedItem().toString());
+       }
+       if(this.cbxVegetacion.getSelectedIndex()!=-1){
+           vegetacion= new Vegetacion(this.cbxVegetacion.getSelectedItem().toString());
+       }
+       String nombre="" + this.txtNombre.getText();
+       Habitat habitat=new Habitat();
+       boolean valida=habitat.verificacion(nombre, clima, vegetacion, seleccionados);
+       if(valida){
+           ctrlHabitat.guardarHabitat(habitat);
+           this.muestraMsjExito();
+       }else{
+           this.muestraMsjCamposVacios();
+       }
    }
    
    public void verificarCamposVacios(){
@@ -165,11 +360,14 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
    }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnVerificar;
     private javax.swing.JComboBox<String> cbxClimas;
-    private javax.swing.JComboBox<String> cbxContinentes;
-    private javax.swing.JComboBox<String> cbxVegetaciones;
+    private javax.swing.JComboBox<String> cbxVegetacion;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblClima;
     private javax.swing.JLabel lblContinente;
     private javax.swing.JLabel lblNombre1;
@@ -177,6 +375,8 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
     private javax.swing.JLabel lblVegetacion;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlRegistro;
+    private javax.swing.JTable tblDisponibles;
+    private javax.swing.JTable tblSeleccionados;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 

@@ -6,6 +6,14 @@
 
 package GUI;
 
+import Dominio.Cuidador;
+import Dominio.Habitat;
+import itson.Control.CtrlRegistrarEspecie;
+import itson.Control.FabricaLogica;
+import itson.Control.ILogica;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 
@@ -17,7 +25,12 @@ import javax.swing.JOptionPane;
 public class FrmInicial extends javax.swing.JFrame {
 
     /** Creates new form FrmInicial */
+    ILogica ctrlHabitat;
+    ILogica ctrlEspecie;
     public FrmInicial() {
+        this.setVisible(true);
+        ctrlHabitat=FabricaLogica.crearInstancia();
+        ctrlEspecie=FabricaLogica.crearInstancia();
         initComponents();
     }
 
@@ -125,13 +138,17 @@ public class FrmInicial extends javax.swing.JFrame {
 
     
    public void seleccionaRegistrarHabitat(){
-       FrmRegistrarHabitat frm = new FrmRegistrarHabitat();
+       LinkedList<Object> arreglo = new LinkedList();
+       arreglo=ctrlHabitat.recuperarDatosHabitats();
+       FrmRegistrarHabitat frm = new FrmRegistrarHabitat(arreglo);
        frm.setVisible(true);
        this.dispose();
    }
-   
+
    public void seleccionaRegistActEspecie() {
-       FrmRegistrarEspecie_1 frm = new FrmRegistrarEspecie_1();
+       List<Habitat> habitats=ctrlEspecie.recuperarHabitats();
+       List<Cuidador> cuidadores=ctrlEspecie.recuperarCuidadores();
+       FrmRegistrarEspecie_1 frm = new FrmRegistrarEspecie_1(habitats, cuidadores);
        frm.setVisible(true);
        this.dispose();
    }

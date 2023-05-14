@@ -4,16 +4,24 @@
  */
 package GUI;
 
+import Dominio.Animal;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author alexa
  */
 public class FrmEditarAnimales extends javax.swing.JFrame {
 
+    FrmRegistrarEspecie_1 especie;
+    ArrayList<Animal> animales=new ArrayList<>();
     /**
      * Creates new form FrmEditarAnimales
      */
-    public FrmEditarAnimales() {
+    public FrmEditarAnimales(FrmRegistrarEspecie_1 especie) {
+        this.especie=especie;
         initComponents();
     }
 
@@ -33,8 +41,14 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblAnimales = new javax.swing.JTable();
         lblAnimales = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        lblEdad = new javax.swing.JLabel();
+        lblNombre2 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        txtEdad = new javax.swing.JTextField();
+        cbSexo = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Editar animales");
@@ -85,19 +99,16 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
 
         jScrollPane1.setFont(new java.awt.Font("Segoe Print", 0, 20)); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblAnimales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "#", "Nombre", "Selección"
+                "Nombre", "Edad", "Sexo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false
@@ -111,18 +122,44 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblAnimales);
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 430, 240));
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 430, 100));
 
         lblAnimales.setFont(new java.awt.Font("Segoe Print", 1, 25)); // NOI18N
         lblAnimales.setForeground(new java.awt.Color(106, 69, 4));
         lblAnimales.setText("Animales");
         pnlFondo.add(lblAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
 
+        lblNombre.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombre.setText("Nombre:");
+        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
+
+        lblEdad.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblEdad.setForeground(new java.awt.Color(255, 255, 255));
+        lblEdad.setText("Edad:");
+        pnlFondo.add(lblEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
+
+        lblNombre2.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblNombre2.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombre2.setText("Sexo:");
+        pnlFondo.add(lblNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, -1, -1));
+
+        txtNombre.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 170, 40));
+
+        txtEdad.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        pnlFondo.add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 170, 40));
+
+        cbSexo.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        cbSexo.setText("Macho");
+        pnlFondo.add(cbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 170, 40));
+
         getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 560));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
@@ -132,7 +169,7 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        this.seleccionaEliminar();
+        this.muestraMsjConfirmacion();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -145,11 +182,23 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     }
     
     private void seleccionaAgregar() {
-        
+        Animal animal=new Animal();
+        String nombre=this.txtNombre.getText();
+        int edad=Integer.parseInt(this.txtEdad.getText());
+        boolean sexo=this.cbSexo.isSelected();
+        boolean exito=animal.verificacion(nombre, edad, sexo);
+        if(exito){
+            animales.add(animal);
+            DefaultTableModel model = (DefaultTableModel) tblAnimales.getModel();
+            Object[] row = new Object[]{animal.getNombre(), animal.getEdad(), animal.getSexo()};
+            model.addRow(row);
+        }else{
+            this.muestraMsjError();
+        }
     }
     
     private void muestraMsjError() {
-        
+        JOptionPane.showMessageDialog(this,"La edad no puede ser mayor a 150 ni menor a 0 y no debe haber campos vacios","Error",JOptionPane.ERROR);
     }
     
     private void muestraMsjExistente() {
@@ -157,7 +206,16 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     }
     
     private void seleccionaEliminar() {
-        
+        int indice=tblAnimales.getSelectedRow();
+        if(indice!=-1){
+            DefaultTableModel model = (DefaultTableModel) tblAnimales.getModel();
+            if(model.getRowCount()>1){
+                model.removeRow(indice);
+            }
+            tblAnimales.revalidate();
+            tblAnimales.replace();
+            animales.remove(indice);
+        }
     }
     
     private void cierraPantalla() {
@@ -165,7 +223,12 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     }
     
     private void muestraMsjConfirmacion() {
-        
+        int dialogResult = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea eliminarlo?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            this.seleccionaEliminar();
+        } else {
+            
+        }
     }
     
     private void seleccionaConfirmar() {
@@ -181,18 +244,25 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     }
     
     private void seleccionaRegresar() {
-        
+        this.setVisible(false);
+        especie.setAnimales(animales);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JCheckBox cbSexo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAnimales;
+    private javax.swing.JLabel lblEdad;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblNombre2;
     private javax.swing.JLabel lblRegistro;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlRegistro;
+    private javax.swing.JTable tblAnimales;
+    private javax.swing.JTextField txtEdad;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
