@@ -8,10 +8,7 @@ import org.bson.types.ObjectId;
  */
 public class Itinerario {
   private ObjectId id;
-    /**
-     * 
-     */
-    private String nombre;
+    private String nombreItinerario;
     
     private int totalEspecies;
 
@@ -39,7 +36,7 @@ public class Itinerario {
     }
 
     public Itinerario(String nombre, int totalEspecies, int maxVisitantes, Recorrido recorrido, List<Zona> zonas, List<Horario> horarios) {
-        this.nombre = nombre;
+        this.nombreItinerario = nombre;
         this.totalEspecies = totalEspecies;
         this.maxVisitantes = maxVisitantes;
         this.recorrido = recorrido;
@@ -66,7 +63,7 @@ public class Itinerario {
         if(horarios.size()==0){
             return false;
         }
-        this.nombre=nombre;
+        this.nombreItinerario=nombre;
         this.maxVisitantes=visitantes;
         this.recorrido=recorrido;
         this.zonas=zonas;
@@ -81,8 +78,6 @@ public class Itinerario {
         this.id = id;
     }
 
-    
-    
     public int getTotalEspecies() {
         return totalEspecies;
     }
@@ -121,6 +116,19 @@ public class Itinerario {
 
     public void setHorarios(List<Horario> horarios) {
         this.horarios = horarios;
+    }
+
+    public String getNombreItinerario() {
+        return nombreItinerario;
+    }
+
+    public void setNombreItinerario(String nombreItinerario) {
+        this.nombreItinerario = nombreItinerario;
+    }
+
+    @Override
+    public String toString() {
+        return "Itinerario{" + "id=" + id + ", nombreItinerario=" + nombreItinerario + ", totalEspecies=" + totalEspecies + ", maxVisitantes=" + maxVisitantes + ", recorrido=" + recorrido + ", zonas=" + zonas + ", horarios=" + horarios + '}';
     }
     
     

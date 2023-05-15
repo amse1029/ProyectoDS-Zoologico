@@ -16,13 +16,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmEditarAnimales extends javax.swing.JFrame {
 
-    FrmRegistrarEspecie_1 especie;
+    FrmRegistrarEspecie especie;
     List<Animal> animales=new ArrayList<>();
     /**
      * Creates new form FrmEditarAnimales
      * @param especie
      */
-    public FrmEditarAnimales(FrmRegistrarEspecie_1 especie) {
+    public FrmEditarAnimales(FrmRegistrarEspecie especie) {
         this.especie=especie;
         initComponents();
     }

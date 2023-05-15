@@ -12,6 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import org.bson.types.ObjectId;
 import Dominio.Itinerario;
+import Dominio.Queja;
 
 /**
  *
@@ -31,4 +32,6 @@ public interface ILogica {
     public Object[] recuperaDatosItinerario();
     public Itinerario buscarItinerario(String nombre);
     public ObjectId guardarItinerario(Itinerario itinerario);
+    public List<Itinerario>recuperaNombreItinerarios();
+    public ObjectId guardarQueja(Queja Queja);
 }

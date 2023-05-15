@@ -159,7 +159,7 @@ public class FrmInicial extends javax.swing.JFrame {
    public void seleccionaRegistActEspecie() {
        List<Habitat> habitats=ctrlEspecie.recuperarHabitats();
        List<Cuidador> cuidadores=ctrlEspecie.recuperarCuidadores();
-       FrmRegistrarEspecie_1 frm = new FrmRegistrarEspecie_1(habitats, cuidadores);
+       FrmRegistrarEspecie frm = new FrmRegistrarEspecie(habitats, cuidadores);
        frm.setVisible(true);
        this.setVisible(false);
        this.dispose();

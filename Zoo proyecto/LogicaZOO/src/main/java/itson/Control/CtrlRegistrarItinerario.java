@@ -53,4 +53,9 @@ public class CtrlRegistrarItinerario {
         Itinerario itinerario = itinerarioDAO.buscar(nombre);
         return itinerario;
     }
+
+    List<Itinerario> recuperaNombreItinerario() {
+        ItinerarioDAO itinerarioDAO= new ItinerarioDAO();
+       return itinerarioDAO.recupera();
+    }
 }

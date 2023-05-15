@@ -20,7 +20,7 @@ import org.bson.types.ObjectId;
  *
  * @author alexa
  */
-public class FrmRegistrarEspecie_1 extends javax.swing.JFrame {
+public class FrmRegistrarEspecie extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmRegistrarEspecie
@@ -32,7 +32,7 @@ public class FrmRegistrarEspecie_1 extends javax.swing.JFrame {
     List<Habitat> habitats;
     ILogica ctrlEspecie;
 
-    public FrmRegistrarEspecie_1(List<Habitat> habitats, List<Cuidador> cuidadores) {
+    public FrmRegistrarEspecie(List<Habitat> habitats, List<Cuidador> cuidadores) {
         this.setVisible(true);
         this.cuidadores = cuidadores;
         this.habitats = habitats;

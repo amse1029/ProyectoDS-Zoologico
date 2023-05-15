@@ -15,24 +15,25 @@ import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
 
 /**
- *
+ * Clase que permite generar la conexion con la base de datos.
  * 
  * @author Joel Antonio Lopez Cota ID:228926 
  */
 public class Conexion {
 
-   
-   
-
     private static MongoDatabase baseDatos;
 
     /**
-     *
+     * Metodo constructor por defecto.
      */
     public Conexion() {
 
     }
 
+    /**
+     * Metodo que permite crear la instancia con Mongo.
+     * @return la instancia con mongo.
+     */
     public static MongoDatabase dameInstancia() {
         if (baseDatos == null) {
             CodecRegistry codec = fromRegistries(

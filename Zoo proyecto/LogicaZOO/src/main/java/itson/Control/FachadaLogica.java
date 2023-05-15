@@ -11,6 +11,7 @@ import Dominio.Especie;
 import Dominio.Guia;
 import Dominio.Habitat;
 import Dominio.Itinerario;
+import Dominio.Queja;
 import Dominio.Vegetacion;
 import Dominio.Zona;
 import java.util.LinkedList;
@@ -104,9 +105,9 @@ public class FachadaLogica implements ILogica {
 
     @Override
     public ObjectId guardarEspecie(Especie especie) {
-       CtrlRegistrarEspecie control = new CtrlRegistrarEspecie();
-       ObjectId id = control.guardarEspecie(especie);
-       return id;
+        CtrlRegistrarEspecie control = new CtrlRegistrarEspecie();
+        ObjectId id = control.guardarEspecie(especie);
+        return id;
     }
 
     @Override
@@ -132,5 +133,19 @@ public class FachadaLogica implements ILogica {
     public ObjectId guardarItinerario(Itinerario itinerario) {
         CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
         return control.guardarItinerario(itinerario);
+    }
+
+    @Override
+    public List<Itinerario> recuperaNombreItinerarios() {
+        CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
+        List<Itinerario> itinerarios=control.recuperaNombreItinerario();
+        return itinerarios;
+    }
+
+    @Override
+    public ObjectId guardarQueja(Queja Queja) {
+        CtrlRegistrarQueja control= new CtrlRegistrarQueja();
+        Queja queja= control.guardar();
+        return queja.getId();
     }
 }

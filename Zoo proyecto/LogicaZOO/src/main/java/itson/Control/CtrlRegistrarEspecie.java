@@ -198,7 +198,7 @@ public class CtrlRegistrarEspecie {
     }
 
     public void guardarCargoEspecie(CargoEspecie cargoEspecie) {
-        datos.guardarCargoEspecie(cargoEspecie);;
+        datos.guardarCargoEspecie(cargoEspecie);
     }
 
     public void eliminarCargoEspecie(CargoEspecie cargoEspecie) {

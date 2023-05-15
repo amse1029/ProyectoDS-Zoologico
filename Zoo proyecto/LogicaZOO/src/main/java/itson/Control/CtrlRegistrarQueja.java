@@ -5,6 +5,7 @@
 
 package itson.Control;
 
+import Dominio.Queja;
 import itson.DAOs.FabricaDatos;
 import itson.DAOs.IDatos;
 
@@ -22,5 +23,11 @@ public class CtrlRegistrarQueja {
     public CtrlRegistrarQueja(){
         this.datos = FabricaDatos.crearInstancia();
     }
+
+    Queja guardar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    
     
 }
