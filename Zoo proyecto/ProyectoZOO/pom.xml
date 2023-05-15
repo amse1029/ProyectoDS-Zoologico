@@ -29,13 +29,13 @@
             <version>RELEASE160</version>
         </dependency>
         <dependency>
-            <groupId>itson.datoszoo</groupId>
-            <artifactId>DatosZOO</artifactId>
+            <groupId>itson.logicahabitat</groupId>
+            <artifactId>LogicaZOO</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
-            <groupId>itson.logicahabitat</groupId>
-            <artifactId>LogicaZOO</artifactId>
+            <groupId>itson.dominiozoo</groupId>
+            <artifactId>DominioZOO</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

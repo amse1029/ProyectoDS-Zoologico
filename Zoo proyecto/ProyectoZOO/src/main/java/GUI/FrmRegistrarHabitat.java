@@ -66,6 +66,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         tblDisponibles = new javax.swing.JTable();
         btnEliminar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar hábitat");
@@ -206,6 +207,16 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         });
         pnlFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 290, -1, -1));
 
+        btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, -1, -1));
+
         getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 510));
 
         pack();
@@ -257,6 +268,11 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
             tamSel++;
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        this.dispose();
+        new FrmInicial();
+    }//GEN-LAST:event_btnRegresarActionPerformed
 
    public void despliegaDatos(List<Object> arreglo){
        ArrayList<Clima> climas=new ArrayList<Clima>((List<Clima>)arreglo.get(2));
@@ -363,6 +379,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnVerificar;
     private javax.swing.JComboBox<String> cbxClimas;
     private javax.swing.JComboBox<String> cbxVegetacion;

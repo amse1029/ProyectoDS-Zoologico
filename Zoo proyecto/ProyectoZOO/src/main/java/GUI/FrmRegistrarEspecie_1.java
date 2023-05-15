@@ -331,7 +331,7 @@ public class FrmRegistrarEspecie_1 extends javax.swing.JFrame {
         editar.muestralos();
         editar.setVisible(true);
         while (!ya) {
-
+           
         }
         Integer cantidad = animales.size();
         this.txtCantidad.setText(cantidad.toString());

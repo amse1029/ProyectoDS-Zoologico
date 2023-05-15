@@ -181,7 +181,9 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
 
     public void muestralos(){
         this.animales=this.especie.getAnimales();
+        if(animales!=null){
         this.mostrarAnimales(animales);
+        }
     }
     
     private void mostrarAnimales(List<Animal> animales){
