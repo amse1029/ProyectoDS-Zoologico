@@ -30,5 +30,5 @@ public interface ILogica {
     public ObjectId guardarEspecie(Especie especie);
     public Object[] recuperaDatosItinerario();
     public Itinerario buscarItinerario(String nombre);
-    public Boolean guardarItinerario(Itinerario itinerario);
+    public ObjectId guardarItinerario(Itinerario itinerario);
 }

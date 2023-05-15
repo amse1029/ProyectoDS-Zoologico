@@ -1,9 +1,19 @@
 package Dominio;
 
 /**
- * 
+ *
  */
 public class Zona {
+
+    /**
+     *
+     */
+    private String nombre;
+
+    /**
+     *
+     */
+    private float extension;
 
     /**
      * Default constructor
@@ -11,15 +21,10 @@ public class Zona {
     public Zona() {
     }
 
-    /**
-     * 
-     */
-    private String nombre;
-
-    /**
-     * 
-     */
-    private float extension;
+    public Zona(String nombre, float extension) {
+        this.nombre = nombre;
+        this.extension = extension;
+    }
 
     public String getNombre() {
         return nombre;
@@ -37,6 +42,10 @@ public class Zona {
         this.extension = extension;
     }
 
+    @Override
+    public String toString() {
+        return "Zona{" + "nombre=" + nombre + ", extension=" + extension + '}';
+    }
     
     
 }

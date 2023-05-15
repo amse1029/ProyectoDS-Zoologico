@@ -35,7 +35,7 @@ public class CargoEspecieDAO {
     public void eliminar(CargoEspecie cargoEspecie){
         MongoCollection<CargoEspecie> coleccion
                 = BASE_DATOS.getCollection( NOMBRE_COLECCION, CargoEspecie.class);
-         coleccion.deleteOne(eq("id",cargoEspecie())); 
+         coleccion.deleteOne(eq("id",cargoEspecie.getId())); 
     }
     
     public List<CargoEspecie> consultaEspecies(Especie especie){

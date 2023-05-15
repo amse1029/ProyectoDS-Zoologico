@@ -12,6 +12,7 @@ import itson.DAOs.IDatos;
 import itson.DAOs.ItinerarioDAO;
 import java.util.LinkedList;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -31,21 +32,23 @@ public class CtrlRegistrarItinerario {
     }
 
     public List<Zona> recuperarZonas() {
-        List<Zona> zona = new LinkedList<>();
-        zona = datos.recuperaZonas();
+        List<Zona> zonas = new LinkedList<>();
+        zonas = datos.recuperaZonas();
+        return zonas;
     }
 
     public List<Guia> recuperarGuias() {
         List<Guia> guias = new LinkedList<>();
         guias = datos.recuperaGuias();
+        return guias;
     }
 
-    public Boolean guardarItinerario(Itinerario itinerario) {
+    public ObjectId guardarItinerario(Itinerario itinerario) {
         ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
-        itinerarioDAO.guardar(itinerario);
+      return itinerarioDAO.guardar(itinerario);
     }
 
-    Itinerario buscarItinerario(String nombre) {
+    public Itinerario buscarItinerario(String nombre) {
         ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
         Itinerario itinerario = itinerarioDAO.buscar(nombre);
         return itinerario;

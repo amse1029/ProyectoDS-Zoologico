@@ -9,6 +9,8 @@ import Dominio.Horario;
 import Dominio.Itinerario;
 import Dominio.Recorrido;
 import Dominio.Zona;
+import itson.Control.FabricaLogica;
+import itson.Control.ILogica;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -255,7 +257,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
     
     private void seleccionaBuscar() {
         String nombre=this.txtNombre.getText();
-        Itinerario itinerario=ctrItinerario.buscarItinerario(nombre);
+        Itinerario itinerario=ctrlItinerario.buscarItinerario(nombre);
         if(itinerario==null){
             this.muestraMsjNoItinerario();
             this.muestraCajasVerificacion();

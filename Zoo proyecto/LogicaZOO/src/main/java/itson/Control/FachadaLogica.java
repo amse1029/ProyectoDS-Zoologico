@@ -129,10 +129,8 @@ public class FachadaLogica implements ILogica {
     }
 
     @Override
-    public Boolean guardarItinerario(Itinerario itinerario) {
+    public ObjectId guardarItinerario(Itinerario itinerario) {
         CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
-        Boolean bandera;
-        bandera=control.guardarItinerario(itinerario);
-        return bandera;
+        return control.guardarItinerario(itinerario);
     }
 }

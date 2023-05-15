@@ -4,29 +4,28 @@ import java.util.Date;
 import org.bson.types.ObjectId;
 
 /**
- * 
+ *
  */
 public class Queja {
+
+    /**
+     *
+     */
+    private ObjectId id;
+    private String descripcion;
+    /**
+     *
+     */
+    private Date fecha;
+    private String correoElectronico;
+    private String numTelefonoVisitante;
+    private String nombreCompletoVisitante;
 
     /**
      * Default constructor
      */
     public Queja() {
     }
-
-    /**
-     * 
-     */
-    private ObjectId id;
-    private String descripcion;
-
-    /**
-     * 
-     */
-    private Date fecha;
-    private String correoElectronico;
-    private String numTelefonoVisitante;
-    private String nombreCompletoVisitante;
 
     public Queja(ObjectId id, String descripcion, Date fecha, String correoElectronico, String numTelefonoVisitante, String nombreCompletoVisitante) {
         this.id = id;
@@ -68,9 +67,6 @@ public class Queja {
     public void setNombreCompletoVisitante(String nombreCompletoVisitante) {
         this.nombreCompletoVisitante = nombreCompletoVisitante;
     }
-    
-    
-    
 
     public String getDescripcion() {
         return descripcion;
@@ -88,6 +84,4 @@ public class Queja {
         this.fecha = fecha;
     }
 
-    
-    
 }

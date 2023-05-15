@@ -7,14 +7,7 @@ import org.bson.types.ObjectId;
  * 
  */
 public class Itinerario {
-
-    /**
-     * Default constructor
-     */
-    public Itinerario() {
-    }
-
-    private ObjectId id;
+  private ObjectId id;
     /**
      * 
      */
@@ -32,12 +25,26 @@ public class Itinerario {
     private List<Zona> zonas;
     
     private List<Horario> horarios;
+    /**
+     * Default constructor
+     */
+    public Itinerario() {
+    }
     
     public Itinerario(ObjectId id, int totalEspecies, int maxVisitantes, Recorrido recorrido) {
         this.id = id;
         this.totalEspecies = totalEspecies;
         this.maxVisitantes = maxVisitantes;
         this.recorrido=recorrido;
+    }
+
+    public Itinerario(String nombre, int totalEspecies, int maxVisitantes, Recorrido recorrido, List<Zona> zonas, List<Horario> horarios) {
+        this.nombre = nombre;
+        this.totalEspecies = totalEspecies;
+        this.maxVisitantes = maxVisitantes;
+        this.recorrido = recorrido;
+        this.zonas = zonas;
+        this.horarios = horarios;
     }
 
     public boolean verificacion(String nombre, int visitantes, Recorrido recorrido, List<Zona> zonas, List<Horario> horarios){
