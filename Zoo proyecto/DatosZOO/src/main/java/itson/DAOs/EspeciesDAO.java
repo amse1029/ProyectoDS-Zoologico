@@ -93,7 +93,9 @@ public class EspeciesDAO {
     public ObjectId actualizar(Especie especie) {
         MongoCollection<Especie> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
-        coleccion.replaceOne(eq("id", especie.getId()), especie);
+        
+        
+        coleccion.replaceOne(eq("_id", especie.getId()), especie);
         return especie.getId();
     }
 }

@@ -31,15 +31,21 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     List<Cuidador> cuidadores;
     List<Habitat> habitats;
     ILogica ctrlEspecie;
+    List<Cuidador> cuida;
+    List<Habitat> habit;
+    Especie especie;
 
     public FrmRegistrarEspecie(List<Habitat> habitats, List<Cuidador> cuidadores) {
         this.setVisible(true);
+        this.animales = new ArrayList<>();
         this.cuidadores = cuidadores;
         this.habitats = habitats;
         this.ctrlEspecie = FabricaLogica.crearInstancia();
+        especie = new Especie();
         initComponents();
         this.despliegaDatos(habitats, cuidadores);
-        editar = new FrmEditarAnimales(this);
+         cuida = ctrlEspecie.recuperarCuidadores();
+         habit = ctrlEspecie.recuperarHabitats();
         this.txtCantidad.setEditable(false);
     }
 
@@ -269,12 +275,15 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     
     private void seleccionaVerificar() {
         String nombre = this.txtNombre1.getText();
-        Especie especie = ctrlEspecie.recuperarEspecie(nombre);
+         especie = ctrlEspecie.recuperarEspecie(nombre);
         if (especie == null) {
-            
+            especie = new Especie();
             this.activaCamposRegistro();
+            
         } else {
             JOptionPane.showMessageDialog(this, "La especie ya se encuentra registrada");
+            this.cuidadores = especie.getCuiadadores();
+            this.habitats = especie.getHabitats();
             this.muestraDatos(especie);
         }
     }
@@ -286,27 +295,26 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         model2.setRowCount(0);
         this.txtNombreCientifico.setText(especie.getNombreCientifico());
         this.txtDescripcion.setText(especie.getDescripcion());
-        List<Cuidador> cuida = especie.getCuiadadores();
-        List<Habitat> habit = especie.getHabitats();
+        
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblCuidadores.getModel();
-        for (int i = 0; i < cuidadores.size(); i++) {
-            if(cuidadores.get(i)==cuida.get(i)){
-                Object[] datos = {cuidadores.get(i).getNombre(), true};
+        for (int i = 0; i < cuida.size(); i++) {
+            if(cuidadores.contains(cuida.get(i))){
+                Object[] datos = {cuida.get(i).getNombre(), true};
                 modeloTabla.addRow(datos);
             }else{
-                Object[] datos = {cuidadores.get(i).getNombre(), false};
+                Object[] datos = {cuida.get(i).getNombre(), false};
                 modeloTabla.addRow(datos);
             }
             
         }
         DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblHabitats.getModel();
 
-        for (int i = 0; i < habitats.size(); i++) {
-            if(habitats.get(i)==habit.get(i)){
-                Object[] datos = {habitats.get(i).getNombre(), true};
+        for (int i = 0; i < habit.size(); i++) {
+            if(habitats.contains(habit.get(i))){
+                Object[] datos = {habit.get(i).getNombre(), true};
                 modeloTabla2.addRow(datos);
             }else{
-                Object[] datos = {habitats.get(i).getNombre(), false};
+                Object[] datos = {habit.get(i).getNombre(), false};
                 modeloTabla2.addRow(datos);
             }
         }
@@ -318,7 +326,6 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     }
 
     private void activaCamposRegistro() {
-        System.out.println("Hola");
         this.txtNombreCientifico.setEditable(true);
         this.txtDescripcion.setEditable(true);
         this.btnGuardar.setEnabled(true);
@@ -328,14 +335,17 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     }
 
     private void seleccionaEditar() {
-        editar.muestralos();
-        editar.setVisible(true);
-        while (!ya) {
+        editar = new FrmEditarAnimales(animales,this);
+       
+        //while (!ya) {
            
-        }
-        Integer cantidad = animales.size();
+        //}
+        
+    }
+    
+    public void actualizar(){
+        Integer cantidad = animales.size();    
         this.txtCantidad.setText(cantidad.toString());
-        ya = false;
     }
 
     private void actualizaCamposRegistrados() {
@@ -347,24 +357,25 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         for (int i = 0; i < tblCuidadores.getRowCount(); i++) {
             boolean escogido = (boolean) tblCuidadores.getValueAt(i, 1);
             if (escogido) {
-                cuidados.add(cuidadores.get(i));
+                cuidados.add(this.cuida.get(i));
             }
         }
         ArrayList<Habitat> hab = new ArrayList<>();
         for (int i = 0; i < tblHabitats.getRowCount(); i++) {
             boolean escogido = (boolean) tblHabitats.getValueAt(i, 1);
             if (escogido) {
-                hab.add(habitats.get(i));
+                hab.add(habit.get(i));
             }
         }
 
         String nombre = this.txtNombre1.getText();
         String nombreCientifico = this.txtNombreCientifico.getText();
         String descripcion = this.txtDescripcion.getText();
-        Especie especie = new Especie();
+        //Especie especie = new Especie();
         boolean correcto = especie.verificacion(nombre, nombreCientifico, descripcion, cuidados, hab, animales);
         if (correcto) {
-            ObjectId id = ctrlEspecie.guardarEspecie(especie);
+            System.out.println(especie.getId());
+            ObjectId id = ctrlEspecie.guardarEspecie(this.especie);
             this.mostrarMsjExito();
             JOptionPane.showMessageDialog(this, "El id de la especie registrada es el siguiente: " + id.toString());
         } else {

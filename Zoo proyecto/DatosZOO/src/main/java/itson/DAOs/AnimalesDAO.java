@@ -64,7 +64,7 @@ public class AnimalesDAO {
     public void eliminar(Animal animal) {
         MongoCollection<Animal> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Animal.class);
-        coleccion.deleteOne(eq("id", animal.getId()));
+        coleccion.deleteOne(eq("_id", animal.getId()));
     }
 
     /**

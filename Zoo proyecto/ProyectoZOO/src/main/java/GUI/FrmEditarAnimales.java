@@ -17,14 +17,18 @@ import javax.swing.table.DefaultTableModel;
 public class FrmEditarAnimales extends javax.swing.JFrame {
 
     FrmRegistrarEspecie especie;
-    List<Animal> animales=new ArrayList<>();
+    List<Animal> animales;
     /**
      * Creates new form FrmEditarAnimales
      * @param especie
      */
-    public FrmEditarAnimales(FrmRegistrarEspecie especie) {
-        this.especie=especie;
+    public FrmEditarAnimales(List<Animal> animales,FrmRegistrarEspecie especie) {
+       this.especie = especie;
         initComponents();
+            this.animales = animales;
+        
+        this.muestralos();
+        this.setVisible(true);
     }
 
     /**
@@ -180,7 +184,6 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     public void muestralos(){
-        this.animales=this.especie.getAnimales();
         if(animales!=null){
         this.mostrarAnimales(animales);
         }
@@ -211,6 +214,7 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         }else{
             this.muestraMsjError();
         }
+        System.out.println(animales);
     }
     
     private void muestraMsjError() {
@@ -235,7 +239,8 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     }
     
     private void cierraPantalla() {
-        this.setVisible(false);
+        especie.actualizar();
+        this.dispose();
     }
     
     private void muestraMsjConfirmacion() {
@@ -260,7 +265,6 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     }
     
     private void seleccionaRegresar() {
-        especie.setAnimales(animales);
         this.cierraPantalla();
     }
 

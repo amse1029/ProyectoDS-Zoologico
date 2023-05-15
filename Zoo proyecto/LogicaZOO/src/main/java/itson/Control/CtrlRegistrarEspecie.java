@@ -101,14 +101,16 @@ public class CtrlRegistrarEspecie {
     }
 
     public ObjectId actualizarEspecie(Especie especie) {
-        datos.actualizarEspecie(especie);
         this.gestionAnimales(especie);
         this.gestionarCuidadoresCargo(especie);
+        especie.setAnimales(null);
+        especie.setCuiadadores(null);
+        datos.actualizarEspecie(especie);
         return especie.getId();
     }
 
     public ObjectId guardarEspecie(Especie especie) {
-        if (this.consultaEspecieNombreCientifico(especie.getNombreCientifico())) {
+        if (especie.getId()!=null) {
             this.actualizarEspecie(especie);
             return especie.getId();
         } else {
