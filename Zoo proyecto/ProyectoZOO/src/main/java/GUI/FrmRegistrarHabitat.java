@@ -97,7 +97,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, -1, -1));
+        pnlFondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 420, -1, -1));
 
         btnVerificar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnVerificar.setForeground(new java.awt.Color(106, 69, 4));
@@ -107,7 +107,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
                 btnVerificarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, -1, -1));
+        pnlFondo.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, -1, 30));
 
         lblContinente.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblContinente.setForeground(new java.awt.Color(255, 255, 255));
@@ -130,18 +130,18 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         lblClima.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblClima.setForeground(new java.awt.Color(255, 255, 255));
         lblClima.setText("Clima:");
-        pnlFondo.add(lblClima, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
+        pnlFondo.add(lblClima, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
         cbxClimas.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(cbxClimas, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 170, 40));
+        pnlFondo.add(cbxClimas, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, 260, 40));
 
         lblVegetacion.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblVegetacion.setForeground(new java.awt.Color(255, 255, 255));
         lblVegetacion.setText("Vegetación:");
-        pnlFondo.add(lblVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
+        pnlFondo.add(lblVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, -1, -1));
 
         cbxVegetacion.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(cbxVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 170, 40));
+        pnlFondo.add(cbxVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 240, 40));
 
         tblSeleccionados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -166,7 +166,11 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblSeleccionados.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblSeleccionados);
+        if (tblSeleccionados.getColumnModel().getColumnCount() > 0) {
+            tblSeleccionados.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 150, 110));
 
@@ -193,27 +197,31 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblDisponibles.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblDisponibles);
+        if (tblDisponibles.getColumnModel().getColumnCount() > 0) {
+            tblDisponibles.getColumnModel().getColumn(0).setResizable(false);
+        }
 
-        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 150, 110));
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 150, 110));
 
-        btnEliminar.setText("Eliminar");
+        btnEliminar.setText(">");
         btnEliminar.setEnabled(false);
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, -1, -1));
+        pnlFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
 
-        btnAgregar.setText("Agregar");
+        btnAgregar.setText("<");
         btnAgregar.setEnabled(false);
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 290, -1, -1));
+        pnlFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, -1, -1));
 
         btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
@@ -223,9 +231,9 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, -1, -1));
+        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 420, -1, -1));
 
-        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 510));
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 480));
 
         pack();
         setLocationRelativeTo(null);

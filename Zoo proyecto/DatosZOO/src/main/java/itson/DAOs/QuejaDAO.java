@@ -31,10 +31,12 @@ public class QuejaDAO {
      *
      * @param queja Es la queja que se desea guardar
      */
+
      public Queja  guardarQueja(Queja queja) {
         MongoCollection<Queja> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Queja.class);
         coleccion.insertOne(queja);
         return queja;
-    }
+
+}
 }

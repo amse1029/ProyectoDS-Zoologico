@@ -80,7 +80,13 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         tblHabitats = new javax.swing.JTable();
         btnRegresar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Registrar Especie");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlFondo.setBackground(new java.awt.Color(238, 189, 102));
@@ -104,7 +110,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
                 btnVerificarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, -1, -1));
+        pnlFondo.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, -1, -1));
 
         btnEditar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnEditar.setForeground(new java.awt.Color(106, 69, 4));
@@ -115,29 +121,39 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 480, -1, -1));
+        pnlFondo.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, -1, -1));
 
         lblNombreCientifico.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombreCientifico.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreCientifico.setText("Nombre científico:");
-        pnlFondo.add(lblNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
+        pnlFondo.add(lblNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
 
         txtDescripcion.setEditable(false);
         txtDescripcion.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 170, 40));
+        pnlFondo.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 170, 40));
 
         lblNombre.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre.setText("Nombre:");
-        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
 
         lblDescripcion.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion.setForeground(new java.awt.Color(255, 255, 255));
         lblDescripcion.setText("Descripción:");
-        pnlFondo.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
+        pnlFondo.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
 
         txtCantidad.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, 170, 40));
+        txtCantidad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                txtCantidadMouseReleased(evt);
+            }
+        });
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyTyped(evt);
+            }
+        });
+        pnlFondo.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 170, 40));
 
         txtNombreCientifico.setEditable(false);
         txtNombreCientifico.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
@@ -146,17 +162,17 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
                 txtNombreCientificoKeyTyped(evt);
             }
         });
-        pnlFondo.add(txtNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 170, 40));
+        pnlFondo.add(txtNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 170, 40));
 
         lblDescripcion1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion1.setForeground(new java.awt.Color(255, 255, 255));
         lblDescripcion1.setText("Cuidador:");
-        pnlFondo.add(lblDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
+        pnlFondo.add(lblDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, -1, -1));
 
         lblAnimales.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblAnimales.setForeground(new java.awt.Color(255, 255, 255));
         lblAnimales.setText("Cantidad Animales:");
-        pnlFondo.add(lblAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, -1, -1));
+        pnlFondo.add(lblAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
         btnGuardar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(106, 69, 4));
@@ -167,12 +183,12 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, -1, -1));
+        pnlFondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, -1, -1));
 
         lblDescripcion3.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion3.setForeground(new java.awt.Color(255, 255, 255));
         lblDescripcion3.setText("Hábitat:");
-        pnlFondo.add(lblDescripcion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, -1, -1));
+        pnlFondo.add(lblDescripcion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, -1, -1));
 
         txtNombre1.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         txtNombre1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -180,47 +196,71 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
                 txtNombre1KeyTyped(evt);
             }
         });
-        pnlFondo.add(txtNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 170, 40));
+        pnlFondo.add(txtNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 170, 40));
 
         tblCuidadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Elegido"
+                "Nombre", "Selecciona"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-        });
-        jScrollPane1.setViewportView(tblCuidadores);
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 110, 110));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblCuidadores.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblCuidadores);
+        if (tblCuidadores.getColumnModel().getColumnCount() > 0) {
+            tblCuidadores.getColumnModel().getColumn(0).setResizable(false);
+            tblCuidadores.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, 140, 120));
 
         tblHabitats.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Elegida"
+                "Nombre", "Selecciona"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
-        });
-        jScrollPane2.setViewportView(tblHabitats);
 
-        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 270, 110, 110));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblHabitats.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tblHabitats);
+        if (tblHabitats.getColumnModel().getColumnCount() > 0) {
+            tblHabitats.getColumnModel().getColumn(0).setResizable(false);
+            tblHabitats.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 130, 140, 90));
 
         btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
@@ -230,9 +270,9 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 480, -1, -1));
+        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 420, -1, -1));
 
-        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 540));
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 480));
 
         pack();
         setLocationRelativeTo(null);
@@ -241,7 +281,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
         // TODO add your handling code here:
         if (this.txtNombre1.getText().isBlank()) {
-        JOptionPane.showMessageDialog(this, "Ecribre el nombre de la especie", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Ecribre el nombre de la especie", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             this.seleccionaVerificar();
         }
@@ -266,7 +306,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre1KeyTyped
-       char key = evt.getKeyChar();
+        char key = evt.getKeyChar();
         boolean letra = Character.isLetter(key);
 
         if (!letra) {
@@ -282,6 +322,34 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreCientificoKeyTyped
+
+    private void txtCantidadMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCantidadMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadMouseReleased
+
+    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
+        if (this.txtCantidad.getText().length()<5) {
+            validacionNumero(evt);
+        }
+        else{
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCantidadKeyTyped
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+      new FrmInicial().setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
+    /**
+     * Metodo para validar el campo por numero.
+     *
+     * @param evt evento
+     */
+    public void validacionNumero(java.awt.event.KeyEvent evt) {
+        char txt = evt.getKeyChar();
+        if (!(Character.isDigit(txt))) {
+            evt.consume();
+        }
+    }
 
     private void despliegaDatos(List<Habitat> habitats, List<Cuidador> cuidadores) {
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblCuidadores.getModel();
