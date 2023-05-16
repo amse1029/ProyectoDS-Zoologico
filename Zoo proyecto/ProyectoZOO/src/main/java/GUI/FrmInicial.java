@@ -8,6 +8,7 @@ package GUI;
 
 import Dominio.Cuidador;
 import Dominio.Habitat;
+import Dominio.Zona;
 import itson.Control.CtrlRegistrarEspecie;
 import itson.Control.FabricaLogica;
 import itson.Control.ILogica;
@@ -20,17 +21,20 @@ import javax.swing.JOptionPane;
 /**
  * Descripción de la clase: 
  * 
- * @author Joel Antonio Lopez Cota ID:228926
+ * @author 
  */
 public class FrmInicial extends javax.swing.JFrame {
 
     /** Creates new form FrmInicial */
     ILogica ctrlHabitat;
     ILogica ctrlEspecie;
+    ILogica ctrlZona;
+    
     public FrmInicial() {
         this.setVisible(true);
         ctrlHabitat=FabricaLogica.crearInstancia();
         ctrlEspecie=FabricaLogica.crearInstancia();
+        ctrlZona = FabricaLogica.crearInstancia();
         initComponents();
     }
 
@@ -146,7 +150,9 @@ public class FrmInicial extends javax.swing.JFrame {
         this.seleccionaRegActItinerario();
     }//GEN-LAST:event_btnRegActItinerarioActionPerformed
 
-    
+   /**
+    * Método que indica cuando el usuario selecciona registrar hábitat.
+    */ 
    public void seleccionaRegistrarHabitat(){
        LinkedList<Object> arreglo = new LinkedList();
        arreglo=ctrlHabitat.recuperarDatosHabitats();
@@ -156,6 +162,9 @@ public class FrmInicial extends javax.swing.JFrame {
        this.dispose();
    }
 
+   /**
+    * Método que indica cuando el usuario selecciona registrar / actualizar especie.
+    */
    public void seleccionaRegistActEspecie() {
        List<Habitat> habitats=ctrlEspecie.recuperarHabitats();
        List<Cuidador> cuidadores=ctrlEspecie.recuperarCuidadores();
@@ -165,14 +174,21 @@ public class FrmInicial extends javax.swing.JFrame {
        this.dispose();
    }
    
+   /**
+    *  Método que indica cuando el usuario selecciona registrar / actualizar itinerario.
+    */
    public void seleccionaRegActItinerario(){
        Object[] datos=ctrlHabitat.recuperaDatosItinerario();
-       FrmItinerarios itinerario=new FrmItinerarios(datos);
+       List<Zona> zonas = ctrlZona.recuperarZonas();
+       FrmItinerarios itinerario=new FrmItinerarios(datos, zonas);
        this.setVisible(false);
        itinerario.setVisible(true);
        this.dispose();
    }
    
+   /**
+    * Metodo que muestra un mensaje de error.
+    */
    public void muestraError(){
        JOptionPane.showMessageDialog(this, "Error al recuperar los datos", "Error", JOptionPane.ERROR_MESSAGE);
    }

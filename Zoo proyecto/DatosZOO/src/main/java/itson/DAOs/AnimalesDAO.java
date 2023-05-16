@@ -16,7 +16,7 @@ import org.bson.types.ObjectId;
 /**
  * Clase que permite gestionar los metodos referentes a los Animales 
  * en la base de datos.
- * @author julio
+ * @author 
  */
 public class AnimalesDAO {
 

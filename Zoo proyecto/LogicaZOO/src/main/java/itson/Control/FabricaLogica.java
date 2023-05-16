@@ -6,11 +6,14 @@ package itson.Control;
 
 /**
  *
- * @author julio
+ * @author 
  */
 public class FabricaLogica {
     
-    
+    /**
+     * Método que crea una instancia de FachadaLogica.
+     * @return Instancia de FachadaLogica
+     */
     public static ILogica crearInstancia(){
         return new FachadaLogica();
     }

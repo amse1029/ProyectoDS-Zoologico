@@ -4,25 +4,14 @@
  */
 package itson.DAOs;
 
-import Dominio.Animal;
-import Dominio.CargoEspecie;
-import Dominio.Clima;
-import Dominio.Continente;
-import Dominio.Cuidador;
-import Dominio.Especie;
-import Dominio.Guia;
-import Dominio.Habitat;
-import Dominio.Itinerario;
-import Dominio.Queja;
-import Dominio.Vegetacion;
-import Dominio.Zona;
+import Dominio.*;
 import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
  * Clase que permite gestionar los metodos de las daos.
  *
- * @author Joel Antonio Lopez Cota ID:228926
+ * @author 
  */
 public class FachadaDatos implements IDatos {
 

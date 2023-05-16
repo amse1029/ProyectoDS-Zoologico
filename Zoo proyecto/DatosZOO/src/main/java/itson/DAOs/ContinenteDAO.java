@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Clase que permite gestionar los metodos referentes a el continente
  * en la base de datos.
- * @author Joel Antonio Lopez Cota ID:228926 
+ * @author 
  */
 public class ContinenteDAO {
 

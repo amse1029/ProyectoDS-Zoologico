@@ -54,7 +54,7 @@ public class FrmCuidadores extends javax.swing.JFrame {
         lblRegistro.setText("Cuidadores");
         pnlRegistro.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 70));
+        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 70));
 
         btnEliminar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(106, 69, 4));
@@ -64,7 +64,7 @@ public class FrmCuidadores extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, -1, -1));
+        pnlFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 440, -1, -1));
 
         btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
@@ -74,7 +74,7 @@ public class FrmCuidadores extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 440, -1, -1));
+        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 440, -1, -1));
 
         btnAgregar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnAgregar.setForeground(new java.awt.Color(106, 69, 4));
@@ -117,12 +117,12 @@ public class FrmCuidadores extends javax.swing.JFrame {
         });
         scrlAsignados.setViewportView(tblAsignados);
 
-        pnlFondo.add(scrlAsignados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 220, 240));
+        pnlFondo.add(scrlAsignados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 260, 240));
 
         lblLibres.setFont(new java.awt.Font("Segoe Print", 1, 20)); // NOI18N
         lblLibres.setForeground(new java.awt.Color(106, 69, 4));
         lblLibres.setText("Cuidadores libres");
-        pnlFondo.add(lblLibres, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, -1, -1));
+        pnlFondo.add(lblLibres, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, -1, -1));
 
         scrlDisponibles.setFont(new java.awt.Font("Segoe Print", 0, 20)); // NOI18N
 
@@ -155,14 +155,14 @@ public class FrmCuidadores extends javax.swing.JFrame {
         });
         scrlDisponibles.setViewportView(tblDisponibles);
 
-        pnlFondo.add(scrlDisponibles, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 220, 240));
+        pnlFondo.add(scrlDisponibles, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 260, 240));
 
         lblAsignados.setFont(new java.awt.Font("Segoe Print", 1, 20)); // NOI18N
         lblAsignados.setForeground(new java.awt.Color(106, 69, 4));
         lblAsignados.setText("Cuidadores asignados");
-        pnlFondo.add(lblAsignados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
+        pnlFondo.add(lblAsignados, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
 
-        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 560));
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 560));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

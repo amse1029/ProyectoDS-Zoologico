@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Clase que permite gestionar los metodos referentes a el clima en la base de
  * datos.
- * @author Joel Antonio Lopez Cota ID:228926
+ * @author 
  */
 public class ClimaDAO {
 

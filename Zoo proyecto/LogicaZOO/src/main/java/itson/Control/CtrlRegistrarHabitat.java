@@ -17,10 +17,17 @@ public class CtrlRegistrarHabitat {
 
     private IDatos datos;
 
+    /**
+     * Constructor que instancia la fabrica de datos
+     */
     public CtrlRegistrarHabitat() {
         this.datos = FabricaDatos.crearInstancia();
     }
 
+    /**
+     * Método que permite recuperar las hábitats existentes.
+     * @return Lista de climas
+     */
     public List<Clima> recuperarClimas() {
         List<Clima> climas = new LinkedList<>();
         climas = datos.recuperarClima();
@@ -33,6 +40,10 @@ public class CtrlRegistrarHabitat {
         }
     }
 
+    /**
+     * Método que permite recuperar las vegetaciones existentes.
+     * @return Lista de vegetaciones
+     */
     public List<Vegetacion> recuperarVegetacion() {
         List<Vegetacion> vegetaciones = new LinkedList<>();
         vegetaciones = datos.recuperarVegetacion();
@@ -45,6 +56,10 @@ public class CtrlRegistrarHabitat {
         }
     }
 
+    /**
+     * Método que permite recuperar los continentes existentes.
+     * @return Lista de continentes
+     */
     public List<Continente> recuperarContiente() {
         List<Continente> continentes = new LinkedList<>();
         continentes = datos.recuperarContinente();
@@ -57,12 +72,22 @@ public class CtrlRegistrarHabitat {
         }
     }
 
+    /**
+     * Método que busca un hábitat por su nombre.
+     * @param nombre Nombre del hábitat que se quiere buscar.
+     * @return Hábitat encontrada.
+     */
     public Habitat buscarHabitat(String nombre) {
         Habitat habitat = new Habitat();
         habitat = datos.buscarHabitat(nombre);
         return habitat;
     }
 
+    /**
+     * Método que guarda un hábitat.
+     * @param habitat Hábitat que se quiere guardar.
+     * @return true si se pudo guardar, false en caso contrario.
+     */
     public boolean guardarHabitat(Habitat habitat) {
         Boolean bandera;
         if (this.buscarHabitat(habitat.getNombre()) == null) {

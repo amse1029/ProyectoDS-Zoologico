@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author alexa
+ * @author 
  */
 public class FrmItinerarios extends javax.swing.JFrame {
 
@@ -26,12 +26,14 @@ public class FrmItinerarios extends javax.swing.JFrame {
      * Creates new form FrmItinerarios
      */
     ILogica ctrlItinerario;
+    List<Zona> zonas;
     Object[] datos;
-    public FrmItinerarios(Object[] datos) {
+    public FrmItinerarios(Object[] datos, List<Zona> zonas) {
         this.datos=datos;
+        this.zonas = zonas;
         initComponents();
         ctrlItinerario=FabricaLogica.crearInstancia();
-        this.despliegaDatos(datos);
+        this.despliegaDatos(datos, zonas);
     }
 
     /**
@@ -79,7 +81,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         lblRegistro.setText("Registrar itinerario");
         pnlRegistro.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 70));
+        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 70));
 
         btnBuscar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(106, 69, 4));
@@ -113,7 +115,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         Horarios.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         Horarios.setForeground(new java.awt.Color(255, 255, 255));
         Horarios.setText("Zonas:");
-        pnlFondo.add(Horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, -1, -1));
+        pnlFondo.add(Horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, -1, -1));
 
         btnGuardar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(106, 69, 4));
@@ -177,7 +179,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblHorarios);
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 220, 140));
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 350, 140));
 
         tblZonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,7 +199,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblZonas);
 
-        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 180, 140));
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, 180, 140));
 
         btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
@@ -209,7 +211,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         });
         pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 500, -1, -1));
 
-        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 550));
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -237,7 +239,12 @@ public class FrmItinerarios extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void despliegaDatos(Object[] datos) {
+    /**
+     * Método que despliega los datos en las tablas correspondientes.
+     * @param datos Datos de los itinerarios.
+     * @param zonas Lista de zonas
+     */
+    private void despliegaDatos(Object[] datos, List<Zona> zonas) {
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblHorarios.getModel();
         Object[] lunes = {"Lunes", false};
         modeloTabla.addRow(lunes);
@@ -253,19 +260,37 @@ public class FrmItinerarios extends javax.swing.JFrame {
         modeloTabla.addRow(martes);
         Object[] domingo={"Domingo", false};
         modeloTabla.addRow(martes);
+        
+        DefaultTableModel tablaZonas = (DefaultTableModel) this.tblZonas.getModel();
+
+        for (int i = 0; i < zonas.size(); i++) {
+            Object[] datos1 = {zonas.get(i).getNombre(), false};
+            tablaZonas.addRow(datos1);
+        }
     }
-    
+
+    /**
+     * Método que realiza las acciones correspondientes 
+     * cuando el usuario selecciona buscar.
+     */
     private void seleccionaBuscar() {
-        String nombre=this.txtNombre.getText();
-        Itinerario itinerario=ctrlItinerario.buscarItinerario(nombre);
-        if(itinerario==null){
+        String nombre = this.txtNombre.getText();
+        Itinerario itinerario = ctrlItinerario.buscarItinerario(nombre);
+        if (itinerario == null) {
             this.muestraMsjNoItinerario();
+            this.txtDuracion.setEditable(true);
+            this.txtLongitud.setEditable(true);
+            this.txtVisitantes.setEditable(true);
             this.muestraCajasVerificacion();
-        }else{
+        } else {
             this.despliegaDatosItinerario(itinerario);
         }
     }
     
+    /**
+     * Método que despliega los datos de un itinerario en las tablas correspondientes.
+     * @param itinerario Itinerario del que se quiere desplegar los datos.
+     */
     private void despliegaDatosItinerario(Itinerario itinerario) {
         Float duracion=itinerario.getRecorrido().getDuracion();
         Float longitud=itinerario.getRecorrido().getLongitud();
@@ -320,10 +345,16 @@ public class FrmItinerarios extends javax.swing.JFrame {
         
     }
     
+    /**
+     * Método que muestra mensaje cuando un itinerario no existe.
+     */
     private void muestraMsjNoItinerario() {
         JOptionPane.showMessageDialog(this, "No existe itinerario", "Información", JOptionPane.INFORMATION_MESSAGE);
     }
     
+    /**
+     * Método que muestra cajas de verificación.
+     */
     private void muestraCajasVerificacion() {
         List<Zona> zonas=(List<Zona>) datos[0];
         DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblZonas.getModel();
@@ -341,6 +372,9 @@ public class FrmItinerarios extends javax.swing.JFrame {
         
     }
     
+    /**
+     * Método que realiza las acciones correspondientes cuando el usuario selecciona guardar.
+     */
     private void seleccionaGuardar() {
         String nombre=this.txtNombre.getText();
         float duracion=Float.parseFloat(this.txtDuracion.getText());
@@ -403,10 +437,16 @@ public class FrmItinerarios extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Método que muestra un mensaje de error.
+     */
     private void muestraMsjError() {
        JOptionPane.showMessageDialog(this, "Error", "Error", JOptionPane.ERROR_MESSAGE); 
     }
     
+    /**
+     * Método que muestra un mensaje de éxito.
+     */
     private void muestraMsjExito() {
         JOptionPane.showMessageDialog(this, "Itinerario registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }

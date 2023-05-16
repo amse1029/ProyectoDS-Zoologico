@@ -18,16 +18,23 @@ import org.bson.types.ObjectId;
 
 /**
  *
- * @author julio
+ * @author 
  */
 public class CtrlRegistrarEspecie {
 
     private IDatos datos;
 
+    /**
+     * Constructor que instancia la fabrica de datos
+     */
     public CtrlRegistrarEspecie() {
         this.datos = FabricaDatos.crearInstancia();
     }
 
+    /**
+     * Método que permite recuperar los cuidadores existentes.
+     * @return Lista de cuidadores
+     */
     public List<Cuidador> recuperarCuidadores() {
         List<Cuidador> cuidadores = new LinkedList<>();
         cuidadores = datos.recuperarCuidadores();
@@ -40,12 +47,21 @@ public class CtrlRegistrarEspecie {
         }
     }
 
+    /**
+     * Método que permite recuperar las hábitats existentes.
+     * @return Lista de hábitat
+     */
     public List<Habitat> recuperarHabitats() {
         List<Habitat> habitats = new LinkedList<>();
         habitats = datos.recuperarHabitats();
         return habitats;
     }
 
+    /**
+     * Método que consulta a una especie por su nombre científico.
+     * @param nombreCientifico Nombre científico de la especie.
+     * @return true si el nombre existe, false en caso contrario
+     */
     public boolean consultaEspecieNombreCientifico(String nombreCientifico) {
         Especie especie = null;
         especie = datos.buscarNombreCientificoEspecie(nombreCientifico);
@@ -56,18 +72,33 @@ public class CtrlRegistrarEspecie {
         }
     }
 
+    /**
+     * Método que consulta un animal a través de su nombre.
+     * @param nombre Nombre del animal.
+     * @return Animal encontrado.
+     */
     public Animal consultaAnimal(String nombre) {
         Animal animal = null;
         animal = datos.consultaAnimal(nombre);
         return animal;
     }
 
+    /**
+     * Método que regresa una lista de animales.
+     * @param especie Especie de la que se requieren los animales.
+     * @return Lista de con los animales de la misma especie.
+     */
     public List<Animal> recuperarAnimales(Especie especie) {
         List<Animal> animales = new LinkedList<>();
         animales = datos.recuperaAnimales(especie.getId());
         return animales;
     }
 
+    /**
+     * Método que recupera una especie por su nombre.
+     * @param nombre Nombre de la especie a buscar.
+     * @return Especie encontrada.
+     */
     public Especie recuperarEspecie(String nombre) {
         Especie especie = null;
         especie = datos.recuperaEspecieNombre(nombre);
@@ -98,19 +129,37 @@ public class CtrlRegistrarEspecie {
         }
     }
 
+    /**
+     * Método que guarda un animal.
+     * @param animal Animal que se quiere guardar.
+     */
     public void guardarAnimal(Animal animal) {
         datos.guardarAnimal(animal);
     }
 
+    /**
+     * Método que elimina un animal.
+     * @param animal Animal que se quiere eliminar.
+     */
     public void eliminarAnimal(Animal animal) {
         datos.eliminarAnimal(animal);
     }
 
+    /**
+     * Método que consulta una especie a través de su nombre científico.
+     * @param nombreCientifico Nombre científico de la especie.
+     * @return Especie con el mismo nombre del parámetro.
+     */
     public Especie consultaEspecie(String nombreCientifico) {
         Especie especie = datos.buscarNombreCientificoEspecie(nombreCientifico);
         return especie;
     }
 
+    /**
+     * Método que actualiza una especie.
+     * @param especie Especie que se quiere actualizar.
+     * @return Id de la especie actualizada.
+     */
     public ObjectId actualizarEspecie(Especie especie) {
         Especie consultada = this.consultaEspecie(especie.getNombreCientifico());
         if (consultada == null || consultada.equals(especie)) {
@@ -125,6 +174,11 @@ public class CtrlRegistrarEspecie {
         }
     }
 
+    /**
+     * Método que guarda una especie.
+     * @param especie Especie que se quiere guardar.
+     * @return Id de la especie guardada.
+     */
     public ObjectId guardarEspecie(Especie especie) {
         if (especie.getId() != null) {
             ObjectId idEspecieGuardada = this.actualizarEspecie(especie);
@@ -153,6 +207,10 @@ public class CtrlRegistrarEspecie {
         }
     }
 
+    /**
+     * Método que gestiona los animales.
+     * @param especie Especie de la que se quieren gestionar los animales.
+     */
     public void gestionAnimales(Especie especie) {
         List<Animal> animalesNuevos = especie.getAnimales();
 
@@ -186,6 +244,10 @@ public class CtrlRegistrarEspecie {
         }
     }
 
+    /**
+     * Método que gestiona los cuidadores a cargo de una especie.
+     * @param especie Especie de la que se quieren gestionar los cuidadores.
+     */
     public void gestionarCuidadoresCargo(Especie especie) {
         List<Cuidador> cuidadoresNuevos = especie.getCuiadadores();
 
@@ -220,10 +282,18 @@ public class CtrlRegistrarEspecie {
 
     }
 
+    /**
+     * Método que guarda el cargo de un cuidador con una especie.
+     * @param cargoEspecie Cargo que se quiere guardar.
+     */
     public void guardarCargoEspecie(CargoEspecie cargoEspecie) {
         datos.guardarCargoEspecie(cargoEspecie);
     }
 
+    /**
+     * Método que elimina el cargo de un cuidador con una especie.
+     * @param cargoEspecie Cargo que se quiere eliminar.
+     */
     public void eliminarCargoEspecie(CargoEspecie cargoEspecie) {
         datos.eliminarCargoEspecie(cargoEspecie);
     }

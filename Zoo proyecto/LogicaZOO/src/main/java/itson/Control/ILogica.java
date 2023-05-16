@@ -16,7 +16,7 @@ import Dominio.Queja;
 
 /**
  *
- * @author julio
+ * @author 
  */
 public interface ILogica {
     

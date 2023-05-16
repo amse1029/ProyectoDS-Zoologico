@@ -15,7 +15,7 @@ import org.bson.types.ObjectId;
 /**
  * Clase que permite gestionar todos los metodos necesarios para 
  * generar itinerarios en la base de datos.
- * @author Joel Antonio Lopez Cota ID:228926
+ * @author 
  */
 public class ItinerarioDAO {
 

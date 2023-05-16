@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author alexa
+ * @author 
  */
 public class FrmQuejas extends javax.swing.JFrame {
 

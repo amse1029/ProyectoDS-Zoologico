@@ -8,7 +8,7 @@ package itson.DAOs;
 /**
  * Clase que permite generar la instancia necesaria para comunicarse con la 
  * fachada
- * @author Joel Antonio Lopez Cota ID:228926 
+ * @author 
  */
 public class FabricaDatos {
 

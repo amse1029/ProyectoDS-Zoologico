@@ -10,8 +10,6 @@ import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.gt;
-import static com.mongodb.client.model.Filters.regex;
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -21,7 +19,7 @@ import org.bson.types.ObjectId;
 /**
  * Clase que permite gestionar los metodos referentes a las especies en la base 
  * de datos.
- * @author julio
+ * @author 
  */
 public class EspeciesDAO {
 
@@ -51,7 +49,6 @@ public class EspeciesDAO {
      */
     public Especie recupera(String nombre) {
         MongoCollection<Especie> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
-
         Especie especie = new Especie();
         especie = coleccion.find(eq("nombre", nombre)).first();
         return especie;
@@ -65,7 +62,6 @@ public class EspeciesDAO {
      */
     public Especie buscarNombreCientifico(String nombreCientifico) {
         MongoCollection<Especie> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
-
         Especie especie = new Especie();
         especie = coleccion.find(eq("nombreCientifico", nombreCientifico)).first();
         return especie;
@@ -93,8 +89,6 @@ public class EspeciesDAO {
     public ObjectId actualizar(Especie especie) {
         MongoCollection<Especie> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
-        
-        
         coleccion.replaceOne(eq("_id", especie.getId()), especie);
         return especie.getId();
     }

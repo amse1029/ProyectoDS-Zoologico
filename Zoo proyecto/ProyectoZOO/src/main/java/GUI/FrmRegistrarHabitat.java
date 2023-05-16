@@ -142,6 +142,8 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         cbxVegetacion.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         pnlFondo.add(cbxVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 400, 170, 40));
 
+        jScrollPane1.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+
         tblSeleccionados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -167,7 +169,9 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblSeleccionados);
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 150, 110));
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 190, 110));
+
+        jScrollPane2.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
 
         tblDisponibles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -194,7 +198,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblDisponibles);
 
-        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 150, 110));
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 200, 110));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.setEnabled(false);

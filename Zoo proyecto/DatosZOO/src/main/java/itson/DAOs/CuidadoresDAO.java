@@ -10,7 +10,6 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -19,7 +18,7 @@ import org.bson.types.ObjectId;
  * Clase que permite gestionar los metodos referentes a los cuidadores en la
  * base de datos.
  *
- * @author julio
+ * @author 
  */
 public class CuidadoresDAO {
 
@@ -71,7 +70,7 @@ public class CuidadoresDAO {
      * Metodo que permite recuperar los animales que cuenten con el id de
      * especie del parametro.
      *
-     * @param idEspecie Es el id de la especie.
+     * @param idCuidador Es el id del cuidador.
      * @return Una lista con todas las coincidencias.
      */
     public List<Cuidador> recuperarId(ObjectId idCuidador) {

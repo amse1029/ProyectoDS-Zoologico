@@ -22,7 +22,7 @@ import org.bson.codecs.pojo.PojoCodecProvider;
 /**
  * Clase que permite gestionar todos los metodos referente a los habitats en la
  * base de datos.
- * @author Joel Antonio Lopez Cota ID:228926
+ * @author 
  */
 public class HabitatDAO {
 

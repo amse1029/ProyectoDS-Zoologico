@@ -8,13 +8,16 @@ package itson.Control;
 import Dominio.Queja;
 import itson.DAOs.FabricaDatos;
 import itson.DAOs.IDatos;
+import itson.DAOs.QuejaDAO;
+import org.bson.types.ObjectId;
 
 /**
  *
  * 
- * @author Joel Antonio Lopez Cota ID:228926 
+ * @author 
  */
 public class CtrlRegistrarQueja {
+    
     private IDatos datos;
 
     /**
@@ -24,8 +27,14 @@ public class CtrlRegistrarQueja {
         this.datos = FabricaDatos.crearInstancia();
     }
 
-    Queja guardar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    /**
+     * Método que guarda una queja.
+     * @param queja Queja que se quiere guardar.
+     * @return Id de la queja guardada.
+     */
+    public ObjectId guardar(Queja queja) {
+        QuejaDAO quejaDAO = new QuejaDAO();
+        return quejaDAO.guardarQueja(queja);
     }
     
     

@@ -4,7 +4,6 @@
  */
 package itson.DAOs;
 
-import Dominio.Continente;
 import Dominio.Zona;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -15,7 +14,7 @@ import java.util.List;
  * Clase que permite gestionar los metodos referentes a la Zona 
  * en la base de datos.
  *
- * @author Joel Antonio Lopez Cota ID:228926
+ * @author 
  */
 public class ZonaDAO {
 

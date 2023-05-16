@@ -48,16 +48,16 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        srlAnimales = new javax.swing.JScrollPane();
         tblAnimales = new javax.swing.JTable();
         lblAnimales = new javax.swing.JLabel();
-        lblNombre = new javax.swing.JLabel();
+        lblNombreCientifico = new javax.swing.JLabel();
         lblEdad = new javax.swing.JLabel();
-        lblNombre2 = new javax.swing.JLabel();
+        lblSexo = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtEdad = new javax.swing.JTextField();
         cbSexo = new javax.swing.JCheckBox();
-        lblNombre1 = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
         txtNombreCientifico = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,7 +107,7 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         });
         pnlFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, -1, -1));
 
-        jScrollPane1.setFont(new java.awt.Font("Segoe Print", 0, 20)); // NOI18N
+        srlAnimales.setFont(new java.awt.Font("Segoe Print", 0, 20)); // NOI18N
 
         tblAnimales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -132,29 +132,29 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblAnimales);
+        srlAnimales.setViewportView(tblAnimales);
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 430, 100));
+        pnlFondo.add(srlAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 560, 100));
 
         lblAnimales.setFont(new java.awt.Font("Segoe Print", 1, 25)); // NOI18N
         lblAnimales.setForeground(new java.awt.Color(106, 69, 4));
         lblAnimales.setText("Animales");
-        pnlFondo.add(lblAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
+        pnlFondo.add(lblAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, -1, -1));
 
-        lblNombre.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
-        lblNombre.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombre.setText("Nombre Cientifico:");
-        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
+        lblNombreCientifico.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblNombreCientifico.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombreCientifico.setText("Nombre Cientifico:");
+        pnlFondo.add(lblNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
 
         lblEdad.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblEdad.setForeground(new java.awt.Color(255, 255, 255));
         lblEdad.setText("Edad:");
         pnlFondo.add(lblEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, -1, -1));
 
-        lblNombre2.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
-        lblNombre2.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombre2.setText("Sexo:");
-        pnlFondo.add(lblNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, -1, -1));
+        lblSexo.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblSexo.setForeground(new java.awt.Color(255, 255, 255));
+        lblSexo.setText("Sexo:");
+        pnlFondo.add(lblSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, -1, -1));
 
         txtNombre.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -176,10 +176,10 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         cbSexo.setText("Macho");
         pnlFondo.add(cbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, 170, 40));
 
-        lblNombre1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
-        lblNombre1.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombre1.setText("Nombre:");
-        pnlFondo.add(lblNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, -1, -1));
+        lblNombre.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombre.setText("Nombre:");
+        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, -1, -1));
 
         txtNombreCientifico.setFont(new java.awt.Font("Segoe Script", 0, 18)); // NOI18N
         txtNombreCientifico.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -234,12 +234,19 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
+    /**
+     * Método que muestra los animales.
+     */
     public void muestralos() {
         if (animales != null) {
             this.mostrarAnimales(animales);
         }
     }
 
+    /**
+     * Método que muestra la lista de animales en la tabla.
+     * @param animales Lista de animales.
+     */
     private void mostrarAnimales(List<Animal> animales) {
         DefaultTableModel model2 = (DefaultTableModel) tblAnimales.getModel();
         model2.setRowCount(0);
@@ -251,6 +258,9 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método que realiza las acciones correspondientes cuando el usuario selecciona agregar.
+     */
     private void seleccionaAgregar() {
         Animal animal = new Animal();
         String nombre = this.txtNombre.getText();
@@ -283,6 +293,10 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         }
 
     }
+    
+    /**
+     * Método que limpia los campos de texto.
+     */
     public void limpiarCampos(){
         this.txtEdad.setText("");
         this.txtNombreCientifico.setText("");
@@ -290,15 +304,27 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         this.cbSexo.setSelected(false);
     }
 
+    /**
+     * Método que muestra un mensaje de error.
+     */
     private void muestraMsjError() {
-        JOptionPane.showMessageDialog(this, "La edad no puede ser mayor a 150 ni menor a 0 y no debe haber campos vacios", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, 
+                "La edad no puede ser mayor a 150 ni menor a 0 y no debe haber campos vacios", 
+                "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Método que muestra un mensaje de que el animal existe.
+     */
     private void muestraMsjExistente() {
-        JOptionPane.showMessageDialog(null, "Vericia el nombre y el nombre cientifico, no esten repetidos en la tabla", "Error", JOptionPane.ERROR_MESSAGE);
-
+        JOptionPane.showMessageDialog(null, 
+                "Verifica el nombre y el nombre cientifico, no esten repetidos en la tabla", 
+                "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Método que realiza las acciones correspondientes cuando el usuario selecciona eliminar.
+     */
     private void seleccionaEliminar() {
         int indice = tblAnimales.getSelectedRow();
         if (indice != -1) {
@@ -313,13 +339,21 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método que cierra la pantalla.
+     */
     private void cierraPantalla() {
         especie.actualizar();
         this.dispose();
     }
 
+    /**
+     * Método que muestra un mensaje de confirmación
+     */
     private void muestraMsjConfirmacion() {
-        int dialogResult = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea eliminarlo?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        int dialogResult = JOptionPane.showConfirmDialog(this, 
+                "¿Está seguro de que desea eliminarlo?", "Confirmación", 
+                JOptionPane.YES_NO_OPTION);
         if (dialogResult == JOptionPane.YES_OPTION) {
             this.seleccionaEliminar();
         } else {
@@ -327,6 +361,9 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * * Método que realiza las acciones correspondientes cuando el usuario selecciona regresar.
+     */
     private void seleccionaRegresar() {
         this.cierraPantalla();
     }
@@ -336,15 +373,15 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JCheckBox cbSexo;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAnimales;
     private javax.swing.JLabel lblEdad;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblNombre1;
-    private javax.swing.JLabel lblNombre2;
+    private javax.swing.JLabel lblNombreCientifico;
     private javax.swing.JLabel lblRegistro;
+    private javax.swing.JLabel lblSexo;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlRegistro;
+    private javax.swing.JScrollPane srlAnimales;
     private javax.swing.JTable tblAnimales;
     private javax.swing.JTextField txtEdad;
     private javax.swing.JTextField txtNombre;

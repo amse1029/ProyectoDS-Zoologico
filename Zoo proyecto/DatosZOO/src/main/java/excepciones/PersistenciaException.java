@@ -7,7 +7,7 @@ package excepciones;
 
 /**
  * La clase PersistenciaException representa una excepción que se produce cuando hay errores en la capa de persistencia.
- * @author esteb
+ * @author 
  */
 public class PersistenciaException extends Exception {
     
