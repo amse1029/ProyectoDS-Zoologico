@@ -108,8 +108,8 @@ public class Animal{
     }
     
     
-    public boolean verificacion(String nombre, int edad, boolean sexo){
-        if(nombre.equals("")){
+    public boolean verificacion(String nombre, int edad, boolean sexo,String nombreCientico){
+        if(nombre.equals("")||nombreCientico.equals("")){
             return false;
         }
         if(edad<0||edad>150){
@@ -117,6 +117,7 @@ public class Animal{
         }
         this.nombre=nombre;
         this.edad=edad;
+        this.nombreCientifico = nombreCientico;
         if(sexo){
             this.sexo="Macho";
         }else{

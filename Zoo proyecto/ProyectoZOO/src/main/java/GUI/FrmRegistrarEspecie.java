@@ -44,8 +44,8 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         especie = new Especie();
         initComponents();
         this.despliegaDatos(habitats, cuidadores);
-         cuida = ctrlEspecie.recuperarCuidadores();
-         habit = ctrlEspecie.recuperarHabitats();
+        cuida = ctrlEspecie.recuperarCuidadores();
+        habit = ctrlEspecie.recuperarHabitats();
         this.txtCantidad.setEditable(false);
     }
 
@@ -141,6 +141,11 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
 
         txtNombreCientifico.setEditable(false);
         txtNombreCientifico.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        txtNombreCientifico.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreCientificoKeyTyped(evt);
+            }
+        });
         pnlFondo.add(txtNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 170, 40));
 
         lblDescripcion1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
@@ -170,6 +175,11 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         pnlFondo.add(lblDescripcion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 280, -1, -1));
 
         txtNombre1.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        txtNombre1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombre1KeyTyped(evt);
+            }
+        });
         pnlFondo.add(txtNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 170, 40));
 
         tblCuidadores.setModel(new javax.swing.table.DefaultTableModel(
@@ -230,7 +240,12 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
 
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
         // TODO add your handling code here:
-        this.seleccionaVerificar();
+        if (this.txtNombre1.getText().isBlank()) {
+        JOptionPane.showMessageDialog(this, "Ecribre el nombre de la especie", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            this.seleccionaVerificar();
+        }
+
     }//GEN-LAST:event_btnVerificarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -245,10 +260,28 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        FrmInicial inicial=new FrmInicial();
+        FrmInicial inicial = new FrmInicial();
         inicial.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void txtNombre1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombre1KeyTyped
+       char key = evt.getKeyChar();
+        boolean letra = Character.isLetter(key);
+
+        if (!letra) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombre1KeyTyped
+
+    private void txtNombreCientificoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCientificoKeyTyped
+        char key = evt.getKeyChar();
+        boolean letra = Character.isLetter(key);
+
+        if (!letra) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreCientificoKeyTyped
 
     private void despliegaDatos(List<Habitat> habitats, List<Cuidador> cuidadores) {
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblCuidadores.getModel();
@@ -269,17 +302,17 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         ya = true;
     }
 
-    public List<Animal> getAnimales(){
+    public List<Animal> getAnimales() {
         return this.animales;
     }
-    
+
     private void seleccionaVerificar() {
         String nombre = this.txtNombre1.getText();
-         especie = ctrlEspecie.recuperarEspecie(nombre);
+        especie = ctrlEspecie.recuperarEspecie(nombre);
         if (especie == null) {
             especie = new Especie();
             this.activaCamposRegistro();
-            
+
         } else {
             JOptionPane.showMessageDialog(this, "La especie ya se encuentra registrada");
             this.cuidadores = especie.getCuiadadores();
@@ -295,30 +328,32 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         model2.setRowCount(0);
         this.txtNombreCientifico.setText(especie.getNombreCientifico());
         this.txtDescripcion.setText(especie.getDescripcion());
-        
+
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblCuidadores.getModel();
         for (int i = 0; i < cuida.size(); i++) {
-            if(cuidadores.contains(cuida.get(i))){
+            if (cuidadores.contains(cuida.get(i))) {
                 Object[] datos = {cuida.get(i).getNombre(), true};
                 modeloTabla.addRow(datos);
-            }else{
+            } else {
                 Object[] datos = {cuida.get(i).getNombre(), false};
                 modeloTabla.addRow(datos);
             }
-            
+
         }
         DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblHabitats.getModel();
 
         for (int i = 0; i < habit.size(); i++) {
-            if(habitats.contains(habit.get(i))){
+            if (habitats.contains(habit.get(i))) {
                 Object[] datos = {habit.get(i).getNombre(), true};
                 modeloTabla2.addRow(datos);
-            }else{
+            } else {
                 Object[] datos = {habit.get(i).getNombre(), false};
                 modeloTabla2.addRow(datos);
             }
         }
-        this.animales=especie.getAnimales();
+        this.animales = especie.getAnimales();
+        this.txtNombreCientifico.setEditable(true);
+        this.txtDescripcion.setEditable(true);
         this.btnGuardar.setEnabled(true);
         this.btnEditar.setEnabled(true);
         this.txtNombre1.setEditable(false);
@@ -335,21 +370,15 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     }
 
     private void seleccionaEditar() {
-        editar = new FrmEditarAnimales(animales,this);
-       
+        editar = new FrmEditarAnimales(animales, this);
+
         //while (!ya) {
-           
         //}
-        
     }
-    
-    public void actualizar(){
-        Integer cantidad = animales.size();    
+
+    public void actualizar() {
+        Integer cantidad = animales.size();
         this.txtCantidad.setText(cantidad.toString());
-    }
-
-    private void actualizaCamposRegistrados() {
-
     }
 
     private void seleccionaGuardar() {
@@ -374,17 +403,24 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         //Especie especie = new Especie();
         boolean correcto = especie.verificacion(nombre, nombreCientifico, descripcion, cuidados, hab, animales);
         if (correcto) {
-            System.out.println(especie.getId());
             ObjectId id = ctrlEspecie.guardarEspecie(this.especie);
-            this.mostrarMsjExito();
-            JOptionPane.showMessageDialog(this, "El id de la especie registrada es el siguiente: " + id.toString());
+            if (id == null) {
+                this.muestraMsjError("Ya existe un animal registrado con ese nombre cientifico");
+            } else {
+                this.mostrarMsjExito();
+                JOptionPane.showMessageDialog(this, "El id de la especie registrada es el siguiente: " + id.toString());
+                FrmInicial inicial = new FrmInicial();
+                inicial.setVisible(true);
+                this.dispose();
+            }
+
         } else {
-            this.muestraMsjError();
+            this.muestraMsjError("Verifica el formato, que no existan campos vacios y has agregado animales");
         }
     }
 
-    private void muestraMsjError() {
-        JOptionPane.showMessageDialog(this, "", "Error", JOptionPane.ERROR_MESSAGE);
+    private void muestraMsjError(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     private void mostrarMsjExito() {

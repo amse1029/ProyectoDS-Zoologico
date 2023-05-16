@@ -62,6 +62,12 @@ public class CtrlRegistrarEspecie {
         return animal;
     }
 
+    public List<Animal> recuperarAnimales(Especie especie) {
+        List<Animal> animales = new LinkedList<>();
+        animales = datos.recuperaAnimales(especie.getId());
+        return animales;
+    }
+
     public Especie recuperarEspecie(String nombre) {
         Especie especie = null;
         especie = datos.recuperaEspecieNombre(nombre);
@@ -69,8 +75,8 @@ public class CtrlRegistrarEspecie {
             //setear animales a la especie
             List<Cuidador> cuidadores = new LinkedList<>();
             List<Cuidador> cuidadoresCargo = new LinkedList<>();
-            List<Animal> animales = new LinkedList<>();
-            animales = datos.recuperaAnimales(especie.getId());
+            List<Animal> animales = this.recuperarAnimales(especie);
+
             especie.setAnimales(animales);
 
             List<CargoEspecie> cargoEspecies = new LinkedList<>();
@@ -100,34 +106,50 @@ public class CtrlRegistrarEspecie {
         datos.eliminarAnimal(animal);
     }
 
+    public Especie consultaEspecie(String nombreCientifico) {
+        Especie especie = datos.buscarNombreCientificoEspecie(nombreCientifico);
+        return especie;
+    }
+
     public ObjectId actualizarEspecie(Especie especie) {
-        this.gestionAnimales(especie);
-        this.gestionarCuidadoresCargo(especie);
-        especie.setAnimales(null);
-        especie.setCuiadadores(null);
-        datos.actualizarEspecie(especie);
-        return especie.getId();
+        Especie consultada = this.consultaEspecie(especie.getNombreCientifico());
+        if (consultada == null || consultada.equals(especie)) {
+            this.gestionAnimales(especie);
+            this.gestionarCuidadoresCargo(especie);
+            especie.setAnimales(null);
+            especie.setCuiadadores(null);
+            datos.actualizarEspecie(especie);
+            return especie.getId();
+        } else {
+            return null;
+        }
     }
 
     public ObjectId guardarEspecie(Especie especie) {
-        if (especie.getId()!=null) {
-            this.actualizarEspecie(especie);
-            return especie.getId();
-        } else {
-            List<Animal> animales = especie.getAnimales();
-            List<Cuidador> cuidadores = especie.getCuiadadores();
-            especie.setAnimales(null);
-            especie.setCuiadadores(null);
-            ObjectId idEspecieGuardada = datos.guardarEspecie(especie);
-            for (Animal animal : animales) {
-                animal.setEspecieId(idEspecieGuardada);
-                this.guardarAnimal(animal);
-            }
-            for (Cuidador cuidador : cuidadores) {
-                CargoEspecie cargoEspecie = new CargoEspecie(new Date(), cuidador.getId(), idEspecieGuardada);
-                this.guardarCargoEspecie(cargoEspecie);
-            }
+        if (especie.getId() != null) {
+            ObjectId idEspecieGuardada = this.actualizarEspecie(especie);
             return idEspecieGuardada;
+        } else {
+            Especie consultada = this.consultaEspecie(especie.getNombreCientifico());
+            if (consultada == null || consultada.equals(especie)) {
+                List<Animal> animales = especie.getAnimales();
+                List<Cuidador> cuidadores = especie.getCuiadadores();
+                especie.setAnimales(null);
+                especie.setCuiadadores(null);
+                ObjectId idEspecieGuardada = datos.guardarEspecie(especie);
+                for (Animal animal : animales) {
+                    animal.setEspecieId(idEspecieGuardada);
+                    this.guardarAnimal(animal);
+                }
+                for (Cuidador cuidador : cuidadores) {
+                    CargoEspecie cargoEspecie = new CargoEspecie(new Date(), cuidador.getId(), idEspecieGuardada);
+                    this.guardarCargoEspecie(cargoEspecie);
+                }
+                return idEspecieGuardada;
+            } else {
+                return null;
+            }
+
         }
     }
 
@@ -168,11 +190,11 @@ public class CtrlRegistrarEspecie {
         List<Cuidador> cuidadoresNuevos = especie.getCuiadadores();
 
         List<CargoEspecie> cuidadoresGuardado = datos.consultaEspeciesCargoEspecie(especie);
-        
+
         for (CargoEspecie cuidadorGuardado : cuidadoresGuardado) {
             boolean encontrado = false;
             for (Cuidador cuidadorNuevo : cuidadoresNuevos) {
-                if(cuidadorGuardado.getCuidadorId().equals(cuidadorNuevo.getId())){
+                if (cuidadorGuardado.getCuidadorId().equals(cuidadorNuevo.getId())) {
                     encontrado = true;
                     break;
                 }
@@ -181,21 +203,20 @@ public class CtrlRegistrarEspecie {
                 eliminarCargoEspecie(cuidadorGuardado);
             }
         }
-        
+
         for (Cuidador cuidadorNuevo : cuidadoresNuevos) {
-          boolean encontrado = false;
-           for (CargoEspecie cuidadorGuardado : cuidadoresGuardado) {
-               if(cuidadorNuevo.getId().equals(cuidadorGuardado.getCuidadorId())){
-                   encontrado = true;
+            boolean encontrado = false;
+            for (CargoEspecie cuidadorGuardado : cuidadoresGuardado) {
+                if (cuidadorNuevo.getId().equals(cuidadorGuardado.getCuidadorId())) {
+                    encontrado = true;
                     break;
-               }
-           }
-           if (!encontrado) {
-               CargoEspecie cargoEspecie = new CargoEspecie(new Date(), cuidadorNuevo.getId(), especie.getId());
-               this.guardarCargoEspecie(cargoEspecie);
+                }
+            }
+            if (!encontrado) {
+                CargoEspecie cargoEspecie = new CargoEspecie(new Date(), cuidadorNuevo.getId(), especie.getId());
+                this.guardarCargoEspecie(cargoEspecie);
             }
         }
-        
 
     }
 
