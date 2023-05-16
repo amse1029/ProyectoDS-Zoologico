@@ -103,7 +103,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
+        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
 
         lblNombreCientifico.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombreCientifico.setForeground(new java.awt.Color(255, 255, 255));
@@ -127,7 +127,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         Horarios.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         Horarios.setForeground(new java.awt.Color(255, 255, 255));
         Horarios.setText("Zonas:");
-        pnlFondo.add(Horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, -1, -1));
+        pnlFondo.add(Horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, -1, -1));
 
         btnGuardar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(106, 69, 4));
@@ -197,7 +197,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
             tblHorarios.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 300, 140));
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 350, 140));
 
         tblZonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -229,7 +229,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
             tblZonas.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 180, 140));
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 180, 140));
 
         btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
@@ -239,7 +239,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 540, -1, -1));
+        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 540, -1, -1));
 
         txtNombreRecorrido.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         pnlFondo.add(txtNombreRecorrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 170, 30));
@@ -252,7 +252,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         Horarios2.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         Horarios2.setForeground(new java.awt.Color(255, 255, 255));
         Horarios2.setText("Guias:");
-        pnlFondo.add(Horarios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 340, -1, -1));
+        pnlFondo.add(Horarios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, -1, -1));
 
         tblGuias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -284,9 +284,9 @@ public class FrmItinerarios extends javax.swing.JFrame {
             tblGuias.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, 180, 140));
+        pnlFondo.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 180, 140));
 
-        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 600));
 
         pack();
         setLocationRelativeTo(null);
