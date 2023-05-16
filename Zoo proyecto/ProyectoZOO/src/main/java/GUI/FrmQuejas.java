@@ -4,6 +4,11 @@
  */
 package GUI;
 
+import Dominio.Horario;
+import Dominio.Itinerario;
+import Dominio.Queja;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,11 +17,18 @@ import javax.swing.JOptionPane;
  */
 public class FrmQuejas extends javax.swing.JFrame {
 
+    List<Itinerario> itinerarios;
+    List<Horario> horarios;
+    ILogica ctrlQueja;
     /**
      * Creates new form FrmQuejas
      */
-    public FrmQuejas() {
+    public FrmQuejas(List<Itinerario> itinerarios) {
+        this.itinerarios=itinerarios;
+        ctrlQueja=FabricaLogica.crearInstancia();
         initComponents();
+        
+        this.muestraListaItinerariosNombres(itinerarios);
     }
 
     /**
@@ -38,6 +50,17 @@ public class FrmQuejas extends javax.swing.JFrame {
         cbxHoras = new javax.swing.JComboBox<>();
         btnEnviarQueja = new javax.swing.JButton();
         cbxFechas1 = new javax.swing.JComboBox<>();
+        lblGuia = new javax.swing.JLabel();
+        txtGuia = new javax.swing.JTextField();
+        lblItinerarios1 = new javax.swing.JLabel();
+        lblItinerarios2 = new javax.swing.JLabel();
+        lblItinerarios3 = new javax.swing.JLabel();
+        lblItinerarios4 = new javax.swing.JLabel();
+        txtQueja = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
+        txtNombreCom = new javax.swing.JTextField();
+        txtCorreo = new javax.swing.JTextField();
+        btnRegresar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -71,10 +94,15 @@ public class FrmQuejas extends javax.swing.JFrame {
         pnlFondo.add(lblHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
         cbxItinerarios.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(cbxItinerarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 170, 40));
+        cbxItinerarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxItinerariosActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(cbxItinerarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 170, 40));
 
         cbxHoras.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(cbxHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 170, 40));
+        pnlFondo.add(cbxHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, 170, 40));
 
         btnEnviarQueja.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnEnviarQueja.setForeground(new java.awt.Color(106, 69, 4));
@@ -84,12 +112,118 @@ public class FrmQuejas extends javax.swing.JFrame {
                 btnEnviarQuejaActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnEnviarQueja, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, -1, -1));
+        pnlFondo.add(btnEnviarQueja, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 450, -1, -1));
 
         cbxFechas1.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(cbxFechas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 170, 40));
+        cbxFechas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxFechas1ActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(cbxFechas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 170, 40));
 
-        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 390));
+        lblGuia.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblGuia.setForeground(new java.awt.Color(255, 255, 255));
+        lblGuia.setText("Guia:");
+        pnlFondo.add(lblGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, -1, -1));
+
+        txtGuia.setEditable(false);
+        txtGuia.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        txtGuia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGuiaActionPerformed(evt);
+            }
+        });
+        txtGuia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtGuiaKeyTyped(evt);
+            }
+        });
+        pnlFondo.add(txtGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 170, 40));
+
+        lblItinerarios1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblItinerarios1.setForeground(new java.awt.Color(255, 255, 255));
+        lblItinerarios1.setText("Queja:");
+        pnlFondo.add(lblItinerarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, -1, -1));
+
+        lblItinerarios2.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblItinerarios2.setForeground(new java.awt.Color(255, 255, 255));
+        lblItinerarios2.setText("Telefono:");
+        pnlFondo.add(lblItinerarios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, -1, -1));
+
+        lblItinerarios3.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblItinerarios3.setForeground(new java.awt.Color(255, 255, 255));
+        lblItinerarios3.setText("Nombre:");
+        pnlFondo.add(lblItinerarios3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, -1, -1));
+
+        lblItinerarios4.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblItinerarios4.setForeground(new java.awt.Color(255, 255, 255));
+        lblItinerarios4.setText("Correo electronico:");
+        pnlFondo.add(lblItinerarios4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, -1, -1));
+
+        txtQueja.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        txtQueja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtQuejaActionPerformed(evt);
+            }
+        });
+        txtQueja.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtQuejaKeyTyped(evt);
+            }
+        });
+        pnlFondo.add(txtQueja, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 170, 40));
+
+        txtTelefono.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        txtTelefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTelefonoActionPerformed(evt);
+            }
+        });
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
+        pnlFondo.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 320, 170, 40));
+
+        txtNombreCom.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        txtNombreCom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreComActionPerformed(evt);
+            }
+        });
+        txtNombreCom.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreComKeyTyped(evt);
+            }
+        });
+        pnlFondo.add(txtNombreCom, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 390, 170, 40));
+
+        txtCorreo.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        txtCorreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCorreoActionPerformed(evt);
+            }
+        });
+        txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyTyped(evt);
+            }
+        });
+        pnlFondo.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 390, 170, 40));
+
+        btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
+        btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
+        btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 450, -1, -1));
+
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -99,22 +233,127 @@ public class FrmQuejas extends javax.swing.JFrame {
         this.seleccionaEnviarQueja();
     }//GEN-LAST:event_btnEnviarQuejaActionPerformed
 
-    private void muestraListaItinerariosNombres() {
+    private void txtGuiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGuiaKeyTyped
+        char key = evt.getKeyChar();
+        boolean letra = Character.isLetter(key);
+
+        if (!letra) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtGuiaKeyTyped
+
+    private void txtGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGuiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtGuiaActionPerformed
+
+    private void cbxItinerariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxItinerariosActionPerformed
+        // TODO add your handling code here:
+        this.seleccionaNombreItinerario();
+    }//GEN-LAST:event_cbxItinerariosActionPerformed
+
+    private void cbxFechas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxFechas1ActionPerformed
+        // TODO add your handling code here:
+        this.seleccionaFechaQueja();
+    }//GEN-LAST:event_cbxFechas1ActionPerformed
+
+    private void txtQuejaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtQuejaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQuejaActionPerformed
+
+    private void txtQuejaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuejaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtQuejaKeyTyped
+
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoActionPerformed
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtNombreComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreComActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreComActionPerformed
+
+    private void txtNombreComKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreComKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreComKeyTyped
+
+    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCorreoActionPerformed
+
+    private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCorreoKeyTyped
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+        FrmAtencionVisitantes frm=new FrmAtencionVisitantes();
+        this.setVisible(false);
+        frm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void muestraListaItinerariosNombres(List<Itinerario> itinerarios) {
+        for(int i=0;i<itinerarios.size();i++){
+            this.cbxItinerarios.addItem(itinerarios.get(i).getNombreItinerario());
+        }
     }
     
     private void seleccionaNombreItinerario() {
+        int indice=this.cbxItinerarios.getSelectedIndex();
+        if(indice!=-1){
+            String guia=itinerarios.get(indice).getGuia().getNombre();
+            this.txtGuia.setText(guia);
+            this.llenaListaFechas(indice);
+        }
     }
     
-    private void llenaListaFechas() {
+    private void llenaListaFechas(int indice) {
+        this.cbxFechas1.removeAllItems();
+        this.horarios=this.itinerarios.get(indice).getHorarios();
+        for(int i=0;i<horarios.size();i++){
+            this.cbxFechas1.addItem(horarios.get(i).getDia().toString());
+        }
     }
     
     private void seleccionaFechaQueja() {
+        this.llenaListaHoras();
     }
     
     private void llenaListaHoras() {
+        this.cbxHoras.removeAllItems();
+        int indice=this.cbxFechas1.getSelectedIndex();
+        if(indice!=-1){
+            List<String> horas=new ArrayList<>();
+            String hora="";
+            for(int i=0;i<this.horarios.get(indice).getHora().length();i++){
+                hora=this.horarios.get(indice).getHora().substring(i, i+5);
+                this.cbxHoras.addItem(hora);
+                i=i+4;
+            }
+        }
     }
     
     private void seleccionaEnviarQueja() {
+        String descripcion=this.txtQueja.getText();
+        String correo=this.txtCorreo.getText();
+        String telefono=this.txtTelefono.getText();
+        String nombre=this.txtNombreCom.getText();
+        if(this.cbxItinerarios.getSelectedIndex()!=-1&&this.cbxFechas1.getSelectedIndex()!=-1&&this.cbxHoras.getSelectedIndex()!=-1){
+            Queja queja=new Queja();
+            boolean exito=queja.verificacion(descripcion, correo, nombre, telefono);
+            if(exito){
+                ctrlQueja.guardarQueja(queja);
+                this.muestraMsjQuejaEnviada();
+            }else{
+                this.muestraMsjError();
+            }
+        }else{
+            this.muestraMsjError();
+        }
     }
     
     private void muestraMsjError() {
@@ -128,14 +367,26 @@ public class FrmQuejas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviarQueja;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<String> cbxFechas1;
     private javax.swing.JComboBox<String> cbxHoras;
     private javax.swing.JComboBox<String> cbxItinerarios;
     private javax.swing.JLabel lblFechas;
+    private javax.swing.JLabel lblGuia;
     private javax.swing.JLabel lblHoras;
     private javax.swing.JLabel lblItinerarios;
+    private javax.swing.JLabel lblItinerarios1;
+    private javax.swing.JLabel lblItinerarios2;
+    private javax.swing.JLabel lblItinerarios3;
+    private javax.swing.JLabel lblItinerarios4;
     private javax.swing.JLabel lblRegistro;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlRegistro;
+    private javax.swing.JTextField txtCorreo;
+    private javax.swing.JTextField txtGuia;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombreCom;
+    private javax.swing.JTextField txtQueja;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

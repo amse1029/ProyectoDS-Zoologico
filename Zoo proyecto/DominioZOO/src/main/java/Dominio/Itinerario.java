@@ -22,6 +22,8 @@ public class Itinerario {
     private List<Zona> zonas;
     
     private List<Horario> horarios;
+    
+    private Guia guia;
     /**
      * Default constructor
      */
@@ -98,6 +100,14 @@ public class Itinerario {
 
     public void setNombreItinerario(String nombreItinerario) {
         this.nombreItinerario = nombreItinerario;
+    }
+
+    public Guia getGuia() {
+        return guia;
+    }
+
+    public void setGuia(Guia guia) {
+        this.guia = guia;
     }
 
     @Override

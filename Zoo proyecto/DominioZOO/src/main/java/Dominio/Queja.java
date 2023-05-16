@@ -35,6 +35,23 @@ public class Queja {
         this.numTelefonoVisitante = numTelefonoVisitante;
         this.nombreCompletoVisitante = nombreCompletoVisitante;
     }
+    
+    public boolean verificacion(String descripcion, String correo, String nombre, String telefono){
+        if(descripcion==null||descripcion.equals("")){
+            return false;
+        }
+        if(correo==null||correo.equals("")){
+            return false;
+        }
+        if(telefono==null||telefono.equals("")){
+            return false;
+        }
+        this.descripcion=descripcion;
+        this.correoElectronico=correo;
+        this.nombreCompletoVisitante=nombre;
+        this.numTelefonoVisitante=telefono;
+        return true;
+    }
 
     public ObjectId getId() {
         return id;

@@ -10,10 +10,12 @@ package GUI;
  */
 public class FrmAtencionVisitantes extends javax.swing.JFrame {
 
+    ILogica ctrlQuejas;
     /**
      * Creates new form FrmAtencionVisitantes
      */
     public FrmAtencionVisitantes() {
+        ctrlQuejas=FabricaLogica.crearInstancia();
         initComponents();
     }
 
@@ -68,7 +70,8 @@ public class FrmAtencionVisitantes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQuejaActionPerformed
 
     private void seleccionaRegistrarQueja() {
-        FrmQuejas frm = new FrmQuejas();
+        List<Itinerario> itinerarios=ctrlQuejas.recuperaNombreItinerario();
+        FrmQuejas frm = new FrmQuejas(itinerarios);
         frm.setVisible(true);
         this.dispose();
     }
