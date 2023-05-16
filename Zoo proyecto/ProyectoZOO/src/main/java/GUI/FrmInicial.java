@@ -29,14 +29,7 @@ public class FrmInicial extends javax.swing.JFrame {
     ILogica ctrlHabitat;
     ILogica ctrlEspecie;
     ILogica ctrlItinerario;
-<<<<<<< Updated upstream
-    
-=======
-<<<<<<< HEAD
-=======
-    
->>>>>>> 40e0b3ae329923d412edcdef943f78240539d21d
->>>>>>> Stashed changes
+
     public FrmInicial() {
         this.setVisible(true);
         ctrlHabitat=FabricaLogica.crearInstancia();
@@ -180,7 +173,7 @@ public class FrmInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegActItinerarioActionPerformed
 
     private void btnRegActEspecie1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegActEspecie1ActionPerformed
-        // TODO add your handling code here:
+        this.seleccionaRegistActEspecie();
     }//GEN-LAST:event_btnRegActEspecie1ActionPerformed
 
     
@@ -211,9 +204,9 @@ public class FrmInicial extends javax.swing.JFrame {
    }
    
    public void seleccionaAtencionVisitantes(){
-       Object[] itinerarios = ctrlHabitat.recuperaDatosItinerario();
-       FrmQuejas frm = new FrmQuejas(itinerarios);
-       frm.setVisible(true);
+       LinkedList<Object> itinerarios = ctrlHabitat.recuperaDatosItinerario();
+       //FrmQuejas frm = new FrmQuejas(itinerarios);
+       //frm.setVisible(true);
        this.dispose();
    }
    

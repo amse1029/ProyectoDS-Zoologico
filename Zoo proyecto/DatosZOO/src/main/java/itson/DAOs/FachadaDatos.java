@@ -472,6 +472,13 @@ public class FachadaDatos implements IDatos {
        recorridosDAO.actualizar(recorrido);
 
     }
+
+    @Override
+    public void agregarGuia() {
+       GuiaDAO guiaDAO = new GuiaDAO();
+       guiaDAO.insertarGuias();
+
+    }
     
     
 

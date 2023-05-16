@@ -74,8 +74,6 @@ public class FrmItinerarios extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         txtNombreRecorrido = new javax.swing.JTextField();
         lblNombre1 = new javax.swing.JLabel();
-        lblGuia = new javax.swing.JLabel();
-        cbxGuias = new javax.swing.JComboBox<>();
         Horarios2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblGuias = new javax.swing.JTable();
@@ -251,19 +249,6 @@ public class FrmItinerarios extends javax.swing.JFrame {
         lblNombre1.setText("Nombre:");
         pnlFondo.add(lblNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
-        lblGuia.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
-        lblGuia.setForeground(new java.awt.Color(255, 255, 255));
-        lblGuia.setText("Guia:");
-        pnlFondo.add(lblGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, -1));
-
-        cbxGuias.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        cbxGuias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxGuiasActionPerformed(evt);
-            }
-        });
-        pnlFondo.add(cbxGuias, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, 170, 30));
-
         Horarios2.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         Horarios2.setForeground(new java.awt.Color(255, 255, 255));
         Horarios2.setText("Guias:");
@@ -330,11 +315,6 @@ public class FrmItinerarios extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void cbxGuiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxGuiasActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_cbxGuiasActionPerformed
-
     private void despliegaDatos(LinkedList<Object> datos) {
         guias = new ArrayList<Guia>((List<Guia>) datos.get(1));
         zonas = new ArrayList<Zona>((List<Zona>) datos.get(0));
@@ -356,6 +336,10 @@ public class FrmItinerarios extends javax.swing.JFrame {
         
         DefaultTableModel tablaZonas = (DefaultTableModel) this.tblZonas.getModel();
         DefaultTableModel tablaGuias = (DefaultTableModel) this.tblGuias.getModel();
+        tablaZonas.setRowCount(0);
+        tablaGuias.setRowCount(0);
+        tblGuias.repaint();
+        tblZonas.repaint();
         for (int i = 0; i < guias.size(); i++) {
             Object[] guia = {guias.get(i).getNombre(), false};
             tablaGuias.addRow(guia);
@@ -377,7 +361,6 @@ public class FrmItinerarios extends javax.swing.JFrame {
             itinerario = new Itinerario();
             if(recorrido==null){
                 recorrido = new Recorrido();
-                this.muestraCajasVerificacion();
             }else{
                 this.despliegaDatosRecorrido(recorrido);
             }
@@ -385,7 +368,6 @@ public class FrmItinerarios extends javax.swing.JFrame {
            this.despliegaDatosItinerario(itinerario);
            if(recorrido==null){
                 recorrido = new Recorrido();
-                this.muestraCajasVerificacion();
             }else{
                 this.despliegaDatosRecorrido(recorrido);
             }
@@ -405,6 +387,8 @@ public class FrmItinerarios extends javax.swing.JFrame {
         Float longitud=recorrido.getLongitud();
         List<Zona> zonaitinerario=recorrido.getZonas();
         DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblZonas.getModel();
+        modeloTabla2.setRowCount(0);
+        tblZonas.repaint();
         for (int i = 0; i < zonas.size(); i++) {
             if(zonaitinerario.contains(zonas.get(i))){
                 Object[] infor = {zonas.get(i).getNombre(), true};
@@ -422,7 +406,6 @@ public class FrmItinerarios extends javax.swing.JFrame {
         Integer visitantes=itinerario.getMaxVisitantes();
         Recorrido recorrido = itinerario.getRecorrido();
         List<Horario> horarios=itinerario.getHorarios();
-        
         
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblHorarios.getModel();
         for (int i = 0; i < horarios.size(); i++) {
@@ -453,6 +436,18 @@ public class FrmItinerarios extends javax.swing.JFrame {
             if(horarios.get(i).getDia().equals(Dias.Domingo)){
                 this.tblHorarios.setValueAt(true, 6, 1);
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 6, 2);
+            }
+        }
+        DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblGuias.getModel();
+        modeloTabla2.setRowCount(0);
+        tblGuias.repaint();
+        for (int i = 0; i < guias.size(); i++) {
+            if(itinerario.getGuia().equals(guias.get(i))){
+                Object[] infor = {guias.get(i).getNombre(), true};
+                modeloTabla2.addRow(infor);
+            }else{
+                Object[] infor = {guias.get(i).getNombre(), false};
+                modeloTabla2.addRow(infor);
             }
         }
         
@@ -498,7 +493,6 @@ public class FrmItinerarios extends javax.swing.JFrame {
         float duracion=Float.parseFloat(this.txtDuracion.getText());
         float longitud=Float.parseFloat(this.txtLongitud.getText());
         int visitantes=Integer.parseInt(this.txtVisitantes.getText());
-        String guia=this.cbxGuias.getSelectedItem().toString();
         List<Horario> horarios=new ArrayList<>();
         if((boolean)this.tblHorarios.getValueAt(0, 1)){
             Horario horario = new Horario();
@@ -556,6 +550,12 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 zona.add(zonas.get(i));
             }
         }
+        Guia guia = new Guia();
+        for(int i=0;i<this.tblGuias.getRowCount();i++){
+            if((boolean)this.tblGuias.getValueAt(i, 1)){
+                guia = guias.get(i);
+            }
+        }
         //Itinerario itinerario=new Itinerario();
         //Recorrido recorrido=new Recorrido();
         itinerario.setNombreItinerario(nombre);
@@ -599,14 +599,12 @@ public class FrmItinerarios extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JComboBox<String> cbxGuias;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblDescripcion2;
-    private javax.swing.JLabel lblGuia;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
     private javax.swing.JLabel lblNombreCientifico;

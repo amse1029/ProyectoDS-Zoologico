@@ -7,7 +7,7 @@ import org.bson.types.ObjectId;
  * 
  */
 public class Itinerario {
-  private ObjectId id;
+   private ObjectId id;
     private String nombreItinerario;
     
     private int totalEspecies;
@@ -23,7 +23,7 @@ public class Itinerario {
     
     private Recorrido recorrido;
     
-    private String guia;
+    private Guia guia;
     /**
      * Default constructor
      */
@@ -70,11 +70,11 @@ public class Itinerario {
         this.id = id;
     }
 
-    public String getGuia() {
+    public Guia getGuia() {
         return guia;
     }
 
-    public void setGuia(String guia) {
+    public void setGuia(Guia guia) {
         this.guia = guia;
     }
 

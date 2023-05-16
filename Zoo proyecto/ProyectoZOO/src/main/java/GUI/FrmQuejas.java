@@ -311,7 +311,7 @@ public class FrmQuejas extends javax.swing.JFrame {
     private void seleccionaNombreItinerario() {
         int indice=this.cbxItinerarios.getSelectedIndex();
         if(indice!=-1){
-            String guia=itinerarios.get(indice).getGuia();
+            String guia=itinerarios.get(indice).getGuia().getNombre();
             this.txtGuia.setText(guia);
             this.llenaListaFechas(indice);
         }

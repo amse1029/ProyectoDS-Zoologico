@@ -44,6 +44,10 @@ public class CtrlRegistrarItinerario {
     public List<Guia> recuperarGuias() {
         List<Guia> guias = new LinkedList<>();
         guias = datos.recuperaGuias();
+        if(guias.isEmpty()){
+            datos.agregarGuia();
+            guias = datos.recuperaGuias();
+        }
         return guias;
     }
 

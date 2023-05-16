@@ -259,4 +259,5 @@ public interface IDatos {
     public Itinerario buscarItineario(String nombre );
     public void actualizarItineario(Itinerario itinerario);
     public void actualizarRecorrido(Recorrido recorrido);
+    public void agregarGuia();
 }

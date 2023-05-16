@@ -1,0 +1,7 @@
+itson\Control\CtrlRegistrarHabitat.class
+itson\Control\FabricaLogica.class
+itson\Control\CtrlRegistrarEspecie.class
+itson\Control\CtrlRegistrarQueja.class
+itson\Control\FachadaLogica.class
+itson\Control\ILogica.class
+itson\Control\CtrlRegistrarItinerario.class
