@@ -8,6 +8,8 @@ import org.bson.types.ObjectId;
 import Dominio.Horario;
 import Dominio.Itinerario;
 import Dominio.Queja;
+import itson.Control.FabricaLogica;
+import itson.Control.ILogica;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -16,13 +18,14 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author alexa
+ * @author 
  */
 public class FrmQuejas extends javax.swing.JFrame {
 
     List<Itinerario> itinerarios;
     List<Horario> horarios;
     ILogica ctrlQueja;
+    
     /**
      * Creates new form FrmQuejas
      */
@@ -79,7 +82,7 @@ public class FrmQuejas extends javax.swing.JFrame {
         lblRegistro.setText("Registro queja");
         pnlRegistro.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 70));
+        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 70));
 
         lblFechas.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblFechas.setForeground(new java.awt.Color(255, 255, 255));

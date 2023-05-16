@@ -8,6 +8,7 @@ package GUI;
 
 import Dominio.Cuidador;
 import Dominio.Habitat;
+import Dominio.Itinerario;
 import itson.Control.CtrlRegistrarEspecie;
 import itson.Control.FabricaLogica;
 import itson.Control.ILogica;
@@ -20,13 +21,15 @@ import javax.swing.JOptionPane;
 /**
  * Descripción de la clase: 
  * 
- * @author Joel Antonio Lopez Cota ID:228926
+ * @author 
  */
 public class FrmInicial extends javax.swing.JFrame {
 
     /** Creates new form FrmInicial */
     ILogica ctrlHabitat;
     ILogica ctrlEspecie;
+    ILogica ctrlItinerario;
+    
     public FrmInicial() {
         this.setVisible(true);
         ctrlHabitat=FabricaLogica.crearInstancia();
@@ -44,16 +47,19 @@ public class FrmInicial extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlFondo = new javax.swing.JPanel();
+        pnlSeparador3 = new javax.swing.JPanel();
         pnlSeparador2 = new javax.swing.JPanel();
         pnlSeparador1 = new javax.swing.JPanel();
         pnlInicial = new javax.swing.JPanel();
         lblZoologico = new javax.swing.JLabel();
         btnRegActItinerario = new javax.swing.JButton();
-        btnRegistrarHabitat1 = new javax.swing.JButton();
-        btnRegActEspecie = new javax.swing.JButton();
+        btnRegistrarHabitat = new javax.swing.JButton();
+        btnAtencionVisitantes = new javax.swing.JButton();
         lblItinerarios = new javax.swing.JLabel();
         lblHabitats = new javax.swing.JLabel();
+        lblQueja = new javax.swing.JLabel();
         lblEspecies = new javax.swing.JLabel();
+        btnRegActEspecie1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pantalla principal");
@@ -62,13 +68,17 @@ public class FrmInicial extends javax.swing.JFrame {
         pnlFondo.setBackground(new java.awt.Color(238, 189, 102));
         pnlFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlSeparador3.setBackground(new java.awt.Color(106, 69, 4));
+        pnlSeparador3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlFondo.add(pnlSeparador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 690, 20));
+
         pnlSeparador2.setBackground(new java.awt.Color(106, 69, 4));
         pnlSeparador2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnlFondo.add(pnlSeparador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 10, 200));
+        pnlFondo.add(pnlSeparador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 70, 10, 220));
 
         pnlSeparador1.setBackground(new java.awt.Color(106, 69, 4));
         pnlSeparador1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnlFondo.add(pnlSeparador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 10, 220));
+        pnlFondo.add(pnlSeparador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 10, 220));
 
         pnlInicial.setBackground(new java.awt.Color(106, 69, 4));
         pnlInicial.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -90,25 +100,25 @@ public class FrmInicial extends javax.swing.JFrame {
         });
         pnlFondo.add(btnRegActItinerario, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, -1, -1));
 
-        btnRegistrarHabitat1.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
-        btnRegistrarHabitat1.setForeground(new java.awt.Color(106, 69, 4));
-        btnRegistrarHabitat1.setText("Registrar");
-        btnRegistrarHabitat1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrarHabitat.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
+        btnRegistrarHabitat.setForeground(new java.awt.Color(106, 69, 4));
+        btnRegistrarHabitat.setText("Registrar");
+        btnRegistrarHabitat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarHabitat1ActionPerformed(evt);
+                btnRegistrarHabitatActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnRegistrarHabitat1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
+        pnlFondo.add(btnRegistrarHabitat, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
-        btnRegActEspecie.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
-        btnRegActEspecie.setForeground(new java.awt.Color(106, 69, 4));
-        btnRegActEspecie.setText("Registrar / Actualizar");
-        btnRegActEspecie.addActionListener(new java.awt.event.ActionListener() {
+        btnAtencionVisitantes.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 18)); // NOI18N
+        btnAtencionVisitantes.setForeground(new java.awt.Color(106, 69, 4));
+        btnAtencionVisitantes.setText("Atención visitantes");
+        btnAtencionVisitantes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegActEspecieActionPerformed(evt);
+                btnAtencionVisitantesActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnRegActEspecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
+        pnlFondo.add(btnAtencionVisitantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, -1, -1));
 
         lblItinerarios.setFont(new java.awt.Font("Segoe Print", 1, 25)); // NOI18N
         lblItinerarios.setForeground(new java.awt.Color(255, 255, 255));
@@ -120,31 +130,50 @@ public class FrmInicial extends javax.swing.JFrame {
         lblHabitats.setText("Hábitats");
         pnlFondo.add(lblHabitats, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
 
+        lblQueja.setFont(new java.awt.Font("Segoe Print", 1, 20)); // NOI18N
+        lblQueja.setForeground(new java.awt.Color(255, 255, 255));
+        lblQueja.setText("¿Tienes alguna queja?");
+        pnlFondo.add(lblQueja, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, -1, -1));
+
         lblEspecies.setFont(new java.awt.Font("Segoe Print", 1, 25)); // NOI18N
         lblEspecies.setForeground(new java.awt.Color(255, 255, 255));
         lblEspecies.setText("Especies");
         pnlFondo.add(lblEspecies, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, -1, -1));
 
-        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 270));
+        btnRegActEspecie1.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
+        btnRegActEspecie1.setForeground(new java.awt.Color(106, 69, 4));
+        btnRegActEspecie1.setText("Registrar / Actualizar");
+        btnRegActEspecie1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegActEspecie1ActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(btnRegActEspecie1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
+
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 480));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistrarHabitat1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarHabitat1ActionPerformed
+    private void btnRegistrarHabitatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarHabitatActionPerformed
         // TODO add your handling code here:
         this.seleccionaRegistrarHabitat();
-    }//GEN-LAST:event_btnRegistrarHabitat1ActionPerformed
+    }//GEN-LAST:event_btnRegistrarHabitatActionPerformed
 
-    private void btnRegActEspecieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegActEspecieActionPerformed
+    private void btnAtencionVisitantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtencionVisitantesActionPerformed
         // TODO add your handling code here:
-        this.seleccionaRegistActEspecie();
-    }//GEN-LAST:event_btnRegActEspecieActionPerformed
+        this.seleccionaAtencionVisitantes();
+    }//GEN-LAST:event_btnAtencionVisitantesActionPerformed
 
     private void btnRegActItinerarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegActItinerarioActionPerformed
         // TODO add your handling code here:
         this.seleccionaRegActItinerario();
     }//GEN-LAST:event_btnRegActItinerarioActionPerformed
+
+    private void btnRegActEspecie1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegActEspecie1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegActEspecie1ActionPerformed
 
     
    public void seleccionaRegistrarHabitat(){
@@ -173,22 +202,32 @@ public class FrmInicial extends javax.swing.JFrame {
        this.dispose();
    }
    
+   public void seleccionaAtencionVisitantes(){
+       Object[] itinerarios = ctrlHabitat.recuperaDatosItinerario();
+       FrmQuejas frm = new FrmQuejas(itinerarios);
+       frm.setVisible(true);
+       this.dispose();
+   }
+   
    public void muestraError(){
        JOptionPane.showMessageDialog(this, "Error al recuperar los datos", "Error", JOptionPane.ERROR_MESSAGE);
    }
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRegActEspecie;
+    private javax.swing.JButton btnAtencionVisitantes;
+    private javax.swing.JButton btnRegActEspecie1;
     private javax.swing.JButton btnRegActItinerario;
-    private javax.swing.JButton btnRegistrarHabitat1;
+    private javax.swing.JButton btnRegistrarHabitat;
     private javax.swing.JLabel lblEspecies;
     private javax.swing.JLabel lblHabitats;
     private javax.swing.JLabel lblItinerarios;
+    private javax.swing.JLabel lblQueja;
     private javax.swing.JLabel lblZoologico;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlInicial;
     private javax.swing.JPanel pnlSeparador1;
     private javax.swing.JPanel pnlSeparador2;
+    private javax.swing.JPanel pnlSeparador3;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -94,7 +94,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         lblRegistro.setText("Registro especie");
         pnlRegistro.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 70));
+        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 70));
 
         btnVerificar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnVerificar.setForeground(new java.awt.Color(106, 69, 4));

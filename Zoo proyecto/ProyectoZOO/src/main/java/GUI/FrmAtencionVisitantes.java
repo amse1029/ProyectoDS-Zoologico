@@ -4,12 +4,18 @@
  */
 package GUI;
 
+import Dominio.Itinerario;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author alexa
+ * @author 
  */
 public class FrmAtencionVisitantes extends javax.swing.JFrame {
 
+    List<Itinerario> itinerarios;
+    
     /**
      * Creates new form FrmAtencionVisitantes
      */
@@ -68,13 +74,15 @@ public class FrmAtencionVisitantes extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQuejaActionPerformed
 
     private void seleccionaRegistrarQueja() {
-        FrmQuejas frm = new FrmQuejas();
+        FrmQuejas frm = new FrmQuejas(itinerarios);
         frm.setVisible(true);
         this.dispose();
     }
     
     private void muestraMsjError() {
-        
+        JOptionPane.showMessageDialog(this, 
+                "Error al recuperar las quejas", "Error", 
+                JOptionPane.ERROR_MESSAGE); 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
