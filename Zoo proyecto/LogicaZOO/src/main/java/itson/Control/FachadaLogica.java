@@ -112,12 +112,11 @@ public class FachadaLogica implements ILogica {
     }
 
     @Override
-    public Object[] recuperaDatosItinerario() {
+    public LinkedList<Object> recuperaDatosItinerario() {
         CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
         CtrlRegistrarHabitat controlHabitat = new CtrlRegistrarHabitat();
         CtrlRegistrarEspecie controlEspecie = new CtrlRegistrarEspecie();
         if (control.recuperarZonas().isEmpty()) {
-            System.out.println("Hola");
             control.insertarHabitats();
             List<Habitat> habitats = controlHabitat.recuperarHabitats();
             control.insertarEspecies(habitats.get(0), habitats.get(1), habitats.get(2));
@@ -127,9 +126,9 @@ public class FachadaLogica implements ILogica {
         }
         List<Zona> listaZonas = control.recuperarZonas();
         List<Guia> listaGuias = control.recuperarGuias();
-        Object[] datos = new Object[2];
-        datos[0] = listaZonas;
-        datos[1] = listaGuias;
+         LinkedList<Object> datos = new LinkedList<>();
+       datos.add(listaZonas);
+       datos.add(listaGuias);
         return datos;
     }
 

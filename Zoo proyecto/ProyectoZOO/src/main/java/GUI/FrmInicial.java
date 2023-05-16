@@ -29,11 +29,19 @@ public class FrmInicial extends javax.swing.JFrame {
     ILogica ctrlHabitat;
     ILogica ctrlEspecie;
     ILogica ctrlItinerario;
+<<<<<<< Updated upstream
     
+=======
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 40e0b3ae329923d412edcdef943f78240539d21d
+>>>>>>> Stashed changes
     public FrmInicial() {
         this.setVisible(true);
         ctrlHabitat=FabricaLogica.crearInstancia();
         ctrlEspecie=FabricaLogica.crearInstancia();
+        ctrlItinerario=FabricaLogica.crearInstancia();
         initComponents();
     }
 
@@ -195,7 +203,7 @@ public class FrmInicial extends javax.swing.JFrame {
    }
    
    public void seleccionaRegActItinerario(){
-       Object[] datos=ctrlHabitat.recuperaDatosItinerario();
+       LinkedList<Object> datos=ctrlItinerario.recuperaDatosItinerario();
        FrmItinerarios itinerario=new FrmItinerarios(datos);
        this.setVisible(false);
        itinerario.setVisible(true);

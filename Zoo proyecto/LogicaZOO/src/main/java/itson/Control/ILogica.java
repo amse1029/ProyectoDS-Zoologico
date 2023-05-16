@@ -30,7 +30,7 @@ public interface ILogica {
     public Animal consultaAnimal(String nombre);
     public Especie recuperarEspecie(String nombre);
     public ObjectId guardarEspecie(Especie especie);
-    public Object[] recuperaDatosItinerario();
+    public LinkedList<Object> recuperaDatosItinerario();
     public Itinerario buscarItinerario(String nombre);
     public ObjectId guardarItinerario(Itinerario itinerario,Recorrido recorrido);
     public List<Itinerario>recuperaNombreItinerarios();
