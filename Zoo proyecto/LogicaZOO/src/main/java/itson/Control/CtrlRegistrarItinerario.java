@@ -17,7 +17,7 @@ import org.bson.types.ObjectId;
 /**
  *
  *
- * @author 
+ * @author
  */
 public class CtrlRegistrarItinerario {
 
@@ -32,36 +32,49 @@ public class CtrlRegistrarItinerario {
 
     /**
      * Método que recupera las zonas existentes.
+     *
      * @return Lista de zonas.
      */
     public List<Zona> recuperarZonas() {
         List<Zona> zonas = new LinkedList<>();
         zonas = datos.recuperaZonas();
+        if (zonas.isEmpty()) {
+            datos.insertarZonas();
+            zonas = datos.recuperaZonas();
+        }
         return zonas;
     }
 
     /**
      * Método que recupera los guías existentes.
+     *
      * @return Lista de guías
      */
     public List<Guia> recuperarGuias() {
         List<Guia> guias = new LinkedList<>();
         guias = datos.recuperaGuias();
+        if (guias.isEmpty()) {
+            datos.insertarGuias();
+            guias = datos.recuperaGuias();
+            return guias;
+        }
         return guias;
     }
 
     /**
      * Método que guarda un itinerario.
+     *
      * @param itinerario Itinerario que se quiere guardar.
      * @return Id del itinerario guardado.
      */
     public ObjectId guardarItinerario(Itinerario itinerario) {
         ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
-      return itinerarioDAO.guardar(itinerario);
+        return itinerarioDAO.guardar(itinerario);
     }
 
     /**
      * Método que busca un itinerario por su nombre.
+     *
      * @param nombre Nombre del itinerario que se quiere buscar.
      * @return Itinerario encontrado.
      */
@@ -73,10 +86,11 @@ public class CtrlRegistrarItinerario {
 
     /**
      * Método que recupera las nombres de los itinerarios existentes.
+     *
      * @return Lista de itinerarios
      */
     List<Itinerario> recuperaNombreItinerario() {
-        ItinerarioDAO itinerarioDAO= new ItinerarioDAO();
-       return itinerarioDAO.recupera();
+        ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
+        return itinerarioDAO.recupera();
     }
 }

@@ -43,33 +43,7 @@ public class Itinerario {
         this.zonas = zonas;
         this.horarios = horarios;
     }
-
-    public boolean verificacion(String nombre, int visitantes, Recorrido recorrido, List<Zona> zonas, List<Horario> horarios){
-        if(nombre.equals("")){
-            return false;
-        }
-        if(visitantes<=0||visitantes>30){
-            return false;
-        }
-        if(recorrido.getDuracion()<=0||recorrido.getDuracion()>90){
-            return false;
-        }
-        if(recorrido.getLongitud()<=0||recorrido.getLongitud()>1500){
-            return false;
-        }
-        if(zonas.size()==0){
-            return false;
-        }
-        if(horarios.size()==0){
-            return false;
-        }
-        this.nombreItinerario=nombre;
-        this.maxVisitantes=visitantes;
-        this.recorrido=recorrido;
-        this.zonas=zonas;
-        this.horarios=horarios;
-        return true;
-    }
+    
     public ObjectId getId() {
         return id;
     }

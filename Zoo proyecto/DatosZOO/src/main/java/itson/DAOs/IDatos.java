@@ -219,7 +219,8 @@ public interface IDatos {
      * @return Una lista con todos los guias existentes
      */
     public List<Guia> recuperaGuias();
-
+    
+    public void insertarGuias();
     /**
      * Metodo que permite recuperar los nombres de los itinerarios.
      *
@@ -247,4 +248,6 @@ public interface IDatos {
      * @param queja Es la queja que se desea agregar.
      */
      public void guardarQueja(Queja queja);
+     
+     public void insertarZonas();
 }

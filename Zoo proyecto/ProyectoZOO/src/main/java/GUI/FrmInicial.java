@@ -8,11 +8,8 @@ package GUI;
 
 import Dominio.Cuidador;
 import Dominio.Habitat;
-import Dominio.Zona;
-import itson.Control.CtrlRegistrarEspecie;
 import itson.Control.FabricaLogica;
 import itson.Control.ILogica;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -178,9 +175,8 @@ public class FrmInicial extends javax.swing.JFrame {
     *  Método que indica cuando el usuario selecciona registrar / actualizar itinerario.
     */
    public void seleccionaRegActItinerario(){
-       Object[] datos=ctrlHabitat.recuperaDatosItinerario();
-       List<Zona> zonas = ctrlZona.recuperarZonas();
-       FrmItinerarios itinerario=new FrmItinerarios(datos, zonas);
+        LinkedList<Object> datos=ctrlHabitat.recuperaDatosItinerario();
+       FrmItinerarios itinerario=new FrmItinerarios(datos);
        this.setVisible(false);
        itinerario.setVisible(true);
        this.dispose();

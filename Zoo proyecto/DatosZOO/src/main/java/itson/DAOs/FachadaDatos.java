@@ -389,4 +389,16 @@ public class FachadaDatos implements IDatos {
        quejaDAO.guardarQueja(queja);
     }
 
+    @Override
+    public void insertarGuias() {
+      GuiaDAO guiaDAO = new GuiaDAO();
+      guiaDAO.insertarGuias();
+      }
+
+    @Override
+    public void insertarZonas() {
+        ZonaDAO zonaDAO= new ZonaDAO();
+        zonaDAO.insertarZonas();
+    }
+
 }

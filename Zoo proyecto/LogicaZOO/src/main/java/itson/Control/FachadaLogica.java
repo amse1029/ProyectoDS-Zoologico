@@ -157,13 +157,13 @@ public class FachadaLogica implements ILogica {
      * @return Arreglo con los datos de un itinerario.
      */
     @Override
-    public Object[] recuperaDatosItinerario() {
+    public LinkedList <Object> recuperaDatosItinerario() {
         CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
         List<Zona> listaZonas = control.recuperarZonas();
         List<Guia> listaGuias = control.recuperarGuias();
-        Object[] datos = new Object[2];
-        datos[0] = listaZonas;
-        datos[1] = listaGuias;
+        LinkedList <Object> datos = new LinkedList<>();
+        datos.add(listaZonas);
+        datos.add(listaGuias);
         return datos;
     }
 

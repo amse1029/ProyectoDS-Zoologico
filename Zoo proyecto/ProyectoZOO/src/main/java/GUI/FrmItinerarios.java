@@ -5,20 +5,23 @@
 package GUI;
 
 import Dominio.Dias;
+import Dominio.Guia;
 import Dominio.Horario;
 import Dominio.Itinerario;
 import Dominio.Recorrido;
 import Dominio.Zona;
 import itson.Control.FabricaLogica;
 import itson.Control.ILogica;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author 
+ * @author
  */
 public class FrmItinerarios extends javax.swing.JFrame {
 
@@ -26,14 +29,15 @@ public class FrmItinerarios extends javax.swing.JFrame {
      * Creates new form FrmItinerarios
      */
     ILogica ctrlItinerario;
-    List<Zona> zonas;
-    Object[] datos;
-    public FrmItinerarios(Object[] datos, List<Zona> zonas) {
-        this.datos=datos;
-        this.zonas = zonas;
+    ArrayList<Zona> zonas;
+    ArrayList<Guia> guias;
+    LinkedList<Object> datos;
+
+    public FrmItinerarios(LinkedList<Object> datos) {
+        this.datos = datos;
         initComponents();
-        ctrlItinerario=FabricaLogica.crearInstancia();
-        this.despliegaDatos(datos, zonas);
+        ctrlItinerario = FabricaLogica.crearInstancia();
+        this.despliegaDatos(datos);
     }
 
     /**
@@ -65,9 +69,20 @@ public class FrmItinerarios extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblZonas = new javax.swing.JTable();
         btnRegresar = new javax.swing.JButton();
+        Horarios2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblGuias = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar itinerario");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlFondo.setBackground(new java.awt.Color(238, 189, 102));
@@ -91,26 +106,31 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
+        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, -1, -1));
 
         lblNombreCientifico.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombreCientifico.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombreCientifico.setText("Duración:");
-        pnlFondo.add(lblNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        lblNombreCientifico.setText("Duración(Minutos):");
+        pnlFondo.add(lblNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
 
         lblNombre.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombre.setText("Nombre:");
-        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        lblNombre.setText("Nombre Itinerario:");
+        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         lblDescripcion.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion.setForeground(new java.awt.Color(255, 255, 255));
-        lblDescripcion.setText("Longitud:");
-        pnlFondo.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
+        lblDescripcion.setText("Longitud(Metros):");
+        pnlFondo.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
         txtDuracion.setEditable(false);
         txtDuracion.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 170, 40));
+        txtDuracion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDuracionKeyTyped(evt);
+            }
+        });
+        pnlFondo.add(txtDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 170, 30));
 
         Horarios.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         Horarios.setForeground(new java.awt.Color(255, 255, 255));
@@ -130,31 +150,54 @@ public class FrmItinerarios extends javax.swing.JFrame {
 
         lblDescripcion2.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion2.setForeground(new java.awt.Color(255, 255, 255));
-        lblDescripcion2.setText("Visitantes:");
-        pnlFondo.add(lblDescripcion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
+        lblDescripcion2.setText("Max Visitantes:");
+        pnlFondo.add(lblDescripcion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
 
         Horarios1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         Horarios1.setForeground(new java.awt.Color(255, 255, 255));
         Horarios1.setText("Horarios:");
-        pnlFondo.add(Horarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
+        pnlFondo.add(Horarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
         txtLongitud.setEditable(false);
         txtLongitud.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtLongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 170, 40));
+        txtLongitud.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLongitudKeyTyped(evt);
+            }
+        });
+        pnlFondo.add(txtLongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 170, 30));
 
         txtVisitantes.setEditable(false);
         txtVisitantes.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtVisitantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 170, 40));
+        txtVisitantes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtVisitantesKeyTyped(evt);
+            }
+        });
+        pnlFondo.add(txtVisitantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 170, 30));
 
         txtNombre.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 170, 40));
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 170, 30));
 
         tblHorarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Dia", "Incluido?", "Horas de inicio:"
+                "Dia", "Selecciona", "Horas de inicio:"
             }
         ) {
             Class[] types = new Class [] {
@@ -172,32 +215,50 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblHorarios.getTableHeader().setReorderingAllowed(false);
         tblHorarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblHorariosMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblHorarios);
+        if (tblHorarios.getColumnModel().getColumnCount() > 0) {
+            tblHorarios.getColumnModel().getColumn(1).setResizable(false);
+        }
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 350, 140));
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 380, 140));
+
+        jScrollPane2.setWheelScrollingEnabled(false);
 
         tblZonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Elegida?"
+                "Nombre", "Selecciona"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
+        tblZonas.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tblZonas);
+        if (tblZonas.getColumnModel().getColumnCount() > 0) {
+            tblZonas.getColumnModel().getColumn(0).setResizable(false);
+            tblZonas.getColumnModel().getColumn(1).setResizable(false);
+        }
 
         pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, 180, 140));
 
@@ -211,9 +272,47 @@ public class FrmItinerarios extends javax.swing.JFrame {
         });
         pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 500, -1, -1));
 
+        Horarios2.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        Horarios2.setForeground(new java.awt.Color(255, 255, 255));
+        Horarios2.setText("Guias:");
+        pnlFondo.add(Horarios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 130, -1, -1));
+
+        tblGuias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Nombre", "Selecciona"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblGuias.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(tblGuias);
+        if (tblGuias.getColumnModel().getColumnCount() > 0) {
+            tblGuias.getColumnModel().getColumn(0).setResizable(false);
+            tblGuias.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        pnlFondo.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, 180, 110));
+
         getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 550));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -228,50 +327,102 @@ public class FrmItinerarios extends javax.swing.JFrame {
 
     private void tblHorariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHorariosMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_tblHorariosMouseClicked
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        FrmInicial principal=new FrmInicial();
+        FrmInicial principal = new FrmInicial();
         this.setVisible(false);
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+     this.validacionCamposAlfabeto(evt);
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtDuracionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDuracionKeyTyped
+        if (!(this.txtDuracion.getText().length()>2)) {
+             this.validacionNumero(evt);
+        }else{
+        evt.consume();
+        }
+    }//GEN-LAST:event_txtDuracionKeyTyped
+
+    private void txtLongitudKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLongitudKeyTyped
+          if (!(this.txtLongitud.getText().length()>2)) {
+             this.validacionNumero(evt);
+        }else{
+        evt.consume();
+        }
+    }//GEN-LAST:event_txtLongitudKeyTyped
+
+    private void txtVisitantesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVisitantesKeyTyped
+           if (!(this.txtVisitantes.getText().length()>1)) {
+             this.validacionNumero(evt);
+        }else{
+        evt.consume();
+        }
+    }//GEN-LAST:event_txtVisitantesKeyTyped
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        new FrmInicial().setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
+
     /**
      * Método que despliega los datos en las tablas correspondientes.
+     *
      * @param datos Datos de los itinerarios.
      * @param zonas Lista de zonas
      */
-    private void despliegaDatos(Object[] datos, List<Zona> zonas) {
+    private void despliegaDatos(LinkedList<Object> datos) {
+        guias = new ArrayList<Guia>((List<Guia>) datos.get(1));
+        zonas = new ArrayList<Zona>((List<Zona>) datos.get(0));
+
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblHorarios.getModel();
         Object[] lunes = {"Lunes", false};
         modeloTabla.addRow(lunes);
-        Object[] martes={"Martes", false};
+        Object[] martes = {"Martes", false};
         modeloTabla.addRow(martes);
         Object[] miercoles = {"Miercoles", false};
         modeloTabla.addRow(lunes);
-        Object[] jueves={"Jueves", false};
+        Object[] jueves = {"Jueves", false};
         modeloTabla.addRow(martes);
         Object[] viernes = {"Viernes", false};
         modeloTabla.addRow(lunes);
-        Object[] sabado={"Sabado", false};
+        Object[] sabado = {"Sabado", false};
         modeloTabla.addRow(martes);
-        Object[] domingo={"Domingo", false};
+        Object[] domingo = {"Domingo", false};
         modeloTabla.addRow(martes);
-        
-        DefaultTableModel tablaZonas = (DefaultTableModel) this.tblZonas.getModel();
 
+        DefaultTableModel tablaZonas = (DefaultTableModel) this.tblZonas.getModel();
+        DefaultTableModel tablaGuias = (DefaultTableModel) this.tblGuias.getModel();
+        for (int i = 0; i < guias.size(); i++) {
+            Object[] guia = {guias.get(i).getNombre(), false};
+            tablaGuias.addRow(guia);
+        }
         for (int i = 0; i < zonas.size(); i++) {
-            Object[] datos1 = {zonas.get(i).getNombre(), false};
-            tablaZonas.addRow(datos1);
+            Object[] zona = {zonas.get(i).getNombre(), false};
+            tablaZonas.addRow(zona);
         }
     }
 
     /**
-     * Método que realiza las acciones correspondientes 
-     * cuando el usuario selecciona buscar.
+     * Método que realiza las acciones correspondientes cuando el usuario
+     * selecciona buscar.
      */
     private void seleccionaBuscar() {
         String nombre = this.txtNombre.getText();
@@ -281,60 +432,62 @@ public class FrmItinerarios extends javax.swing.JFrame {
             this.txtDuracion.setEditable(true);
             this.txtLongitud.setEditable(true);
             this.txtVisitantes.setEditable(true);
-            this.muestraCajasVerificacion();
+            this.btnGuardar.setEnabled(true);
         } else {
             this.despliegaDatosItinerario(itinerario);
         }
     }
-    
+
     /**
-     * Método que despliega los datos de un itinerario en las tablas correspondientes.
+     * Método que despliega los datos de un itinerario en las tablas
+     * correspondientes.
+     *
      * @param itinerario Itinerario del que se quiere desplegar los datos.
      */
     private void despliegaDatosItinerario(Itinerario itinerario) {
-        Float duracion=itinerario.getRecorrido().getDuracion();
-        Float longitud=itinerario.getRecorrido().getLongitud();
-        Integer visitantes=itinerario.getMaxVisitantes();
-        List<Horario> horarios=itinerario.getHorarios();
-        List<Zona> zonaitinerario=itinerario.getZonas();
-        List<Zona> zonas=(List<Zona>) datos[0];
+        Float duracion = itinerario.getRecorrido().getDuracion();
+        Float longitud = itinerario.getRecorrido().getLongitud();
+        Integer visitantes = itinerario.getMaxVisitantes();
+        List<Horario> horarios = itinerario.getHorarios();
+        List<Zona> zonaitinerario = itinerario.getZonas();
+        this.tblZonas.removeAll();
         DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblZonas.getModel();
-        for (int i = 0; i < zonas.size(); i++) {
-            if(zonaitinerario.get(i)==zonas.get(i)){
-                Object[] infor = {zonas.get(i).getNombre(), true};
-                modeloTabla2.addRow(infor);
-            }else{
-                Object[] infor = {zonas.get(i).getNombre(), false};
-                modeloTabla2.addRow(infor);
-            }
-        }
+//        for (int i = 0; i < zonas.size(); i++) {
+//            if (zonaitinerario.get(i) == zonas.get(i)) {
+//                Object[] infor = {zonas.get(i).getNombre(), true};
+//                modeloTabla2.addRow(infor);
+//            } else {
+//                Object[] infor = {zonas.get(i).getNombre(), false};
+//                modeloTabla2.addRow(infor);
+//            }
+//        }
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblHorarios.getModel();
         for (int i = 0; i < horarios.size(); i++) {
-            if(horarios.get(i).getDia().equals(Dias.Lunes)){
+            if (horarios.get(i).getDia().equals(Dias.Lunes)) {
                 this.tblHorarios.setValueAt(true, 0, 1);
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 0, 2);
             }
-            if(horarios.get(i).getDia().equals(Dias.Martes)){
+            if (horarios.get(i).getDia().equals(Dias.Martes)) {
                 this.tblHorarios.setValueAt(true, 1, 1);
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 1, 2);
             }
-            if(horarios.get(i).getDia().equals(Dias.Miercoles)){
+            if (horarios.get(i).getDia().equals(Dias.Miercoles)) {
                 this.tblHorarios.setValueAt(true, 2, 1);
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 2, 2);
             }
-            if(horarios.get(i).getDia().equals(Dias.Jueves)){
+            if (horarios.get(i).getDia().equals(Dias.Jueves)) {
                 this.tblHorarios.setValueAt(true, 3, 1);
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 3, 2);
             }
-            if(horarios.get(i).getDia().equals(Dias.Viernes)){
+            if (horarios.get(i).getDia().equals(Dias.Viernes)) {
                 this.tblHorarios.setValueAt(true, 4, 1);
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 4, 2);
             }
-            if(horarios.get(i).getDia().equals(Dias.Sabado)){
+            if (horarios.get(i).getDia().equals(Dias.Sabado)) {
                 this.tblHorarios.setValueAt(true, 5, 1);
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 5, 2);
             }
-            if(horarios.get(i).getDia().equals(Dias.Domingo)){
+            if (horarios.get(i).getDia().equals(Dias.Domingo)) {
                 this.tblHorarios.setValueAt(true, 6, 1);
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 6, 2);
             }
@@ -342,124 +495,136 @@ public class FrmItinerarios extends javax.swing.JFrame {
         this.txtDuracion.setText(duracion.toString());
         this.txtLongitud.setText(longitud.toString());
         this.txtVisitantes.setText(visitantes.toString());
-        
+
     }
-    
+
     /**
      * Método que muestra mensaje cuando un itinerario no existe.
      */
     private void muestraMsjNoItinerario() {
         JOptionPane.showMessageDialog(this, "No existe itinerario", "Información", JOptionPane.INFORMATION_MESSAGE);
     }
-    
-    /**
-     * Método que muestra cajas de verificación.
-     */
-    private void muestraCajasVerificacion() {
-        List<Zona> zonas=(List<Zona>) datos[0];
-        DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblZonas.getModel();
-        for (int i = 0; i < zonas.size(); i++) {
-            Object[] infor = {zonas.get(i).getNombre(), false};
-            modeloTabla2.addRow(infor);
-        }
-    }
-    
+
     private void seleccionaDia() {
-        
+
     }
-    
+
     private void muestraEspacioHoras() {
-        
+
     }
-    
+
     /**
-     * Método que realiza las acciones correspondientes cuando el usuario selecciona guardar.
+     * Método que realiza las acciones correspondientes cuando el usuario
+     * selecciona guardar.
      */
     private void seleccionaGuardar() {
-        String nombre=this.txtNombre.getText();
-        float duracion=Float.parseFloat(this.txtDuracion.getText());
-        float longitud=Float.parseFloat(this.txtLongitud.getText());
-        int visitantes=Integer.parseInt(this.txtVisitantes.getText());
-        List<Horario> horarios=new ArrayList<>();
-        Horario horario=new Horario();
-        if((boolean)this.tblHorarios.getValueAt(0, 1)){
+        String nombre = this.txtNombre.getText();
+        float duracion = Float.parseFloat(this.txtDuracion.getText());
+        float longitud = Float.parseFloat(this.txtLongitud.getText());
+        int maxVisitantes = Integer.parseInt(this.txtVisitantes.getText());
+        List<Horario> horarios = new ArrayList<>();
+        Horario horario = new Horario();
+        if ((boolean) this.tblHorarios.getValueAt(0, 1)) {
             horario.setDia(Dias.Lunes);
             horario.setHora(this.tblHorarios.getValueAt(0, 2).toString());
             horarios.add(horario);
         }
-        if((boolean)this.tblHorarios.getValueAt(1, 1)){
+        if ((boolean) this.tblHorarios.getValueAt(1, 1)) {
             horario.setDia(Dias.Martes);
             horario.setHora(this.tblHorarios.getValueAt(1, 2).toString());
             horarios.add(horario);
         }
-        if((boolean)this.tblHorarios.getValueAt(2, 1)){
+        if ((boolean) this.tblHorarios.getValueAt(2, 1)) {
             horario.setDia(Dias.Miercoles);
             horario.setHora(this.tblHorarios.getValueAt(2, 2).toString());
             horarios.add(horario);
         }
-        if((boolean)this.tblHorarios.getValueAt(3, 1)){
+        if ((boolean) this.tblHorarios.getValueAt(3, 1)) {
             horario.setDia(Dias.Jueves);
             horario.setHora(this.tblHorarios.getValueAt(3, 2).toString());
             horarios.add(horario);
         }
-        if((boolean)this.tblHorarios.getValueAt(4, 1)){
+        if ((boolean) this.tblHorarios.getValueAt(4, 1)) {
             horario.setDia(Dias.Viernes);
             horario.setHora(this.tblHorarios.getValueAt(4, 2).toString());
             horarios.add(horario);
         }
-        if((boolean)this.tblHorarios.getValueAt(5, 1)){
+        if ((boolean) this.tblHorarios.getValueAt(5, 1)) {
             horario.setDia(Dias.Sabado);
             horario.setHora(this.tblHorarios.getValueAt(5, 2).toString());
             horarios.add(horario);
         }
-        if((boolean)this.tblHorarios.getValueAt(6, 1)){
+        if ((boolean) this.tblHorarios.getValueAt(6, 1)) {
             horario.setDia(Dias.Domingo);
             horario.setHora(this.tblHorarios.getValueAt(6, 2).toString());
             horarios.add(horario);
         }
-        List<Zona> zonas=new ArrayList<>();
-        List<Zona> todas=(List<Zona>) datos[0];
-        for(int i=0;i<this.tblZonas.getRowCount();i++){
-            if((boolean)this.tblZonas.getValueAt(i, 1)){
-                zonas.add(todas.get(i));
+        List<Zona> zonasGuardar = new ArrayList<>();
+        for (int i = 0; i < this.tblZonas.getRowCount(); i++) {
+            if ((boolean) this.tblZonas.getValueAt(i, 1)) {
+                zonasGuardar.add(zonas.get(i));
             }
         }
-        Itinerario itinerario=new Itinerario();
-        Recorrido recorrido=new Recorrido();
+        Recorrido recorrido = new Recorrido();
         recorrido.setDuracion(duracion);
         recorrido.setLongitud(longitud);
-        boolean exito=itinerario.verificacion(nombre, visitantes, recorrido, zonas, horarios);
-        if(ctrlItinerario.buscarItinerario(nombre)==null){
+        Itinerario itinerario = new Itinerario(nombre, 15, maxVisitantes, recorrido, zonas, horarios);
+        if (ctrlItinerario.buscarItinerario(nombre) == null) {
             ctrlItinerario.guardarItinerario(itinerario);
             this.muestraMsjExito();
-        }else{
+        } else {
             this.muestraMsjError();
         }
     }
-    
+
     /**
      * Método que muestra un mensaje de error.
      */
     private void muestraMsjError() {
-       JOptionPane.showMessageDialog(this, "Error", "Error", JOptionPane.ERROR_MESSAGE); 
+        JOptionPane.showMessageDialog(this, "Error", "Error", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     /**
      * Método que muestra un mensaje de éxito.
      */
     private void muestraMsjExito() {
         JOptionPane.showMessageDialog(this, "Itinerario registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }
-   
+ /**
+     * Metodo para validar el campo por numero.
+     *
+     * @param evt evento
+     */
+    public void validacionNumero(java.awt.event.KeyEvent evt) {
+        char txt = evt.getKeyChar();
+        if (!(Character.isDigit(txt))) {
+            evt.consume();
+        }
+    }
+
+    /**
+     *
+     * Metodo para validar el campo alfabetico.
+     *
+     * @param evt evento
+     */
+    public void validacionCamposAlfabeto(java.awt.event.KeyEvent evt) {
+        char txt = evt.getKeyChar();
+        if (!(Character.isAlphabetic(txt) || txt == KeyEvent.VK_SPACE)) {
+            evt.consume();
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Horarios;
     private javax.swing.JLabel Horarios1;
+    private javax.swing.JLabel Horarios2;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblDescripcion2;
     private javax.swing.JLabel lblNombre;
@@ -467,6 +632,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
     private javax.swing.JLabel lblRegistro;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlRegistro;
+    private javax.swing.JTable tblGuias;
     private javax.swing.JTable tblHorarios;
     private javax.swing.JTable tblZonas;
     private javax.swing.JTextField txtDuracion;

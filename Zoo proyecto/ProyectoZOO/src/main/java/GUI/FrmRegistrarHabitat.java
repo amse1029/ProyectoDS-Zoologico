@@ -70,8 +70,13 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar hábitat");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlFondo.setBackground(new java.awt.Color(238, 189, 102));
@@ -297,6 +302,10 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+      new FrmInicial().setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     public void despliegaDatos(List<Object> arreglo) {
         ArrayList<Clima> climas = new ArrayList<Clima>((List<Clima>) arreglo.get(2));
