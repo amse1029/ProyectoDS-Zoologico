@@ -22,6 +22,8 @@ public class Itinerario {
     private List<Horario> horarios;
     
     private Recorrido recorrido;
+    
+    private String guia;
     /**
      * Default constructor
      */
@@ -66,6 +68,14 @@ public class Itinerario {
 
     public void setId(ObjectId id) {
         this.id = id;
+    }
+
+    public String getGuia() {
+        return guia;
+    }
+
+    public void setGuia(String guia) {
+        this.guia = guia;
     }
 
     public int getTotalEspecies() {

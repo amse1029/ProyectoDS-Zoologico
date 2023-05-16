@@ -5,6 +5,7 @@
 package GUI;
 
 import Dominio.Dias;
+import Dominio.Guia;
 import Dominio.Horario;
 import Dominio.Itinerario;
 import Dominio.Recorrido;
@@ -13,6 +14,8 @@ import itson.Control.FabricaLogica;
 import itson.Control.ILogica;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -67,6 +70,8 @@ public class FrmItinerarios extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         txtNombreRecorrido = new javax.swing.JTextField();
         lblNombre1 = new javax.swing.JLabel();
+        lblGuia = new javax.swing.JLabel();
+        cbxGuias = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar itinerario");
@@ -221,6 +226,19 @@ public class FrmItinerarios extends javax.swing.JFrame {
         lblNombre1.setText("Nombre:");
         pnlFondo.add(lblNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
+        lblGuia.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblGuia.setForeground(new java.awt.Color(255, 255, 255));
+        lblGuia.setText("Guia:");
+        pnlFondo.add(lblGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 190, -1, -1));
+
+        cbxGuias.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        cbxGuias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxGuiasActionPerformed(evt);
+            }
+        });
+        pnlFondo.add(cbxGuias, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 170, 40));
+
         getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 600));
 
         pack();
@@ -250,6 +268,11 @@ public class FrmItinerarios extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    private void cbxGuiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxGuiasActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cbxGuiasActionPerformed
+
     private void despliegaDatos(Object[] datos) {
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblHorarios.getModel();
         Object[] lunes = {"Lunes", false};
@@ -266,6 +289,11 @@ public class FrmItinerarios extends javax.swing.JFrame {
         modeloTabla.addRow(sabado);
         Object[] domingo={"Domingo", false};
         modeloTabla.addRow(domingo);
+        
+        List<Guia> guias=(List<Guia>) datos[1];
+        for(int i=0;i<guias.size();i++){
+            this.cbxGuias.addItem(guias.get(i).getNombre());
+        }
     }
     
     private void seleccionaBuscar() {
@@ -384,11 +412,25 @@ public class FrmItinerarios extends javax.swing.JFrame {
         
     }
     
+    private boolean validaNumero(String numero){
+        String FLOAT_PATTERN = "^[-+]?\\d*\\.?\\d+$";
+        Pattern pattern = Pattern.compile(FLOAT_PATTERN);
+        Matcher matcher = pattern.matcher(numero);
+        return matcher.matches();
+    }
+    
     private void seleccionaGuardar() {
         String nombre=this.txtNombre.getText();
+        if(this.validaNumero(this.txtDuracion.getText())&&this.validaNumero(this.txtLongitud.getText())&&this.validaNumero(this.txtVisitantes.getText())){
+            
+        }else{
+            JOptionPane.showMessageDialog(this, "Los numeros no son corectos");
+            return;
+        }
         float duracion=Float.parseFloat(this.txtDuracion.getText());
         float longitud=Float.parseFloat(this.txtLongitud.getText());
         int visitantes=Integer.parseInt(this.txtVisitantes.getText());
+        String guia=this.cbxGuias.getSelectedItem().toString();
         List<Horario> horarios=new ArrayList<>();
         if((boolean)this.tblHorarios.getValueAt(0, 1)){
             Horario horario = new Horario();
@@ -432,6 +474,14 @@ public class FrmItinerarios extends javax.swing.JFrame {
             horario.setHora(this.tblHorarios.getValueAt(6, 2).toString());
             horarios.add(horario);
         }
+        for(int i=0;i<horarios.size();i++){
+            if(this.validaHoras(horarios.get(i).getHora())){
+                
+            }else{
+                JOptionPane.showMessageDialog(this, "Las horas deben de cumplir con el siguiente formato: hh:mm, y en caso de que sean varias deben estar separadas por comas sin ningun espacio");
+                return;
+            }
+        }
         List<Zona> zonas=new ArrayList<>();
         List<Zona> todas=(List<Zona>) datos[0];
         for(int i=0;i<this.tblZonas.getRowCount();i++){
@@ -445,6 +495,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         recorrido.setDuracion(duracion);
         itinerario.setMaxVisitantes(visitantes);
         itinerario.setHorarios(horarios);
+        itinerario.setGuia(guia);
         recorrido.setLongitud(longitud);
         recorrido.setNombre(this.txtNombreRecorrido.getText());
         recorrido.setZonas(zonas);
@@ -456,6 +507,13 @@ public class FrmItinerarios extends javax.swing.JFrame {
         }else{
             this.muestraMsjError();
         }
+    }
+    
+    public boolean validaHoras(String horas){
+        String HORA_PATTERN = "^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(,([0-1]?[0-9]|2[0-3]):([0-5][0-9]))*$";
+        Pattern pattern = Pattern.compile(HORA_PATTERN);
+        Matcher matcher = pattern.matcher(horas);
+        return matcher.matches();
     }
     
     private void muestraMsjError() {
@@ -473,10 +531,12 @@ public class FrmItinerarios extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JComboBox<String> cbxGuias;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblDescripcion2;
+    private javax.swing.JLabel lblGuia;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
     private javax.swing.JLabel lblNombreCientifico;

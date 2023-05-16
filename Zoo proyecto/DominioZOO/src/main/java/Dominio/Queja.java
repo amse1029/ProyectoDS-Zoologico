@@ -20,11 +20,19 @@ public class Queja {
     private String correoElectronico;
     private String numTelefonoVisitante;
     private String nombreCompletoVisitante;
-
+    private ObjectId itinerario;
     /**
      * Default constructor
      */
     public Queja() {
+    }
+
+    public ObjectId getItinerario() {
+        return itinerario;
+    }
+
+    public void setItinerario(ObjectId itinerario) {
+        this.itinerario = itinerario;
     }
 
     public Queja(ObjectId id, String descripcion, Date fecha, String correoElectronico, String numTelefonoVisitante, String nombreCompletoVisitante) {
@@ -36,6 +44,25 @@ public class Queja {
         this.nombreCompletoVisitante = nombreCompletoVisitante;
     }
 
+    public boolean verificacion(String descripcion, String correo, String nombre, String telefono, ObjectId itinerario){
+        if(descripcion==null||descripcion.equals("")){
+            return false;
+        }
+        if(correo==null||correo.equals("")){
+            return false;
+        }
+        if(telefono==null||telefono.equals("")){
+            return false;
+        }
+        this.descripcion=descripcion;
+        this.correoElectronico=correo;
+        this.nombreCompletoVisitante=nombre;
+        this.numTelefonoVisitante=telefono;
+        this.itinerario=itinerario;
+        this.fecha=new Date();
+        return true;
+    }
+    
     public ObjectId getId() {
         return id;
     }
