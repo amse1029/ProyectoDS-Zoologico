@@ -29,12 +29,14 @@ public class FrmInicial extends javax.swing.JFrame {
     ILogica ctrlHabitat;
     ILogica ctrlEspecie;
     ILogica ctrlItinerario;
+    ILogica ctrlQueja;
 
     public FrmInicial() {
         this.setVisible(true);
         ctrlHabitat=FabricaLogica.crearInstancia();
         ctrlEspecie=FabricaLogica.crearInstancia();
         ctrlItinerario=FabricaLogica.crearInstancia();
+        ctrlQueja = FabricaLogica.crearInstancia();
         initComponents();
     }
 
@@ -204,9 +206,9 @@ public class FrmInicial extends javax.swing.JFrame {
    }
    
    public void seleccionaAtencionVisitantes(){
-       LinkedList<Object> itinerarios = ctrlHabitat.recuperaDatosItinerario();
-       //FrmQuejas frm = new FrmQuejas(itinerarios);
-       //frm.setVisible(true);
+       List<Itinerario> itinerarios =  ctrlQueja.recuperarItinerarios();
+       FrmQuejas frm = new FrmQuejas(itinerarios);
+       frm.setVisible(true);
        this.dispose();
    }
    

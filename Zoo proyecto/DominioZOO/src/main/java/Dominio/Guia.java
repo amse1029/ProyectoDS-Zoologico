@@ -23,5 +23,6 @@ public class Guia extends Empleado {
         super(nombre, direccion, telefono, fechaIngreso);
     }
     
+    
 
 }

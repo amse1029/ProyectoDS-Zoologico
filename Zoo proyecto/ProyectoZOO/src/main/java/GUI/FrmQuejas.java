@@ -232,6 +232,7 @@ public class FrmQuejas extends javax.swing.JFrame {
         getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 480));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEnviarQuejaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarQuejaActionPerformed
@@ -286,7 +287,7 @@ public class FrmQuejas extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        FrmAtencionVisitantes frm=new FrmAtencionVisitantes();
+        FrmInicial frm=new FrmInicial();
         this.setVisible(false);
         frm.setVisible(true);
         this.dispose();
@@ -357,7 +358,7 @@ public class FrmQuejas extends javax.swing.JFrame {
             List<String> horas=new ArrayList<>();
             String hora="";
             for(int i=0;i<this.horarios.get(indice).getHora().length();i++){
-                hora=this.horarios.get(indice).getHora().substring(i, i+5);
+                hora=this.horarios.get(indice).getHora().substring(i, i+4);
                 this.cbxHoras.addItem(hora);
                 i=i+4;
             }
@@ -381,11 +382,15 @@ public class FrmQuejas extends javax.swing.JFrame {
                     this.muestraMsjError();
                 }
             }else{
-                this.muestraMsjError();
+                this.muestraMensajeErrorFormato();
             }
         }else{
             this.muestraMsjError();
         }
+    }
+    private void muestraMensajeErrorFormato(){
+        JOptionPane.showMessageDialog(this, "Los formatos deben ser los siguientes numero de telefono:  (nnn)-nnn-nnnn"
+                + " y correo electronico: example@example.com ", "Error", JOptionPane.ERROR_MESSAGE); 
     }
     
     private void muestraMsjError() {

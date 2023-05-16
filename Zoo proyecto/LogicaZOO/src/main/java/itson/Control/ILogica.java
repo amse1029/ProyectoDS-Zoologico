@@ -38,4 +38,5 @@ public interface ILogica {
     public Recorrido buscarRecorrido(String nombre);
     public void actualizarRecorrido(Recorrido recorrido);
     public void actulizarItieneracio(Itinerario itinerario);
+    public List<Itinerario> recuperarItinerarios();
 }

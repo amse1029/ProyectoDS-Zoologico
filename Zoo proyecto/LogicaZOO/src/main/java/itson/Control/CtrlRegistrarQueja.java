@@ -5,9 +5,11 @@
 
 package itson.Control;
 
+import Dominio.Itinerario;
 import Dominio.Queja;
 import itson.DAOs.FabricaDatos;
 import itson.DAOs.IDatos;
+import java.util.List;
 
 /**
  *
@@ -24,8 +26,14 @@ public class CtrlRegistrarQueja {
         this.datos = FabricaDatos.crearInstancia();
     }
 
-    Queja guardar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Queja guardar(Queja queja) {
+         datos.guardarQueja(queja);
+        return queja;
+    }
+    
+    public List<Itinerario> recuperarItinerarios(){
+        List<Itinerario> itinearios = datos.recuperarItinerarios();
+        return itinearios;
     }
     
     

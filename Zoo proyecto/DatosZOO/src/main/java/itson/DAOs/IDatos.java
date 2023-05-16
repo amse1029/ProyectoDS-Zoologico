@@ -247,7 +247,7 @@ public interface IDatos {
      * Metodo que permite guardar una queja en la base de datos.
      * @param queja Es la queja que se desea agregar.
      */
-     public void guardarQueja(Queja queja);
+     public Queja guardarQueja(Queja queja);
      
     public void insertarHabitats();
     public void insertarZonas(Especie especie, Especie especie2, Especie especie3);
@@ -260,4 +260,5 @@ public interface IDatos {
     public void actualizarItineario(Itinerario itinerario);
     public void actualizarRecorrido(Recorrido recorrido);
     public void agregarGuia();
+    public List<Itinerario> recuperarItinerarios();
 }

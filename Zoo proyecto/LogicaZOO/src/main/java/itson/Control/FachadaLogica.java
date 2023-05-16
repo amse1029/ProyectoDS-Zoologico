@@ -126,9 +126,9 @@ public class FachadaLogica implements ILogica {
         }
         List<Zona> listaZonas = control.recuperarZonas();
         List<Guia> listaGuias = control.recuperarGuias();
-         LinkedList<Object> datos = new LinkedList<>();
-       datos.add(listaZonas);
-       datos.add(listaGuias);
+        LinkedList<Object> datos = new LinkedList<>();
+        datos.add(listaZonas);
+        datos.add(listaGuias);
         return datos;
     }
 
@@ -154,9 +154,9 @@ public class FachadaLogica implements ILogica {
     }
 
     @Override
-    public ObjectId guardarQueja(Queja Queja) {
+    public ObjectId guardarQueja(Queja queja) {
         CtrlRegistrarQueja control = new CtrlRegistrarQueja();
-        Queja queja = control.guardar();
+        control.guardar(queja);
         return queja.getId();
     }
 
@@ -178,5 +178,12 @@ public class FachadaLogica implements ILogica {
     public void actulizarItieneracio(Itinerario itinerario) {
         CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
         control.actualizarItinerario(itinerario);
+    }
+
+    @Override
+    public List<Itinerario> recuperarItinerarios() {
+       CtrlRegistrarQueja control = new CtrlRegistrarQueja();
+        List<Itinerario> itinerarios = control.recuperarItinerarios();
+        return itinerarios;
     }
 }

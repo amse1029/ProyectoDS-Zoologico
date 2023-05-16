@@ -398,9 +398,10 @@ public class FachadaDatos implements IDatos {
      * @param queja Es la queja que se desea agregar.
      */
     @Override
-    public void guardarQueja(Queja queja) {
+        public Queja guardarQueja(Queja queja) {
         QuejaDAO quejaDAO = new QuejaDAO();
         quejaDAO.guardarQueja(queja);
+        return queja;
     }
 
     @Override
@@ -477,6 +478,14 @@ public class FachadaDatos implements IDatos {
     public void agregarGuia() {
        GuiaDAO guiaDAO = new GuiaDAO();
        guiaDAO.insertarGuias();
+
+    }
+
+    @Override
+    public List<Itinerario> recuperarItinerarios() {
+     ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
+        List<Itinerario >itinerarios = itinerarioDAO.recupera();
+        return itinerarios;
 
     }
     
