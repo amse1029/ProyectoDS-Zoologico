@@ -74,8 +74,6 @@ public class FrmItinerarios extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         txtNombreRecorrido = new javax.swing.JTextField();
         lblNombre1 = new javax.swing.JLabel();
-        lblGuia = new javax.swing.JLabel();
-        cbxGuias = new javax.swing.JComboBox<>();
         Horarios2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblGuias = new javax.swing.JTable();
@@ -105,7 +103,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
+        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
 
         lblNombreCientifico.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombreCientifico.setForeground(new java.awt.Color(255, 255, 255));
@@ -129,7 +127,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         Horarios.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         Horarios.setForeground(new java.awt.Color(255, 255, 255));
         Horarios.setText("Zonas:");
-        pnlFondo.add(Horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, -1, -1));
+        pnlFondo.add(Horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, -1, -1));
 
         btnGuardar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(106, 69, 4));
@@ -199,7 +197,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
             tblHorarios.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 300, 140));
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 350, 140));
 
         tblZonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -231,7 +229,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
             tblZonas.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 180, 140));
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 180, 140));
 
         btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
@@ -241,7 +239,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 540, -1, -1));
+        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 540, -1, -1));
 
         txtNombreRecorrido.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         pnlFondo.add(txtNombreRecorrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 170, 30));
@@ -251,23 +249,10 @@ public class FrmItinerarios extends javax.swing.JFrame {
         lblNombre1.setText("Nombre:");
         pnlFondo.add(lblNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
-        lblGuia.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
-        lblGuia.setForeground(new java.awt.Color(255, 255, 255));
-        lblGuia.setText("Guia:");
-        pnlFondo.add(lblGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, -1, -1));
-
-        cbxGuias.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        cbxGuias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxGuiasActionPerformed(evt);
-            }
-        });
-        pnlFondo.add(cbxGuias, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, 170, 30));
-
         Horarios2.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         Horarios2.setForeground(new java.awt.Color(255, 255, 255));
         Horarios2.setText("Guias:");
-        pnlFondo.add(Horarios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 340, -1, -1));
+        pnlFondo.add(Horarios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, -1, -1));
 
         tblGuias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -299,9 +284,9 @@ public class FrmItinerarios extends javax.swing.JFrame {
             tblGuias.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 380, 180, 140));
+        pnlFondo.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 180, 140));
 
-        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 600));
 
         pack();
         setLocationRelativeTo(null);
@@ -329,11 +314,6 @@ public class FrmItinerarios extends javax.swing.JFrame {
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
-
-    private void cbxGuiasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxGuiasActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_cbxGuiasActionPerformed
 
     private void despliegaDatos(LinkedList<Object> datos) {
         guias = new ArrayList<Guia>((List<Guia>) datos.get(1));
@@ -599,14 +579,12 @@ public class FrmItinerarios extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JComboBox<String> cbxGuias;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblDescripcion2;
-    private javax.swing.JLabel lblGuia;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
     private javax.swing.JLabel lblNombreCientifico;
