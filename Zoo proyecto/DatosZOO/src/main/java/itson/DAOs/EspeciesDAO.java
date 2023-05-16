@@ -12,6 +12,9 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.gt;
 import static com.mongodb.client.model.Filters.regex;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -97,5 +100,24 @@ public class EspeciesDAO {
         
         coleccion.replaceOne(eq("_id", especie.getId()), especie);
         return especie.getId();
+    }
+    
+    public void insertar(Habitat habitat1,Habitat habitat2,Habitat habitat3){
+        MongoCollection<Especie> coleccion
+                = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
+        Especie especie1 = new Especie("Tigre", "Panthera tigris", "Un felino grande y poderoso", Arrays.asList(habitat1));
+        Especie especie2 = new Especie("Cobra Real", "Ophiophagus hannah", "Una serpiente venenosa y ágil", Arrays.asList(habitat2));
+        Especie especie3 = new Especie("Oso Polar", "Ursus maritimus", "Un gran mamífero adaptado al frío", Arrays.asList(habitat3));
+
+        coleccion.insertMany(Arrays.asList(especie1,especie3,especie2));
+    }
+    
+    public List<Especie> recuperarTodas(){
+        MongoCollection<Especie> coleccion
+                = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
+         List<Especie> especies = new ArrayList<>();
+         coleccion.find().into(especies);
+         return especies;
+         
     }
 }

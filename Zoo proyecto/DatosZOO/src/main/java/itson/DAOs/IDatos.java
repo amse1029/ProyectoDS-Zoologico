@@ -14,6 +14,7 @@ import Dominio.Guia;
 import Dominio.Habitat;
 import Dominio.Itinerario;
 import Dominio.Queja;
+import Dominio.Recorrido;
 import Dominio.Vegetacion;
 import Dominio.Zona;
 import java.util.List;
@@ -233,7 +234,7 @@ public interface IDatos {
      * @param nombre Es el nombre del itinerario.
      * @return El itinerario que coincide con el nombre.
      */
-    public Itinerario buscarItinerario(String nombre);
+    public Itinerario buscarItinerarioRecorrido(ObjectId id);
 
     /**
      * Metodo para guardar un itinerario en la base de datos.
@@ -247,4 +248,15 @@ public interface IDatos {
      * @param queja Es la queja que se desea agregar.
      */
      public void guardarQueja(Queja queja);
+     
+    public void insertarHabitats();
+    public void insertarZonas(Especie especie, Especie especie2, Especie especie3);
+    public void insertarEspecies(Habitat habitat1,Habitat habitat2,Habitat habitat3);
+    public void InsertarAnimales(Especie especie, Especie especie2, Especie especie3);
+    public ObjectId insertarRecorrido(Recorrido recorrido);
+    public List<Especie> recuperarTodasEspecies();
+    public Recorrido recuperarRecorrido(String nombre);
+    public Itinerario buscarItineario(String nombre );
+    public void actualizarItineario(Itinerario itinerario);
+    public void actualizarRecorrido(Recorrido recorrido);
 }

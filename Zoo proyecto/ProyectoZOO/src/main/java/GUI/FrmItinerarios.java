@@ -27,6 +27,8 @@ public class FrmItinerarios extends javax.swing.JFrame {
      */
     ILogica ctrlItinerario;
     Object[] datos;
+    Recorrido recorrido;
+    Itinerario itinerario;
     public FrmItinerarios(Object[] datos) {
         this.datos=datos;
         initComponents();
@@ -63,6 +65,8 @@ public class FrmItinerarios extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblZonas = new javax.swing.JTable();
         btnRegresar = new javax.swing.JButton();
+        txtNombreRecorrido = new javax.swing.JTextField();
+        lblNombre1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Registrar itinerario");
@@ -94,26 +98,26 @@ public class FrmItinerarios extends javax.swing.JFrame {
         lblNombreCientifico.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombreCientifico.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreCientifico.setText("Duración:");
-        pnlFondo.add(lblNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        pnlFondo.add(lblNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
 
         lblNombre.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombre.setText("Nombre:");
-        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        lblNombre.setText("Nombre Recorrido:");
+        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 220, -1));
 
         lblDescripcion.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion.setForeground(new java.awt.Color(255, 255, 255));
         lblDescripcion.setText("Longitud:");
-        pnlFondo.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
+        pnlFondo.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
 
         txtDuracion.setEditable(false);
         txtDuracion.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 170, 40));
+        pnlFondo.add(txtDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 170, 40));
 
         Horarios.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         Horarios.setForeground(new java.awt.Color(255, 255, 255));
         Horarios.setText("Zonas:");
-        pnlFondo.add(Horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 300, -1, -1));
+        pnlFondo.add(Horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, -1));
 
         btnGuardar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(106, 69, 4));
@@ -124,28 +128,28 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, -1, -1));
+        pnlFondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 540, -1, -1));
 
         lblDescripcion2.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion2.setForeground(new java.awt.Color(255, 255, 255));
         lblDescripcion2.setText("Visitantes:");
-        pnlFondo.add(lblDescripcion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
+        pnlFondo.add(lblDescripcion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
 
         Horarios1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         Horarios1.setForeground(new java.awt.Color(255, 255, 255));
         Horarios1.setText("Horarios:");
-        pnlFondo.add(Horarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
+        pnlFondo.add(Horarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, -1, -1));
 
         txtLongitud.setEditable(false);
         txtLongitud.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtLongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 170, 40));
+        pnlFondo.add(txtLongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 170, 40));
 
         txtVisitantes.setEditable(false);
         txtVisitantes.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtVisitantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 170, 40));
+        pnlFondo.add(txtVisitantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 170, 40));
 
         txtNombre.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, 170, 40));
+        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 170, 40));
 
         tblHorarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -177,7 +181,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblHorarios);
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 220, 140));
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 220, 140));
 
         tblZonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,7 +201,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tblZonas);
 
-        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 180, 140));
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 380, 180, 140));
 
         btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
@@ -207,11 +211,20 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 500, -1, -1));
+        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 540, -1, -1));
 
-        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 550));
+        txtNombreRecorrido.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        pnlFondo.add(txtNombreRecorrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 170, 40));
+
+        lblNombre1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblNombre1.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombre1.setText("Nombre:");
+        pnlFondo.add(lblNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 600));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -244,38 +257,59 @@ public class FrmItinerarios extends javax.swing.JFrame {
         Object[] martes={"Martes", false};
         modeloTabla.addRow(martes);
         Object[] miercoles = {"Miercoles", false};
-        modeloTabla.addRow(lunes);
+        modeloTabla.addRow(miercoles);
         Object[] jueves={"Jueves", false};
-        modeloTabla.addRow(martes);
+        modeloTabla.addRow(jueves);
         Object[] viernes = {"Viernes", false};
-        modeloTabla.addRow(lunes);
+        modeloTabla.addRow(viernes);
         Object[] sabado={"Sabado", false};
-        modeloTabla.addRow(martes);
+        modeloTabla.addRow(sabado);
         Object[] domingo={"Domingo", false};
-        modeloTabla.addRow(martes);
+        modeloTabla.addRow(domingo);
     }
     
     private void seleccionaBuscar() {
         String nombre=this.txtNombre.getText();
-        Itinerario itinerario=ctrlItinerario.buscarItinerario(nombre);
+        String nombreRecorrido = this.txtNombreRecorrido.getText();
+        itinerario=ctrlItinerario.buscarItinerario(nombre);
+        recorrido = ctrlItinerario.buscarRecorrido(nombreRecorrido);
+        System.out.println(recorrido);
         if(itinerario==null){
             this.muestraMsjNoItinerario();
-            this.muestraCajasVerificacion();
+            itinerario = new Itinerario();
+            if(recorrido==null){
+                recorrido = new Recorrido();
+                this.muestraCajasVerificacion();
+            }else{
+                this.despliegaDatosRecorrido(recorrido);
+            }
         }else{
-            this.despliegaDatosItinerario(itinerario);
+           this.despliegaDatosItinerario(itinerario);
+           if(recorrido==null){
+                recorrido = new Recorrido();
+                this.muestraCajasVerificacion();
+            }else{
+                this.despliegaDatosRecorrido(recorrido);
+            }
         }
+         this.activaCamposRegistro();
     }
     
-    private void despliegaDatosItinerario(Itinerario itinerario) {
-        Float duracion=itinerario.getRecorrido().getDuracion();
-        Float longitud=itinerario.getRecorrido().getLongitud();
-        Integer visitantes=itinerario.getMaxVisitantes();
-        List<Horario> horarios=itinerario.getHorarios();
-        List<Zona> zonaitinerario=itinerario.getZonas();
+    public void activaCamposRegistro(){
+        this.txtDuracion.setEditable(true);
+        this.txtLongitud.setEditable(true);
+        this.txtVisitantes.setEditable(true);
+        this.btnGuardar.setEnabled(true);
+    }
+    
+    private void despliegaDatosRecorrido(Recorrido recorrido){
+        Float duracion=recorrido.getDuracion();
+        Float longitud=recorrido.getLongitud();
+        List<Zona> zonaitinerario=recorrido.getZonas();
         List<Zona> zonas=(List<Zona>) datos[0];
         DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblZonas.getModel();
         for (int i = 0; i < zonas.size(); i++) {
-            if(zonaitinerario.get(i)==zonas.get(i)){
+            if(zonaitinerario.contains(zonas.get(i))){
                 Object[] infor = {zonas.get(i).getNombre(), true};
                 modeloTabla2.addRow(infor);
             }else{
@@ -283,6 +317,16 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 modeloTabla2.addRow(infor);
             }
         }
+        this.txtDuracion.setText(duracion.toString());
+        this.txtLongitud.setText(longitud.toString());
+    }
+    
+    private void despliegaDatosItinerario(Itinerario itinerario) {
+        Integer visitantes=itinerario.getMaxVisitantes();
+        Recorrido recorrido = itinerario.getRecorrido();
+        List<Horario> horarios=itinerario.getHorarios();
+        
+        
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblHorarios.getModel();
         for (int i = 0; i < horarios.size(); i++) {
             if(horarios.get(i).getDia().equals(Dias.Lunes)){
@@ -314,8 +358,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 6, 2);
             }
         }
-        this.txtDuracion.setText(duracion.toString());
-        this.txtLongitud.setText(longitud.toString());
+        
         this.txtVisitantes.setText(visitantes.toString());
         
     }
@@ -347,38 +390,44 @@ public class FrmItinerarios extends javax.swing.JFrame {
         float longitud=Float.parseFloat(this.txtLongitud.getText());
         int visitantes=Integer.parseInt(this.txtVisitantes.getText());
         List<Horario> horarios=new ArrayList<>();
-        Horario horario=new Horario();
         if((boolean)this.tblHorarios.getValueAt(0, 1)){
+            Horario horario = new Horario();
             horario.setDia(Dias.Lunes);
             horario.setHora(this.tblHorarios.getValueAt(0, 2).toString());
             horarios.add(horario);
         }
         if((boolean)this.tblHorarios.getValueAt(1, 1)){
+            Horario horario = new Horario();
             horario.setDia(Dias.Martes);
             horario.setHora(this.tblHorarios.getValueAt(1, 2).toString());
             horarios.add(horario);
         }
         if((boolean)this.tblHorarios.getValueAt(2, 1)){
+            Horario horario = new Horario();
             horario.setDia(Dias.Miercoles);
             horario.setHora(this.tblHorarios.getValueAt(2, 2).toString());
             horarios.add(horario);
         }
         if((boolean)this.tblHorarios.getValueAt(3, 1)){
+            Horario horario = new Horario();
             horario.setDia(Dias.Jueves);
             horario.setHora(this.tblHorarios.getValueAt(3, 2).toString());
             horarios.add(horario);
         }
         if((boolean)this.tblHorarios.getValueAt(4, 1)){
+            Horario horario = new Horario();
             horario.setDia(Dias.Viernes);
             horario.setHora(this.tblHorarios.getValueAt(4, 2).toString());
             horarios.add(horario);
         }
         if((boolean)this.tblHorarios.getValueAt(5, 1)){
+            Horario horario = new Horario();
             horario.setDia(Dias.Sabado);
             horario.setHora(this.tblHorarios.getValueAt(5, 2).toString());
             horarios.add(horario);
         }
         if((boolean)this.tblHorarios.getValueAt(6, 1)){
+            Horario horario = new Horario();
             horario.setDia(Dias.Domingo);
             horario.setHora(this.tblHorarios.getValueAt(6, 2).toString());
             horarios.add(horario);
@@ -390,13 +439,19 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 zonas.add(todas.get(i));
             }
         }
-        Itinerario itinerario=new Itinerario();
-        Recorrido recorrido=new Recorrido();
+        //Itinerario itinerario=new Itinerario();
+        //Recorrido recorrido=new Recorrido();
+        itinerario.setNombreItinerario(nombre);
         recorrido.setDuracion(duracion);
+        itinerario.setMaxVisitantes(visitantes);
+        itinerario.setHorarios(horarios);
         recorrido.setLongitud(longitud);
-        boolean exito=itinerario.verificacion(nombre, visitantes, recorrido, zonas, horarios);
-        if(ctrlItinerario.buscarItinerario(nombre)==null){
-            ctrlItinerario.guardarItinerario(itinerario);
+        recorrido.setNombre(this.txtNombreRecorrido.getText());
+        recorrido.setZonas(zonas);
+        boolean exito=itinerario.verificacion(nombre,visitantes, horarios);
+        Itinerario itinerarioAux = ctrlItinerario.buscarItinerario(nombre);
+        if(itinerarioAux==null){
+            ctrlItinerario.guardarItinerario(itinerario,recorrido);
             this.muestraMsjExito();
         }else{
             this.muestraMsjError();
@@ -423,6 +478,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblDescripcion2;
     private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblNombre1;
     private javax.swing.JLabel lblNombreCientifico;
     private javax.swing.JLabel lblRegistro;
     private javax.swing.JPanel pnlFondo;
@@ -432,6 +488,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
     private javax.swing.JTextField txtDuracion;
     private javax.swing.JTextField txtLongitud;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombreRecorrido;
     private javax.swing.JTextField txtVisitantes;
     // End of variables declaration//GEN-END:variables
 }

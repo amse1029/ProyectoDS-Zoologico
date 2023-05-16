@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.bson.types.ObjectId;
 
 /**
  * Descripción de la clase:
@@ -361,10 +362,10 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         Clima clima = null;
         Vegetacion vegetacion = null;
         if (this.cbxClimas.getSelectedIndex() != -1) {
-            clima = new Clima(cbxClimas.getSelectedItem().toString());
+            clima = new Clima(new ObjectId(),cbxClimas.getSelectedItem().toString());
         }
         if (this.cbxVegetacion.getSelectedIndex() != -1) {
-            vegetacion = new Vegetacion(this.cbxVegetacion.getSelectedItem().toString());
+            vegetacion = new Vegetacion(this.cbxVegetacion.getSelectedItem().toString(),new ObjectId());
         }
         String nombre = "" + this.txtNombre.getText();
         Habitat habitat = new Habitat();

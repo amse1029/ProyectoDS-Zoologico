@@ -5,6 +5,7 @@
 package itson.DAOs;
 
 import Dominio.Itinerario;
+import Dominio.Recorrido;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
@@ -35,7 +36,14 @@ public class ItinerarioDAO {
      * @param nombre Es el nombre del itinerario que se desea buscar.
      * @return Un itinerario en caso de existir, vacio en caso contrario.
      */
-    public Itinerario buscar(String nombre) {
+    public Itinerario buscarRecorrido(ObjectId id) {
+        MongoCollection<Itinerario> coleccion
+                = BASE_DATOS.getCollection(NOMBRE_COLECCION, Itinerario.class);
+        Itinerario itinerario = new Itinerario();
+        itinerario = coleccion.find(eq("recorridoId", id)).first();
+        return itinerario;
+    }
+    public Itinerario buscar(String nombre ) {
         MongoCollection<Itinerario> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Itinerario.class);
         Itinerario itinerario = new Itinerario();
@@ -67,6 +75,13 @@ public class ItinerarioDAO {
          List<Itinerario> itinerarios = new LinkedList<>();
         coleccion.find().into(itinerarios);
         return itinerarios;
+    }
+    public void actualizar(Itinerario itinerario) {
+        MongoCollection<Itinerario> coleccion
+                = BASE_DATOS.getCollection(NOMBRE_COLECCION, Itinerario.class);
+        
+        
+        coleccion.replaceOne(eq("_id", itinerario.getId()), itinerario);
     }
    
 }

@@ -227,4 +227,9 @@ public class CtrlRegistrarEspecie {
     public void eliminarCargoEspecie(CargoEspecie cargoEspecie) {
         datos.eliminarCargoEspecie(cargoEspecie);
     }
+    
+    public List<Especie> recuperarEspcies(){
+        List<Especie> especies = datos.recuperarTodasEspecies();
+        return  especies;
+    }
 }

@@ -12,6 +12,7 @@ import Dominio.Guia;
 import Dominio.Habitat;
 import Dominio.Itinerario;
 import Dominio.Queja;
+import Dominio.Recorrido;
 import Dominio.Vegetacion;
 import Dominio.Zona;
 import java.util.LinkedList;
@@ -113,6 +114,17 @@ public class FachadaLogica implements ILogica {
     @Override
     public Object[] recuperaDatosItinerario() {
         CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
+        CtrlRegistrarHabitat controlHabitat = new CtrlRegistrarHabitat();
+        CtrlRegistrarEspecie controlEspecie = new CtrlRegistrarEspecie();
+        if (control.recuperarZonas().isEmpty()) {
+            System.out.println("Hola");
+            control.insertarHabitats();
+            List<Habitat> habitats = controlHabitat.recuperarHabitats();
+            control.insertarEspecies(habitats.get(0), habitats.get(1), habitats.get(2));
+            List<Especie> especies = controlEspecie.recuperarEspcies();
+            control.InsertarAnimales(especies.get(0), especies.get(1), especies.get(2));
+            control.insertarZonas(especies.get(0), especies.get(1), especies.get(2));
+        }
         List<Zona> listaZonas = control.recuperarZonas();
         List<Guia> listaGuias = control.recuperarGuias();
         Object[] datos = new Object[2];
@@ -130,22 +142,42 @@ public class FachadaLogica implements ILogica {
     }
 
     @Override
-    public ObjectId guardarItinerario(Itinerario itinerario) {
+    public ObjectId guardarItinerario(Itinerario itinerario, Recorrido recorrido) {
         CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
-        return control.guardarItinerario(itinerario);
+        return control.guardarItinerario(itinerario, recorrido);
     }
 
     @Override
     public List<Itinerario> recuperaNombreItinerarios() {
         CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
-        List<Itinerario> itinerarios=control.recuperaNombreItinerario();
+        List<Itinerario> itinerarios = control.recuperaNombreItinerario();
         return itinerarios;
     }
 
     @Override
     public ObjectId guardarQueja(Queja Queja) {
-        CtrlRegistrarQueja control= new CtrlRegistrarQueja();
-        Queja queja= control.guardar();
+        CtrlRegistrarQueja control = new CtrlRegistrarQueja();
+        Queja queja = control.guardar();
         return queja.getId();
+    }
+
+    @Override
+    public Recorrido buscarRecorrido(String nombre) {
+        CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
+        Recorrido recorrido = control.buscarRecorrido(nombre);
+        return recorrido;
+    }
+
+    @Override
+    public void actualizarRecorrido(Recorrido recorrido) {
+        CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
+        control.actualizarRecorrido(recorrido);
+
+    }
+
+    @Override
+    public void actulizarItieneracio(Itinerario itinerario) {
+        CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
+        control.actualizarItinerario(itinerario);
     }
 }

@@ -39,10 +39,11 @@ public class ContinenteDAO {
         Continente continente3 = new Continente("Africa");
         Continente continente4 = new Continente("Antartida");
         Continente continente5 = new Continente("Oceania");
+        Continente continente6 = new Continente("Europa");
         
         MongoCollection<Continente> coleccion
                 = BASE_DATOS.getCollection( NOMBRE_COLECCION, Continente.class);
-        coleccion.insertMany(Arrays.asList(continente,continente2,continente3,continente4,continente5));
+        coleccion.insertMany(Arrays.asList(continente,continente2,continente3,continente4,continente5,continente6));
     }
     
     /**

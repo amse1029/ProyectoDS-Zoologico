@@ -48,6 +48,14 @@ public class Especie {
         this.habitats = habitats;
     }
 
+    public Especie(String nombre, String nombreCientifico, String descripcion, List<Habitat> habitats) {
+        this.nombre = nombre;
+        this.nombreCientifico = nombreCientifico;
+        this.descripcion = descripcion;
+        this.habitats = habitats;
+    }
+    
+
     public Especie(String nombre, String nombreCientifico, String descripcion, List<Animal> animales, List<Cuidador> cuiadadores, List<Habitat> habitats) {
         this.nombre = nombre;
         this.nombreCientifico = nombreCientifico;

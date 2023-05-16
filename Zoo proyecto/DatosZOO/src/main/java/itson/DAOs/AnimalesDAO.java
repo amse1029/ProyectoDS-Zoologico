@@ -5,17 +5,21 @@
 package itson.DAOs;
 
 import Dominio.Animal;
+import Dominio.Especie;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
- * Clase que permite gestionar los metodos referentes a los Animales 
- * en la base de datos.
+ * Clase que permite gestionar los metodos referentes a los Animales en la base
+ * de datos.
+ *
  * @author julio
  */
 public class AnimalesDAO {
@@ -79,5 +83,26 @@ public class AnimalesDAO {
         Animal animal = new Animal();
         animal = coleccion.find(regex("nombre", nombre)).first();
         return animal;
+    }
+
+    public void InsertarAnimales(Especie especie, Especie especie2, Especie especie3) {
+        Animal tigre1 = new Animal("Tigre de Bengala", "Panthera tigris tigris", 5, especie.getId(), "Macho");
+        Animal tigre2 = new Animal("Tigre Siberiano", "Panthera tigris altaica", 7, especie.getId(), "Hembra");
+        Animal tigre3 = new Animal("Tigre Malayo", "Panthera tigris jacksoni", 4, especie.getId(), "Macho");
+
+
+
+        Animal cobra1 = new Animal("Cobra India", "Ophiophagus hannah", 3, especie2.getId(), "Hembra");
+        Animal cobra2 = new Animal("Cobra Filipina", "Ophiophagus hannah", 5, especie2.getId(), "Macho");
+        Animal cobra3 = new Animal("Cobra de Malasia", "Ophiophagus hannah", 4, especie2.getId(), "Hembra");
+
+        Animal oso1 = new Animal("Oso Polar del Ártico", "Ursus maritimus maritimus", 8, especie3.getId(), "Macho");
+        Animal oso2 = new Animal("Oso Polar del Subártico", "Ursus maritimus marinus", 6, especie3.getId(), "Hembra");
+        Animal oso3 = new Animal("Oso Polar de la Bahía de Hudson", "Ursus maritimus hudsonicus", 10, especie3.getId(), "Macho");
+
+         MongoCollection<Animal> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Animal.class);
+         
+        coleccion.insertMany(Arrays.asList(tigre1,tigre2,tigre3,cobra1,cobra2,cobra3,oso1,oso2,oso3));
+        
     }
 }

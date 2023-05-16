@@ -73,5 +73,10 @@ public class CtrlRegistrarHabitat {
         }
 
     }
+    
+    public List<Habitat> recuperarHabitats (){
+        List<Habitat> habitats = datos.recuperarHabitats();
+        return habitats;
+    }
 
 }

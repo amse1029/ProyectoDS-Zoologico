@@ -17,56 +17,46 @@ public class Itinerario {
      */
     private int maxVisitantes;
 
-    private Recorrido recorrido;
-    
-    private List<Zona> zonas;
+    private ObjectId recorridoId;
     
     private List<Horario> horarios;
+    
+    private Recorrido recorrido;
     /**
      * Default constructor
      */
     public Itinerario() {
     }
     
-    public Itinerario(ObjectId id, int totalEspecies, int maxVisitantes, Recorrido recorrido) {
+    public Itinerario(ObjectId id, int totalEspecies, int maxVisitantes, ObjectId recorridoId) {
         this.id = id;
         this.totalEspecies = totalEspecies;
         this.maxVisitantes = maxVisitantes;
-        this.recorrido=recorrido;
+        this.recorridoId=recorridoId;
     }
 
-    public Itinerario(String nombre, int totalEspecies, int maxVisitantes, Recorrido recorrido, List<Zona> zonas, List<Horario> horarios) {
+    public Itinerario(String nombre, int totalEspecies, int maxVisitantes, ObjectId recorridoId, List<Horario> horarios) {
         this.nombreItinerario = nombre;
         this.totalEspecies = totalEspecies;
         this.maxVisitantes = maxVisitantes;
-        this.recorrido = recorrido;
-        this.zonas = zonas;
+        this.recorridoId = recorridoId;
         this.horarios = horarios;
     }
 
-    public boolean verificacion(String nombre, int visitantes, Recorrido recorrido, List<Zona> zonas, List<Horario> horarios){
+    public boolean verificacion(String nombre, int visitantes,  List<Horario> horarios){
         if(nombre.equals("")){
             return false;
         }
         if(visitantes<=0||visitantes>30){
             return false;
         }
-        if(recorrido.getDuracion()<=0||recorrido.getDuracion()>90){
-            return false;
-        }
-        if(recorrido.getLongitud()<=0||recorrido.getLongitud()>1500){
-            return false;
-        }
-        if(zonas.size()==0){
-            return false;
-        }
+
         if(horarios.size()==0){
             return false;
         }
         this.nombreItinerario=nombre;
         this.maxVisitantes=visitantes;
-        this.recorrido=recorrido;
-        this.zonas=zonas;
+
         this.horarios=horarios;
         return true;
     }
@@ -94,20 +84,20 @@ public class Itinerario {
         this.maxVisitantes = maxVisitantes;
     }
 
-    public Recorrido getRecorrido(){
-        return this.recorrido;
-    }
-    
-    public void setRecorrido(Recorrido recorrido){
-        this.recorrido=recorrido;
+    public ObjectId getRecorridoId() {
+        return recorridoId;
     }
 
-    public List<Zona> getZonas() {
-        return zonas;
+    public void setRecorridoId(ObjectId recorridoId) {
+        this.recorridoId = recorridoId;
     }
 
-    public void setZonas(List<Zona> zonas) {
-        this.zonas = zonas;
+    public Recorrido getRecorrido() {
+        return recorrido;
+    }
+
+    public void setRecorrido(Recorrido recorrido) {
+        this.recorrido = recorrido;
     }
 
     public List<Horario> getHorarios() {
@@ -128,7 +118,7 @@ public class Itinerario {
 
     @Override
     public String toString() {
-        return "Itinerario{" + "id=" + id + ", nombreItinerario=" + nombreItinerario + ", totalEspecies=" + totalEspecies + ", maxVisitantes=" + maxVisitantes + ", recorrido=" + recorrido + ", zonas=" + zonas + ", horarios=" + horarios + '}';
+        return "Itinerario{" + "id=" + id + ", nombreItinerario=" + nombreItinerario + ", totalEspecies=" + totalEspecies + ", maxVisitantes=" + maxVisitantes + ", recorrido=" + recorridoId + ", horarios=" + horarios + '}';
     }
     
     

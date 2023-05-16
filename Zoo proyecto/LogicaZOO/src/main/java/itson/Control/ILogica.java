@@ -13,6 +13,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import Dominio.Itinerario;
 import Dominio.Queja;
+import Dominio.Recorrido;
 
 /**
  *
@@ -31,7 +32,10 @@ public interface ILogica {
     public ObjectId guardarEspecie(Especie especie);
     public Object[] recuperaDatosItinerario();
     public Itinerario buscarItinerario(String nombre);
-    public ObjectId guardarItinerario(Itinerario itinerario);
+    public ObjectId guardarItinerario(Itinerario itinerario,Recorrido recorrido);
     public List<Itinerario>recuperaNombreItinerarios();
     public ObjectId guardarQueja(Queja Queja);
+    public Recorrido buscarRecorrido(String nombre);
+    public void actualizarRecorrido(Recorrido recorrido);
+    public void actulizarItieneracio(Itinerario itinerario);
 }

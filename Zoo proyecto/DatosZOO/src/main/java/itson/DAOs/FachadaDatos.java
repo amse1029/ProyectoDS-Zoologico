@@ -14,6 +14,7 @@ import Dominio.Guia;
 import Dominio.Habitat;
 import Dominio.Itinerario;
 import Dominio.Queja;
+import Dominio.Recorrido;
 import Dominio.Vegetacion;
 import Dominio.Zona;
 import java.util.List;
@@ -372,10 +373,12 @@ public class FachadaDatos implements IDatos {
      * @return El itinerario que coincide con el nombre.
      */
     @Override
-    public Itinerario buscarItinerario(String nombre) {
+    public Itinerario buscarItinerarioRecorrido(ObjectId id ) {
         ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
-        return itinerarioDAO.buscar(nombre);
+        return itinerarioDAO.buscarRecorrido(id);
     }
+    
+    
 
     /**
      * Metodo para guardar un itinerario en la base de datos.
@@ -386,7 +389,7 @@ public class FachadaDatos implements IDatos {
     @Override
     public ObjectId guardarItinerario(Itinerario itinerario) {
         ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
-       return itinerarioDAO.guardar(itinerario);
+        return itinerarioDAO.guardar(itinerario);
     }
 
     /**
@@ -396,8 +399,80 @@ public class FachadaDatos implements IDatos {
      */
     @Override
     public void guardarQueja(Queja queja) {
-       QuejaDAO quejaDAO= new QuejaDAO();
-       quejaDAO.guardarQueja(queja);
+        QuejaDAO quejaDAO = new QuejaDAO();
+        quejaDAO.guardarQueja(queja);
     }
+
+    @Override
+    public void insertarHabitats() {
+        HabitatDAO habitatDAO = new HabitatDAO();
+        habitatDAO.insertar();
+    }
+
+    @Override
+    public void insertarZonas(Especie especie, Especie especie2, Especie especie3) {
+        ZonaDAO zonaDAO = new ZonaDAO();
+        zonaDAO.insertarZonas(especie, especie2, especie3);
+    }
+
+    @Override
+    public void insertarEspecies(Habitat habitat1, Habitat habitat2, Habitat habitat3) {
+       EspeciesDAO especiesDAO = new EspeciesDAO();
+       especiesDAO.insertar(habitat1, habitat2, habitat3);
+    }
+
+    @Override
+    public void InsertarAnimales(Especie especie, Especie especie2, Especie especie3) {
+     AnimalesDAO animalesDAO = new AnimalesDAO();
+     animalesDAO.InsertarAnimales(especie, especie2, especie3);
+
+    }
+
+    @Override
+    public ObjectId insertarRecorrido(Recorrido recorrido) {
+    RecorridosDAO recorridosDAO = new RecorridosDAO();
+    recorridosDAO.insertar(recorrido);
+    return recorrido.getId();
+
+    }
+
+    @Override
+    public List<Especie> recuperarTodasEspecies() {
+      EspeciesDAO especiesDAO = new EspeciesDAO();
+      List<Especie> especies = especiesDAO.recuperarTodas();
+      return especies;
+    }
+
+    @Override
+    public Recorrido recuperarRecorrido(String nombre) {
+      RecorridosDAO recorridosDAO = new RecorridosDAO();
+      Recorrido recorrido = recorridosDAO.recuperar(nombre);
+      return recorrido;
+
+    }
+
+    @Override
+    public Itinerario buscarItineario(String nombre) {
+     ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
+     Itinerario itinerario = itinerarioDAO.buscar(nombre);
+     return itinerario;
+
+    }
+
+    @Override
+    public void actualizarItineario(Itinerario itinerario) {
+        ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
+        itinerarioDAO.actualizar(itinerario);
+
+    }
+
+    @Override
+    public void actualizarRecorrido(Recorrido recorrido) {
+       RecorridosDAO recorridosDAO = new RecorridosDAO();
+       recorridosDAO.actualizar(recorrido);
+
+    }
+    
+    
 
 }
