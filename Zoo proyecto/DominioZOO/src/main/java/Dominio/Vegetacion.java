@@ -4,7 +4,7 @@ import java.util.Objects;
 import org.bson.types.ObjectId;
 
 /**
- * 
+ *
  */
 public class Vegetacion {
 
@@ -15,35 +15,57 @@ public class Vegetacion {
     }
 
     /**
-     * 
+     *
      */
     private String nombre;
     private ObjectId id;
 
+    /**
+     * Constructor que inicializa el atributo nombre al valor de su parámetro.
+     * @param nombre Nombre de la vegetación.
+     */
     public Vegetacion(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * Constructor que inicializa el atributo nombre y id al valor de su parámetro.
+     * @param nombre Nombre de la vegetación.
+     * @param id Id de la vegetación.
+     */
     public Vegetacion(String nombre, ObjectId id) {
         this.nombre = nombre;
         this.id = id;
     }
 
+    /**
+     * Método que regresa el id de la vegetación.
+     * @return Id de la vegetación.
+     */
     public ObjectId getId() {
         return id;
     }
 
+    /**
+     * Método que setea el id de la vegetación.
+     * @param id Id de la vegetación.
+     */
     public void setId(ObjectId id) {
         this.id = id;
     }
-    
-    
-    
-    
+
+    /**
+     * Método que regresa el nombre de la vegetación.
+     * @return Nombre de la vegetación.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Método que setea el nombre de la vegetación.
+     * @param nombre Nombre de la vegetación.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -75,6 +97,4 @@ public class Vegetacion {
         return "Vegetacion{" + "nombre=" + nombre + ", id=" + id + '}';
     }
 
-    
-    
 }

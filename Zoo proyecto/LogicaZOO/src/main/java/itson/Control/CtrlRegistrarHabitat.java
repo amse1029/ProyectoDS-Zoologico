@@ -17,10 +17,18 @@ public class CtrlRegistrarHabitat {
 
     private IDatos datos;
 
+    /**
+     * Constructor que inicializa datos con la instancia de FabricaDatos.
+     */
     public CtrlRegistrarHabitat() {
         this.datos = FabricaDatos.crearInstancia();
     }
 
+    /**
+     * Método que recupera los climas.
+     *
+     * @return Lista de climas.
+     */
     public List<Clima> recuperarClimas() {
         List<Clima> climas = new LinkedList<>();
         climas = datos.recuperarClima();
@@ -33,6 +41,11 @@ public class CtrlRegistrarHabitat {
         }
     }
 
+    /**
+     * Método que recupera las vegetaciones.
+     *
+     * @return Lista de vegetaciones.
+     */
     public List<Vegetacion> recuperarVegetacion() {
         List<Vegetacion> vegetaciones = new LinkedList<>();
         vegetaciones = datos.recuperarVegetacion();
@@ -45,6 +58,11 @@ public class CtrlRegistrarHabitat {
         }
     }
 
+    /**
+     * Método que recupera los continentes.
+     *
+     * @return Lista de continentes.
+     */
     public List<Continente> recuperarContiente() {
         List<Continente> continentes = new LinkedList<>();
         continentes = datos.recuperarContinente();
@@ -57,12 +75,24 @@ public class CtrlRegistrarHabitat {
         }
     }
 
+    /**
+     * Método que busca a un hábitat por su nombre.
+     *
+     * @param nombre Nombre del hábitat que se quiere buscar.
+     * @return Hábitat encontrada.
+     */
     public Habitat buscarHabitat(String nombre) {
         Habitat habitat = new Habitat();
         habitat = datos.buscarHabitat(nombre);
         return habitat;
     }
 
+    /**
+     * Método que guarda un hábitat.
+     *
+     * @param habitat Hábitat que se quiere guardar.
+     * @return true si se pudo guardar, false en caso contrario.
+     */
     public boolean guardarHabitat(Habitat habitat) {
         Boolean bandera;
         if (this.buscarHabitat(habitat.getNombre()) == null) {
@@ -73,8 +103,13 @@ public class CtrlRegistrarHabitat {
         }
 
     }
-    
-    public List<Habitat> recuperarHabitats (){
+
+    /**
+     * Método que recupera los hábitats.
+     *
+     * @return Lista de hábitats.
+     */
+    public List<Habitat> recuperarHabitats() {
         List<Habitat> habitats = datos.recuperarHabitats();
         return habitats;
     }

@@ -70,6 +70,7 @@ public class FrmQuejas extends javax.swing.JFrame {
         lblItinerarios4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Registrar queja");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlFondo.setBackground(new java.awt.Color(238, 189, 102));
@@ -260,6 +261,7 @@ public class FrmQuejas extends javax.swing.JFrame {
 
     private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtCorreoKeyTyped
 
     private void txtGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGuiaActionPerformed
@@ -267,12 +269,7 @@ public class FrmQuejas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtGuiaActionPerformed
 
     private void txtGuiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtGuiaKeyTyped
-        char key = evt.getKeyChar();
-        boolean letra = Character.isLetter(key);
 
-        if (!letra) {
-            evt.consume();
-        }
     }//GEN-LAST:event_txtGuiaKeyTyped
 
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed

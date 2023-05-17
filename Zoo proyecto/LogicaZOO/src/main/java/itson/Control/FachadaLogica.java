@@ -120,7 +120,7 @@ public class FachadaLogica implements ILogica {
             control.insertarHabitats();
             List<Habitat> habitats = controlHabitat.recuperarHabitats();
             control.insertarEspecies(habitats.get(0), habitats.get(1), habitats.get(2));
-            List<Especie> especies = controlEspecie.recuperarEspcies();
+            List<Especie> especies = controlEspecie.recuperarEspecies();
             control.InsertarAnimales(especies.get(0), especies.get(1), especies.get(2));
             control.insertarZonas(especies.get(0), especies.get(1), especies.get(2));
         }

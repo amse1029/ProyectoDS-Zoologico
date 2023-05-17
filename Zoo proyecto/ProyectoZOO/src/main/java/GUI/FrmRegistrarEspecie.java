@@ -317,12 +317,8 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtNombreCientificoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCientificoKeyTyped
-<<<<<<< Updated upstream
        char key = evt.getKeyChar();
-=======
-        char key = evt.getKeyChar();
->>>>>>> Stashed changes
-        
+
         if ((!Character.isLetter(key)) && key != KeyEvent.VK_SPACE) {
             evt.consume();
         }
@@ -388,7 +384,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
 
         } else {
             JOptionPane.showMessageDialog(this, "La especie ya se encuentra registrada");
-            this.cuidadores = especie.getCuiadadores();
+            this.cuidadores = especie.getCuidadores();
             this.habitats = especie.getHabitats();
             this.muestraDatos(especie);
         }
