@@ -5,6 +5,7 @@
 package GUI;
 
 import Dominio.Animal;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -62,6 +63,11 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar animales");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlFondo.setBackground(new java.awt.Color(238, 189, 102));
@@ -218,8 +224,11 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void txtEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyTyped
+        if (this.txtEdad.getText().length()<5) {
         if (evt.getKeyChar() < '0' || evt.getKeyChar() > '9') {
             // Si no es un número, consumir el evento
+            evt.consume();
+        }}else{
             evt.consume();
         }
     }//GEN-LAST:event_txtEdadKeyTyped
@@ -227,8 +236,11 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     private void txtNombreCientificoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCientificoKeyTyped
         char key = evt.getKeyChar();
         boolean letra = Character.isLetter(key);
-
-        if (!letra) {
+        if (this.txtNombreCientifico.getText().length()<30) {
+            if (!(letra || key == KeyEvent.VK_SPACE )) {
+            evt.consume();
+        } 
+        }else{
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreCientificoKeyTyped
@@ -236,11 +248,18 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char key = evt.getKeyChar();
         boolean letra = Character.isLetter(key);
-
-        if (!letra) {
+  if (this.txtNombre.getText().length()<30) {
+            if (!(letra || key == KeyEvent.VK_SPACE )) {
+            evt.consume();
+        } 
+        }else{
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+   this.cierraPantalla();
+    }//GEN-LAST:event_formWindowClosing
 
     public void muestralos() {
         if (animales != null) {

@@ -81,7 +81,6 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         tblHabitats = new javax.swing.JTable();
         btnRegresar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Especie");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -131,6 +130,11 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
 
         txtDescripcion.setEditable(false);
         txtDescripcion.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyTyped(evt);
+            }
+        });
         pnlFondo.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 170, 40));
 
         lblNombre.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
@@ -147,6 +151,11 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         txtCantidad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 txtCantidadMouseReleased(evt);
+            }
+        });
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadKeyTyped(evt);
             }
         });
         pnlFondo.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 170, 40));
@@ -187,6 +196,11 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         pnlFondo.add(lblDescripcion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, -1, -1));
 
         txtNombre.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreKeyTyped(evt);
@@ -194,7 +208,6 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         });
         pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 170, 40));
 
-        tblCuidadores.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblCuidadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -218,8 +231,6 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblCuidadores.setCellSelectionEnabled(false);
-        tblCuidadores.setRowSelectionAllowed(true);
         tblCuidadores.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblCuidadores);
         if (tblCuidadores.getColumnModel().getColumnCount() > 0) {
@@ -229,7 +240,6 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
 
         pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 280, 190, 120));
 
-        tblHabitats.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblHabitats.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -306,17 +316,17 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-        char key = evt.getKeyChar();
-        
-        if ((!Character.isLetter(key)) && key != KeyEvent.VK_SPACE) {
+       if (this.txtNombre.getText().length()<25) {
+            validacionAlfabeto(evt);
+        }else{
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtNombreCientificoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCientificoKeyTyped
-       char key = evt.getKeyChar();
-
-        if ((!Character.isLetter(key)) && key != KeyEvent.VK_SPACE) {
+        if (this.txtNombreCientifico.getText().length()<25) {
+            validacionAlfabeto(evt);
+        }else{
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreCientificoKeyTyped
@@ -328,6 +338,36 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
       new FrmInicial().setVisible(true);
     }//GEN-LAST:event_formWindowClosing
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
+        if (this.txtCantidad.getText().length()<5) {
+            validacionNumero(evt);
+        }else{
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCantidadKeyTyped
+
+    private void txtDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyTyped
+      
+        if (this.txtDescripcion.getText().length()<50) {
+            validacionAlfabeto(evt);
+        }else{
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDescripcionKeyTyped
+  
+    public void validacionAlfabeto(java.awt.event.KeyEvent evt){
+       char key = evt.getKeyChar();
+        if ((!Character.isLetter(key)) && key != KeyEvent.VK_SPACE) {
+            evt.consume();
+        }
+    }
+    
+    
     /**
      * Metodo para validar el campo por numero.
      *
@@ -428,13 +468,14 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
 
     private void seleccionaEditar() {
         editar = new FrmEditarAnimales(animales, this);
-
+        this.setVisible(false);
         //while (!ya) {
         //}
     }
 
     public void actualizar() {
         Integer cantidad = animales.size();
+        this.setVisible(true);
         this.txtCantidad.setText(cantidad.toString());
     }
 

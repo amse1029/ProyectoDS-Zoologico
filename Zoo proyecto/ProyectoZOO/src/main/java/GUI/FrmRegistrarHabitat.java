@@ -72,8 +72,13 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar hábitat");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlFondo.setBackground(new java.awt.Color(238, 189, 102));
@@ -108,7 +113,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
                 btnVerificarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, -1, 30));
+        pnlFondo.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, -1, 30));
 
         lblContinente.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblContinente.setForeground(new java.awt.Color(255, 255, 255));
@@ -142,7 +147,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         pnlFondo.add(lblVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, -1, -1));
 
         cbxVegetacion.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(cbxVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 240, 40));
+        pnlFondo.add(cbxVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 330, 240, 40));
 
         tblSeleccionados.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblSeleccionados.setModel(new javax.swing.table.DefaultTableModel(
@@ -174,7 +179,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
             tblSeleccionados.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 180, 110));
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 180, 110));
 
         tblDisponibles.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblDisponibles.setModel(new javax.swing.table.DefaultTableModel(
@@ -206,7 +211,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
             tblDisponibles.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 180, 110));
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 180, 110));
 
         btnEliminar.setText(">");
         btnEliminar.setEnabled(false);
@@ -215,7 +220,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, -1, -1));
+        pnlFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 220, -1, -1));
 
         btnAgregar.setText("<");
         btnAgregar.setEnabled(false);
@@ -224,7 +229,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 180, -1, -1));
+        pnlFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, -1, -1));
 
         btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
@@ -299,11 +304,18 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char key = evt.getKeyChar();
-        
-        if ((!Character.isLetter(key)) && key != KeyEvent.VK_SPACE) {
+        if (this.txtNombre.getText().length()<30) {
+             if ((!Character.isLetter(key)) && key != KeyEvent.VK_SPACE) {
             evt.consume();
-        }
+        }}
+             else{
+                 evt.consume();
+             }   
     }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        new FrmInicial().setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     public void despliegaDatos(List<Object> arreglo) {
         ArrayList<Clima> climas = new ArrayList<Clima>((List<Clima>) arreglo.get(2));

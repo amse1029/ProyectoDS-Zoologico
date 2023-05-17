@@ -6,9 +6,11 @@ package itson.DAOs;
 
 import Dominio.Continente;
 import Dominio.Especie;
+import Dominio.Itinerario;
 import Dominio.Zona;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.eq;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;

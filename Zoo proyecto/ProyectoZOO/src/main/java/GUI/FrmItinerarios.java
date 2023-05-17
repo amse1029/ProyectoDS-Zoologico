@@ -12,6 +12,7 @@ import Dominio.Recorrido;
 import Dominio.Zona;
 import itson.Control.FabricaLogica;
 import itson.Control.ILogica;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -35,6 +37,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
     LinkedList<Object> datos;
     Recorrido recorrido;
     Itinerario itinerario;
+    List<ObjectId> animalesSeleccionados = new ArrayList<>();
 
     public FrmItinerarios(LinkedList<Object> datos) {
         this.datos = datos;
@@ -53,6 +56,8 @@ public class FrmItinerarios extends javax.swing.JFrame {
     private void initComponents() {
 
         jProgressBar1 = new javax.swing.JProgressBar();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         pnlFondo = new javax.swing.JPanel();
         pnlRegistro = new javax.swing.JPanel();
         lblRegistro = new javax.swing.JLabel();
@@ -75,12 +80,20 @@ public class FrmItinerarios extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         txtNombreRecorrido = new javax.swing.JTextField();
         lblNombre1 = new javax.swing.JLabel();
-        Horarios2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblGuias = new javax.swing.JTable();
+        Horarios3 = new javax.swing.JLabel();
+        animales = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane4.setViewportView(jTextPane1);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar itinerario");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlFondo.setBackground(new java.awt.Color(238, 189, 102));
@@ -94,7 +107,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         lblRegistro.setText("Registrar itinerario");
         pnlRegistro.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 70));
+        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 70));
 
         btnBuscar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnBuscar.setForeground(new java.awt.Color(106, 69, 4));
@@ -104,31 +117,36 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
+        pnlFondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, -1, -1));
 
         lblNombreCientifico.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombreCientifico.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreCientifico.setText("Duración(Minutos):");
-        pnlFondo.add(lblNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+        pnlFondo.add(lblNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, -1, -1));
 
         lblNombre.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre.setText("Nombre Recorrido:");
-        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 220, -1));
+        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 220, -1));
 
         lblDescripcion.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion.setForeground(new java.awt.Color(255, 255, 255));
         lblDescripcion.setText("Longitud(Metros):");
-        pnlFondo.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
+        pnlFondo.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
 
         txtDuracion.setEditable(false);
         txtDuracion.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 170, 30));
+        txtDuracion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDuracionKeyTyped(evt);
+            }
+        });
+        pnlFondo.add(txtDuracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 170, 30));
 
         Horarios.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         Horarios.setForeground(new java.awt.Color(255, 255, 255));
         Horarios.setText("Zonas:");
-        pnlFondo.add(Horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, -1, -1));
+        pnlFondo.add(Horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 340, -1, -1));
 
         btnGuardar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(106, 69, 4));
@@ -139,28 +157,43 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 540, -1, -1));
+        pnlFondo.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 540, -1, -1));
 
         lblDescripcion2.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion2.setForeground(new java.awt.Color(255, 255, 255));
         lblDescripcion2.setText("Max Visitantes:");
-        pnlFondo.add(lblDescripcion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+        pnlFondo.add(lblDescripcion2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
 
         Horarios1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         Horarios1.setForeground(new java.awt.Color(255, 255, 255));
         Horarios1.setText("Horarios:");
-        pnlFondo.add(Horarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, -1, -1));
+        pnlFondo.add(Horarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
 
         txtLongitud.setEditable(false);
         txtLongitud.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtLongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 170, 30));
+        txtLongitud.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLongitudKeyTyped(evt);
+            }
+        });
+        pnlFondo.add(txtLongitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 250, 170, 30));
 
         txtVisitantes.setEditable(false);
         txtVisitantes.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtVisitantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 170, 30));
+        txtVisitantes.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtVisitantesKeyTyped(evt);
+            }
+        });
+        pnlFondo.add(txtVisitantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, 170, 30));
 
         txtNombre.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 170, 30));
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
+        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 170, 30));
 
         tblHorarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -198,7 +231,16 @@ public class FrmItinerarios extends javax.swing.JFrame {
             tblHorarios.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 350, 140));
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 380, 350, 140));
+
+        jScrollPane2.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                jScrollPane2ComponentAdded(evt);
+            }
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                jScrollPane2ComponentRemoved(evt);
+            }
+        });
 
         tblZonas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -224,13 +266,21 @@ public class FrmItinerarios extends javax.swing.JFrame {
             }
         });
         tblZonas.getTableHeader().setReorderingAllowed(false);
+        tblZonas.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                tblZonasComponentAdded(evt);
+            }
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                tblZonasComponentRemoved(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblZonas);
         if (tblZonas.getColumnModel().getColumnCount() > 0) {
             tblZonas.getColumnModel().getColumn(0).setResizable(false);
             tblZonas.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, 180, 140));
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 380, 180, 140));
 
         btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
@@ -240,20 +290,20 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 540, -1, -1));
+        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 540, -1, -1));
 
         txtNombreRecorrido.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(txtNombreRecorrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 170, 30));
+        txtNombreRecorrido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreRecorridoKeyTyped(evt);
+            }
+        });
+        pnlFondo.add(txtNombreRecorrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 170, 30));
 
         lblNombre1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombre1.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre1.setText("Nombre:");
-        pnlFondo.add(lblNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
-
-        Horarios2.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
-        Horarios2.setForeground(new java.awt.Color(255, 255, 255));
-        Horarios2.setText("Guias:");
-        pnlFondo.add(Horarios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, -1, -1));
+        pnlFondo.add(lblNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, -1, -1));
 
         tblGuias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -279,13 +329,28 @@ public class FrmItinerarios extends javax.swing.JFrame {
             }
         });
         tblGuias.getTableHeader().setReorderingAllowed(false);
+        tblGuias.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentAdded(java.awt.event.ContainerEvent evt) {
+                tblGuiasComponentAdded(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblGuias);
         if (tblGuias.getColumnModel().getColumnCount() > 0) {
             tblGuias.getColumnModel().getColumn(0).setResizable(false);
             tblGuias.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 180, 140));
+        pnlFondo.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, 180, 140));
+
+        Horarios3.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        Horarios3.setForeground(new java.awt.Color(255, 255, 255));
+        Horarios3.setText("Guias:");
+        pnlFondo.add(Horarios3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, -1, -1));
+
+        animales.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        animales.setForeground(new java.awt.Color(255, 255, 255));
+        animales.setText("Animales Seleccionados:");
+        pnlFondo.add(animales, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 530, -1, -1));
 
         getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 600));
 
@@ -321,6 +386,121 @@ public class FrmItinerarios extends javax.swing.JFrame {
         principal.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        new FrmInicial().setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        if (this.txtNombre.getText().length() < 25) {
+            validacionCamposAlfabeto(evt);
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtNombreRecorridoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreRecorridoKeyTyped
+        if (this.txtNombreRecorrido.getText().length() < 25) {
+            validacionCamposAlfabeto(evt);
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreRecorridoKeyTyped
+
+    private void txtDuracionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDuracionKeyTyped
+        if (this.txtDuracion.getText().length() < 4) {
+            validacionNumero(evt);
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDuracionKeyTyped
+
+    private void txtLongitudKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLongitudKeyTyped
+        if (this.txtLongitud.getText().length() < 5) {
+            validacionNumero(evt);
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtLongitudKeyTyped
+
+    private void txtVisitantesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVisitantesKeyTyped
+        if (this.txtVisitantes.getText().length() < 2) {
+            validacionNumero(evt);
+        } else {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtVisitantesKeyTyped
+
+    private void jScrollPane2ComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jScrollPane2ComponentAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane2ComponentAdded
+
+    private void tblZonasComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_tblZonasComponentAdded
+
+    }//GEN-LAST:event_tblZonasComponentAdded
+
+    private void jScrollPane2ComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jScrollPane2ComponentRemoved
+    }//GEN-LAST:event_jScrollPane2ComponentRemoved
+
+    private void tblZonasComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_tblZonasComponentRemoved
+        acualizarAnimales();
+    }//GEN-LAST:event_tblZonasComponentRemoved
+
+    private void tblGuiasComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_tblGuiasComponentAdded
+        actualizarCampos();
+    }//GEN-LAST:event_tblGuiasComponentAdded
+
+    private void actualizarCampos() {
+        for (int row = 0; row < this.tblGuias.getRowCount(); row++) {
+            boolean selected = (boolean) tblGuias.getValueAt(row, 1);
+            if (selected) {
+                this.tblGuias.setValueAt(false, row, 1);
+            }
+        }
+    }
+
+    private void acualizarAnimales() {
+        animalesSeleccionados.clear();
+        for (int row = 0; row < this.tblZonas.getRowCount(); row++) {
+            boolean selected = (boolean) tblZonas.getValueAt(row, 1);
+            if (selected) {
+                String name = (String) tblZonas.getValueAt(row, 0);
+                if (zonas.get(row).getNombre() == name) {
+                    for (int i = 0; i < zonas.get(row).getEspecieId().size(); i++) {
+
+                        animalesSeleccionados.add(zonas.get(row).getEspecieId().get(i));
+                    }
+                }
+
+            }
+        }
+        this.animales.setText("Animales Seleccionados: " + animalesSeleccionados.size());
+    }
+
+    /**
+     * Metodo para validar el campo por numero.
+     *
+     * @param evt evento
+     */
+    public void validacionNumero(java.awt.event.KeyEvent evt) {
+        char txt = evt.getKeyChar();
+        if (!(Character.isDigit(txt))) {
+            evt.consume();
+        }
+    }
+
+    /**
+     *
+     * Metodo para validar el campo alfabetico.
+     *
+     * @param evt evento
+     */
+    public void validacionCamposAlfabeto(java.awt.event.KeyEvent evt) {
+        char txt = evt.getKeyChar();
+        if (!(Character.isAlphabetic(txt) || txt == KeyEvent.VK_SPACE)) {
+            evt.consume();
+        }
+    }
 
     private void despliegaDatos(LinkedList<Object> datos) {
         guias = new ArrayList<Guia>((List<Guia>) datos.get(1));
@@ -362,7 +542,6 @@ public class FrmItinerarios extends javax.swing.JFrame {
         String nombreRecorrido = this.txtNombreRecorrido.getText();
         itinerario = ctrlItinerario.buscarItinerario(nombre);
         recorrido = ctrlItinerario.buscarRecorrido(nombreRecorrido);
-        System.out.println(recorrido);
         if (itinerario == null) {
             this.muestraMsjNoItinerario();
             itinerario = new Itinerario();
@@ -466,22 +645,6 @@ public class FrmItinerarios extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(this, "No existe itinerario", "Información", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void muestraCajasVerificacion() {
-        DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblZonas.getModel();
-        for (int i = 0; i < zonas.size(); i++) {
-            Object[] infor = {zonas.get(i).getNombre(), false};
-            modeloTabla2.addRow(infor);
-        }
-    }
-
-    private void seleccionaDia() {
-
-    }
-
-    private void muestraEspacioHoras() {
-
-    }
-
     private boolean validaNumero(String numero) {
         String FLOAT_PATTERN = "^[-+]?\\d*\\.?\\d+$";
         Pattern pattern = Pattern.compile(FLOAT_PATTERN);
@@ -491,10 +654,25 @@ public class FrmItinerarios extends javax.swing.JFrame {
 
     private void seleccionaGuardar() {
         String nombre = this.txtNombre.getText();
-        if (this.validaNumero(this.txtDuracion.getText()) && this.validaNumero(this.txtLongitud.getText()) && this.validaNumero(this.txtVisitantes.getText())) {
+        if (this.validaNumero(this.txtDuracion.getText())) {
+            if (this.validaNumero(this.txtLongitud.getText())) {
+                if (this.validaNumero(this.txtVisitantes.getText())) {
+                    if (this.txtNombre.getText().isBlank() || this.txtNombreRecorrido.getText().isBlank()) {
+                        JOptionPane.showMessageDialog(this, "Verifique que los nombres no esten vacios");
+                        return;
+                    } else {
 
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Los visitantes no son correctos");
+                    return;
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "La longitud no es correcta");
+                return;
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Los numeros no son corectos");
+            JOptionPane.showMessageDialog(this, "La duracion no es correcta");
             return;
         }
         float duracion = Float.parseFloat(this.txtDuracion.getText());
@@ -543,13 +721,19 @@ public class FrmItinerarios extends javax.swing.JFrame {
             horario.setHora(this.tblHorarios.getValueAt(6, 2).toString());
             horarios.add(horario);
         }
+        if (horarios.isEmpty()) {
+               JOptionPane.showMessageDialog(this, "Selecciona un horario");
+                return;
+            }else{
         for (int i = 0; i < horarios.size(); i++) {
+            
             if (this.validaHoras(horarios.get(i).getHora())) {
 
             } else {
-                JOptionPane.showMessageDialog(this, "Las horas deben de cumplir con el siguiente formato: hh:mm, y en caso de que sean varias deben estar separadas por comas sin ningun espacio");
+                JOptionPane.showMessageDialog(this, "Las horas deben de cumplir con el siguiente formato: hh:mm, \n y en caso de que sean varias deben estar separadas por comas sin ningun espacio");
                 return;
             }
+        }
         }
         List<Zona> zona = new ArrayList<>();
         for (int i = 0; i < this.tblZonas.getRowCount(); i++) {
@@ -557,14 +741,27 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 zona.add(zonas.get(i));
             }
         }
+        if (zona.isEmpty()) {
+               JOptionPane.showMessageDialog(this, "Selecciona un zona");
+                return;
+            }else{
+            
+        }
         Guia guia = new Guia();
         for (int i = 0; i < this.tblGuias.getRowCount(); i++) {
             if ((boolean) this.tblGuias.getValueAt(i, 1)) {
                 guia = guias.get(i);
             }
         }
+         if (guia.getId()==null) {
+               JOptionPane.showMessageDialog(this, "Selecciona un guia");
+                return;
+            }else{
+             
+         }
         //Itinerario itinerario=new Itinerario();
         //Recorrido recorrido=new Recorrido();
+        itinerario.setTotalEspecies(animalesSeleccionados.size());
         itinerario.setNombreItinerario(nombre);
         recorrido.setDuracion(duracion);
         itinerario.setMaxVisitantes(visitantes);
@@ -572,12 +769,14 @@ public class FrmItinerarios extends javax.swing.JFrame {
         itinerario.setGuia(guia);
         recorrido.setLongitud(longitud);
         recorrido.setNombre(this.txtNombreRecorrido.getText());
-        recorrido.setZonas(zonas);
+        recorrido.setZonas(zona);
         boolean exito = itinerario.verificacion(nombre, visitantes, horarios);
         Itinerario itinerarioAux = ctrlItinerario.buscarItinerario(nombre);
         if (itinerarioAux == null) {
             ctrlItinerario.guardarItinerario(itinerario, recorrido);
             this.muestraMsjExito();
+            this.dispose();
+            new FrmInicial().setVisible(true);
         } else {
             this.muestraMsjError();
         }
@@ -602,7 +801,8 @@ public class FrmItinerarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Horarios;
     private javax.swing.JLabel Horarios1;
-    private javax.swing.JLabel Horarios2;
+    private javax.swing.JLabel Horarios3;
+    private javax.swing.JLabel animales;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRegresar;
@@ -610,6 +810,8 @@ public class FrmItinerarios extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblDescripcion2;
     private javax.swing.JLabel lblNombre;

@@ -181,5 +181,6 @@ public class CtrlRegistrarItinerario {
     public void actualizarRecorrido(Recorrido recorrido) {
         datos.actualizarRecorrido(recorrido);
     }
+    
 
 }

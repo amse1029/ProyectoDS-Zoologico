@@ -186,4 +186,6 @@ public class FachadaLogica implements ILogica {
         List<Itinerario> itinerarios = control.recuperarItinerarios();
         return itinerarios;
     }
+
+   
 }
