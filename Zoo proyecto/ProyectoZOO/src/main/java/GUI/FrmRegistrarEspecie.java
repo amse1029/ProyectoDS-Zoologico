@@ -168,7 +168,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         lblDescripcion1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion1.setForeground(new java.awt.Color(255, 255, 255));
         lblDescripcion1.setText("Cuidador:");
-        pnlFondo.add(lblDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 220, -1, -1));
+        pnlFondo.add(lblDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 240, -1, -1));
 
         lblAnimales.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblAnimales.setForeground(new java.awt.Color(255, 255, 255));
@@ -199,6 +199,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         });
         pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 170, 40));
 
+        tblCuidadores.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblCuidadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -229,8 +230,9 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
             tblCuidadores.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, 140, 120));
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 280, 190, 120));
 
+        tblHabitats.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblHabitats.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -261,7 +263,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
             tblHabitats.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 130, 140, 90));
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 130, 190, 110));
 
         btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
@@ -315,7 +317,11 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtNombreCientificoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCientificoKeyTyped
+<<<<<<< Updated upstream
        char key = evt.getKeyChar();
+=======
+        char key = evt.getKeyChar();
+>>>>>>> Stashed changes
         
         if ((!Character.isLetter(key)) && key != KeyEvent.VK_SPACE) {
             evt.consume();

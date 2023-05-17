@@ -144,6 +144,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         cbxVegetacion.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         pnlFondo.add(cbxVegetacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 240, 40));
 
+        tblSeleccionados.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblSeleccionados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -173,8 +174,9 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
             tblSeleccionados.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 150, 110));
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 180, 110));
 
+        tblDisponibles.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         tblDisponibles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -204,7 +206,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
             tblDisponibles.getColumnModel().getColumn(0).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 150, 110));
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 160, 180, 110));
 
         btnEliminar.setText(">");
         btnEliminar.setEnabled(false);
@@ -366,6 +368,9 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método que determina lo que pasa cuando el actor selecciona guardar.
+     */
     public void seleccionaGuardar() {
         Clima clima = null;
         Vegetacion vegetacion = null;
@@ -385,7 +390,6 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
             } else {
                 this.muestraMsjExito();
             }
-
         } else {
             this.muestraMsjCamposVacios();
         }
@@ -393,7 +397,6 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
 
     public void muestraMsjError() {
         JOptionPane.showMessageDialog(this, "Ya existe un habitat con ese nombre", "Error", JOptionPane.ERROR_MESSAGE);
-
     }
 
     public void muestraMsjCamposVacios() {
