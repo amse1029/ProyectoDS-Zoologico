@@ -149,11 +149,6 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
                 txtCantidadMouseReleased(evt);
             }
         });
-        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtCantidadKeyTyped(evt);
-            }
-        });
         pnlFondo.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 170, 40));
 
         txtNombreCientifico.setEditable(false);
@@ -212,7 +207,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -223,6 +218,8 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblCuidadores.setCellSelectionEnabled(false);
+        tblCuidadores.setRowSelectionAllowed(true);
         tblCuidadores.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblCuidadores);
         if (tblCuidadores.getColumnModel().getColumnCount() > 0) {
@@ -327,15 +324,6 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     private void txtCantidadMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCantidadMouseReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadMouseReleased
-
-    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
-        if (this.txtCantidad.getText().length()<5) {
-            validacionNumero(evt);
-        }
-        else{
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
       new FrmInicial().setVisible(true);
@@ -470,7 +458,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         String nombreCientifico = this.txtNombreCientifico.getText();
         String descripcion = this.txtDescripcion.getText();
         //Especie especie = new Especie();
-        boolean correcto = especie.verificacion(nombre, nombreCientifico, descripcion, cuidados, hab, animales);
+        boolean correcto = especie.verificacion(nombre, nombreCientifico, descripcion, cuidados, hab);
         if (correcto) {
             ObjectId id = ctrlEspecie.guardarEspecie(this.especie);
             if (id == null) {

@@ -35,10 +35,11 @@ public class FrmItinerarios extends javax.swing.JFrame {
     LinkedList<Object> datos;
     Recorrido recorrido;
     Itinerario itinerario;
+
     public FrmItinerarios(LinkedList<Object> datos) {
-        this.datos=datos;
+        this.datos = datos;
         initComponents();
-        ctrlItinerario=FabricaLogica.crearInstancia();
+        ctrlItinerario = FabricaLogica.crearInstancia();
         this.despliegaDatos(datos);
     }
 
@@ -294,7 +295,13 @@ public class FrmItinerarios extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        this.seleccionaBuscar();
+        if (this.txtNombre.getText().isBlank() || this.txtNombreRecorrido.getText().isBlank()) {
+            JOptionPane.showMessageDialog(this, "Ecribre el nombre del recorrido e itinerario", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            this.seleccionaBuscar();
+        }
+
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -304,12 +311,12 @@ public class FrmItinerarios extends javax.swing.JFrame {
 
     private void tblHorariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHorariosMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_tblHorariosMouseClicked
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        FrmInicial principal=new FrmInicial();
+        FrmInicial principal = new FrmInicial();
         this.setVisible(false);
         principal.setVisible(true);
         this.dispose();
@@ -321,19 +328,19 @@ public class FrmItinerarios extends javax.swing.JFrame {
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblHorarios.getModel();
         Object[] lunes = {"Lunes", false};
         modeloTabla.addRow(lunes);
-        Object[] martes={"Martes", false};
+        Object[] martes = {"Martes", false};
         modeloTabla.addRow(martes);
         Object[] miercoles = {"Miercoles", false};
         modeloTabla.addRow(miercoles);
-        Object[] jueves={"Jueves", false};
+        Object[] jueves = {"Jueves", false};
         modeloTabla.addRow(jueves);
         Object[] viernes = {"Viernes", false};
         modeloTabla.addRow(viernes);
-        Object[] sabado={"Sabado", false};
+        Object[] sabado = {"Sabado", false};
         modeloTabla.addRow(sabado);
-        Object[] domingo={"Domingo", false};
+        Object[] domingo = {"Domingo", false};
         modeloTabla.addRow(domingo);
-        
+
         DefaultTableModel tablaZonas = (DefaultTableModel) this.tblZonas.getModel();
         DefaultTableModel tablaGuias = (DefaultTableModel) this.tblGuias.getModel();
         tablaZonas.setRowCount(0);
@@ -349,51 +356,51 @@ public class FrmItinerarios extends javax.swing.JFrame {
             tablaZonas.addRow(zona);
         }
     }
-    
+
     private void seleccionaBuscar() {
-        String nombre=this.txtNombre.getText();
+        String nombre = this.txtNombre.getText();
         String nombreRecorrido = this.txtNombreRecorrido.getText();
-        itinerario=ctrlItinerario.buscarItinerario(nombre);
+        itinerario = ctrlItinerario.buscarItinerario(nombre);
         recorrido = ctrlItinerario.buscarRecorrido(nombreRecorrido);
         System.out.println(recorrido);
-        if(itinerario==null){
+        if (itinerario == null) {
             this.muestraMsjNoItinerario();
             itinerario = new Itinerario();
-            if(recorrido==null){
+            if (recorrido == null) {
                 recorrido = new Recorrido();
-            }else{
+            } else {
                 this.despliegaDatosRecorrido(recorrido);
             }
-        }else{
-           this.despliegaDatosItinerario(itinerario);
-           if(recorrido==null){
+        } else {
+            this.despliegaDatosItinerario(itinerario);
+            if (recorrido == null) {
                 recorrido = new Recorrido();
-            }else{
+            } else {
                 this.despliegaDatosRecorrido(recorrido);
             }
         }
-         this.activaCamposRegistro();
+        this.activaCamposRegistro();
     }
-    
-    public void activaCamposRegistro(){
+
+    public void activaCamposRegistro() {
         this.txtDuracion.setEditable(true);
         this.txtLongitud.setEditable(true);
         this.txtVisitantes.setEditable(true);
         this.btnGuardar.setEnabled(true);
     }
-    
-    private void despliegaDatosRecorrido(Recorrido recorrido){
-        Float duracion=recorrido.getDuracion();
-        Float longitud=recorrido.getLongitud();
-        List<Zona> zonaitinerario=recorrido.getZonas();
+
+    private void despliegaDatosRecorrido(Recorrido recorrido) {
+        Float duracion = recorrido.getDuracion();
+        Float longitud = recorrido.getLongitud();
+        List<Zona> zonaitinerario = recorrido.getZonas();
         DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblZonas.getModel();
         modeloTabla2.setRowCount(0);
         tblZonas.repaint();
         for (int i = 0; i < zonas.size(); i++) {
-            if(zonaitinerario.contains(zonas.get(i))){
+            if (zonaitinerario.contains(zonas.get(i))) {
                 Object[] infor = {zonas.get(i).getNombre(), true};
                 modeloTabla2.addRow(infor);
-            }else{
+            } else {
                 Object[] infor = {zonas.get(i).getNombre(), false};
                 modeloTabla2.addRow(infor);
             }
@@ -401,39 +408,39 @@ public class FrmItinerarios extends javax.swing.JFrame {
         this.txtDuracion.setText(duracion.toString());
         this.txtLongitud.setText(longitud.toString());
     }
-    
+
     private void despliegaDatosItinerario(Itinerario itinerario) {
-        Integer visitantes=itinerario.getMaxVisitantes();
+        Integer visitantes = itinerario.getMaxVisitantes();
         Recorrido recorrido = itinerario.getRecorrido();
-        List<Horario> horarios=itinerario.getHorarios();
-        
+        List<Horario> horarios = itinerario.getHorarios();
+
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblHorarios.getModel();
         for (int i = 0; i < horarios.size(); i++) {
-            if(horarios.get(i).getDia().equals(Dias.Lunes)){
+            if (horarios.get(i).getDia().equals(Dias.Lunes)) {
                 this.tblHorarios.setValueAt(true, 0, 1);
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 0, 2);
             }
-            if(horarios.get(i).getDia().equals(Dias.Martes)){
+            if (horarios.get(i).getDia().equals(Dias.Martes)) {
                 this.tblHorarios.setValueAt(true, 1, 1);
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 1, 2);
             }
-            if(horarios.get(i).getDia().equals(Dias.Miercoles)){
+            if (horarios.get(i).getDia().equals(Dias.Miercoles)) {
                 this.tblHorarios.setValueAt(true, 2, 1);
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 2, 2);
             }
-            if(horarios.get(i).getDia().equals(Dias.Jueves)){
+            if (horarios.get(i).getDia().equals(Dias.Jueves)) {
                 this.tblHorarios.setValueAt(true, 3, 1);
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 3, 2);
             }
-            if(horarios.get(i).getDia().equals(Dias.Viernes)){
+            if (horarios.get(i).getDia().equals(Dias.Viernes)) {
                 this.tblHorarios.setValueAt(true, 4, 1);
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 4, 2);
             }
-            if(horarios.get(i).getDia().equals(Dias.Sabado)){
+            if (horarios.get(i).getDia().equals(Dias.Sabado)) {
                 this.tblHorarios.setValueAt(true, 5, 1);
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 5, 2);
             }
-            if(horarios.get(i).getDia().equals(Dias.Domingo)){
+            if (horarios.get(i).getDia().equals(Dias.Domingo)) {
                 this.tblHorarios.setValueAt(true, 6, 1);
                 this.tblHorarios.setValueAt(horarios.get(i).getHora(), 6, 2);
             }
@@ -442,23 +449,23 @@ public class FrmItinerarios extends javax.swing.JFrame {
         modeloTabla2.setRowCount(0);
         tblGuias.repaint();
         for (int i = 0; i < guias.size(); i++) {
-            if(itinerario.getGuia().equals(guias.get(i))){
+            if (itinerario.getGuia().equals(guias.get(i))) {
                 Object[] infor = {guias.get(i).getNombre(), true};
                 modeloTabla2.addRow(infor);
-            }else{
+            } else {
                 Object[] infor = {guias.get(i).getNombre(), false};
                 modeloTabla2.addRow(infor);
             }
         }
-        
+
         this.txtVisitantes.setText(visitantes.toString());
-        
+
     }
-    
+
     private void muestraMsjNoItinerario() {
         JOptionPane.showMessageDialog(this, "No existe itinerario", "Información", JOptionPane.INFORMATION_MESSAGE);
     }
-    
+
     private void muestraCajasVerificacion() {
         DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblZonas.getModel();
         for (int i = 0; i < zonas.size(); i++) {
@@ -466,93 +473,93 @@ public class FrmItinerarios extends javax.swing.JFrame {
             modeloTabla2.addRow(infor);
         }
     }
-    
+
     private void seleccionaDia() {
-        
+
     }
-    
+
     private void muestraEspacioHoras() {
-        
+
     }
-    
-    private boolean validaNumero(String numero){
+
+    private boolean validaNumero(String numero) {
         String FLOAT_PATTERN = "^[-+]?\\d*\\.?\\d+$";
         Pattern pattern = Pattern.compile(FLOAT_PATTERN);
         Matcher matcher = pattern.matcher(numero);
         return matcher.matches();
     }
-    
+
     private void seleccionaGuardar() {
-        String nombre=this.txtNombre.getText();
-        if(this.validaNumero(this.txtDuracion.getText())&&this.validaNumero(this.txtLongitud.getText())&&this.validaNumero(this.txtVisitantes.getText())){
-            
-        }else{
+        String nombre = this.txtNombre.getText();
+        if (this.validaNumero(this.txtDuracion.getText()) && this.validaNumero(this.txtLongitud.getText()) && this.validaNumero(this.txtVisitantes.getText())) {
+
+        } else {
             JOptionPane.showMessageDialog(this, "Los numeros no son corectos");
             return;
         }
-        float duracion=Float.parseFloat(this.txtDuracion.getText());
-        float longitud=Float.parseFloat(this.txtLongitud.getText());
-        int visitantes=Integer.parseInt(this.txtVisitantes.getText());
-        List<Horario> horarios=new ArrayList<>();
-        if((boolean)this.tblHorarios.getValueAt(0, 1)){
+        float duracion = Float.parseFloat(this.txtDuracion.getText());
+        float longitud = Float.parseFloat(this.txtLongitud.getText());
+        int visitantes = Integer.parseInt(this.txtVisitantes.getText());
+        List<Horario> horarios = new ArrayList<>();
+        if ((boolean) this.tblHorarios.getValueAt(0, 1)) {
             Horario horario = new Horario();
             horario.setDia(Dias.Lunes);
             horario.setHora(this.tblHorarios.getValueAt(0, 2).toString());
             horarios.add(horario);
         }
-        if((boolean)this.tblHorarios.getValueAt(1, 1)){
+        if ((boolean) this.tblHorarios.getValueAt(1, 1)) {
             Horario horario = new Horario();
             horario.setDia(Dias.Martes);
             horario.setHora(this.tblHorarios.getValueAt(1, 2).toString());
             horarios.add(horario);
         }
-        if((boolean)this.tblHorarios.getValueAt(2, 1)){
+        if ((boolean) this.tblHorarios.getValueAt(2, 1)) {
             Horario horario = new Horario();
             horario.setDia(Dias.Miercoles);
             horario.setHora(this.tblHorarios.getValueAt(2, 2).toString());
             horarios.add(horario);
         }
-        if((boolean)this.tblHorarios.getValueAt(3, 1)){
+        if ((boolean) this.tblHorarios.getValueAt(3, 1)) {
             Horario horario = new Horario();
             horario.setDia(Dias.Jueves);
             horario.setHora(this.tblHorarios.getValueAt(3, 2).toString());
             horarios.add(horario);
         }
-        if((boolean)this.tblHorarios.getValueAt(4, 1)){
+        if ((boolean) this.tblHorarios.getValueAt(4, 1)) {
             Horario horario = new Horario();
             horario.setDia(Dias.Viernes);
             horario.setHora(this.tblHorarios.getValueAt(4, 2).toString());
             horarios.add(horario);
         }
-        if((boolean)this.tblHorarios.getValueAt(5, 1)){
+        if ((boolean) this.tblHorarios.getValueAt(5, 1)) {
             Horario horario = new Horario();
             horario.setDia(Dias.Sabado);
             horario.setHora(this.tblHorarios.getValueAt(5, 2).toString());
             horarios.add(horario);
         }
-        if((boolean)this.tblHorarios.getValueAt(6, 1)){
+        if ((boolean) this.tblHorarios.getValueAt(6, 1)) {
             Horario horario = new Horario();
             horario.setDia(Dias.Domingo);
             horario.setHora(this.tblHorarios.getValueAt(6, 2).toString());
             horarios.add(horario);
         }
-        for(int i=0;i<horarios.size();i++){
-            if(this.validaHoras(horarios.get(i).getHora())){
-                
-            }else{
+        for (int i = 0; i < horarios.size(); i++) {
+            if (this.validaHoras(horarios.get(i).getHora())) {
+
+            } else {
                 JOptionPane.showMessageDialog(this, "Las horas deben de cumplir con el siguiente formato: hh:mm, y en caso de que sean varias deben estar separadas por comas sin ningun espacio");
                 return;
             }
         }
-        List<Zona> zona=new ArrayList<>();
-        for(int i=0;i<this.tblZonas.getRowCount();i++){
-            if((boolean)this.tblZonas.getValueAt(i, 1)){
+        List<Zona> zona = new ArrayList<>();
+        for (int i = 0; i < this.tblZonas.getRowCount(); i++) {
+            if ((boolean) this.tblZonas.getValueAt(i, 1)) {
                 zona.add(zonas.get(i));
             }
         }
         Guia guia = new Guia();
-        for(int i=0;i<this.tblGuias.getRowCount();i++){
-            if((boolean)this.tblGuias.getValueAt(i, 1)){
+        for (int i = 0; i < this.tblGuias.getRowCount(); i++) {
+            if ((boolean) this.tblGuias.getValueAt(i, 1)) {
                 guia = guias.get(i);
             }
         }
@@ -566,31 +573,31 @@ public class FrmItinerarios extends javax.swing.JFrame {
         recorrido.setLongitud(longitud);
         recorrido.setNombre(this.txtNombreRecorrido.getText());
         recorrido.setZonas(zonas);
-        boolean exito=itinerario.verificacion(nombre,visitantes, horarios);
+        boolean exito = itinerario.verificacion(nombre, visitantes, horarios);
         Itinerario itinerarioAux = ctrlItinerario.buscarItinerario(nombre);
-        if(itinerarioAux==null){
-            ctrlItinerario.guardarItinerario(itinerario,recorrido);
+        if (itinerarioAux == null) {
+            ctrlItinerario.guardarItinerario(itinerario, recorrido);
             this.muestraMsjExito();
-        }else{
+        } else {
             this.muestraMsjError();
         }
     }
-    
-    public boolean validaHoras(String horas){
+
+    public boolean validaHoras(String horas) {
         String HORA_PATTERN = "^([0-1]?[0-9]|2[0-3]):([0-5][0-9])(,([0-1]?[0-9]|2[0-3]):([0-5][0-9]))*$";
         Pattern pattern = Pattern.compile(HORA_PATTERN);
         Matcher matcher = pattern.matcher(horas);
         return matcher.matches();
     }
-    
+
     private void muestraMsjError() {
-       JOptionPane.showMessageDialog(this, "Error", "Error", JOptionPane.ERROR_MESSAGE); 
+        JOptionPane.showMessageDialog(this, "Error", "Error", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     private void muestraMsjExito() {
         JOptionPane.showMessageDialog(this, "Itinerario registrado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }
-   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Horarios;

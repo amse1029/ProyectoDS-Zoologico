@@ -213,7 +213,7 @@ public class Especie {
      * @param habitats Hábitats correspondientes de la especie.
      * @return true en caso de estar completo, false en caso contrario.
      */
-    public boolean verificacion(String nombre, String nombreCientifico, String descripcion, ArrayList<Cuidador> cuidadores, ArrayList<Habitat> habitats, List<Animal> animales) {
+    public boolean verificacion(String nombre, String nombreCientifico, String descripcion, ArrayList<Cuidador> cuidadores, ArrayList<Habitat> habitats) {
         if (nombre.equals("")) {
             return false;
         }
@@ -229,15 +229,11 @@ public class Especie {
         if (habitats.size() == 0) {
             return false;
         }
-        if (animales.size() == 0) {
-            return false;
-        }
         this.nombre = nombre;
         this.nombreCientifico = nombreCientifico;
         this.descripcion = descripcion;
         this.cuidadores = cuidadores;
         this.habitats = habitats;
-        this.animales = animales;
         return true;
     }
 

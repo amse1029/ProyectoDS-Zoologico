@@ -202,9 +202,11 @@ public class CtrlRegistrarEspecie {
                 especie.setAnimales(null);
                 especie.setCuidadores(null);
                 ObjectId idEspecieGuardada = datos.guardarEspecie(especie);
-                for (Animal animal : animales) {
-                    animal.setEspecieId(idEspecieGuardada);
-                    this.guardarAnimal(animal);
+                if (animales!=null) {
+                    for (Animal animal : animales) {
+                        animal.setEspecieId(idEspecieGuardada);
+                        this.guardarAnimal(animal);
+                    }
                 }
                 for (Cuidador cuidador : cuidadores) {
                     CargoEspecie cargoEspecie = new CargoEspecie(new Date(), cuidador.getId(), idEspecieGuardada);

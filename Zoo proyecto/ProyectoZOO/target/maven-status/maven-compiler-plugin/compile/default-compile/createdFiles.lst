@@ -10,6 +10,7 @@ GUI\FrmInicial$3.class
 GUI\FrmAtencionVisitantes$1.class
 GUI\FrmQuejas$11.class
 GUI\FrmQuejas$5.class
+GUI\FrmRegistrarEspecie$11.class
 GUI\FrmCuidadores$3.class
 GUI\FrmItinerarios$1.class
 GUI\FrmRegistrarEspecie$2.class
@@ -20,6 +21,7 @@ GUI\FrmRegistrarHabitat.class
 GUI\FrmQuejas$2.class
 GUI\FrmCuidadores.class
 GUI\FrmItinerarios$2.class
+GUI\FrmRegistrarEspecie$9.class
 GUI\FrmQuejas$8.class
 GUI\FrmRegistrarHabitat$7.class
 GUI\FrmEditarAnimales$1.class
@@ -30,6 +32,7 @@ GUI\FrmRegistrarEspecie$6.class
 GUI\FrmItinerarios$5.class
 GUI\FrmQuejas$12.class
 GUI\FrmEditarAnimales$4.class
+GUI\FrmRegistrarEspecie$10.class
 GUI\FrmItinerarios$3.class
 GUI\FrmRegistrarHabitat$6.class
 GUI\FrmCuidadores$2.class

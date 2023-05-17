@@ -262,7 +262,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
             Object[] row = {(Object) tblSeleccionados.getValueAt(indice, 0)};
             model.addRow(row);
             DefaultTableModel model2 = (DefaultTableModel) tblSeleccionados.getModel();
-            if (model2.getRowCount() > 1) {
+            if (model2.getRowCount() > 0) {
                 model2.removeRow(indice);
             }
             tamSel--;
@@ -284,7 +284,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
             Object[] row = {(Object) tblDisponibles.getValueAt(indice, 0)};
             model.addRow(row);
             DefaultTableModel model2 = (DefaultTableModel) tblDisponibles.getModel();
-            if (model2.getRowCount() > 1) {
+            if (model2.getRowCount() > 0) {
                 model2.removeRow(indice);
             }
             tamDis--;
