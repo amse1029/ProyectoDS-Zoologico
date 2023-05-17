@@ -10,6 +10,7 @@ import Dominio.Itinerario;
 import Dominio.Queja;
 import itson.Control.FabricaLogica;
 import itson.Control.ILogica;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -246,6 +247,11 @@ public class FrmQuejas extends javax.swing.JFrame {
 
     private void txtQuejaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuejaKeyTyped
         // TODO add your handling code here:
+        char key = evt.getKeyChar();
+        
+        if ((!Character.isLetter(key)) && key != KeyEvent.VK_SPACE) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtQuejaKeyTyped
 
     private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
@@ -275,6 +281,10 @@ public class FrmQuejas extends javax.swing.JFrame {
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
         // TODO add your handling code here:
+        char key = evt.getKeyChar();
+        if (!Character.isDigit(key) && key != '-' && key != '(' && key != ')') {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtTelefonoKeyTyped
 
     private void txtNombreComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreComActionPerformed

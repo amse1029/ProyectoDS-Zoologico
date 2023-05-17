@@ -12,6 +12,7 @@ import Dominio.Vegetacion;
 import itson.Control.CtrlRegistrarHabitat;
 import itson.Control.FabricaLogica;
 import itson.Control.ILogica;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -296,9 +297,8 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char key = evt.getKeyChar();
-        boolean letra = Character.isLetter(key);
-
-        if (!letra) {
+        
+        if ((!Character.isLetter(key)) && key != KeyEvent.VK_SPACE) {
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreKeyTyped
