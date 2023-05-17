@@ -5,6 +5,7 @@
 
 package itson.Control;
 
+import Dominio.Animal;
 import Dominio.Itinerario;
 import Dominio.Queja;
 import itson.DAOs.FabricaDatos;
@@ -35,7 +36,6 @@ public class CtrlRegistrarQueja {
         List<Itinerario> itinearios = datos.recuperarItinerarios();
         return itinearios;
     }
-    
     
     
 }

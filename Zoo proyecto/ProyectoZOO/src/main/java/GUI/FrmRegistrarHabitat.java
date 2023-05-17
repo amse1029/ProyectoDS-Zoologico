@@ -9,7 +9,6 @@ import Dominio.Clima;
 import Dominio.Continente;
 import Dominio.Habitat;
 import Dominio.Vegetacion;
-import itson.Control.CtrlRegistrarHabitat;
 import itson.Control.FabricaLogica;
 import itson.Control.ILogica;
 import java.awt.event.KeyEvent;
@@ -31,12 +30,13 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
      */
     ArrayList<Continente> seleccionados = new ArrayList<>();
     ArrayList<Continente> disponibles = new ArrayList<>();
+    List<Object> arreglo;
     int tamSel = 0;
     int tamDis = 0;
     ILogica ctrlHabitat = FabricaLogica.crearInstancia();
 
     public FrmRegistrarHabitat(List<Object> arreglo) {
-
+        this.arreglo = arreglo;
         disponibles = new ArrayList<Continente>((List<Continente>) arreglo.get(0));
         tamDis = disponibles.size();
         initComponents();
@@ -299,18 +299,19 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         this.dispose();
-        new FrmInicial();
+        new FrmInicial().setVisible(true);
+
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char key = evt.getKeyChar();
-        if (this.txtNombre.getText().length()<30) {
-             if ((!Character.isLetter(key)) && key != KeyEvent.VK_SPACE) {
+        if (this.txtNombre.getText().length() < 30) {
+            if ((!Character.isLetter(key)) && key != KeyEvent.VK_SPACE) {
+                evt.consume();
+            }
+        } else {
             evt.consume();
-        }}
-             else{
-                 evt.consume();
-             }   
+        }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -328,6 +329,9 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         }
         ArrayList<Continente> continentes = new ArrayList<Continente>((List<Continente>) arreglo.get(0));
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblDisponibles.getModel();
+        DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblSeleccionados.getModel();
+        modeloTabla2.setRowCount(0);
+        modeloTabla.setRowCount(0);
         for (int i = 0; i < continentes.size(); i++) {
             Object[] fila = {continentes.get(i).getNombre()};
             modeloTabla.addRow(fila);
@@ -341,6 +345,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
             Habitat habitat = ctrlHabitat.buscarHabitat(this.txtNombre.getText());
             if (habitat == null) {
                 this.activaCamposRegistro();
+                this.despliegaDatos(arreglo);
             } else {
                 this.desactivarCamposRegistro();
                 this.despliegaHabitatExistente(habitat);
@@ -387,10 +392,10 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
         Clima clima = null;
         Vegetacion vegetacion = null;
         if (this.cbxClimas.getSelectedIndex() != -1) {
-            clima = new Clima(new ObjectId(),cbxClimas.getSelectedItem().toString());
+            clima = new Clima(new ObjectId(), cbxClimas.getSelectedItem().toString());
         }
         if (this.cbxVegetacion.getSelectedIndex() != -1) {
-            vegetacion = new Vegetacion(this.cbxVegetacion.getSelectedItem().toString(),new ObjectId());
+            vegetacion = new Vegetacion(this.cbxVegetacion.getSelectedItem().toString(), new ObjectId());
         }
         String nombre = "" + this.txtNombre.getText();
         Habitat habitat = new Habitat();
@@ -401,6 +406,8 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
                 this.muestraMsjError();
             } else {
                 this.muestraMsjExito();
+                this.dispose();
+                new FrmInicial().setVisible(true);
             }
         } else {
             this.muestraMsjCamposVacios();

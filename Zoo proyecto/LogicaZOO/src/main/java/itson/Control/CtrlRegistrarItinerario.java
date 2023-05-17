@@ -4,6 +4,7 @@
  */
 package itson.Control;
 
+import Dominio.Animal;
 import Dominio.Especie;
 import Dominio.Guia;
 import Dominio.Habitat;
@@ -180,6 +181,10 @@ public class CtrlRegistrarItinerario {
      */
     public void actualizarRecorrido(Recorrido recorrido) {
         datos.actualizarRecorrido(recorrido);
+    }
+
+    List<Animal> recuperarAnimales(ObjectId idEspecie) {
+        return datos.recuperaAnimales(idEspecie);
     }
     
 

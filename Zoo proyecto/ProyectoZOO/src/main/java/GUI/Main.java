@@ -4,14 +4,6 @@
  */
 package GUI;
 
-import Dominio.Horario;
-import Dominio.Itinerario;
-import Dominio.Recorrido;
-import Dominio.Zona;
-import itson.Control.FabricaLogica;
-import itson.Control.FachadaLogica;
-import java.util.List;
-
 /**
  *
  * @author julio

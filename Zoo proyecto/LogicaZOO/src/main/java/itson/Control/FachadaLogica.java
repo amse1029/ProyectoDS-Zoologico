@@ -187,5 +187,12 @@ public class FachadaLogica implements ILogica {
         return itinerarios;
     }
 
+    @Override
+    public List<Animal> recupearaAnimales(ObjectId idEspecie) {
+     CtrlRegistrarItinerario control = new CtrlRegistrarItinerario();
+        List<Animal> animales = control.recuperarAnimales(idEspecie);
+        return animales;
+    }
+
    
 }

@@ -39,5 +39,5 @@ public interface ILogica {
     public void actualizarRecorrido(Recorrido recorrido);
     public void actulizarItieneracio(Itinerario itinerario);
     public List<Itinerario> recuperarItinerarios();
-            
+    public List<Animal> recupearaAnimales(ObjectId idAnimal);
 }

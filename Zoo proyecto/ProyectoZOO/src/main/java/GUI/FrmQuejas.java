@@ -19,22 +19,22 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author 
+ * @author
  */
 public class FrmQuejas extends javax.swing.JFrame {
 
     List<Itinerario> itinerarios;
     List<Horario> horarios;
     ILogica ctrlQueja;
-    
+
     /**
      * Creates new form FrmQuejas
      */
     public FrmQuejas(List<Itinerario> itinerarios) {
-        this.itinerarios=itinerarios;
-        ctrlQueja=FabricaLogica.crearInstancia();
+        this.itinerarios = itinerarios;
+        ctrlQueja = FabricaLogica.crearInstancia();
         initComponents();
-        
+
         this.muestraListaItinerariosNombres(itinerarios);
     }
 
@@ -69,8 +69,13 @@ public class FrmQuejas extends javax.swing.JFrame {
         lblItinerarios1 = new javax.swing.JLabel();
         lblItinerarios4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar queja");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         pnlFondo.setBackground(new java.awt.Color(238, 189, 102));
@@ -99,7 +104,7 @@ public class FrmQuejas extends javax.swing.JFrame {
         lblHoras.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblHoras.setForeground(new java.awt.Color(255, 255, 255));
         lblHoras.setText("Horas:");
-        pnlFondo.add(lblHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
+        pnlFondo.add(lblHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
 
         cbxItinerarios.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         cbxItinerarios.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +254,7 @@ public class FrmQuejas extends javax.swing.JFrame {
     private void txtQuejaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtQuejaKeyTyped
         // TODO add your handling code here:
         char key = evt.getKeyChar();
-        
+
         if ((!Character.isLetter(key)) && key != KeyEvent.VK_SPACE) {
             evt.consume();
         }
@@ -260,8 +265,9 @@ public class FrmQuejas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
-        // TODO add your handling code here:
-        
+        if (!(this.txtCorreo.getText().length()<25)) {
+            evt.consume();
+        }
     }//GEN-LAST:event_txtCorreoKeyTyped
 
     private void txtGuiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGuiaActionPerformed
@@ -279,9 +285,14 @@ public class FrmQuejas extends javax.swing.JFrame {
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
         // TODO add your handling code here:
         char key = evt.getKeyChar();
-        if (!Character.isDigit(key) && key != '-' && key != '(' && key != ')') {
+        if (this.txtTelefono.getText().length() < 11) {
+            if (!Character.isDigit(key) && key != '-' && key != '(' && key != ')') {
+                evt.consume();
+            }
+        } else {
             evt.consume();
         }
+
     }//GEN-LAST:event_txtTelefonoKeyTyped
 
     private void txtNombreComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreComActionPerformed
@@ -289,12 +300,16 @@ public class FrmQuejas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreComActionPerformed
 
     private void txtNombreComKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreComKeyTyped
-        // TODO add your handling code here:
+        if (      this.txtNombreCom.getText().length()<50) {
+            this.validacionCamposAlfabeto(evt);
+        }else{
+            evt.consume();
+        }
     }//GEN-LAST:event_txtNombreComKeyTyped
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
-        FrmInicial frm=new FrmInicial();
+        FrmInicial frm = new FrmInicial();
         this.setVisible(false);
         frm.setVisible(true);
         this.dispose();
@@ -310,104 +325,121 @@ public class FrmQuejas extends javax.swing.JFrame {
         this.seleccionaNombreItinerario();
     }//GEN-LAST:event_cbxItinerariosActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        new FrmInicial().setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_formWindowClosing
+    /**
+     *
+     * Metodo para validar el campo alfabetico.
+     *
+     * @param evt evento
+     */
+    public void validacionCamposAlfabeto(java.awt.event.KeyEvent evt) {
+        char txt = evt.getKeyChar();
+        if (!(Character.isAlphabetic(txt) || txt == KeyEvent.VK_SPACE)) {
+            evt.consume();
+        }
+    }
+
     private void muestraListaItinerariosNombres(List<Itinerario> itinerarios) {
-        for(int i=0;i<itinerarios.size();i++){
+        for (int i = 0; i < itinerarios.size(); i++) {
             this.cbxItinerarios.addItem(itinerarios.get(i).getNombreItinerario());
         }
     }
-    
+
     private void seleccionaNombreItinerario() {
-        int indice=this.cbxItinerarios.getSelectedIndex();
-        if(indice!=-1){
-            String guia=itinerarios.get(indice).getGuia().getNombre();
+        int indice = this.cbxItinerarios.getSelectedIndex();
+        if (indice != -1) {
+            String guia = itinerarios.get(indice).getGuia().getNombre();
             this.txtGuia.setText(guia);
             this.llenaListaFechas(indice);
         }
     }
-    
-    public boolean validaCorreo(String email){
+
+    public boolean validaCorreo(String email) {
         String EMAIL_PATTERN = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         Pattern pattern = Pattern.compile(EMAIL_PATTERN);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
-    
-    public boolean validaTelefono(String numero){
+
+    public boolean validaTelefono(String numero) {
         String PHONE_NUMBER_PATTERN = "^\\(\\d{3}\\)-\\d{3}-\\d{4}$";
         Pattern pattern = Pattern.compile(PHONE_NUMBER_PATTERN);
         Matcher matcher = pattern.matcher(numero);
         return matcher.matches();
     }
-    
-    public boolean validaNombre(String nombre){
+
+    public boolean validaNombre(String nombre) {
         String NAME_PATTERN = "^[a-zA-Z ]+$";
         Pattern pattern = Pattern.compile(NAME_PATTERN);
         Matcher matcher = pattern.matcher(nombre);
         return matcher.matches();
     }
-    
+
     private void llenaListaFechas(int indice) {
         this.cbxFechas1.removeAllItems();
-        this.horarios=this.itinerarios.get(indice).getHorarios();
-        for(int i=0;i<horarios.size();i++){
+        this.horarios = this.itinerarios.get(indice).getHorarios();
+        for (int i = 0; i < horarios.size(); i++) {
             this.cbxFechas1.addItem(horarios.get(i).getDia().toString());
         }
     }
-    
+
     private void seleccionaFechaQueja() {
         this.llenaListaHoras();
     }
-    
+
     private void llenaListaHoras() {
         this.cbxHoras.removeAllItems();
-        int indice=this.cbxFechas1.getSelectedIndex();
-        if(indice!=-1){
-            List<String> horas=new ArrayList<>();
-            String hora="";
-            for(int i=0;i<this.horarios.get(indice).getHora().length();i++){
-                hora=this.horarios.get(indice).getHora().substring(i, i+4);
+        int indice = this.cbxFechas1.getSelectedIndex();
+        if (indice != -1) {
+            List<String> horas = new ArrayList<>();
+            String hora = "";
+            for (int i = 0; i < this.horarios.get(indice).getHora().length(); i++) {
+                hora = this.horarios.get(indice).getHora().substring(i, i + 4);
                 this.cbxHoras.addItem(hora);
-                i=i+4;
+                i = i + 4;
             }
         }
     }
-    
+
     private void seleccionaEnviarQueja() {
-        String descripcion=this.txtQueja.getText();
-        String correo=this.txtCorreo.getText();
-        String telefono=this.txtTelefono.getText();
-        String nombre=this.txtNombreCom.getText();
-        ObjectId itinerario=this.itinerarios.get(this.cbxItinerarios.getSelectedIndex()).getId();
-        if(this.cbxItinerarios.getSelectedIndex()!=-1&&this.cbxFechas1.getSelectedIndex()!=-1&&this.cbxHoras.getSelectedIndex()!=-1){
-            if(this.validaCorreo(correo)&&this.validaTelefono(telefono)&&this.validaNombre(nombre)){
-                Queja queja=new Queja();
-                boolean exito=queja.verificacion(descripcion, correo, nombre, telefono, itinerario);
-                if(exito){
+        String descripcion = this.txtQueja.getText();
+        String correo = this.txtCorreo.getText();
+        String telefono = this.txtTelefono.getText();
+        String nombre = this.txtNombreCom.getText();
+        ObjectId itinerario = this.itinerarios.get(this.cbxItinerarios.getSelectedIndex()).getId();
+        if (this.cbxItinerarios.getSelectedIndex() != -1 && this.cbxFechas1.getSelectedIndex() != -1 && this.cbxHoras.getSelectedIndex() != -1) {
+            if (this.validaCorreo(correo) && this.validaTelefono(telefono) && this.validaNombre(nombre)) {
+                Queja queja = new Queja();
+                boolean exito = queja.verificacion(descripcion, correo, nombre, telefono, itinerario);
+                if (exito) {
                     ctrlQueja.guardarQueja(queja);
                     this.muestraMsjQuejaEnviada();
-                }else{
+                } else {
                     this.muestraMsjError();
                 }
-            }else{
+            } else {
                 this.muestraMensajeErrorFormato();
             }
-        }else{
+        } else {
             this.muestraMsjError();
         }
     }
-    private void muestraMensajeErrorFormato(){
+
+    private void muestraMensajeErrorFormato() {
         JOptionPane.showMessageDialog(this, "Los formatos deben ser los siguientes numero de telefono:  (nnn)-nnn-nnnn"
-                + " y correo electronico: example@example.com ", "Error", JOptionPane.ERROR_MESSAGE); 
+                + " y correo electronico: example@example.com ", "Error", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     private void muestraMsjError() {
-        JOptionPane.showMessageDialog(this, "Error", "Error", JOptionPane.ERROR_MESSAGE); 
+        JOptionPane.showMessageDialog(this, "Error", "Error", JOptionPane.ERROR_MESSAGE);
     }
-    
+
     private void muestraMsjQuejaEnviada() {
         JOptionPane.showMessageDialog(this, "Queja enviada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviarQueja;

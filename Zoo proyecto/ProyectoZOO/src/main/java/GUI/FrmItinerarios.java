@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import Dominio.Animal;
 import Dominio.Dias;
 import Dominio.Guia;
 import Dominio.Horario;
@@ -20,7 +21,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.bson.types.ObjectId;
 
 /**
  *
@@ -32,17 +32,19 @@ public class FrmItinerarios extends javax.swing.JFrame {
      * Creates new form FrmItinerarios
      */
     ILogica ctrlItinerario;
+    ILogica ctrlAnimales;
     ArrayList<Zona> zonas;
     ArrayList<Guia> guias;
     LinkedList<Object> datos;
     Recorrido recorrido;
     Itinerario itinerario;
-    List<ObjectId> animalesSeleccionados = new ArrayList<>();
+    List<Animal> animalesSeleccionados = new ArrayList<>();
 
     public FrmItinerarios(LinkedList<Object> datos) {
         this.datos = datos;
         initComponents();
         ctrlItinerario = FabricaLogica.crearInstancia();
+        ctrlAnimales = FabricaLogica.crearInstancia();
         this.despliegaDatos(datos);
     }
 
@@ -467,8 +469,9 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 String name = (String) tblZonas.getValueAt(row, 0);
                 if (zonas.get(row).getNombre() == name) {
                     for (int i = 0; i < zonas.get(row).getEspecieId().size(); i++) {
-
-                        animalesSeleccionados.add(zonas.get(row).getEspecieId().get(i));
+                        for (int j = 0; j < ctrlItinerario.recupearaAnimales(zonas.get(row).getEspecieId().get(i)).size(); j++) {
+                            animalesSeleccionados.add(ctrlItinerario.recupearaAnimales(zonas.get(row).getEspecieId().get(i)).get(j));
+                        }
                     }
                 }
 
