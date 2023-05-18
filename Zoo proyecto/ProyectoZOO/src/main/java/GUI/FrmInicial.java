@@ -25,12 +25,15 @@ import javax.swing.JOptionPane;
  */
 public class FrmInicial extends javax.swing.JFrame {
 
-    /** Creates new form FrmInicial */
     ILogica ctrlHabitat;
     ILogica ctrlEspecie;
     ILogica ctrlItinerario;
     ILogica ctrlQueja;
 
+     /**
+     * Crea un nuevo formulario FrmInicial.
+     *
+     */
     public FrmInicial() {
         this.setVisible(true);
         ctrlHabitat=FabricaLogica.crearInstancia();
@@ -88,7 +91,7 @@ public class FrmInicial extends javax.swing.JFrame {
 
         lblZoologico.setFont(new java.awt.Font("Segoe Print", 1, 30)); // NOI18N
         lblZoologico.setForeground(new java.awt.Color(255, 255, 255));
-        lblZoologico.setText("Zoologico Cd. Obregón");
+        lblZoologico.setText("Zoológico Cd. Obregón");
         pnlInicial.add(lblZoologico, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         pnlFondo.add(pnlInicial, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 70));
@@ -178,7 +181,9 @@ public class FrmInicial extends javax.swing.JFrame {
         this.seleccionaRegistActEspecie();
     }//GEN-LAST:event_btnRegActEspecie1ActionPerformed
 
-    
+    /**
+     * Método que indica las acciones a seguir cuando el actor selecciona registrar hábitat.
+     */
    public void seleccionaRegistrarHabitat(){
        LinkedList<Object> arreglo = new LinkedList();
        arreglo=ctrlHabitat.recuperarDatosHabitats();
@@ -188,6 +193,10 @@ public class FrmInicial extends javax.swing.JFrame {
        this.dispose();
    }
 
+   /**
+     * Método que indica las acciones a seguir cuando el actor selecciona 
+     * registrar / actualizar especie.
+     */
    public void seleccionaRegistActEspecie() {
        List<Habitat> habitats=ctrlEspecie.recuperarHabitats();
        List<Cuidador> cuidadores=ctrlEspecie.recuperarCuidadores();
@@ -197,6 +206,10 @@ public class FrmInicial extends javax.swing.JFrame {
        this.dispose();
    }
    
+   /**
+     * Método que indica las acciones a seguir cuando el actor selecciona 
+     * registrar / actualizar itinerario.
+     */
    public void seleccionaRegActItinerario(){
        LinkedList<Object> datos=ctrlItinerario.recuperaDatosItinerario();
        FrmItinerarios itinerario=new FrmItinerarios(datos);
@@ -205,6 +218,10 @@ public class FrmInicial extends javax.swing.JFrame {
        this.dispose();
    }
    
+   /**
+     * Método que indica las acciones a seguir cuando el actor selecciona 
+     * atención visitantes.
+     */
    public void seleccionaAtencionVisitantes(){
        List<Itinerario> itinerarios =  ctrlQueja.recuperarItinerarios();
        FrmQuejas frm = new FrmQuejas(itinerarios);
@@ -212,6 +229,9 @@ public class FrmInicial extends javax.swing.JFrame {
        this.dispose();
    }
    
+   /**
+    * Método que muestra un mensaje de error.
+    */
    public void muestraError(){
        JOptionPane.showMessageDialog(this, "Error al recuperar los datos", "Error", JOptionPane.ERROR_MESSAGE);
    }

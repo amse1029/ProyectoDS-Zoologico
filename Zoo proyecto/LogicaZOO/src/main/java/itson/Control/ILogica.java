@@ -37,7 +37,7 @@ public interface ILogica {
     public ObjectId guardarQueja(Queja Queja);
     public Recorrido buscarRecorrido(String nombre);
     public void actualizarRecorrido(Recorrido recorrido);
-    public void actulizarItieneracio(Itinerario itinerario);
+    public void actualizarItieneracio(Itinerario itinerario);
     public List<Itinerario> recuperarItinerarios();
     public List<Animal> recupearaAnimales(ObjectId idAnimal);
 }

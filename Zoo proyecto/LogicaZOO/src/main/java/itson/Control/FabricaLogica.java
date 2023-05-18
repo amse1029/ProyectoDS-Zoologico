@@ -6,11 +6,15 @@ package itson.Control;
 
 /**
  *
- * @author julio
+ * @author 
  */
 public class FabricaLogica {
     
-    
+    /**
+     * Crea y devuelve una instancia de la lógica de la aplicación.
+     *
+     * @return Instancia de la interfaz ILogica que representa la lógica de la aplicación.
+     */
     public static ILogica crearInstancia(){
         return new FachadaLogica();
     }

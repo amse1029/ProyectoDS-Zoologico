@@ -15,7 +15,7 @@ import java.util.List;
 /**
  *
  * 
- * @author Joel Antonio Lopez Cota ID:228926 
+ * @author 
  */
 public class CtrlRegistrarQueja {
     private IDatos datos;
@@ -36,6 +36,4 @@ public class CtrlRegistrarQueja {
         List<Itinerario> itinearios = datos.recuperarItinerarios();
         return itinearios;
     }
-    
-    
 }

@@ -23,7 +23,7 @@ import org.bson.types.ObjectId;
 /**
  * Clase que permite gestionar los metodos de las daos.
  *
- * @author Joel Antonio Lopez Cota ID:228926
+ * @author 
  */
 public class FachadaDatos implements IDatos {
 

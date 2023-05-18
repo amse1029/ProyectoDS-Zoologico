@@ -28,7 +28,9 @@ public class FrmQuejas extends javax.swing.JFrame {
     ILogica ctrlQueja;
 
     /**
-     * Creates new form FrmQuejas
+     * Crea un nuevo formulario FrmQuejas.
+     *
+     * @param itinerarios Lista de itinerarios disponibles.
      */
     public FrmQuejas(List<Itinerario> itinerarios) {
         this.itinerarios = itinerarios;
@@ -48,8 +50,11 @@ public class FrmQuejas extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlFondo = new javax.swing.JPanel();
+        pnlSeparador1 = new javax.swing.JPanel();
         pnlRegistro = new javax.swing.JPanel();
         lblRegistro = new javax.swing.JLabel();
+        lblDatosItinerario = new javax.swing.JLabel();
+        lblDatosItinerario1 = new javax.swing.JLabel();
         lblFechas = new javax.swing.JLabel();
         lblItinerarios = new javax.swing.JLabel();
         lblHoras = new javax.swing.JLabel();
@@ -66,8 +71,10 @@ public class FrmQuejas extends javax.swing.JFrame {
         lblGuia = new javax.swing.JLabel();
         lblItinerarios2 = new javax.swing.JLabel();
         lblItinerarios3 = new javax.swing.JLabel();
-        lblItinerarios1 = new javax.swing.JLabel();
         lblItinerarios4 = new javax.swing.JLabel();
+        lblItinerarios5 = new javax.swing.JLabel();
+        pnlSeparador3 = new javax.swing.JPanel();
+        lblItinerarios6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar queja");
@@ -81,6 +88,10 @@ public class FrmQuejas extends javax.swing.JFrame {
         pnlFondo.setBackground(new java.awt.Color(238, 189, 102));
         pnlFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        pnlSeparador1.setBackground(new java.awt.Color(106, 69, 4));
+        pnlSeparador1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlFondo.add(pnlSeparador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, 10, 320));
+
         pnlRegistro.setBackground(new java.awt.Color(106, 69, 4));
         pnlRegistro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -89,22 +100,34 @@ public class FrmQuejas extends javax.swing.JFrame {
         lblRegistro.setText("Registro queja");
         pnlRegistro.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 70));
+        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 70));
+
+        lblDatosItinerario.setBackground(new java.awt.Color(106, 69, 4));
+        lblDatosItinerario.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblDatosItinerario.setForeground(new java.awt.Color(106, 69, 4));
+        lblDatosItinerario.setText("Datos personales:");
+        pnlFondo.add(lblDatosItinerario, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, -1, -1));
+
+        lblDatosItinerario1.setBackground(new java.awt.Color(106, 69, 4));
+        lblDatosItinerario1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblDatosItinerario1.setForeground(new java.awt.Color(106, 69, 4));
+        lblDatosItinerario1.setText("Datos del itinerario:");
+        pnlFondo.add(lblDatosItinerario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         lblFechas.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblFechas.setForeground(new java.awt.Color(255, 255, 255));
         lblFechas.setText("Fechas:");
-        pnlFondo.add(lblFechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
+        pnlFondo.add(lblFechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
 
         lblItinerarios.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblItinerarios.setForeground(new java.awt.Color(255, 255, 255));
         lblItinerarios.setText("Itinerarios:");
-        pnlFondo.add(lblItinerarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+        pnlFondo.add(lblItinerarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         lblHoras.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblHoras.setForeground(new java.awt.Color(255, 255, 255));
         lblHoras.setText("Horas:");
-        pnlFondo.add(lblHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
+        pnlFondo.add(lblHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
         cbxItinerarios.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         cbxItinerarios.addActionListener(new java.awt.event.ActionListener() {
@@ -112,10 +135,10 @@ public class FrmQuejas extends javax.swing.JFrame {
                 cbxItinerariosActionPerformed(evt);
             }
         });
-        pnlFondo.add(cbxItinerarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 170, 40));
+        pnlFondo.add(cbxItinerarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, 170, 40));
 
         cbxHoras.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
-        pnlFondo.add(cbxHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 170, 40));
+        pnlFondo.add(cbxHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 170, 40));
 
         btnEnviarQueja.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnEnviarQueja.setForeground(new java.awt.Color(106, 69, 4));
@@ -125,7 +148,7 @@ public class FrmQuejas extends javax.swing.JFrame {
                 btnEnviarQuejaActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnEnviarQueja, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 430, -1, -1));
+        pnlFondo.add(btnEnviarQueja, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 532, -1, 40));
 
         cbxFechas1.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         cbxFechas1.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +156,7 @@ public class FrmQuejas extends javax.swing.JFrame {
                 cbxFechas1ActionPerformed(evt);
             }
         });
-        pnlFondo.add(cbxFechas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 170, 40));
+        pnlFondo.add(cbxFechas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 170, 40));
 
         txtQueja.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         txtQueja.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +169,7 @@ public class FrmQuejas extends javax.swing.JFrame {
                 txtQuejaKeyTyped(evt);
             }
         });
-        pnlFondo.add(txtQueja, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 170, 40));
+        pnlFondo.add(txtQueja, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, 590, 40));
 
         txtCorreo.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         txtCorreo.addActionListener(new java.awt.event.ActionListener() {
@@ -159,7 +182,7 @@ public class FrmQuejas extends javax.swing.JFrame {
                 txtCorreoKeyTyped(evt);
             }
         });
-        pnlFondo.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, 170, 40));
+        pnlFondo.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 150, 170, 40));
 
         txtGuia.setEditable(false);
         txtGuia.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
@@ -173,7 +196,7 @@ public class FrmQuejas extends javax.swing.JFrame {
                 txtGuiaKeyTyped(evt);
             }
         });
-        pnlFondo.add(txtGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, 170, 40));
+        pnlFondo.add(txtGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 170, 40));
 
         txtTelefono.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
@@ -186,7 +209,7 @@ public class FrmQuejas extends javax.swing.JFrame {
                 txtTelefonoKeyTyped(evt);
             }
         });
-        pnlFondo.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, 170, 40));
+        pnlFondo.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 210, 170, 40));
 
         txtNombreCom.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         txtNombreCom.addActionListener(new java.awt.event.ActionListener() {
@@ -199,7 +222,7 @@ public class FrmQuejas extends javax.swing.JFrame {
                 txtNombreComKeyTyped(evt);
             }
         });
-        pnlFondo.add(txtNombreCom, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 360, 170, 40));
+        pnlFondo.add(txtNombreCom, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 280, 170, 40));
 
         btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
@@ -209,34 +232,43 @@ public class FrmQuejas extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 430, -1, -1));
+        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 532, -1, 40));
 
         lblGuia.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblGuia.setForeground(new java.awt.Color(255, 255, 255));
         lblGuia.setText("Guia:");
-        pnlFondo.add(lblGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, -1, -1));
+        pnlFondo.add(lblGuia, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, -1, -1));
 
         lblItinerarios2.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblItinerarios2.setForeground(new java.awt.Color(255, 255, 255));
-        lblItinerarios2.setText("Telefono:");
-        pnlFondo.add(lblItinerarios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 290, -1, -1));
+        lblItinerarios2.setText("Teléfono:");
+        pnlFondo.add(lblItinerarios2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, -1, -1));
 
-        lblItinerarios3.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblItinerarios3.setFont(new java.awt.Font("Segoe Print", 1, 14)); // NOI18N
         lblItinerarios3.setForeground(new java.awt.Color(255, 255, 255));
-        lblItinerarios3.setText("Nombre:");
-        pnlFondo.add(lblItinerarios3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, -1, -1));
-
-        lblItinerarios1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
-        lblItinerarios1.setForeground(new java.awt.Color(255, 255, 255));
-        lblItinerarios1.setText("Queja:");
-        pnlFondo.add(lblItinerarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, -1, -1));
+        lblItinerarios3.setText("(opcional)");
+        pnlFondo.add(lblItinerarios3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 320, -1, -1));
 
         lblItinerarios4.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblItinerarios4.setForeground(new java.awt.Color(255, 255, 255));
-        lblItinerarios4.setText("Correo electronico:");
-        pnlFondo.add(lblItinerarios4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, -1, -1));
+        lblItinerarios4.setText("Correo electrónico:");
+        pnlFondo.add(lblItinerarios4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, -1, -1));
 
-        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 480));
+        lblItinerarios5.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblItinerarios5.setForeground(new java.awt.Color(255, 255, 255));
+        lblItinerarios5.setText("Nombre completo:");
+        pnlFondo.add(lblItinerarios5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, -1, -1));
+
+        pnlSeparador3.setBackground(new java.awt.Color(106, 69, 4));
+        pnlSeparador3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlFondo.add(pnlSeparador3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 920, 20));
+
+        lblItinerarios6.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblItinerarios6.setForeground(new java.awt.Color(255, 255, 255));
+        lblItinerarios6.setText("Descripción de la queja: ");
+        pnlFondo.add(lblItinerarios6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, -1, -1));
+
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 600));
 
         pack();
         setLocationRelativeTo(null);
@@ -341,12 +373,20 @@ public class FrmQuejas extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método que muestra la lista con los nombres de los itinerarios.
+     * @param itinerarios Lista de itinerarios.
+     */
     private void muestraListaItinerariosNombres(List<Itinerario> itinerarios) {
         for (int i = 0; i < itinerarios.size(); i++) {
             this.cbxItinerarios.addItem(itinerarios.get(i).getNombreItinerario());
         }
     }
 
+    /**
+     * Método que indica las acciones a seguir cuando el actor selecciona un
+     * nombre de itinerario.
+     */
     private void seleccionaNombreItinerario() {
         int indice = this.cbxItinerarios.getSelectedIndex();
         if (indice != -1) {
@@ -356,6 +396,11 @@ public class FrmQuejas extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método que valida el formato de un email.
+     * @param email Email que se quiere validar.
+     * @return true si el formato es correcto, false en caso contrario.
+     */
     public boolean validaCorreo(String email) {
         String EMAIL_PATTERN = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         Pattern pattern = Pattern.compile(EMAIL_PATTERN);
@@ -363,6 +408,11 @@ public class FrmQuejas extends javax.swing.JFrame {
         return matcher.matches();
     }
 
+    /**
+     * Método que valida el formato de un teléfono.
+     * @param numero Teléfono que se quiere validar.
+     * @return true si el formato es correcto, false en caso contrario.
+     */
     public boolean validaTelefono(String numero) {
         String PHONE_NUMBER_PATTERN = "^\\(\\d{3}\\)-\\d{3}-\\d{4}$";
         Pattern pattern = Pattern.compile(PHONE_NUMBER_PATTERN);
@@ -370,6 +420,11 @@ public class FrmQuejas extends javax.swing.JFrame {
         return matcher.matches();
     }
 
+    /**
+     * Método que valida el formato de un nombre.
+     * @param nombre Nombre que se quiere validar.
+     * @return true si el formato es correcto, false en caso contrario.
+     */
     public boolean validaNombre(String nombre) {
         String NAME_PATTERN = "^[a-zA-Z ]+$";
         Pattern pattern = Pattern.compile(NAME_PATTERN);
@@ -377,6 +432,10 @@ public class FrmQuejas extends javax.swing.JFrame {
         return matcher.matches();
     }
 
+    /**
+     * Método que llena la lista de fechas.
+     * @param indice Índice del itinerario.
+     */
     private void llenaListaFechas(int indice) {
         this.cbxFechas1.removeAllItems();
         this.horarios = this.itinerarios.get(indice).getHorarios();
@@ -385,10 +444,17 @@ public class FrmQuejas extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método que indica las acciones a seguir cuando el actor selecciona una 
+     * fecha para su queja.
+     */
     private void seleccionaFechaQueja() {
         this.llenaListaHoras();
     }
 
+     /**
+     * Método que llena la lista con las horas del itinerario.
+     */
     private void llenaListaHoras() {
         this.cbxHoras.removeAllItems();
         int indice = this.cbxFechas1.getSelectedIndex();
@@ -396,13 +462,16 @@ public class FrmQuejas extends javax.swing.JFrame {
             List<String> horas = new ArrayList<>();
             String hora = "";
             for (int i = 0; i < this.horarios.get(indice).getHora().length(); i++) {
-                hora = this.horarios.get(indice).getHora().substring(i, i + 4);
+                hora = this.horarios.get(indice).getHora().substring(i, i + 5);
                 this.cbxHoras.addItem(hora);
-                i = i + 4;
+                i = i + 5;
             }
         }
     }
 
+    /**
+     * Método que indica las acciones a seguir cuando el actor selecciona enviar queja.
+     */
     private void seleccionaEnviarQueja() {
         String descripcion = this.txtQueja.getText();
         String correo = this.txtCorreo.getText();
@@ -426,16 +495,24 @@ public class FrmQuejas extends javax.swing.JFrame {
             this.muestraMsjError();
         }
     }
-
+    /**
+     * Método que muestra un mensaje cuando hay error en el formato.
+     */
     private void muestraMensajeErrorFormato() {
         JOptionPane.showMessageDialog(this, "Los formatos deben ser los siguientes numero de telefono:  (nnn)-nnn-nnnn"
                 + " y correo electronico: example@example.com ", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Método que muestra un mensaje de error.
+     */
     private void muestraMsjError() {
         JOptionPane.showMessageDialog(this, "Error", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Método que muestra un mensaje de que la queja fue enviada.
+     */
     private void muestraMsjQuejaEnviada() {
         JOptionPane.showMessageDialog(this, "Queja enviada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -447,17 +524,22 @@ public class FrmQuejas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxFechas1;
     private javax.swing.JComboBox<String> cbxHoras;
     private javax.swing.JComboBox<String> cbxItinerarios;
+    private javax.swing.JLabel lblDatosItinerario;
+    private javax.swing.JLabel lblDatosItinerario1;
     private javax.swing.JLabel lblFechas;
     private javax.swing.JLabel lblGuia;
     private javax.swing.JLabel lblHoras;
     private javax.swing.JLabel lblItinerarios;
-    private javax.swing.JLabel lblItinerarios1;
     private javax.swing.JLabel lblItinerarios2;
     private javax.swing.JLabel lblItinerarios3;
     private javax.swing.JLabel lblItinerarios4;
+    private javax.swing.JLabel lblItinerarios5;
+    private javax.swing.JLabel lblItinerarios6;
     private javax.swing.JLabel lblRegistro;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlRegistro;
+    private javax.swing.JPanel pnlSeparador1;
+    private javax.swing.JPanel pnlSeparador3;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtGuia;
     private javax.swing.JTextField txtNombreCom;

@@ -4,7 +4,6 @@ Dominio\Itinerario.class
 Dominio\Queja.class
 Dominio\Dias.class
 Dominio\Horario.class
-Dominio\CargoEspecie.class
 Dominio\Clima.class
 Dominio\Empleado.class
 Dominio\Animal.class
@@ -13,5 +12,6 @@ Dominio\Cuidador.class
 Dominio\Habitat.class
 Dominio\Guia.class
 Dominio\Vegetacion.class
+Dominio\cargoEspecie.class
 Dominio\Especie.class
 Dominio\Recorrido.class

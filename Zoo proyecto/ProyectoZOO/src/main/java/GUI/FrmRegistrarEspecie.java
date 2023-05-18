@@ -19,13 +19,10 @@ import org.bson.types.ObjectId;
 
 /**
  *
- * @author alexa
+ * @author
  */
 public class FrmRegistrarEspecie extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmRegistrarEspecie
-     */
     FrmEditarAnimales editar;
     List<Animal> animales;
     boolean ya = false;
@@ -36,6 +33,12 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     List<Habitat> habit;
     Especie especie;
 
+    /**
+     * Crea un nuevo formulario FrmRegistrarEspecie.
+     *
+     * @param habitats Lista de hábitats disponibles.
+     * @param cuidadores Lista de cuidadores disponibles.
+     */
     public FrmRegistrarEspecie(List<Habitat> habitats, List<Cuidador> cuidadores) {
         this.setVisible(true);
         this.animales = new ArrayList<>();
@@ -66,7 +69,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         lblNombreCientifico = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
-        lblNombre = new javax.swing.JLabel();
+        lblDatosEspecie = new javax.swing.JLabel();
         lblDescripcion = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
         txtNombreCientifico = new javax.swing.JTextField();
@@ -80,6 +83,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHabitats = new javax.swing.JTable();
         btnRegresar = new javax.swing.JButton();
+        lblNombre = new javax.swing.JLabel();
 
         setTitle("Registrar Especie");
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -100,7 +104,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         lblRegistro.setText("Registro especie");
         pnlRegistro.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 70));
+        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 70));
 
         btnVerificar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnVerificar.setForeground(new java.awt.Color(106, 69, 4));
@@ -110,7 +114,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
                 btnVerificarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, -1, -1));
+        pnlFondo.add(btnVerificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, -1, -1));
 
         btnEditar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnEditar.setForeground(new java.awt.Color(106, 69, 4));
@@ -121,7 +125,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, -1, -1));
+        pnlFondo.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, -1, -1));
 
         lblNombreCientifico.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombreCientifico.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,10 +141,11 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         });
         pnlFondo.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 250, 170, 40));
 
-        lblNombre.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
-        lblNombre.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombre.setText("Nombre:");
-        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
+        lblDatosEspecie.setBackground(new java.awt.Color(106, 69, 4));
+        lblDatosEspecie.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblDatosEspecie.setForeground(new java.awt.Color(106, 69, 4));
+        lblDatosEspecie.setText("Datos de la especie:");
+        pnlFondo.add(lblDatosEspecie, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
         lblDescripcion.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion.setForeground(new java.awt.Color(255, 255, 255));
@@ -158,7 +163,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
                 txtCantidadKeyTyped(evt);
             }
         });
-        pnlFondo.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 170, 40));
+        pnlFondo.add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, 140, 40));
 
         txtNombreCientifico.setEditable(false);
         txtNombreCientifico.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
@@ -172,11 +177,11 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         lblDescripcion1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion1.setForeground(new java.awt.Color(255, 255, 255));
         lblDescripcion1.setText("Cuidador:");
-        pnlFondo.add(lblDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 240, -1, -1));
+        pnlFondo.add(lblDescripcion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, -1, -1));
 
         lblAnimales.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblAnimales.setForeground(new java.awt.Color(255, 255, 255));
-        lblAnimales.setText("Cantidad Animales:");
+        lblAnimales.setText("Cantidad de animales:");
         pnlFondo.add(lblAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
         btnGuardar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
@@ -193,7 +198,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         lblDescripcion3.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblDescripcion3.setForeground(new java.awt.Color(255, 255, 255));
         lblDescripcion3.setText("Hábitat:");
-        pnlFondo.add(lblDescripcion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, -1, -1));
+        pnlFondo.add(lblDescripcion3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, -1, -1));
 
         txtNombre.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         txtNombre.addActionListener(new java.awt.event.ActionListener() {
@@ -238,7 +243,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
             tblCuidadores.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 280, 190, 120));
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 270, 190, 120));
 
         tblHabitats.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -270,7 +275,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
             tblHabitats.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 130, 190, 110));
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 120, 190, 110));
 
         btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
@@ -282,7 +287,12 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         });
         pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 420, -1, -1));
 
-        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 730, 480));
+        lblNombre.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombre.setText("Nombre:");
+        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
+
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 480));
 
         pack();
         setLocationRelativeTo(null);
@@ -291,7 +301,11 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
         // TODO add your handling code here:
         if (this.txtNombre.getText().isBlank()) {
-            JOptionPane.showMessageDialog(this, "Ecribre el nombre de la especie", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Ecribre el nombre de la especie",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         } else {
             this.seleccionaVerificar();
         }
@@ -316,17 +330,17 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
-       if (this.txtNombre.getText().length()<25) {
+        if (this.txtNombre.getText().length() < 25) {
             validacionAlfabeto(evt);
-        }else{
+        } else {
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtNombreCientificoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCientificoKeyTyped
-        if (this.txtNombreCientifico.getText().length()<25) {
+        if (this.txtNombreCientifico.getText().length() < 25) {
             validacionAlfabeto(evt);
-        }else{
+        } else {
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreCientificoKeyTyped
@@ -336,7 +350,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCantidadMouseReleased
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-      new FrmInicial().setVisible(true);
+        new FrmInicial().setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
@@ -344,30 +358,34 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
-        if (this.txtCantidad.getText().length()<5) {
+        if (this.txtCantidad.getText().length() < 5) {
             validacionNumero(evt);
-        }else{
+        } else {
             evt.consume();
         }
     }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void txtDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyTyped
-      
-        if (this.txtDescripcion.getText().length()<50) {
+
+        if (this.txtDescripcion.getText().length() < 50) {
             validacionAlfabeto(evt);
-        }else{
+        } else {
             evt.consume();
         }
     }//GEN-LAST:event_txtDescripcionKeyTyped
-  
-    public void validacionAlfabeto(java.awt.event.KeyEvent evt){
-       char key = evt.getKeyChar();
+
+    /**
+     * Método que valida que solamente se acepten letras y espacios.
+     *
+     * @param evt
+     */
+    public void validacionAlfabeto(java.awt.event.KeyEvent evt) {
+        char key = evt.getKeyChar();
         if ((!Character.isLetter(key)) && key != KeyEvent.VK_SPACE) {
             evt.consume();
         }
     }
-    
-    
+
     /**
      * Metodo para validar el campo por numero.
      *
@@ -380,6 +398,12 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método que despliega los datos de los hábitats y cuidadores.
+     *
+     * @param habitats Lista de hábitats disponibles.
+     * @param cuidadores Lista de cuidadores disponibles.
+     */
     private void despliegaDatos(List<Habitat> habitats, List<Cuidador> cuidadores) {
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblCuidadores.getModel();
         for (int i = 0; i < cuidadores.size(); i++) {
@@ -394,30 +418,50 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método que setea la lista de animales.
+     *
+     * @param animales Lista de animales.
+     */
     public void setAnimales(List<Animal> animales) {
         this.animales = animales;
         ya = true;
     }
 
+    /**
+     * Método que regresa una lista de animales.
+     *
+     * @return Lista de animales.
+     */
     public List<Animal> getAnimales() {
         return this.animales;
     }
 
+    /**
+     * Método que determina lo que pasa cuando el actor selecciona verificar.
+     */
     private void seleccionaVerificar() {
         String nombre = this.txtNombre.getText();
+        nombre = nombre.trim();
         especie = ctrlEspecie.recuperarEspecie(nombre);
         if (especie == null) {
             especie = new Especie();
             this.activaCamposRegistro();
-
         } else {
-            JOptionPane.showMessageDialog(this, "La especie ya se encuentra registrada");
+            JOptionPane.showMessageDialog(
+                    this,
+                    "La especie ya se encuentra registrada");
             this.cuidadores = especie.getCuidadores();
             this.habitats = especie.getHabitats();
             this.muestraDatos(especie);
         }
     }
 
+    /**
+     * Método que muestra los datos de una especie.
+     *
+     * @param especie Especie de la que se mostrarán los datos.
+     */
     private void muestraDatos(Especie especie) {
         DefaultTableModel model = (DefaultTableModel) tblCuidadores.getModel();
         model.setRowCount(0);
@@ -457,6 +501,9 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         this.btnVerificar.setEnabled(false);
     }
 
+    /**
+     * Método que activa los campos de registro.
+     */
     private void activaCamposRegistro() {
         this.txtNombreCientifico.setEditable(true);
         this.txtDescripcion.setEditable(true);
@@ -466,19 +513,27 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         this.btnVerificar.setEnabled(false);
     }
 
+    /**
+     * Método que determina lo que pasa cuando el actor selecciona editar
+     * animales.
+     */
     private void seleccionaEditar() {
         editar = new FrmEditarAnimales(animales, this);
         this.setVisible(false);
-        //while (!ya) {
-        //}
     }
 
+    /**
+     * Método que actualiza la cantidad de animales.
+     */
     public void actualizar() {
         Integer cantidad = animales.size();
         this.setVisible(true);
         this.txtCantidad.setText(cantidad.toString());
     }
 
+    /**
+     * Método que determina lo que pasa cuando el actor selecciona guardar.
+     */
     private void seleccionaGuardar() {
         ArrayList<Cuidador> cuidados = new ArrayList<>();
         for (int i = 0; i < tblCuidadores.getRowCount(); i++) {
@@ -496,33 +551,55 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
         }
 
         String nombre = this.txtNombre.getText();
+        nombre = nombre.trim();
         String nombreCientifico = this.txtNombreCientifico.getText();
+        nombreCientifico = nombreCientifico.trim();
         String descripcion = this.txtDescripcion.getText();
         //Especie especie = new Especie();
-        boolean correcto = especie.verificacion(nombre, nombreCientifico, descripcion, cuidados, hab);
+        boolean correcto = especie.verificacion(nombre, nombreCientifico,
+                descripcion, cuidados, hab);
         if (correcto) {
             ObjectId id = ctrlEspecie.guardarEspecie(this.especie);
             if (id == null) {
-                this.muestraMsjError("Ya existe un animal registrado con ese nombre cientifico");
+                this.muestraMsjError(
+                        "Ya existe un animal registrado con ese nombre científico");
             } else {
                 this.mostrarMsjExito();
-                JOptionPane.showMessageDialog(this, "El id de la especie registrada es el siguiente: " + id.toString());
+                JOptionPane.showMessageDialog(this,
+                        "El id de la especie registrada es el siguiente: "
+                        + id.toString());
                 FrmInicial inicial = new FrmInicial();
                 inicial.setVisible(true);
                 this.dispose();
             }
-
         } else {
-            this.muestraMsjError("Verifica el formato, que no existan campos vacios y has agregado animales");
+            this.muestraMsjError(
+                    "Verifica el formato, que no existan campos vacíos y has agregado animales");
         }
     }
 
+    /**
+     * Método que muestra un mensaje de error.
+     *
+     * @param mensaje Mensaje que se quiere mostrar.
+     */
     private void muestraMsjError(String mensaje) {
-        JOptionPane.showMessageDialog(this, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(
+                this,
+                mensaje,
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Método que muestra un mensaje de éxito.
+     */
     private void mostrarMsjExito() {
-        JOptionPane.showMessageDialog(this, "Especie registrada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(
+                this,
+                "Especie registrada con éxito",
+                "Éxito",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
 
@@ -534,6 +611,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAnimales;
+    private javax.swing.JLabel lblDatosEspecie;
     private javax.swing.JLabel lblDescripcion;
     private javax.swing.JLabel lblDescripcion1;
     private javax.swing.JLabel lblDescripcion3;

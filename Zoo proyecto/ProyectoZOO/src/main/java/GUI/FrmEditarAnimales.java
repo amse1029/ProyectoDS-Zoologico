@@ -6,14 +6,13 @@ package GUI;
 
 import Dominio.Animal;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author alexa
+ * @author
  */
 public class FrmEditarAnimales extends javax.swing.JFrame {
 
@@ -21,9 +20,11 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     List<Animal> animales;
 
     /**
-     * Creates new form FrmEditarAnimales
+     * Crea un nuevo formulario FrmEditarAnimales.
      *
-     * @param especie
+     * @param animales Lista de animales a editar.
+     * @param especie Instancia del formulario FrmRegistrarEspecie asociada a la
+     * edición de animales.
      */
     public FrmEditarAnimales(List<Animal> animales, FrmRegistrarEspecie especie) {
         this.especie = especie;
@@ -51,7 +52,7 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAnimales = new javax.swing.JTable();
-        lblAnimales = new javax.swing.JLabel();
+        lblDatosAnimales = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblEdad = new javax.swing.JLabel();
         lblNombre2 = new javax.swing.JLabel();
@@ -60,6 +61,7 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         cbSexo = new javax.swing.JCheckBox();
         lblNombre1 = new javax.swing.JLabel();
         txtNombreCientifico = new javax.swing.JTextField();
+        lblAnimales = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar animales");
@@ -79,9 +81,9 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         lblRegistro.setFont(new java.awt.Font("Segoe Print", 1, 30)); // NOI18N
         lblRegistro.setForeground(new java.awt.Color(255, 255, 255));
         lblRegistro.setText("Editar animales");
-        pnlRegistro.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
+        pnlRegistro.add(lblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 70));
+        pnlFondo.add(pnlRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 70));
 
         btnEliminar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnEliminar.setForeground(new java.awt.Color(106, 69, 4));
@@ -91,7 +93,7 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 460, -1, -1));
+        pnlFondo.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 500, -1, -1));
 
         btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
@@ -101,7 +103,7 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 460, -1, -1));
+        pnlFondo.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 500, -1, -1));
 
         btnAgregar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnAgregar.setForeground(new java.awt.Color(106, 69, 4));
@@ -111,7 +113,7 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        pnlFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 460, -1, -1));
+        pnlFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 500, -1, -1));
 
         jScrollPane1.setFont(new java.awt.Font("Segoe Print", 0, 20)); // NOI18N
 
@@ -120,7 +122,7 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Edad", "Sexo", "Nombre Cientifico"
+                "Nombre", "Edad", "Sexo", "Nombre científico"
             }
         ) {
             Class[] types = new Class [] {
@@ -147,27 +149,27 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
             tblAnimales.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 430, 100));
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 570, 100));
 
-        lblAnimales.setFont(new java.awt.Font("Segoe Print", 1, 25)); // NOI18N
-        lblAnimales.setForeground(new java.awt.Color(106, 69, 4));
-        lblAnimales.setText("Animales");
-        pnlFondo.add(lblAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, -1, -1));
+        lblDatosAnimales.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
+        lblDatosAnimales.setForeground(new java.awt.Color(106, 69, 4));
+        lblDatosAnimales.setText("Datos del animal:");
+        pnlFondo.add(lblDatosAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, -1, 50));
 
         lblNombre.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(255, 255, 255));
-        lblNombre.setText("Nombre Cientifico:");
-        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
+        lblNombre.setText("Nombre científico:");
+        pnlFondo.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
 
         lblEdad.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblEdad.setForeground(new java.awt.Color(255, 255, 255));
         lblEdad.setText("Edad:");
-        pnlFondo.add(lblEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, -1, -1));
+        pnlFondo.add(lblEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 390, -1, -1));
 
         lblNombre2.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombre2.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre2.setText("Sexo:");
-        pnlFondo.add(lblNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 400, -1, -1));
+        pnlFondo.add(lblNombre2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, -1, -1));
 
         txtNombre.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -175,7 +177,7 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
                 txtNombreKeyTyped(evt);
             }
         });
-        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, 170, 40));
+        pnlFondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, 170, 40));
 
         txtEdad.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         txtEdad.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -183,17 +185,17 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
                 txtEdadKeyTyped(evt);
             }
         });
-        pnlFondo.add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 350, 170, 40));
+        pnlFondo.add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 390, 170, 40));
 
         cbSexo.setBackground(new java.awt.Color(238, 189, 102));
         cbSexo.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
         cbSexo.setText("Macho");
-        pnlFondo.add(cbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 400, 170, 40));
+        pnlFondo.add(cbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 440, 170, 40));
 
         lblNombre1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         lblNombre1.setForeground(new java.awt.Color(255, 255, 255));
         lblNombre1.setText("Nombre:");
-        pnlFondo.add(lblNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 250, -1, -1));
+        pnlFondo.add(lblNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 290, -1, -1));
 
         txtNombreCientifico.setFont(new java.awt.Font("Segoe Script", 0, 18)); // NOI18N
         txtNombreCientifico.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -201,9 +203,14 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
                 txtNombreCientificoKeyTyped(evt);
             }
         });
-        pnlFondo.add(txtNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 170, 40));
+        pnlFondo.add(txtNombreCientifico, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, 170, 40));
 
-        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 520));
+        lblAnimales.setFont(new java.awt.Font("Segoe Print", 1, 25)); // NOI18N
+        lblAnimales.setForeground(new java.awt.Color(106, 69, 4));
+        lblAnimales.setText("Animales existentes");
+        pnlFondo.add(lblAnimales, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, -1, 50));
+
+        getContentPane().add(pnlFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 570));
 
         pack();
         setLocationRelativeTo(null);
@@ -216,7 +223,14 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        this.muestraMsjConfirmacion();
+        int indice = tblAnimales.getSelectedRow();
+        if (indice != -1) {
+            this.muestraMsjConfirmacion();
+        } else {
+            JOptionPane.showMessageDialog(
+                    this,
+                    "No se ha seleccionado ningún animal");
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -224,11 +238,12 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void txtEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyTyped
-        if (this.txtEdad.getText().length()<5) {
-        if (evt.getKeyChar() < '0' || evt.getKeyChar() > '9') {
-            // Si no es un número, consumir el evento
-            evt.consume();
-        }}else{
+        if (this.txtEdad.getText().length() < 5) {
+            if (evt.getKeyChar() < '0' || evt.getKeyChar() > '9') {
+                // Si no es un número, consumir el evento
+                evt.consume();
+            }
+        } else {
             evt.consume();
         }
     }//GEN-LAST:event_txtEdadKeyTyped
@@ -236,11 +251,11 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     private void txtNombreCientificoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCientificoKeyTyped
         char key = evt.getKeyChar();
         boolean letra = Character.isLetter(key);
-        if (this.txtNombreCientifico.getText().length()<30) {
-            if (!(letra || key == KeyEvent.VK_SPACE )) {
-            evt.consume();
-        } 
-        }else{
+        if (this.txtNombreCientifico.getText().length() < 30) {
+            if (!(letra || key == KeyEvent.VK_SPACE)) {
+                evt.consume();
+            }
+        } else {
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreCientificoKeyTyped
@@ -248,47 +263,63 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char key = evt.getKeyChar();
         boolean letra = Character.isLetter(key);
-  if (this.txtNombre.getText().length()<30) {
-            if (!(letra || key == KeyEvent.VK_SPACE )) {
-            evt.consume();
-        } 
-        }else{
+        if (this.txtNombre.getText().length() < 30) {
+            if (!(letra || key == KeyEvent.VK_SPACE)) {
+                evt.consume();
+            }
+        } else {
             evt.consume();
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-   this.cierraPantalla();
+        this.cierraPantalla();
     }//GEN-LAST:event_formWindowClosing
 
+    /**
+     * Método que muestra los animales.
+     */
     public void muestralos() {
         if (animales != null) {
             this.mostrarAnimales(animales);
         }
     }
 
+    /**
+     * Método que muestra los animales.
+     *
+     * @param animales Lista de animales a mostrar.
+     */
     private void mostrarAnimales(List<Animal> animales) {
         DefaultTableModel model2 = (DefaultTableModel) tblAnimales.getModel();
         model2.setRowCount(0);
         for (int i = 0; i < animales.size(); i++) {
             Animal animal = animales.get(i);
             DefaultTableModel model = (DefaultTableModel) tblAnimales.getModel();
-            Object[] row = new Object[]{animal.getNombre(), animal.getEdad(), animal.getSexo(),animal.getNombreCientifico()};
+            Object[] row = new Object[]{animal.getNombre(), animal.getEdad(),
+                animal.getSexo(), animal.getNombreCientifico()};
             model.addRow(row);
         }
     }
 
+    /**
+     * Método que indica las acciones a seguir cuando el actor selecciona
+     * guardar.
+     */
     private void seleccionaAgregar() {
         Animal animal = new Animal();
         String nombre = this.txtNombre.getText();
+        nombre = nombre.trim();
         String nombreCientifico = this.txtNombreCientifico.getText();
+        nombreCientifico = nombreCientifico.trim();
         int edad = Integer.parseInt(this.txtEdad.getText());
         boolean sexo = this.cbSexo.isSelected();
 
-// Verificar si ya existe un animal con el mismo nombre y nombre científico
+        // Verificar si ya existe un animal con el mismo nombre y nombre científico
         boolean existeAnimal = false;
         for (Animal a : animales) {
-            if (a.getNombre().equals(nombre) || a.getNombreCientifico().equals(nombreCientifico)) {
+            if (a.getNombre().equals(
+                    nombre) || a.getNombreCientifico().equals(nombreCientifico)) {
                 existeAnimal = true;
                 break;
             }
@@ -303,29 +334,55 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
                 DefaultTableModel model = (DefaultTableModel) tblAnimales.getModel();
                 Object[] row = new Object[]{animal.getNombre(), animal.getEdad(), animal.getSexo()};
                 model.addRow(row);
-               this.limpiarCampos();
+                this.limpiarCampos();
             } else {
                 this.muestraMsjError();
             }
         }
 
     }
-    public void limpiarCampos(){
+
+    /**
+     * Método que limpia los campos.
+     */
+    public void limpiarCampos() {
         this.txtEdad.setText("");
         this.txtNombreCientifico.setText("");
         this.txtNombre.setText("");
         this.cbSexo.setSelected(false);
     }
 
+    /**
+     * Método que muestra un mensaje de error cuando la edad es mayor a 150 o
+     * menor a 0 y cuando hay campos vacíos.
+     */
     private void muestraMsjError() {
-        JOptionPane.showMessageDialog(this, "La edad no puede ser mayor a 150 ni menor a 0 y no debe haber campos vacios", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(
+                this,
+                "La edad no puede ser mayor a 150 ni menor a 0 "
+                + "y no debe haber campos vacíos",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
     }
 
+    /**
+     * Método que muestra un mensaje cuando se quiere agregar un animal
+     * existente.
+     */
     private void muestraMsjExistente() {
-        JOptionPane.showMessageDialog(null, "Vericia el nombre y el nombre cientifico, no esten repetidos en la tabla", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(
+                this,
+                "Verifica el nombre y el nombre científico,"
+                + " no estén repetidos en la tabla",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
 
     }
 
+    /**
+     * Método que indica las acciones a seguir cuando el actor selecciona
+     * eliminar.
+     */
     private void seleccionaEliminar() {
         int indice = tblAnimales.getSelectedRow();
         if (indice != -1) {
@@ -340,13 +397,23 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método que cierra la pantalla.
+     */
     private void cierraPantalla() {
         especie.actualizar();
         this.dispose();
     }
 
+    /**
+     * Método que muestra un mensaje de confirmación.
+     */
     private void muestraMsjConfirmacion() {
-        int dialogResult = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea eliminarlo?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        int dialogResult = JOptionPane.showConfirmDialog(
+                this,
+                "¿Está seguro de que desea eliminarlo?",
+                "Confirmación",
+                JOptionPane.YES_NO_OPTION);
         if (dialogResult == JOptionPane.YES_OPTION) {
             this.seleccionaEliminar();
         } else {
@@ -354,6 +421,10 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Método que indica las acciones a seguir cuando el actor selecciona
+     * regresar.
+     */
     private void seleccionaRegresar() {
         this.cierraPantalla();
     }
@@ -365,6 +436,7 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
     private javax.swing.JCheckBox cbSexo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAnimales;
+    private javax.swing.JLabel lblDatosAnimales;
     private javax.swing.JLabel lblEdad;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblNombre1;
