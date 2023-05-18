@@ -34,7 +34,10 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
     int tamSel = 0;
     int tamDis = 0;
     ILogica ctrlHabitat = FabricaLogica.crearInstancia();
-
+    /**
+     * Metodo constructor que incializa el frame
+     * @param arreglo esun arreglo con los datos de cliima y vegetacion
+     */
     public FrmRegistrarHabitat(List<Object> arreglo) {
         this.arreglo = arreglo;
         disponibles = new ArrayList<Continente>((List<Continente>) arreglo.get(0));
@@ -366,7 +369,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
                     this,
                     "No se ha ingresado ningún nombre de hábitat");
         } else {
-            Habitat habitat = ctrlHabitat.buscarHabitat(this.txtNombre.getText());
+            Habitat habitat = ctrlHabitat.buscarHabitat(this.txtNombre.getText().trim());
             if (habitat == null) {
                 this.activaCamposRegistro();
                 this.despliegaDatos(arreglo);
@@ -443,8 +446,7 @@ public class FrmRegistrarHabitat extends javax.swing.JFrame {
             vegetacion = new Vegetacion(
                     this.cbxVegetacion.getSelectedItem().toString(), new ObjectId());
         }
-        String nombre = "" + this.txtNombre.getText();
-        nombre = nombre.trim();
+        String nombre = "" + this.txtNombre.getText().trim();
         Habitat habitat = new Habitat();
         boolean valida = habitat.verificacion(nombre, clima, vegetacion, seleccionados);
         if (valida) {

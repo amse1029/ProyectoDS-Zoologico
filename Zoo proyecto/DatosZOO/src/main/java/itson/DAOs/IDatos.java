@@ -229,9 +229,9 @@ public interface IDatos {
     public List<Itinerario> recuperaNombreItinerario();
 
     /**
-     * Metodo que permite buscar un itinerario por el nombre de la misma
+     * Metodo que permite buscar un itinerario por el id de la misma.
      *
-     * @param nombre Es el nombre del itinerario.
+     * @param id es el id del itinerario
      * @return El itinerario que coincide con el nombre.
      */
     public Itinerario buscarItinerarioRecorrido(ObjectId id);
@@ -246,19 +246,74 @@ public interface IDatos {
     /**
      * Metodo que permite guardar una queja en la base de datos.
      * @param queja Es la queja que se desea agregar.
+     * @return la queja agregada
      */
      public Queja guardarQueja(Queja queja);
-     
+    /**
+     * Metodo que permite insertar los habitats en la base de datos.
+     */
     public void insertarHabitats();
+    /**
+     * Metodo que permite insertar especies en zonas.
+     * @param especie es la especie 1 a agregar.
+     * @param especie2 es la especie 2 a agregar.
+     * @param especie3 es la especie 3 a agregar.
+     */
     public void insertarZonas(Especie especie, Especie especie2, Especie especie3);
+    /**
+     * Metodo que permite insertar especies en habitat.
+     * @param habitat1 es el habitat 1 a agregar.
+     * @param habitat2 es el habitat 2 a agregar.
+     * @param habitat3 es el habitat 3 a agregar.
+     */
     public void insertarEspecies(Habitat habitat1,Habitat habitat2,Habitat habitat3);
+    /**
+     * Metodo que permite insertar animales en especies.
+     * @param especie especie 1 a agregar.
+     * @param especie2 especie 2 a agregar.
+     * @param especie3 especie 3 a agregar.
+     */
     public void InsertarAnimales(Especie especie, Especie especie2, Especie especie3);
+    /**
+     * Metodoo que permite insertar un recorrido en la base de datos.
+     * @param recorrido es el recorrido a agregar.
+     * @return el id del recorrido agregado.
+     */
     public ObjectId insertarRecorrido(Recorrido recorrido);
+    /**
+     * Metodo que permite recuperar todas las especies existentes en la base de datos.
+     * @return la lista con todos las especies.
+     */
     public List<Especie> recuperarTodasEspecies();
+    /**
+     * Metodo que recupera el recorrido con el nombre dado por el parametro.
+     * @param nombre es el nombre del recorrido.
+     * @return el recorrido que se recupero.
+     */
     public Recorrido recuperarRecorrido(String nombre);
+    /**
+     * Metodo que busca un itinerario por el nombre del parametro.
+     * @param nombre es el nombre del itinerario.
+     * @return el itinerario buscado
+     */
     public Itinerario buscarItineario(String nombre );
+    /**
+     * Metodo que permite actualizar un itinerario.
+     * @param itinerario es el itinerario a actualizar.
+     */
     public void actualizarItineario(Itinerario itinerario);
+    /**
+     * Metodo que permite actualizar un recorrido.
+     * @param recorrido es el itinerario a actualizar.
+     */
     public void actualizarRecorrido(Recorrido recorrido);
+    /**
+     * Metodo que permite agregar guias en la base de datos.
+     */
     public void agregarGuia();
+    /**
+     * Metodo que permite recuperar los itinerarios existentes en la base de datos.
+     * @return una lista con todos los itinerarios.
+     */
     public List<Itinerario> recuperarItinerarios();
 }

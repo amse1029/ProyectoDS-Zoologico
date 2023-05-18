@@ -43,7 +43,12 @@ public class ZonaDAO {
         coleccion.find().into(zonas);
         return zonas;
     }
-
+ /**
+     * Metodo que permite insertar especies en zonas.
+     * @param especie es la especie 1 a agregar.
+     * @param especie2 es la especie 2 a agregar.
+     * @param especie3 es la especie 3 a agregar.
+     */
     protected void insertarZonas(Especie especie, Especie especie2, Especie especie3) {
         Zona zona1 = new Zona("Zona de los Felinos", Arrays.asList(especie.getId()));
         Zona zona2 = new Zona("Zona de las Serpientes", Arrays.asList(especie2.getId()));

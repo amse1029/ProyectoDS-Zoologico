@@ -65,6 +65,7 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar animales");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -308,10 +309,8 @@ public class FrmEditarAnimales extends javax.swing.JFrame {
      */
     private void seleccionaAgregar() {
         Animal animal = new Animal();
-        String nombre = this.txtNombre.getText();
-        nombre = nombre.trim();
-        String nombreCientifico = this.txtNombreCientifico.getText();
-        nombreCientifico = nombreCientifico.trim();
+        String nombre = this.txtNombre.getText().trim();
+        String nombreCientifico = this.txtNombreCientifico.getText().trim();
         int edad = Integer.parseInt(this.txtEdad.getText());
         boolean sexo = this.cbSexo.isSelected();
 

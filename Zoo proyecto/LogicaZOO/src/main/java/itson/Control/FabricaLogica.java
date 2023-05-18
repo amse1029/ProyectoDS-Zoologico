@@ -5,7 +5,7 @@
 package itson.Control;
 
 /**
- *
+ * Clase que permite crear la instancia de ILogica
  * @author 
  */
 public class FabricaLogica {

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import org.bson.Document;
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -58,7 +59,7 @@ public class HabitatDAO {
         MongoCollection<Habitat> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Habitat.class);
 
         Habitat habitat = new Habitat();
-        habitat = coleccion.find(eq("nombre", nombre)).first();
+        habitat = coleccion.find(new Document("nombre", new Document("$regex", nombre).append("$options", "i"))).first();
         return habitat;
     }
 

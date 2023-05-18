@@ -3,7 +3,9 @@ package Dominio;
 import java.util.Date;
 import java.util.Objects;
 import org.bson.types.ObjectId;
-
+/**
+ * Clase de cargoEspecie itinerario que contiene todos los atributos necesarios.
+ */
 public class CargoEspecie {
 
     private ObjectId id;
@@ -110,6 +112,10 @@ public class CargoEspecie {
         this.fechaInicioCargo = fechaInicioCargo;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -117,6 +123,11 @@ public class CargoEspecie {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -132,6 +143,10 @@ public class CargoEspecie {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "cargoEspecie{" + "id=" + id + ", fechaInicioCargo=" + fechaInicioCargo + ", cuidadorId=" + cuidadorId + ", especieId=" + especieId + '}';

@@ -5,7 +5,7 @@ import java.util.Objects;
 import org.bson.types.ObjectId;
 
 /**
- *
+ * Clase de dominio zona que contiene todos los atributos necesarios.
  */
 public class Zona {
 
@@ -122,6 +122,10 @@ public class Zona {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -129,6 +133,11 @@ public class Zona {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -144,6 +153,10 @@ public class Zona {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Zona{" + "nombre=" + nombre + ", id=" + id + ", especieId=" + especieId + ", especies=" + especies + '}';

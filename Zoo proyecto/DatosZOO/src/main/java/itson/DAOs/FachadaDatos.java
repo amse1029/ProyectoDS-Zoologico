@@ -296,8 +296,6 @@ public class FachadaDatos implements IDatos {
     /**
      * Metodo que permite consultar todas las especies que tiene a cargo un
      * cuidador.
-     *
-     * @param cuidador Es el cuidador del que se desean obtener los cargos.
      * @return Una lista de los cargos que tiene el cuidador.
      */
     @Override
@@ -319,7 +317,6 @@ public class FachadaDatos implements IDatos {
     /**
      * Metodo que permite recuperar el cuidador que tiene el mismo id.
      *
-     * @param idCuidador Es el id del cuidador.
      * @return una lista de cuidadores.
      */
     @Override
@@ -369,7 +366,6 @@ public class FachadaDatos implements IDatos {
     /**
      * Metodo que permite buscar un itinerario por el nombre de la misma
      *
-     * @param nombre Es el nombre del itinerario.
      * @return El itinerario que coincide con el nombre.
      */
     @Override
@@ -403,32 +399,53 @@ public class FachadaDatos implements IDatos {
         quejaDAO.guardarQueja(queja);
         return queja;
     }
-
+/**
+     * Metodo que permite insertar los habitats en la base de datos.
+     */
     @Override
     public void insertarHabitats() {
         HabitatDAO habitatDAO = new HabitatDAO();
         habitatDAO.insertar();
     }
-
+ /**
+     * Metodo que permite insertar especies en zonas.
+     * @param especie es la especie 1 a agregar.
+     * @param especie2 es la especie 2 a agregar.
+     * @param especie3 es la especie 3 a agregar.
+     */
     @Override
     public void insertarZonas(Especie especie, Especie especie2, Especie especie3) {
         ZonaDAO zonaDAO = new ZonaDAO();
         zonaDAO.insertarZonas(especie, especie2, especie3);
     }
-
+/**
+     * Metodo que permite insertar especies en habitat.
+     * @param habitat1 es el habitat 1 a agregar.
+     * @param habitat2 es el habitat 2 a agregar.
+     * @param habitat3 es el habitat 3 a agregar.
+     */
     @Override
     public void insertarEspecies(Habitat habitat1, Habitat habitat2, Habitat habitat3) {
        EspeciesDAO especiesDAO = new EspeciesDAO();
        especiesDAO.insertar(habitat1, habitat2, habitat3);
     }
-
+/**
+     * Metodo que permite insertar animales en especies.
+     * @param especie especie 1 a agregar.
+     * @param especie2 especie 2 a agregar.
+     * @param especie3 especie 3 a agregar.
+     */
     @Override
     public void InsertarAnimales(Especie especie, Especie especie2, Especie especie3) {
      AnimalesDAO animalesDAO = new AnimalesDAO();
      animalesDAO.InsertarAnimales(especie, especie2, especie3);
 
     }
-
+/**
+     * Metodoo que permite insertar un recorrido en la base de datos.
+     * @param recorrido es el recorrido a agregar.
+     * @return el id del recorrido agregado.
+     */
     @Override
     public ObjectId insertarRecorrido(Recorrido recorrido) {
     RecorridosDAO recorridosDAO = new RecorridosDAO();
@@ -436,14 +453,23 @@ public class FachadaDatos implements IDatos {
     return recorrido.getId();
 
     }
-
+    /**
+     * Metodo que permite recuperar todas las especies existentes en la base de
+     * datos.
+     *
+     * @return la lista con todos las especies.
+     */
     @Override
     public List<Especie> recuperarTodasEspecies() {
       EspeciesDAO especiesDAO = new EspeciesDAO();
       List<Especie> especies = especiesDAO.recuperarTodas();
       return especies;
     }
-
+/**
+     * Metodo que recupera el recorrido con el nombre dado por el parametro.
+     * @param nombre es el nombre del recorrido.
+     * @return el recorrido que se recupero.
+     */
     @Override
     public Recorrido recuperarRecorrido(String nombre) {
       RecorridosDAO recorridosDAO = new RecorridosDAO();
@@ -451,7 +477,11 @@ public class FachadaDatos implements IDatos {
       return recorrido;
 
     }
-
+ /**
+     * Metodo que busca un itinerario por el nombre del parametro.
+     * @param nombre es el nombre del itinerario.
+     * @return el itinerario buscado
+     */
     @Override
     public Itinerario buscarItineario(String nombre) {
      ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
@@ -459,28 +489,39 @@ public class FachadaDatos implements IDatos {
      return itinerario;
 
     }
-
+/**
+     * Metodo que permite actualizar un itinerario.
+     * @param itinerario es el itinerario a actualizar.
+     */
     @Override
     public void actualizarItineario(Itinerario itinerario) {
         ItinerarioDAO itinerarioDAO = new ItinerarioDAO();
         itinerarioDAO.actualizar(itinerario);
 
     }
-
+ /**
+     * Metodo que permite actualizar un recorrido.
+     * @param recorrido es el itinerario a actualizar.
+     */
     @Override
     public void actualizarRecorrido(Recorrido recorrido) {
        RecorridosDAO recorridosDAO = new RecorridosDAO();
        recorridosDAO.actualizar(recorrido);
 
     }
-
+ /**
+     * Metodo que permite agregar guias en la base de datos.
+     */
     @Override
     public void agregarGuia() {
        GuiaDAO guiaDAO = new GuiaDAO();
        guiaDAO.insertarGuias();
 
     }
-
+/**
+     * Metodo que permite recuperar los itinerarios existentes en la base de datos.
+     * @return una lista con todos los itinerarios.
+     */
     @Override
     public List<Itinerario> recuperarItinerarios() {
      ItinerarioDAO itinerarioDAO = new ItinerarioDAO();

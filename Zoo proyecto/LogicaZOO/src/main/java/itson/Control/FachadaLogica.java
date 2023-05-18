@@ -21,7 +21,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
- *
+ * Fachada que implementa todos los metodos de logica para el zoo.
  *
  * @author 
  */

@@ -441,8 +441,7 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
      * Método que determina lo que pasa cuando el actor selecciona verificar.
      */
     private void seleccionaVerificar() {
-        String nombre = this.txtNombre.getText();
-        nombre = nombre.trim();
+        String nombre = this.txtNombre.getText().trim();
         especie = ctrlEspecie.recuperarEspecie(nombre);
         if (especie == null) {
             especie = new Especie();
@@ -550,11 +549,9 @@ public class FrmRegistrarEspecie extends javax.swing.JFrame {
             }
         }
 
-        String nombre = this.txtNombre.getText();
-        nombre = nombre.trim();
-        String nombreCientifico = this.txtNombreCientifico.getText();
-        nombreCientifico = nombreCientifico.trim();
-        String descripcion = this.txtDescripcion.getText();
+        String nombre = this.txtNombre.getText().trim();
+        String nombreCientifico = this.txtNombreCientifico.getText().trim();
+        String descripcion = this.txtDescripcion.getText().trim();
         //Especie especie = new Especie();
         boolean correcto = especie.verificacion(nombre, nombreCientifico,
                 descripcion, cuidados, hab);

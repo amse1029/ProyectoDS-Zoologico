@@ -4,7 +4,7 @@ import java.util.Objects;
 import org.bson.types.ObjectId;
 
 /**
- *
+ * Clase de dominio clima que contiene todos los atributos necesarios.
  */
 public class Clima {
 
@@ -70,6 +70,10 @@ public class Clima {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -77,6 +81,11 @@ public class Clima {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -92,6 +101,10 @@ public class Clima {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Clima{" + "id=" + id + ", nombre=" + nombre + '}';

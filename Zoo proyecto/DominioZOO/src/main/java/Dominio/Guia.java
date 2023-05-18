@@ -4,8 +4,7 @@ import java.util.Date;
 import org.bson.types.ObjectId;
 
 /**
- *
- * @author
+ * Clase de dominio guia que contiene todos los atributos necesarios.
  */
 public class Guia extends Empleado {
 

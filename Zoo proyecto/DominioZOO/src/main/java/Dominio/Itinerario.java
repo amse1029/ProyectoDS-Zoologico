@@ -4,7 +4,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
- *
+ * Clase de dominio itinerario que contiene todos los atributos necesarios.
  */
 public class Itinerario {
 
@@ -236,6 +236,10 @@ public class Itinerario {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Itinerario{" + "id=" + id + ", nombreItinerario=" + nombreItinerario + ", totalEspecies=" + totalEspecies + ", maxVisitantes=" + maxVisitantes + ", recorrido=" + recorridoId + ", horarios=" + horarios + '}';

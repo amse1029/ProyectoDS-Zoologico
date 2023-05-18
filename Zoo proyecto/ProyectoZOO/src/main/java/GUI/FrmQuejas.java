@@ -78,6 +78,7 @@ public class FrmQuejas extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar queja");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -473,10 +474,10 @@ public class FrmQuejas extends javax.swing.JFrame {
      * Método que indica las acciones a seguir cuando el actor selecciona enviar queja.
      */
     private void seleccionaEnviarQueja() {
-        String descripcion = this.txtQueja.getText();
-        String correo = this.txtCorreo.getText();
-        String telefono = this.txtTelefono.getText();
-        String nombre = this.txtNombreCom.getText();
+        String descripcion = this.txtQueja.getText().trim();
+        String correo = this.txtCorreo.getText().trim();
+        String telefono = this.txtTelefono.getText().trim();
+        String nombre = this.txtNombreCom.getText().trim();
         ObjectId itinerario = this.itinerarios.get(this.cbxItinerarios.getSelectedIndex()).getId();
         if (this.cbxItinerarios.getSelectedIndex() != -1 && this.cbxFechas1.getSelectedIndex() != -1 && this.cbxHoras.getSelectedIndex() != -1) {
             if (this.validaCorreo(correo) && this.validaTelefono(telefono) && this.validaNombre(nombre)) {

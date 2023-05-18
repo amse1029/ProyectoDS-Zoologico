@@ -11,7 +11,7 @@ import itson.DAOs.IDatos;
 import java.util.List;
 
 /**
- *
+ * Clase que permite controlar los metodos de registrar queja.
  *
  * @author
  */

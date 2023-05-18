@@ -4,7 +4,7 @@ import java.util.Date;
 import org.bson.types.ObjectId;
 
 /**
- *
+ * Clase de dominio cuidador que contiene todos los atributos necesarios.
  */
 public class Cuidador extends Empleado {
 

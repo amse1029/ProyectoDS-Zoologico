@@ -17,6 +17,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
+ * Clase que permite controlar los metodos de registrar queja.
  *
  * @author
  */

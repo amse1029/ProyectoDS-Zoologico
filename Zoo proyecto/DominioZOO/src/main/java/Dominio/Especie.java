@@ -6,7 +6,7 @@ import java.util.Objects;
 import org.bson.types.ObjectId;
 
 /**
- *
+ * Clase de dominio especie que contiene todos los atributos necesarios.
  */
 public class Especie {
 
@@ -80,6 +80,7 @@ public class Especie {
      * @param nombreCientifico Nombre científico de la especie.
      * @param descripcion Descripción de la especie.
      * @param animales Animales correspondientes de la especie.
+     * @param cuiadadores
      * @param habitats Hábitats correspondientes de la especie.
      */
     public Especie(String nombre, String nombreCientifico, String descripcion, List<Animal> animales, List<Cuidador> cuiadadores, List<Habitat> habitats) {
@@ -208,7 +209,6 @@ public class Especie {
      * @param nombre Nombre de la especie.
      * @param nombreCientifico Nombre científico de la especie.
      * @param descripcion Descripción de la especie.
-     * @param animales Animales correspondientes de la especie.
      * @param cuidadores Cuidadores correspondientes de la especie.
      * @param habitats Hábitats correspondientes de la especie.
      * @return true en caso de estar completo, false en caso contrario.
@@ -237,6 +237,10 @@ public class Especie {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -244,6 +248,11 @@ public class Especie {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -259,6 +268,10 @@ public class Especie {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Especie{" + "id=" + id + ", nombre=" + nombre + ", nombreCientifico=" + nombreCientifico + ", descripcion=" + descripcion + ", animales=" + animales + ", cuiadadores=" + cuidadores + ", habitats=" + habitats + '}';

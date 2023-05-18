@@ -10,6 +10,7 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import java.util.LinkedList;
 import java.util.List;
+import org.bson.Document;
 import org.bson.types.ObjectId;
 
 /**
@@ -43,12 +44,17 @@ public class ItinerarioDAO {
         itinerario = coleccion.find(eq("recorridoId", id)).first();
         return itinerario;
     }
-
+/**
+     * Metodo que busca un itinerario por el nombre del parametro.
+     * @param nombre es el nombre del itinerario.
+     * @return el itinerario buscado
+     */
     protected Itinerario buscar(String nombre) {
         MongoCollection<Itinerario> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Itinerario.class);
         Itinerario itinerario = new Itinerario();
-        itinerario = coleccion.find(eq("nombreItinerario", nombre)).first();
+        itinerario = coleccion.find(new Document("nombreItinerario", new Document("$regex", nombre).append("$options", "i"))).first();
+        System.out.println(itinerario);
         return itinerario;
     }
 
@@ -78,7 +84,10 @@ public class ItinerarioDAO {
         coleccion.find().into(itinerarios);
         return itinerarios;
     }
-
+/**
+     * Metodo que permite actualizar un itinerario.
+     * @param itinerario es el itinerario a actualizar.
+     */
     protected void actualizar(Itinerario itinerario) {
         MongoCollection<Itinerario> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Itinerario.class);

@@ -13,6 +13,7 @@ import static com.mongodb.client.model.Filters.regex;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import org.bson.Document;
 import org.bson.types.ObjectId;
 
 /**
@@ -80,10 +81,15 @@ public class AnimalesDAO {
         MongoCollection<Animal> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Animal.class);
 
         Animal animal = new Animal();
-        animal = coleccion.find(regex("nombre", nombre)).first();
+        animal = coleccion.find(new Document("nombre", new Document("$regex", nombre).append("$options", "i"))).first();
         return animal;
     }
-
+  /**
+     * Metodo que permite insertar animales en especies.
+     * @param especie especie 1 a agregar.
+     * @param especie2 especie 2 a agregar.
+     * @param especie3 especie 3 a agregar.
+     */
     protected void InsertarAnimales(Especie especie, Especie especie2, Especie especie3) {
         Animal tigre1 = new Animal("Tigre de Bengala", "Panthera tigris tigris", 5, especie.getId(), "Macho");
         Animal tigre2 = new Animal("Tigre Siberiano", "Panthera tigris altaica", 7, especie.getId(), "Hembra");

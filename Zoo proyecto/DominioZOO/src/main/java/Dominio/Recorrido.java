@@ -5,7 +5,7 @@ import java.util.Objects;
 import org.bson.types.ObjectId;
 
 /**
- *
+ * Clase de dominio recorrido que contiene todos los atributos necesarios.
  */
 public class Recorrido {
 
@@ -160,6 +160,10 @@ public class Recorrido {
         this.longitud = longitud;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 3;
@@ -167,6 +171,11 @@ public class Recorrido {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -182,15 +191,26 @@ public class Recorrido {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Recorrido{" + "duracion=" + duracion + ", longitud=" + longitud + ", id=" + id + ", zonas=" + zonas + ", zonasId=" + zonasId + '}';
     }
-
+    /**
+     * 
+     * @return 
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     *
+     * @param nombre
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }

@@ -24,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author 
+ * @author
  */
 public class FrmItinerarios extends javax.swing.JFrame {
 
@@ -35,6 +35,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
     LinkedList<Object> datos;
     Recorrido recorrido;
     Itinerario itinerario;
+    List<Zona> zonaitinerario;
     List<Animal> animalesSeleccionados = new ArrayList<>();
 
     /**
@@ -94,6 +95,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar itinerario");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -157,7 +159,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         Horarios.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         Horarios.setForeground(new java.awt.Color(255, 255, 255));
         Horarios.setText("Zonas:");
-        pnlFondo.add(Horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 430, -1, -1));
+        pnlFondo.add(Horarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, -1, -1));
 
         btnGuardar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnGuardar.setForeground(new java.awt.Color(106, 69, 4));
@@ -173,7 +175,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         Horarios1.setFont(new java.awt.Font("Segoe Print", 1, 22)); // NOI18N
         Horarios1.setForeground(new java.awt.Color(255, 255, 255));
         Horarios1.setText("Horarios:");
-        pnlFondo.add(Horarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
+        pnlFondo.add(Horarios1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
 
         txtLongitud.setEditable(false);
         txtLongitud.setFont(new java.awt.Font("Segoe Print", 0, 18)); // NOI18N
@@ -237,7 +239,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
             tblHorarios.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 350, 140));
+        pnlFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 350, 140));
 
         jScrollPane2.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentAdded(java.awt.event.ContainerEvent evt) {
@@ -286,7 +288,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
             tblZonas.getColumnModel().getColumn(1).setResizable(false);
         }
 
-        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 470, 180, 140));
+        pnlFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 450, 180, 140));
 
         btnRegresar.setFont(new java.awt.Font("PMingLiU-ExtB", 1, 20)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(106, 69, 4));
@@ -492,7 +494,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
 
             }
         }
-        this.animales.setText("Animales Seleccionados: " + animalesSeleccionados.size());
+        this.animales.setText("Cantidad de animales visitados: " + animalesSeleccionados.size());
     }
 
     /**
@@ -522,12 +524,17 @@ public class FrmItinerarios extends javax.swing.JFrame {
 
     /**
      * Método que despliega los datos de un itinerario.
+     *
      * @param datos Datos de los itinerarios.
      */
     private void despliegaDatos(LinkedList<Object> datos) {
+        this.txtDuracion.setText("");
+        this.txtLongitud.setText("");
+        this.txtVisitantes.setText("");
         guias = new ArrayList<Guia>((List<Guia>) datos.get(1));
         zonas = new ArrayList<Zona>((List<Zona>) datos.get(0));
         DefaultTableModel modeloTabla = (DefaultTableModel) this.tblHorarios.getModel();
+        modeloTabla.setRowCount(0);
         Object[] lunes = {"Lunes", false};
         modeloTabla.addRow(lunes);
         Object[] martes = {"Martes", false};
@@ -560,25 +567,30 @@ public class FrmItinerarios extends javax.swing.JFrame {
     }
 
     /**
-     * Método que indica las acciones a seguir cuando el actor selecciona buscar.
+     * Método que indica las acciones a seguir cuando el actor selecciona
+     * buscar.
      */
     private void seleccionaBuscar() {
-        String nombre = this.txtNombre.getText();
-        String nombreRecorrido = this.txtNombreRecorrido.getText();
+        String nombre = this.txtNombre.getText().trim();
+        String nombreRecorrido = this.txtNombreRecorrido.getText().trim();
         itinerario = ctrlItinerario.buscarItinerario(nombre);
         recorrido = ctrlItinerario.buscarRecorrido(nombreRecorrido);
         if (itinerario == null) {
-            this.muestraMsjNoItinerario();
+            this.animales.setText("Cantidad de animales visitados: ");
+            this.despliegaDatos(datos);
             itinerario = new Itinerario();
             if (recorrido == null) {
+                this.muestraMsjNoRecorrido();
                 recorrido = new Recorrido();
             } else {
+                this.muestraMsjNoItinerario();
                 this.despliegaDatosRecorrido(recorrido);
             }
         } else {
             this.despliegaDatosItinerario(itinerario);
             if (recorrido == null) {
                 recorrido = new Recorrido();
+                this.muestraMsjNoRecorrido();
             } else {
                 this.despliegaDatosRecorrido(recorrido);
             }
@@ -598,12 +610,15 @@ public class FrmItinerarios extends javax.swing.JFrame {
 
     /**
      * Método que despliega los datos de un recorrido.
+     *
      * @param recorrido Datos del recorrido.
      */
     private void despliegaDatosRecorrido(Recorrido recorrido) {
         Float duracion = recorrido.getDuracion();
         Float longitud = recorrido.getLongitud();
-        List<Zona> zonaitinerario = recorrido.getZonas();
+        zonaitinerario = recorrido.getZonas();
+        this.actualizarCampos();
+        this.animales.setText("Cantidad de animales visitados: " + this.animalesSeleccionados.size());
         DefaultTableModel modeloTabla2 = (DefaultTableModel) this.tblZonas.getModel();
         modeloTabla2.setRowCount(0);
         tblZonas.repaint();
@@ -622,6 +637,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
 
     /**
      * Método que despliega los datos de un itinerario.
+     *
      * @param itinerario Itinerario del que se desplegaran los datos.
      */
     private void despliegaDatosItinerario(Itinerario itinerario) {
@@ -686,6 +702,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
 
     /**
      * Método que valida el formato de un número.
+     *
      * @param numero Número que se quiere validar.
      * @return true si el formato es correcto, false en caso contrario.
      */
@@ -697,13 +714,26 @@ public class FrmItinerarios extends javax.swing.JFrame {
     }
 
     /**
-     * Método que indica las acciones a seguir cuando el actor selecciona guardar.
+     * Método que indica las acciones a seguir cuando el actor selecciona
+     * guardar.
      */
     private void seleccionaGuardar() {
-        String nombre = this.txtNombre.getText();
-        if (this.validaNumero(this.txtDuracion.getText())) {
-            if (this.validaNumero(this.txtLongitud.getText())) {
-                if (this.validaNumero(this.txtVisitantes.getText())) {
+        DefaultTableModel modeloTabla = (DefaultTableModel) this.tblHorarios.getModel();
+        float duracion = Float.parseFloat(this.txtDuracion.getText().trim());
+        float longitud = Float.parseFloat(this.txtLongitud.getText().trim());
+        int visitantes = Integer.parseInt(this.txtVisitantes.getText().trim());
+        String nombre = this.txtNombre.getText().trim();
+        for (int i = 0; i < modeloTabla.getColumnCount(); i++) {
+            if ((boolean) this.tblHorarios.getValueAt(i, 1) && modeloTabla.getValueAt(i, 2) == null) {
+                JOptionPane.showMessageDialog(this, "Seleccione correctamente el horario");
+                return;
+            } else {
+
+            }
+        }
+        if (this.validaNumero(this.txtDuracion.getText().trim())) {
+            if (this.validaNumero(this.txtLongitud.getText().trim())) {
+                if (this.validaNumero(this.txtVisitantes.getText().trim())) {
                     if (this.txtNombre.getText().isBlank() || this.txtNombreRecorrido.getText().isBlank()) {
                         JOptionPane.showMessageDialog(this, "Verifique que los nombres no esten vacios");
                         return;
@@ -722,9 +752,6 @@ public class FrmItinerarios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "La duracion no es correcta");
             return;
         }
-        float duracion = Float.parseFloat(this.txtDuracion.getText());
-        float longitud = Float.parseFloat(this.txtLongitud.getText());
-        int visitantes = Integer.parseInt(this.txtVisitantes.getText());
         List<Horario> horarios = new ArrayList<>();
         if ((boolean) this.tblHorarios.getValueAt(0, 1)) {
             Horario horario = new Horario();
@@ -769,18 +796,18 @@ public class FrmItinerarios extends javax.swing.JFrame {
             horarios.add(horario);
         }
         if (horarios.isEmpty()) {
-               JOptionPane.showMessageDialog(this, "Selecciona un horario");
-                return;
-            }else{
-        for (int i = 0; i < horarios.size(); i++) {
-            
-            if (this.validaHoras(horarios.get(i).getHora())) {
+            JOptionPane.showMessageDialog(this, "Selecciona un horario");
+            return;
+        } else {
+            for (int i = 0; i < horarios.size(); i++) {
 
-            } else {
-                JOptionPane.showMessageDialog(this, "Las horas deben de cumplir con el siguiente formato: hh:mm, \n y en caso de que sean varias deben estar separadas por comas sin ningun espacio");
-                return;
+                if (this.validaHoras(horarios.get(i).getHora())) {
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Las horas deben de cumplir con el siguiente formato: hh:mm, \n y en caso de que sean varias deben estar separadas por comas sin ningun espacio");
+                    return;
+                }
             }
-        }
         }
         List<Zona> zona = new ArrayList<>();
         for (int i = 0; i < this.tblZonas.getRowCount(); i++) {
@@ -789,10 +816,10 @@ public class FrmItinerarios extends javax.swing.JFrame {
             }
         }
         if (zona.isEmpty()) {
-               JOptionPane.showMessageDialog(this, "Selecciona un zona");
-                return;
-            }else{
-            
+            JOptionPane.showMessageDialog(this, "Selecciona un zona");
+            return;
+        } else {
+
         }
         Guia guia = new Guia();
         for (int i = 0; i < this.tblGuias.getRowCount(); i++) {
@@ -800,12 +827,12 @@ public class FrmItinerarios extends javax.swing.JFrame {
                 guia = guias.get(i);
             }
         }
-         if (guia.getId()==null) {
-               JOptionPane.showMessageDialog(this, "Selecciona un guia");
-                return;
-            }else{
-             
-         }
+        if (guia.getId() == null) {
+            JOptionPane.showMessageDialog(this, "Selecciona un guia");
+            return;
+        } else {
+
+        }
         //Itinerario itinerario=new Itinerario();
         //Recorrido recorrido=new Recorrido();
         itinerario.setTotalEspecies(animalesSeleccionados.size());
@@ -815,7 +842,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
         itinerario.setHorarios(horarios);
         itinerario.setGuia(guia);
         recorrido.setLongitud(longitud);
-        recorrido.setNombre(this.txtNombreRecorrido.getText());
+        recorrido.setNombre(this.txtNombreRecorrido.getText().trim());
         recorrido.setZonas(zona);
         boolean exito = itinerario.verificacion(nombre, visitantes, horarios);
         Itinerario itinerarioAux = ctrlItinerario.buscarItinerario(nombre);
@@ -831,6 +858,7 @@ public class FrmItinerarios extends javax.swing.JFrame {
 
     /**
      * Método que valida el formato de una hora.
+     *
      * @param horas Hora que se quiere validar.
      * @return true si el formato es correcto, false en caso contrario.
      */
@@ -888,4 +916,10 @@ public class FrmItinerarios extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombreRecorrido;
     private javax.swing.JTextField txtVisitantes;
     // End of variables declaration//GEN-END:variables
+
+    private void muestraMsjNoRecorrido() {
+        JOptionPane.showMessageDialog(this, "No existe Recorrido", "Información", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
 }

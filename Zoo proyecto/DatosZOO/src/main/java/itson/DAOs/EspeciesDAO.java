@@ -13,6 +13,7 @@ import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.bson.Document;
 import org.bson.codecs.configuration.CodecProvider;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
@@ -55,7 +56,7 @@ public class EspeciesDAO {
         MongoCollection<Especie> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
 
         Especie especie = new Especie();
-        especie = coleccion.find(eq("nombre", nombre)).first();
+        especie = coleccion.find(new Document("nombre", new Document("$regex", nombre).append("$options", "i"))).first();
         return especie;
     }
 
@@ -100,6 +101,13 @@ public class EspeciesDAO {
         return especie.getId();
     }
 
+    /**
+     * Metodo que permite insertar especies en habitat.
+     *
+     * @param habitat1 es el habitat 1 a agregar.
+     * @param habitat2 es el habitat 2 a agregar.
+     * @param habitat3 es el habitat 3 a agregar.
+     */
     protected void insertar(Habitat habitat1, Habitat habitat2, Habitat habitat3) {
         MongoCollection<Especie> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
@@ -110,6 +118,12 @@ public class EspeciesDAO {
         coleccion.insertMany(Arrays.asList(especie1, especie3, especie2));
     }
 
+    /**
+     * Metodo que permite recuperar todas las especies existentes en la base de
+     * datos.
+     *
+     * @return la lista con todos las especies.
+     */
     protected List<Especie> recuperarTodas() {
         MongoCollection<Especie> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);

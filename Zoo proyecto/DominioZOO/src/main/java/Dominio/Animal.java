@@ -4,7 +4,7 @@ import java.util.Objects;
 import org.bson.types.ObjectId;
 
 /**
- *
+ * Clase de dominio animal que contiene todos los atributos necesarios.
  */
 public class Animal {
 
@@ -220,6 +220,10 @@ public class Animal {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -227,6 +231,11 @@ public class Animal {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -242,6 +251,10 @@ public class Animal {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Animal{" + "id=" + id + ", nombre=" + nombre + ", nombreCientifico=" + nombreCientifico + ", edad=" + edad + '}';

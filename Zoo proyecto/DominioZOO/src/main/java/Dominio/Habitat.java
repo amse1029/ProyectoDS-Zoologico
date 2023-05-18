@@ -5,7 +5,7 @@ import java.util.Objects;
 import org.bson.types.ObjectId;
 
 /**
- *
+ * Clase de dominio habitat que contiene todos los atributos necesarios.
  */
 public class Habitat {
 
@@ -170,6 +170,10 @@ public class Habitat {
         return true;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 3;
@@ -177,6 +181,11 @@ public class Habitat {
         return hash;
     }
 
+    /**
+     *
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -192,6 +201,10 @@ public class Habitat {
         return Objects.equals(this.id, other.id);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "Habitat{" + "id=" + id + ", nombre=" + nombre + ", clima=" + clima + ", continentes=" + continentes + ", vegetacion=" + vegetacion + '}';

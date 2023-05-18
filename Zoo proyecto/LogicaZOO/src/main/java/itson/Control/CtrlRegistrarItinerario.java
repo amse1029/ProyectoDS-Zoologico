@@ -18,7 +18,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
- *
+  * Clase que permite controlar los metodos de registrar itinerario.
  *
  * @author
  */
@@ -183,6 +183,11 @@ public class CtrlRegistrarItinerario {
         datos.actualizarRecorrido(recorrido);
     }
 
+    /**
+     * Metodo que permite recuperar los animales mediante el id de la especie
+     * @param idEspecie es el id de la especie
+     * @return una lista de animales con los datos.
+     */
     protected List<Animal> recuperarAnimales(ObjectId idEspecie) {
         return datos.recuperaAnimales(idEspecie);
     }

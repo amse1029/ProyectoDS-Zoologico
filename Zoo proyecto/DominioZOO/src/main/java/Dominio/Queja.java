@@ -4,7 +4,7 @@ import java.util.Date;
 import org.bson.types.ObjectId;
 
 /**
- *
+ * Clase de dominio queja que contiene todos los atributos necesarios.
  */
 public class Queja {
 
@@ -77,6 +77,10 @@ public class Queja {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(ObjectId id) {
         this.id = id;
     }

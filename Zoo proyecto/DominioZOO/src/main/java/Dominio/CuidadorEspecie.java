@@ -3,7 +3,7 @@ package Dominio;
 import org.bson.types.ObjectId;
 
 /**
- *
+ * Clase de dominio cuidadorEspecie que contiene todos los atributos necesarios.
  */
 public class CuidadorEspecie {
 

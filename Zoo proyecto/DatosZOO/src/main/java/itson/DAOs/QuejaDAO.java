@@ -30,6 +30,7 @@ public class QuejaDAO {
      * Metodo que permite guardar una queja en la base de datos.
      *
      * @param queja Es la queja que se desea guardar
+     * @return la queja que se guardo.
      */
     protected Queja guardarQueja(Queja queja) {
         MongoCollection<Queja> coleccion
