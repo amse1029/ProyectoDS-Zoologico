@@ -10,7 +10,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,7 +19,7 @@ import org.bson.types.ObjectId;
  * Clase que permite gestionar los metodos referentes a los Animales en la base
  * de datos.
  *
- * @author julio
+ * @author
  */
 public class AnimalesDAO {
 
@@ -41,7 +40,7 @@ public class AnimalesDAO {
      * @param idEspecie Es el id de la especie.
      * @return Una lista con todas las coincidencias.
      */
-    public List<Animal> recupera(ObjectId idEspecie) {
+    protected List<Animal> recupera(ObjectId idEspecie) {
         MongoCollection<Animal> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Animal.class);
         List<Animal> animales = new LinkedList<>();
@@ -54,7 +53,7 @@ public class AnimalesDAO {
      *
      * @param animal Es el animal que se desea guardar.
      */
-    public void guardar(Animal animal) {
+    protected void guardar(Animal animal) {
         MongoCollection<Animal> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Animal.class);
         coleccion.insertOne(animal);
@@ -65,7 +64,7 @@ public class AnimalesDAO {
      *
      * @param animal Es el animal que se desea eliminar.
      */
-    public void eliminar(Animal animal) {
+    protected void eliminar(Animal animal) {
         MongoCollection<Animal> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Animal.class);
         coleccion.deleteOne(eq("_id", animal.getId()));
@@ -77,7 +76,7 @@ public class AnimalesDAO {
      * @param nombre Es el nombre del animal.
      * @return El animal que coincida con el nombre.
      */
-    public Animal consulta(String nombre) {
+    protected Animal consulta(String nombre) {
         MongoCollection<Animal> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Animal.class);
 
         Animal animal = new Animal();
@@ -85,12 +84,10 @@ public class AnimalesDAO {
         return animal;
     }
 
-    public void InsertarAnimales(Especie especie, Especie especie2, Especie especie3) {
+    protected void InsertarAnimales(Especie especie, Especie especie2, Especie especie3) {
         Animal tigre1 = new Animal("Tigre de Bengala", "Panthera tigris tigris", 5, especie.getId(), "Macho");
         Animal tigre2 = new Animal("Tigre Siberiano", "Panthera tigris altaica", 7, especie.getId(), "Hembra");
         Animal tigre3 = new Animal("Tigre Malayo", "Panthera tigris jacksoni", 4, especie.getId(), "Macho");
-
-
 
         Animal cobra1 = new Animal("Cobra India", "Ophiophagus hannah", 3, especie2.getId(), "Hembra");
         Animal cobra2 = new Animal("Cobra Filipina", "Ophiophagus hannah", 5, especie2.getId(), "Macho");
@@ -100,9 +97,9 @@ public class AnimalesDAO {
         Animal oso2 = new Animal("Oso Polar del Subártico", "Ursus maritimus marinus", 6, especie3.getId(), "Hembra");
         Animal oso3 = new Animal("Oso Polar de la Bahía de Hudson", "Ursus maritimus hudsonicus", 10, especie3.getId(), "Macho");
 
-         MongoCollection<Animal> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Animal.class);
-         
-        coleccion.insertMany(Arrays.asList(tigre1,tigre2,tigre3,cobra1,cobra2,cobra3,oso1,oso2,oso3));
-        
+        MongoCollection<Animal> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Animal.class);
+
+        coleccion.insertMany(Arrays.asList(tigre1, tigre2, tigre3, cobra1, cobra2, cobra3, oso1, oso2, oso3));
+
     }
 }

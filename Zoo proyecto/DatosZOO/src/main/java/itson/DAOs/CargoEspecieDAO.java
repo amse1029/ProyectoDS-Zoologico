@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Clase que permite gestionar los metodos referentes a cargoEspecie 
  * en la base de datos.
- * @author julio
+ * @author 
  */
 public class CargoEspecieDAO {
     private final MongoDatabase BASE_DATOS;
@@ -26,7 +26,7 @@ public class CargoEspecieDAO {
     /**
      * Metodo constructor que instancia la conexion con la base de datos.
      */
-    public CargoEspecieDAO() {
+    protected CargoEspecieDAO() {
         this.BASE_DATOS = Conexion.dameInstancia();
     }
     
@@ -34,7 +34,7 @@ public class CargoEspecieDAO {
      * Metodo que permite guardar el cuidador que esta a cargo de la especie.
      * @param cargoEspecie Es el cuidador que esta a cargo de la especie.
      */
-    public void guardar(CargoEspecie cargoEspecie){
+    protected void guardar(CargoEspecie cargoEspecie){
         MongoCollection<CargoEspecie> coleccion
                 = BASE_DATOS.getCollection( NOMBRE_COLECCION, CargoEspecie.class);
          coleccion.insertOne(cargoEspecie); 
@@ -45,7 +45,7 @@ public class CargoEspecieDAO {
      * @param cargoEspecie Es quien esta a cargo de la especie que se 
      * desea elimnar.
      */
-    public void eliminar(CargoEspecie cargoEspecie){
+    protected void eliminar(CargoEspecie cargoEspecie){
         MongoCollection<CargoEspecie> coleccion
                 = BASE_DATOS.getCollection( NOMBRE_COLECCION, CargoEspecie.class);
          coleccion.deleteOne(eq("_id",cargoEspecie.getId())); 
@@ -57,7 +57,7 @@ public class CargoEspecieDAO {
      * @param especie Es la especie de la cual se quieren obtener los cargos.
      * @return Una lista con todos los que estan a cargo de una especie.
      */
-    public List<CargoEspecie> consultaEspecies(Especie especie){
+    protected List<CargoEspecie> consultaEspecies(Especie especie){
         MongoCollection<CargoEspecie> coleccion
                 = BASE_DATOS.getCollection( NOMBRE_COLECCION, CargoEspecie.class);
         List<CargoEspecie> listaCargoEspecies = new LinkedList<>();
@@ -71,7 +71,7 @@ public class CargoEspecieDAO {
      * @param cuidador Es el cuidador del que se desean obtener los cargos.
      * @return Una lista de los cargos que tiene el cuidador.
      */
-    public List<CargoEspecie> consultaCuidador(Cuidador cuidador){
+    protected List<CargoEspecie> consultaCuidador(Cuidador cuidador){
         MongoCollection<CargoEspecie> coleccion
                 = BASE_DATOS.getCollection( NOMBRE_COLECCION, CargoEspecie.class);
         List<CargoEspecie> listaCargoEspecies = new LinkedList<>();

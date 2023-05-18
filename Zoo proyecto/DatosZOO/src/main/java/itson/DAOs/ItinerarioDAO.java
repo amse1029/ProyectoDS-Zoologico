@@ -5,7 +5,6 @@
 package itson.DAOs;
 
 import Dominio.Itinerario;
-import Dominio.Recorrido;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
@@ -14,9 +13,10 @@ import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
- * Clase que permite gestionar todos los metodos necesarios para 
- * generar itinerarios en la base de datos.
- * @author Joel Antonio Lopez Cota ID:228926
+ * Clase que permite gestionar todos los metodos necesarios para generar
+ * itinerarios en la base de datos.
+ *
+ * @author
  */
 public class ItinerarioDAO {
 
@@ -31,19 +31,20 @@ public class ItinerarioDAO {
     }
 
     /**
-     * Metodo que permite buscar un itinerario en base a su nombre.
+     * Método que busca un recorrido por su ID
      *
-     * @param nombre Es el nombre del itinerario que se desea buscar.
-     * @return Un itinerario en caso de existir, vacio en caso contrario.
+     * @param id Id del recorrido
+     * @return Itinerario al que corresponde el recorrido.
      */
-    public Itinerario buscarRecorrido(ObjectId id) {
+    protected Itinerario buscarRecorrido(ObjectId id) {
         MongoCollection<Itinerario> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Itinerario.class);
         Itinerario itinerario = new Itinerario();
         itinerario = coleccion.find(eq("recorridoId", id)).first();
         return itinerario;
     }
-    public Itinerario buscar(String nombre ) {
+
+    protected Itinerario buscar(String nombre) {
         MongoCollection<Itinerario> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Itinerario.class);
         Itinerario itinerario = new Itinerario();
@@ -57,31 +58,32 @@ public class ItinerarioDAO {
      * @param itinerario Es el itinerario que se desea guardar.
      * @return El id del itinerario que se guardo
      */
-    public ObjectId guardar(Itinerario itinerario) {
+    protected ObjectId guardar(Itinerario itinerario) {
         MongoCollection<Itinerario> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Itinerario.class);
         coleccion.insertOne(itinerario);
         return itinerario.getId();
     }
-    
+
     /**
      * Metodo que permite recuperar todos los itinerarios existentes en la base
      * de datos.
+     *
      * @return Una lista con los itinerarios existentes.
      */
-    public List<Itinerario> recupera() {
-       MongoCollection<Itinerario> coleccion
+    protected List<Itinerario> recupera() {
+        MongoCollection<Itinerario> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Itinerario.class);
-         List<Itinerario> itinerarios = new LinkedList<>();
+        List<Itinerario> itinerarios = new LinkedList<>();
         coleccion.find().into(itinerarios);
         return itinerarios;
     }
-    public void actualizar(Itinerario itinerario) {
+
+    protected void actualizar(Itinerario itinerario) {
         MongoCollection<Itinerario> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Itinerario.class);
-        
-        
+
         coleccion.replaceOne(eq("_id", itinerario.getId()), itinerario);
     }
-   
+
 }

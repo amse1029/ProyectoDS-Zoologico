@@ -16,8 +16,8 @@ import org.bson.codecs.pojo.PojoCodecProvider;
 
 /**
  * Clase que permite generar la conexion con la base de datos.
- * 
- * @author Joel Antonio Lopez Cota ID:228926 
+ *
+ * @author
  */
 public class Conexion {
 
@@ -32,9 +32,10 @@ public class Conexion {
 
     /**
      * Metodo que permite crear la instancia con Mongo.
+     *
      * @return la instancia con mongo.
      */
-    public static MongoDatabase dameInstancia() {
+    protected static MongoDatabase dameInstancia() {
         if (baseDatos == null) {
             CodecRegistry codec = fromRegistries(
                     MongoClientSettings.getDefaultCodecRegistry(),

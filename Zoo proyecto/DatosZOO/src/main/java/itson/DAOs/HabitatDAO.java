@@ -25,7 +25,7 @@ import org.bson.codecs.pojo.PojoCodecProvider;
  * Clase que permite gestionar todos los metodos referente a los habitats en la
  * base de datos.
  *
- * @author Joel Antonio Lopez Cota ID:228926
+ * @author 
  */
 public class HabitatDAO {
 
@@ -54,7 +54,7 @@ public class HabitatDAO {
      * @param nombre Es el nombre del habitar.
      * @return El habitat que concuerda con el nombre.
      */
-    public Habitat buscarHabitat(String nombre) {
+    protected Habitat buscarHabitat(String nombre) {
         MongoCollection<Habitat> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Habitat.class);
 
         Habitat habitat = new Habitat();
@@ -68,7 +68,7 @@ public class HabitatDAO {
      * @param habitat Es el habitat que se desea guardar.
      * @return true si se pudo guardar, false en caso contrario.
      */
-    public boolean guardarHabitat(Habitat habitat) {
+    protected boolean guardarHabitat(Habitat habitat) {
         MongoCollection<Habitat> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Habitat.class);
         coleccion.insertOne(habitat);
         if (habitat.getId() != null) {
@@ -83,14 +83,17 @@ public class HabitatDAO {
      *
      * @return Una lista con todos los habitats existentes.
      */
-    public List<Habitat> recupera() {
+    protected List<Habitat> recupera() {
         MongoCollection<Habitat> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Habitat.class);
         List<Habitat> habitats = new LinkedList<>();
         coleccion.find().into(habitats);
         return habitats;
     }
 
-    public void insertar() {
+    /**
+     * Método que inserta hábitats a la base de datos.
+     */
+    protected void insertar() {
         MongoCollection<Habitat> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Habitat.class);
         Clima clima1 = new Clima("Clima tropical");
         Continente continente1 = new Continente("America");
@@ -117,8 +120,8 @@ public class HabitatDAO {
         continentes3.add(continente3_2);
 
         Habitat habitat3 = new Habitat("Bosque Boreal", clima3, continentes3, vegetacion3);
-        
-        coleccion.insertMany(Arrays.asList(habitat1,habitat2,habitat3));
+
+        coleccion.insertMany(Arrays.asList(habitat1, habitat2, habitat3));
     }
 
 }

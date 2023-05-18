@@ -12,7 +12,7 @@ import org.bson.types.ObjectId;
 
 /**
  *
- * @author julio
+ * @author 
  */
 public class RecorridosDAO {
     private final MongoDatabase BASE_DATOS;
@@ -25,24 +25,23 @@ public class RecorridosDAO {
         this.BASE_DATOS = Conexion.dameInstancia();
     }
     
-    public ObjectId insertar(Recorrido recorrido){
+    protected ObjectId insertar(Recorrido recorrido){
         MongoCollection<Recorrido> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Recorrido.class);
         coleccion.insertOne(recorrido);
         return recorrido.getId();
     }
     
-    public Recorrido recuperar(String nombre){
+    protected Recorrido recuperar(String nombre){
          MongoCollection<Recorrido> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Recorrido.class);
          Recorrido recorrido = coleccion.find(eq("nombre",nombre)).first();
          return recorrido;
     }
     
-    public void actualizar(Recorrido recorrido) {
+    protected void actualizar(Recorrido recorrido) {
         MongoCollection<Recorrido> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Recorrido.class);
-        
         
         coleccion.replaceOne(eq("_id", recorrido.getId()), recorrido);
     }

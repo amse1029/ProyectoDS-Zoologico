@@ -29,7 +29,7 @@ public class CtrlRegistrarHabitat {
      *
      * @return Lista de climas.
      */
-    public List<Clima> recuperarClimas() {
+    protected List<Clima> recuperarClimas() {
         List<Clima> climas = new LinkedList<>();
         climas = datos.recuperarClima();
         if (climas.isEmpty()) {
@@ -46,7 +46,7 @@ public class CtrlRegistrarHabitat {
      *
      * @return Lista de vegetaciones.
      */
-    public List<Vegetacion> recuperarVegetacion() {
+    protected List<Vegetacion> recuperarVegetacion() {
         List<Vegetacion> vegetaciones = new LinkedList<>();
         vegetaciones = datos.recuperarVegetacion();
         if (vegetaciones.isEmpty()) {
@@ -63,7 +63,7 @@ public class CtrlRegistrarHabitat {
      *
      * @return Lista de continentes.
      */
-    public List<Continente> recuperarContiente() {
+    protected List<Continente> recuperarContiente() {
         List<Continente> continentes = new LinkedList<>();
         continentes = datos.recuperarContinente();
         if (continentes.isEmpty()) {
@@ -81,7 +81,7 @@ public class CtrlRegistrarHabitat {
      * @param nombre Nombre del hábitat que se quiere buscar.
      * @return Hábitat encontrada.
      */
-    public Habitat buscarHabitat(String nombre) {
+    protected Habitat buscarHabitat(String nombre) {
         Habitat habitat = new Habitat();
         habitat = datos.buscarHabitat(nombre);
         return habitat;
@@ -93,7 +93,7 @@ public class CtrlRegistrarHabitat {
      * @param habitat Hábitat que se quiere guardar.
      * @return true si se pudo guardar, false en caso contrario.
      */
-    public boolean guardarHabitat(Habitat habitat) {
+    protected boolean guardarHabitat(Habitat habitat) {
         Boolean bandera;
         if (this.buscarHabitat(habitat.getNombre()) == null) {
             bandera = datos.guardarHabitat(habitat);
@@ -109,7 +109,7 @@ public class CtrlRegistrarHabitat {
      *
      * @return Lista de hábitats.
      */
-    public List<Habitat> recuperarHabitats() {
+    protected List<Habitat> recuperarHabitats() {
         List<Habitat> habitats = datos.recuperarHabitats();
         return habitats;
     }

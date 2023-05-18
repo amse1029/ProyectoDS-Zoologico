@@ -36,7 +36,7 @@ public class CtrlRegistrarEspecie {
      *
      * @return Lista de cuidadores.
      */
-    public List<Cuidador> recuperarCuidadores() {
+    protected List<Cuidador> recuperarCuidadores() {
         List<Cuidador> cuidadores = new LinkedList<>();
         cuidadores = datos.recuperarCuidadores();
         if (cuidadores.isEmpty()) {
@@ -53,7 +53,7 @@ public class CtrlRegistrarEspecie {
      *
      * @return Lista de hábitats.
      */
-    public List<Habitat> recuperarHabitats() {
+    protected List<Habitat> recuperarHabitats() {
         List<Habitat> habitats = new LinkedList<>();
         habitats = datos.recuperarHabitats();
         return habitats;
@@ -65,7 +65,7 @@ public class CtrlRegistrarEspecie {
      * @param nombreCientifico Nombre científico de la especie.
      * @return true si se encontró, false en caso contrario.
      */
-    public boolean consultaEspecieNombreCientifico(String nombreCientifico) {
+    protected boolean consultaEspecieNombreCientifico(String nombreCientifico) {
         Especie especie = null;
         especie = datos.buscarNombreCientificoEspecie(nombreCientifico);
         if (especie == null) {
@@ -81,7 +81,7 @@ public class CtrlRegistrarEspecie {
      * @param nombre Nombre del animal.
      * @return Animal encontrado.
      */
-    public Animal consultaAnimal(String nombre) {
+    protected Animal consultaAnimal(String nombre) {
         Animal animal = null;
         animal = datos.consultaAnimal(nombre);
         return animal;
@@ -93,7 +93,7 @@ public class CtrlRegistrarEspecie {
      * @param especie Especie de la que se requieren los animales.
      * @return Lista con los animales de dicha especie.
      */
-    public List<Animal> recuperarAnimales(Especie especie) {
+    protected List<Animal> recuperarAnimales(Especie especie) {
         List<Animal> animales = new LinkedList<>();
         animales = datos.recuperaAnimales(especie.getId());
         return animales;
@@ -105,7 +105,7 @@ public class CtrlRegistrarEspecie {
      * @param nombre Nombre de la especie.
      * @return Especie encontrada.
      */
-    public Especie recuperarEspecie(String nombre) {
+    protected Especie recuperarEspecie(String nombre) {
         Especie especie = null;
         especie = datos.recuperaEspecieNombre(nombre);
         if (especie != null) {
@@ -140,7 +140,7 @@ public class CtrlRegistrarEspecie {
      *
      * @param animal Animal que se quiere guardar.
      */
-    public void guardarAnimal(Animal animal) {
+    protected void guardarAnimal(Animal animal) {
         datos.guardarAnimal(animal);
     }
 
@@ -149,7 +149,7 @@ public class CtrlRegistrarEspecie {
      *
      * @param animal Animal que se quiere eliminar.
      */
-    public void eliminarAnimal(Animal animal) {
+    protected void eliminarAnimal(Animal animal) {
         datos.eliminarAnimal(animal);
     }
 
@@ -159,7 +159,7 @@ public class CtrlRegistrarEspecie {
      * @param nombreCientifico Nombre científico de la especie.
      * @return Especie encontrada.
      */
-    public Especie consultaEspecie(String nombreCientifico) {
+    protected Especie consultaEspecie(String nombreCientifico) {
         Especie especie = datos.buscarNombreCientificoEspecie(nombreCientifico);
         return especie;
     }
@@ -170,7 +170,7 @@ public class CtrlRegistrarEspecie {
      * @param especie Especie que se quiere actualizar.
      * @return Id de la especie actualizada.
      */
-    public ObjectId actualizarEspecie(Especie especie) {
+    protected ObjectId actualizarEspecie(Especie especie) {
         Especie consultada = this.consultaEspecie(especie.getNombreCientifico());
         if (consultada == null || consultada.equals(especie)) {
             this.gestionAnimales(especie);
@@ -190,7 +190,7 @@ public class CtrlRegistrarEspecie {
      * @param especie Especie que se quiere guardar.
      * @return Id de la especie guardada.
      */
-    public ObjectId guardarEspecie(Especie especie) {
+    protected ObjectId guardarEspecie(Especie especie) {
         if (especie.getId() != null) {
             ObjectId idEspecieGuardada = this.actualizarEspecie(especie);
             return idEspecieGuardada;
@@ -202,7 +202,7 @@ public class CtrlRegistrarEspecie {
                 especie.setAnimales(null);
                 especie.setCuidadores(null);
                 ObjectId idEspecieGuardada = datos.guardarEspecie(especie);
-                if (animales!=null) {
+                if (animales != null) {
                     for (Animal animal : animales) {
                         animal.setEspecieId(idEspecieGuardada);
                         this.guardarAnimal(animal);
@@ -225,7 +225,7 @@ public class CtrlRegistrarEspecie {
      *
      * @param especie Especie de la que se quieren gestionar los animales.
      */
-    public void gestionAnimales(Especie especie) {
+    protected void gestionAnimales(Especie especie) {
         List<Animal> animalesNuevos = especie.getAnimales();
 
         List<Animal> animalesGuardados = datos.recuperaAnimales(especie.getId());
@@ -263,7 +263,7 @@ public class CtrlRegistrarEspecie {
      *
      * @param especie Especie de la que se quieren saber los cuidadores.
      */
-    public void gestionarCuidadoresCargo(Especie especie) {
+    protected void gestionarCuidadoresCargo(Especie especie) {
         List<Cuidador> cuidadoresNuevos = especie.getCuidadores();
 
         List<CargoEspecie> cuidadoresGuardado = datos.consultaEspeciesCargoEspecie(especie);
@@ -302,7 +302,7 @@ public class CtrlRegistrarEspecie {
      *
      * @param cargoEspecie Cargo de la especie que se quiere guardar.
      */
-    public void guardarCargoEspecie(CargoEspecie cargoEspecie) {
+    protected void guardarCargoEspecie(CargoEspecie cargoEspecie) {
         datos.guardarCargoEspecie(cargoEspecie);
     }
 
@@ -311,7 +311,7 @@ public class CtrlRegistrarEspecie {
      *
      * @param cargoEspecie Cargo de la especie que se quiere eliminar.
      */
-    public void eliminarCargoEspecie(CargoEspecie cargoEspecie) {
+    protected void eliminarCargoEspecie(CargoEspecie cargoEspecie) {
         datos.eliminarCargoEspecie(cargoEspecie);
     }
 
@@ -320,7 +320,7 @@ public class CtrlRegistrarEspecie {
      *
      * @return Lista de todas las especies.
      */
-    public List<Especie> recuperarEspecies() {
+    protected List<Especie> recuperarEspecies() {
         List<Especie> especies = datos.recuperarTodasEspecies();
         return especies;
     }

@@ -12,7 +12,7 @@ import com.mongodb.client.MongoDatabase;
  * Clase que permite gestionar todos los metodos referentes a las quejas en la
  * base de datos.
  *
- * @author Joel Antonio Lopez Cota ID:228926
+ * @author
  */
 public class QuejaDAO {
 
@@ -22,7 +22,7 @@ public class QuejaDAO {
     /**
      * Metodo constructor que instancia la conexion con la base de datos.
      */
-    public QuejaDAO() {
+    protected QuejaDAO() {
         this.BASE_DATOS = Conexion.dameInstancia();
     }
 
@@ -31,12 +31,11 @@ public class QuejaDAO {
      *
      * @param queja Es la queja que se desea guardar
      */
-
-     public Queja  guardarQueja(Queja queja) {
+    protected Queja guardarQueja(Queja queja) {
         MongoCollection<Queja> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Queja.class);
         coleccion.insertOne(queja);
         return queja;
 
-}
+    }
 }

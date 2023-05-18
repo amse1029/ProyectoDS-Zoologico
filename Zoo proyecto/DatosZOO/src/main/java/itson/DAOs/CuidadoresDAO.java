@@ -10,7 +10,6 @@ import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import org.bson.types.ObjectId;
@@ -19,7 +18,7 @@ import org.bson.types.ObjectId;
  * Clase que permite gestionar los metodos referentes a los cuidadores en la
  * base de datos.
  *
- * @author julio
+ * @author
  */
 public class CuidadoresDAO {
 
@@ -36,7 +35,7 @@ public class CuidadoresDAO {
     /**
      * Metodo que permite agregar cuidadores en la base de datos.
      */
-    public void agregarCuiadadores() {
+    protected void agregarCuiadadores() {
         try {
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
             Cuidador cuidador1 = new Cuidador("Juan Perez", "Calle 123", "555-1234", formatoFecha.parse("15/05/2022"));
@@ -59,7 +58,7 @@ public class CuidadoresDAO {
      *
      * @return Una lista con todos los cuidadores existentes.
      */
-    public List<Cuidador> recuperar() {
+    protected List<Cuidador> recuperar() {
         MongoCollection<Cuidador> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Cuidador.class);
         List<Cuidador> cuidadores = new LinkedList<>();
@@ -68,13 +67,13 @@ public class CuidadoresDAO {
     }
 
     /**
-     * Metodo que permite recuperar los animales que cuenten con el id de
-     * especie del parametro.
+     * Metodo que permite recuperar los cuidadores que cuenten con el id de
+     * cuidador del parametro.
      *
-     * @param idEspecie Es el id de la especie.
+     * @param idCuidador Es el id del cuidador.
      * @return Una lista con todas las coincidencias.
      */
-    public List<Cuidador> recuperarId(ObjectId idCuidador) {
+    protected List<Cuidador> recuperarId(ObjectId idCuidador) {
         MongoCollection<Cuidador> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Cuidador.class);
         List<Cuidador> cuidadores = new LinkedList<>();

@@ -24,7 +24,7 @@ import org.bson.types.ObjectId;
  * Interfaz que contiene todos los metodos que seran utilizados en la fachada
  * datos.
  *
- * @author Joel Antonio Lopez Cota ID:228926
+ * @author 
  */
 public interface IDatos {
 

@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Clase que permite gestionar todos los metodos referentes a la vegetacion en
  * la base de datos.
- * @author Joel Antonio Lopez Cota ID:228926
+ * @author 
  */
 public class VegetacionDAO {
 
@@ -31,7 +31,7 @@ public class VegetacionDAO {
     /**
      * Metodo que permite insertar vegetaciones en la base de datos.
      */
-    public void insertarVegetaciones() {
+    protected void insertarVegetaciones() {
         Vegetacion vegetacion = new Vegetacion("Bosques templados");
         Vegetacion vegetacion2 = new Vegetacion("Bosques tropicales");
         Vegetacion vegetacion3 = new Vegetacion("Sabanas");
@@ -49,7 +49,7 @@ public class VegetacionDAO {
      * de datos.
      * @return Una lista con todas la vegetaciones que existen.
      */
-    public List<Vegetacion> recupera() {
+    protected List<Vegetacion> recupera() {
         MongoCollection<Vegetacion> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Vegetacion.class);
         List<Vegetacion> vegetaciones = new LinkedList<>();

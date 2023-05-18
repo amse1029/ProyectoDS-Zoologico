@@ -10,8 +10,6 @@ import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.gt;
-import static com.mongodb.client.model.Filters.regex;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,9 +20,10 @@ import org.bson.codecs.pojo.PojoCodecProvider;
 import org.bson.types.ObjectId;
 
 /**
- * Clase que permite gestionar los metodos referentes a las especies en la base 
+ * Clase que permite gestionar los metodos referentes a las especies en la base
  * de datos.
- * @author julio
+ *
+ * @author
  */
 public class EspeciesDAO {
 
@@ -34,7 +33,7 @@ public class EspeciesDAO {
     /**
      * Metodo constructor que instancia la conexion con la base de datos.
      */
-    public EspeciesDAO() {
+    protected EspeciesDAO() {
         CodecProvider codecProvider = PojoCodecProvider.builder()
                 .register("Dominio")
                 .register(Habitat.class)
@@ -52,7 +51,7 @@ public class EspeciesDAO {
      * @param nombre Es el nombre de la especie.
      * @return La especie que cuente con el nombre del parametro.
      */
-    public Especie recupera(String nombre) {
+    protected Especie recupera(String nombre) {
         MongoCollection<Especie> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
 
         Especie especie = new Especie();
@@ -66,7 +65,7 @@ public class EspeciesDAO {
      * @param nombreCientifico Es el nombre cientifico de la especie.
      * @return La especie que cuente con el nombre cientifico del parametro.
      */
-    public Especie buscarNombreCientifico(String nombreCientifico) {
+    protected Especie buscarNombreCientifico(String nombreCientifico) {
         MongoCollection<Especie> coleccion = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
 
         Especie especie = new Especie();
@@ -80,7 +79,7 @@ public class EspeciesDAO {
      * @param especie Es la especie que se desea guardar.
      * @return Es el id que se genero al guardarlo.
      */
-    public ObjectId guardar(Especie especie) {
+    protected ObjectId guardar(Especie especie) {
         MongoCollection<Especie> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
         coleccion.insertOne(especie);
@@ -93,31 +92,30 @@ public class EspeciesDAO {
      * @param especie Es la especie que se desea actualizar.
      * @return Es el id de la especie que se actualizo.
      */
-    public ObjectId actualizar(Especie especie) {
+    protected ObjectId actualizar(Especie especie) {
         MongoCollection<Especie> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
-        
-        
+
         coleccion.replaceOne(eq("_id", especie.getId()), especie);
         return especie.getId();
     }
-    
-    public void insertar(Habitat habitat1,Habitat habitat2,Habitat habitat3){
+
+    protected void insertar(Habitat habitat1, Habitat habitat2, Habitat habitat3) {
         MongoCollection<Especie> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
         Especie especie1 = new Especie("Tigre", "Panthera tigris", "Un felino grande y poderoso", Arrays.asList(habitat1));
         Especie especie2 = new Especie("Cobra Real", "Ophiophagus hannah", "Una serpiente venenosa y ágil", Arrays.asList(habitat2));
         Especie especie3 = new Especie("Oso Polar", "Ursus maritimus", "Un gran mamífero adaptado al frío", Arrays.asList(habitat3));
 
-        coleccion.insertMany(Arrays.asList(especie1,especie3,especie2));
+        coleccion.insertMany(Arrays.asList(especie1, especie3, especie2));
     }
-    
-    public List<Especie> recuperarTodas(){
+
+    protected List<Especie> recuperarTodas() {
         MongoCollection<Especie> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Especie.class);
-         List<Especie> especies = new ArrayList<>();
-         coleccion.find().into(especies);
-         return especies;
-         
+        List<Especie> especies = new ArrayList<>();
+        coleccion.find().into(especies);
+        return especies;
+
     }
 }

@@ -14,7 +14,8 @@ import java.util.List;
 /**
  * Clase que permite gestionar los metodos referentes a el clima en la base de
  * datos.
- * @author Joel Antonio Lopez Cota ID:228926
+ *
+ * @author
  */
 public class ClimaDAO {
 
@@ -31,7 +32,7 @@ public class ClimaDAO {
     /**
      * Metodo que permite insertar los climas en la base de datos.
      */
-    public void insertarClimas() {
+    protected void insertarClimas() {
         Clima clima = new Clima("Clima tropical");
         Clima clima2 = new Clima("Clima desértico");
         Clima clima3 = new Clima("Clima templado");
@@ -47,7 +48,7 @@ public class ClimaDAO {
      *
      * @return Una lista con los climas existentes.
      */
-    public List<Clima> recupera() {
+    protected List<Clima> recupera() {
         MongoCollection<Clima> coleccion
                 = BASE_DATOS.getCollection(NOMBRE_COLECCION, Clima.class);
         List<Clima> climas = new LinkedList<>();
